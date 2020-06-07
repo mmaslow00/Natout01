@@ -1,0 +1,336 @@
+<apex:page sidebar="false" showHeader="false"
+    controller="NatoutTripBudgetReportController"
+>
+<style>
+    * {
+    box-sizing: border-box;
+    }
+
+    .alignLeft {
+        text-align: left;
+    }
+    .alignRight {
+        text-align: right;
+    }
+    .footer {
+        text-decoration: overline;
+    }
+    .bordered {
+        padding: 8px;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        border-style: solid;
+        border-width: thin;    
+    }
+    .printButton {
+        padding: 8px;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+    .total {
+        padding-top: 8px;
+    }
+    .leftMargin {
+        padding-left: 5px;
+    }
+</style>
+    <div class="printButton alignRight">
+        <div>
+        <apex:form >
+            <apex:commandButton value="Print"
+                onclick="window.print()"
+            />
+        </apex:form>
+        </div>
+        <div class="total">
+            Estimated Price: 
+            <apex:outputText styleClass="leftMargin" value="{0, Number, Currency}">
+                <apex:param value="{!tripPrice}"></apex:param>
+            </apex:outputText>
+        </div>
+    </div>
+    <div class="bordered">
+    <apex:dataTable value="{!volTravel.itemList}" var="item" id="theTable"
+        columnClasses="alignLeft, alignRight, alignRight, alignRight, alignRight, alignRight"
+        footerClass="alignRight footer"
+        styleClass="tableClass" 
+        cellpadding="8"
+    >
+        <apex:facet name="header">Volunteer Travel</apex:facet>
+
+        <apex:column >
+            {!item.category}
+        </apex:column>
+
+        <apex:column headerClass="alignRight">
+            <apex:facet name="header">{!volTravel.role1}</apex:facet>
+            <apex:outputText value="{0, number, currency}">
+                <apex:param value="{!item.role1Amount}" />
+            </apex:outputText>
+            <apex:facet name="footer">
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!volTravel.role1Total}" />
+                </apex:outputText>
+            </apex:facet>
+        </apex:column>
+        <apex:column headerClass="alignRight">
+            <apex:facet name="header">{!volTravel.role2}</apex:facet>
+            <apex:outputText value="{0, number, currency}">
+                <apex:param value="{!item.role2Amount}" />
+            </apex:outputText>
+            <apex:facet name="footer">
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!volTravel.role2Total}" />
+                </apex:outputText>
+            </apex:facet>
+        </apex:column>
+        <apex:column headerClass="alignRight">
+            <apex:facet name="header">{!volTravel.role3}</apex:facet>
+            <apex:outputText value="{0, number, currency}">
+                <apex:param value="{!item.role3Amount}" />
+            </apex:outputText>
+            <apex:facet name="footer">
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!volTravel.role3Total}" />
+                </apex:outputText>
+            </apex:facet>
+        </apex:column>
+        <apex:column headerClass="alignRight">
+            <apex:facet name="header">{!volTravel.role4}</apex:facet>
+            <apex:outputText value="{0, number, currency}">
+                <apex:param value="{!item.role4Amount}" />
+            </apex:outputText>
+            <apex:facet name="footer">
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!volTravel.role4Total}" />
+                </apex:outputText>
+            </apex:facet>
+        </apex:column>
+        <apex:column headerClass="alignRight">
+            <apex:facet name="header">Total</apex:facet>
+            <apex:outputText value="{0, number, currency}">
+                <apex:param value="{!item.categoryTotal}" />
+            </apex:outputText>
+            <apex:facet name="footer">
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!volTravel.grandTotal}" />
+                </apex:outputText>
+            </apex:facet>
+        </apex:column>
+    </apex:dataTable>
+    </div>
+
+    <apex:outputPanel rendered="{! ! ISNULL(meals.total) }">
+    <div class="bordered">
+        <apex:dataTable value="{!meals.itemList}" var="item"
+            columnClasses="alignLeft, alignRight, alignRight"
+            footerClass="alignRight footer"
+            styleClass="tableClass" 
+            cellpadding="8"
+        >
+            <apex:facet name="header">Meals</apex:facet>
+    
+            <apex:column >
+                {!item.itemName}
+            </apex:column>
+    
+            <apex:column headerClass="alignRight">
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!item.amount}" />
+                </apex:outputText>
+                <apex:facet name="footer">
+                    <apex:outputText value="{0, number, currency}">
+                        <apex:param value="{!meals.total}" />
+                    </apex:outputText>
+                </apex:facet>
+            </apex:column>
+        </apex:dataTable>
+    </div>
+    </apex:outputPanel>
+
+    <div class="bordered">
+    <apex:dataTable value="{!transport.itemList}" var="item"
+        columnClasses="alignLeft, alignRight, alignRight, alignRight, alignRight, alignRight"
+        footerClass="alignRight footer"
+        styleClass="tableClass" 
+        cellpadding="8"
+    >
+        <apex:facet name="header">On Trip Transportation</apex:facet>
+
+        <apex:column >
+            {!item.itemName}
+        </apex:column>
+
+        <apex:column headerClass="alignRight">
+            <apex:facet name="header">Trip</apex:facet>
+            <apex:outputText value="{0, number, currency}">
+                <apex:param value="{!item.tripAmount}" />
+            </apex:outputText>
+            <apex:facet name="footer">
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!transport.tripTotal}" />
+                </apex:outputText>
+            </apex:facet>
+        </apex:column>
+
+        <apex:column headerClass="alignRight">
+            <apex:facet name="header">Staff</apex:facet>
+            <apex:outputText value="{0, number, currency}">
+                <apex:param value="{!item.staffAmount}" />
+            </apex:outputText>
+            <apex:facet name="footer">
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!transport.staffTotal}" />
+                </apex:outputText>
+            </apex:facet>
+        </apex:column>
+
+        <apex:column headerClass="alignRight">
+            <apex:facet name="header">Participant</apex:facet>
+            <apex:outputText value="{0, number, currency}">
+                <apex:param value="{!item.partAmount}" />
+            </apex:outputText>
+            <apex:facet name="footer">
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!transport.partTotal}" />
+                </apex:outputText>
+            </apex:facet>
+        </apex:column>
+
+        <apex:column headerClass="alignRight">
+            <apex:facet name="header">Total</apex:facet>
+            <apex:outputText value="{0, number, currency}">
+                <apex:param value="{!item.totalAmount}" />
+            </apex:outputText>
+            <apex:facet name="footer">
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!transport.grandTotal}" />
+                </apex:outputText>
+            </apex:facet>
+        </apex:column>
+    </apex:dataTable>
+    </div>
+    <div class="bordered">
+    <apex:dataTable value="{!concessionaires.itemList}" var="item"
+        columnClasses="alignLeft, alignRight, alignRight, alignRight, alignRight, alignRight"
+        footerClass="alignRight footer"
+        styleClass="tableClass" 
+        cellpadding="8"
+    >
+        <apex:facet name="header">Concessionaires</apex:facet>
+
+        <apex:column >
+            {!item.itemName}
+        </apex:column>
+
+        <apex:column headerClass="alignRight">
+            <apex:facet name="header">Trip</apex:facet>
+            <apex:outputText value="{0, number, currency}">
+                <apex:param value="{!item.tripAmount}" />
+            </apex:outputText>
+            <apex:facet name="footer">
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!concessionaires.tripTotal}" />
+                </apex:outputText>
+            </apex:facet>
+        </apex:column>
+
+        <apex:column headerClass="alignRight">
+            <apex:facet name="header">Staff</apex:facet>
+            <apex:outputText value="{0, number, currency}">
+                <apex:param value="{!item.staffAmount}" />
+            </apex:outputText>
+            <apex:facet name="footer">
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!concessionaires.staffTotal}" />
+                </apex:outputText>
+            </apex:facet>
+        </apex:column>
+
+        <apex:column headerClass="alignRight">
+            <apex:facet name="header">Participant</apex:facet>
+            <apex:outputText value="{0, number, currency}">
+                <apex:param value="{!item.partAmount}" />
+            </apex:outputText>
+            <apex:facet name="footer">
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!concessionaires.partTotal}" />
+                </apex:outputText>
+            </apex:facet>
+        </apex:column>
+
+        <apex:column headerClass="alignRight">
+            <apex:facet name="header">Total</apex:facet>
+            <apex:outputText value="{0, number, currency}">
+                <apex:param value="{!item.totalAmount}" />
+            </apex:outputText>
+            <apex:facet name="footer">
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!concessionaires.grandTotal}" />
+                </apex:outputText>
+            </apex:facet>
+        </apex:column>
+
+    </apex:dataTable>
+    </div>
+    <apex:outputPanel rendered="{! ! ISNULL(otherList.total) }">
+    <div class="bordered">
+        <apex:dataTable value="{!otherList.itemList}" var="item"
+            columnClasses="alignLeft, alignRight, alignRight"
+            footerClass="alignRight footer"
+            styleClass="tableClass" 
+            cellpadding="8"
+        >
+            <apex:facet name="header">Other</apex:facet>
+    
+            <apex:column >
+                {!item.itemName}
+            </apex:column>
+    
+            <apex:column headerClass="alignRight">
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!item.amount}" />
+                </apex:outputText>
+                <apex:facet name="footer">
+                    <apex:outputText value="{0, number, currency}">
+                        <apex:param value="{!otherList.total}" />
+                    </apex:outputText>
+                </apex:facet>
+            </apex:column>
+        </apex:dataTable>
+    </div>
+    </apex:outputPanel>
+
+    <apex:outputPanel rendered="{! ! ISNULL(standardValues.total) }">
+    <div class="bordered">
+        <apex:dataTable value="{!standardValues.itemList}" var="item"
+            columnClasses="alignLeft, alignRight, alignRight"
+            footerClass="alignRight footer"
+            styleClass="tableClass" 
+            cellpadding="8"
+        >
+            <apex:facet name="header">Subcommittee Standard Values</apex:facet>
+    
+            <apex:column >
+                {!item.itemName}
+            </apex:column>
+    
+            <apex:column headerClass="alignRight">
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!item.amount}" />
+                </apex:outputText>
+                <apex:facet name="footer">
+                    <apex:outputText value="{0, number, currency}">
+                        <apex:param value="{!standardValues.total}" />
+                    </apex:outputText>
+                </apex:facet>
+            </apex:column>
+        </apex:dataTable>
+    </div>
+    </apex:outputPanel>
+
+</apex:page>

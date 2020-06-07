@@ -1,0 +1,5 @@
+<apex:page controller="NatoutTripVendorExportController" contentType="text/csv#VendorExport.csv" language="en-US">"Trip Id","Vendor Type","Vendor Name"
+    <apex:repeat value="{!exportList}" var="exp">
+"{!exp.tripId}","{!exp.type}","{!exp.name}"
+    </apex:repeat>
+</apex:page>

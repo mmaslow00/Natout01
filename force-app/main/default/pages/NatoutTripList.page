@@ -1,0 +1,13 @@
+<apex:page sidebar="false" showheader="false" docType="html-5.0">
+    <apex:includeLightning />
+    <div id="lightning" style="margin: 10px; font-size: 14px;" />
+	<script>
+		$Lightning.use("c:NatoutTripsApp", function() {
+        $Lightning.createComponent("c:natoutTripList",
+          {},
+          "lightning",
+          function(cmp) {}
+      );
+    });
+    </script>
+</apex:page>

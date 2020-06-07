@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>National_Outings_Admin__c</members>
+        <members>National_Outings_Trip__c</members>
+        <members>National_Outings_Trip_Agency__c</members>
+        <members>National_Outings_Trip_Budget_Item__c</members>
+        <members>National_Outings_Trip_Collaborator__c</members>
+        <members>National_Outings_Trip_Itinerary__c</members>
+        <members>National_Outings_Trip_Staff__c</members>
+        <members>National_Outings_Trip_Vendor__c</members>
+        <members>National_Outings_Country__mdt</members>  
+        <members>National_Outings_State__mdt</members>  
+        <members>National_Outings_Subcommittee_Values__mdt</members>  
+        <members>National_Outings_Trip_Type_Values__mdt</members>  
+        <members>National_Outings_Vendor_Type__mdt</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>National_Outings_Trip_Area</members>
+        <name>GlobalValueSet</name>
+    </types>
+<version>48.0</version>
+</Package>

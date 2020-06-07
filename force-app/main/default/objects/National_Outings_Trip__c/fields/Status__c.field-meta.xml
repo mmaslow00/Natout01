@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <defaultValue>&apos;Started&apos;</defaultValue>
+    <externalId>false</externalId>
+    <label>Approval Status</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Started</fullName>
+                <default>true</default>
+                <label>Started</label>
+            </value>
+            <value>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+                <label>Submitted</label>
+            </value>
+            <value>
+                <fullName>Returned</fullName>
+                <default>false</default>
+                <label>Returned</label>
+            </value>
+            <value>
+                <fullName>Approved by Chair</fullName>
+                <default>false</default>
+                <label>Approved by Chair</label>
+            </value>
+            <value>
+                <fullName>Approved by Staff</fullName>
+                <default>false</default>
+                <label>Approved by Staff</label>
+            </value>
+            <value>
+                <fullName>Uploaded to TRAIL</fullName>
+                <default>false</default>
+                <label>Uploaded to TRAIL</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

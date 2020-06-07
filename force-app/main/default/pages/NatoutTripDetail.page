@@ -1,0 +1,20 @@
+<apex:page sidebar="false" showheader="false" docType="html-5.0">
+    <apex:includeLightning />
+    <div id="lightning" style="margin-left: 10%; margin-right: 5%"/>
+	<script>
+		$Lightning.use("c:NatoutTripsApp", function() {
+        $Lightning.createComponent("c:natoutTripDetail",
+          {recordId: getUrlVars()["id"]},
+          "lightning",
+          function(cmp) {}
+      );
+    });
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+    }    
+    </script>
+</apex:page>

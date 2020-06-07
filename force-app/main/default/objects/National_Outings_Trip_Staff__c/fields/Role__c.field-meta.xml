@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Role__c</fullName>
+    <externalId>false</externalId>
+    <label>Role</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Assistant Commissary</fullName>
+                <default>false</default>
+                <label>Assistant Commissary</label>
+            </value>
+            <value>
+                <fullName>Assistant_Leader</fullName>
+                <default>false</default>
+                <label>Assistant-Leader</label>
+            </value>
+            <value>
+                <fullName>Assistant-Leader 2</fullName>
+                <default>false</default>
+                <label>Assistant-Leader 2</label>
+            </value>
+            <value>
+                <fullName>Assistant Leader 3</fullName>
+                <default>false</default>
+                <label>Assistant Leader 3</label>
+            </value>
+            <value>
+                <fullName>Assistant Leader 4</fullName>
+                <default>false</default>
+                <label>Assistant Leader 4</label>
+            </value>
+            <value>
+                <fullName>Assistant Trainee</fullName>
+                <default>false</default>
+                <label>Assistant Trainee</label>
+            </value>
+            <value>
+                <fullName>Associate Leader</fullName>
+                <default>false</default>
+                <label>Associate Leader</label>
+            </value>
+            <value>
+                <fullName>Board Liaison</fullName>
+                <default>false</default>
+                <label>Board Liaison</label>
+            </value>
+            <value>
+                <fullName>Co-Leader</fullName>
+                <default>false</default>
+                <label>Co-Leader</label>
+            </value>
+            <value>
+                <fullName>Commissary</fullName>
+                <default>false</default>
+                <label>Commissary</label>
+            </value>
+            <value>
+                <fullName>Conservation Coordinator</fullName>
+                <default>false</default>
+                <label>Conservation Coordinator</label>
+            </value>
+            <value>
+                <fullName>Conservation Specialist</fullName>
+                <default>false</default>
+                <label>Conservation Specialist</label>
+            </value>
+            <value>
+                <fullName>Cook</fullName>
+                <default>false</default>
+                <label>Cook</label>
+            </value>
+            <value>
+                <fullName>Crew</fullName>
+                <default>false</default>
+                <label>Crew</label>
+            </value>
+            <value>
+                <fullName>Doctor</fullName>
+                <default>false</default>
+                <label>Doctor</label>
+            </value>
+            <value>
+                <fullName>Evaluation Coordinator</fullName>
+                <default>false</default>
+                <label>Evaluation Coordinator</label>
+            </value>
+            <value>
+                <fullName>Guide</fullName>
+                <default>false</default>
+                <label>Guide</label>
+            </value>
+            <value>
+                <fullName>Home School Mentor</fullName>
+                <default>false</default>
+                <label>Home School Mentor</label>
+            </value>
+            <value>
+                <fullName>Host</fullName>
+                <default>false</default>
+                <label>Host</label>
+            </value>
+            <value>
+                <fullName>Instructor</fullName>
+                <default>false</default>
+                <label>Instructor</label>
+            </value>
+            <value>
+                <fullName>Leader</fullName>
+                <default>false</default>
+                <label>Leader</label>
+            </value>
+            <value>
+                <fullName>Leader Child</fullName>
+                <default>false</default>
+                <label>Leader Child</label>
+            </value>
+            <value>
+                <fullName>Liaison</fullName>
+                <default>false</default>
+                <label>Liaison</label>
+            </value>
+            <value>
+                <fullName>Mentor Leader</fullName>
+                <default>false</default>
+                <label>Mentor Leader</label>
+            </value>
+            <value>
+                <fullName>Mountaineering Specialist</fullName>
+                <default>false</default>
+                <label>Mountaineering Specialist</label>
+            </value>
+            <value>
+                <fullName>Naturalist</fullName>
+                <default>false</default>
+                <label>Naturalist</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Specialist</fullName>
+                <default>false</default>
+                <label>Specialist</label>
+            </value>
+            <value>
+                <fullName>Support Staff</fullName>
+                <default>false</default>
+                <label>Support Staff</label>
+            </value>
+            <value>
+                <fullName>Trainee</fullName>
+                <default>false</default>
+                <label>Trainee</label>
+            </value>
+            <value>
+                <fullName>Trainee Cook</fullName>
+                <default>false</default>
+                <label>Trainee Cook</label>
+            </value>
+            <value>
+                <fullName>Treasurer</fullName>
+                <default>false</default>
+                <label>Treasurer</label>
+            </value>
+            <value>
+                <fullName>Volunteer Coordinator</fullName>
+                <default>false</default>
+                <label>Volunteer Coordinator</label>
+            </value>
+            <value>
+                <fullName>NewTestValue</fullName>
+                <default>false</default>
+                <label>NewTestValue</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Permit_Requirement_Options__c</fullName>
+    <defaultValue>&apos;Commercial Permit (s) are not required&apos;</defaultValue>
+    <externalId>false</externalId>
+    <label>Permit Requirement Options</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Commercial Permit (s) are not required</fullName>
+                <default>false</default>
+                <label>Commercial Permit (s) are not required</label>
+            </value>
+            <value>
+                <fullName>Permit Associate Staff will obtain Commercial Permit (s)</fullName>
+                <default>false</default>
+                <label>Permit Associate Staff will obtain Commercial Permit (s)</label>
+            </value>
+            <value>
+                <fullName>Concessionaire will obtain all Commercial Permit (s)</fullName>
+                <default>false</default>
+                <label>Concessionaire will obtain all Commercial Permit (s)</label>
+            </value>
+            <value>
+                <fullName>Concessionaire will obtain some Commercial Permit (s)</fullName>
+                <default>false</default>
+                <label>Concessionaire will obtain some Commercial Permit (s)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
