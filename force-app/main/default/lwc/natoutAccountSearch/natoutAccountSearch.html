@@ -1,0 +1,62 @@
+<template>
+    <div class="c-container">
+        <article class="slds-card">
+            <div class="slds-card__header slds-grid">
+              <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body">
+                  <h2 class="slds-card__header-title">
+                      <span>Search for an Account</span>
+                  </h2>
+                </div>
+              </header>
+            </div>
+            <div>
+                <lightning-input 
+                    label="Name begins with"
+                    value={searchName}
+                    minlength="2"
+                    onchange={setSearchName}
+                    class="searchName"
+                    required
+                >
+                </lightning-input>
+            </div>
+            <div if:true={loadingResults} class="slds-is-relative">
+                <lightning-spinner
+                    alternative-text="Loading..."
+                >
+                </lightning-spinner>
+            </div> 
+    
+            <div style="padding: 10px">
+                <lightning-button label = "Search" onclick={searchAccounts} style="padding-right:10px;">
+                </lightning-button>
+                <lightning-button label = "Cancel" onclick={cancelSelection}>
+                </lightning-button>
+            </div>
+            <template if:false={resultsFound}>
+                No Results Found
+            </template>
+            <template if:true={resultsFound}>
+                <table>
+                <template for:each={accountList} for:item="acct">
+                    <tr key={acct.Id} onclick={selectAccount}>
+                        <td>
+                        </td>
+                        <td>
+                            <a
+                            href="#"
+                            key={acct.Id}
+                            >
+                            {acct.Name} 
+                            </a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            {acct.BillingStreet}&nbsp;&nbsp;&nbsp;&nbsp;{acct.BillingCity}&nbsp;&nbsp;&nbsp;&nbsp;{acct.BillingState}
+                        </td>
+                    </tr>
+                </template>
+                </table>
+            </template>
+        </article>
+    </div>
+</template>

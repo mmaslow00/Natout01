@@ -1,0 +1,14 @@
+.c-container {
+    background-color: beige;
+    border: 1px solid #d8dde6;
+    margin: 10px 0 20px 0;
+    max-width: 650px;
+}
+.save-button {
+    text-align: center;
+    padding: 10px;
+}
+.location-div {
+    padding: 5%;
+    text-align:center;
+}

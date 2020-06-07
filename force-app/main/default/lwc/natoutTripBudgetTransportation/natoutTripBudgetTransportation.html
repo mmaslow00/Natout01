@@ -1,0 +1,84 @@
+<template>    
+    <div class="c-container">
+        <article class="slds-card">
+            <div class="slds-card__header slds-grid slds-page-header">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">
+                            <span>On Trip Transportation</span>
+                        </h2>
+                    </div>
+                    <div if:true={canEdit} class="slds-no-flex">
+                        <button class="slds-button slds-button_neutral" onclick={createNewItem}>New</button>
+                    </div>
+                </header>
+            </div>
+            <template if:true={showBudgetList}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={budgetList}
+                    columns={columns}
+                    onrowaction={handleRowAction}
+                    hide-checkbox-column="true"
+                >
+                </lightning-datatable>
+            </template>
+        </article>
+        <template if:true={isModalOpen}>
+            <div>
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                                <lightning-icon icon-name="utility:close" size="medium">
+                                </lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Update Budget Item</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <lightning-radio-group name="radioGroup"
+                                label="Option"
+                                options={options}
+                                value={itemToUpdate.Option__c}
+                                type="radio"
+                                onchange={handleOptionChange}
+                            >
+                            </lightning-radio-group>
+                
+                            <lightning-layout-item padding="around-small">
+                                <lightning-combobox
+                                    label='Category'
+                                    value={itemToUpdate.Item_Category__c}
+                                    options={categoriesToShow}
+                                    onchange={handleCategoryChange}
+                                    required
+                                >
+                                </lightning-combobox>
+                            </lightning-layout-item>
+
+                            <lightning-layout-item padding="around-small">
+                                <lightning-input type="number"
+                                    label='Amount'
+                                    value={itemToUpdate.Amount__c}
+                                    onchange={handleAmountChange}
+                                    formatter="currency"
+                                    step=".01"
+                                    required
+                                >
+                                </lightning-input>
+                            </lightning-layout-item>
+                            <div style="height: 200px;"></div>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning-button label="Cancel" variant="neutral" onclick={closeModal}></lightning-button>
+                            <lightning-button label="Save" variant="brand" onclick={saveAndClose} class="slds-p-left_large"></lightning-button>
+                            <lightning-button label="Save and New" variant="brand" onclick={saveAndNew} class="slds-p-left_large"></lightning-button>
+                        </footer>
+                    </div>
+                </section>
+            </div>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </div>        
+</template>

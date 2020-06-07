@@ -1,0 +1,96 @@
+<template>
+    <div class="c-container">
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid slds-page-header">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span>Trip Staff</span>
+                    </h2>
+                </div>
+                <div if:true={canEdit} class="slds-no-flex">
+                    <button class="slds-button slds-button_neutral" onclick={createNewStaff}>New</button>
+                </div>
+            </header>
+        </div>
+        <lightning-datatable
+            key-field="Id"
+            data={staffList}
+            columns={columns}
+            onrowaction={handleRowAction}
+            hide-checkbox-column="true"
+        >
+        </lightning-datatable>
+    </article>
+
+    <template if:true={isModalOpen}>
+        <div class="demo-only">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close" size="medium">
+                            </lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Update Trip Staff</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <template if:false={searchingContacts}>
+                            <center>
+                                <p><b>Staff Member:</b> {staffToUpdate.FirstName} {staffToUpdate.LastName}</p>
+                                <p><lightning-button variant="base" label="Change" onclick={searchContacts}></lightning-button></p>
+                            </center>
+                        </template>
+
+                        <template if:true={searchingContacts}>
+                            <div style="height: 300px;">
+                                <c-natout-leader-search
+                                    allow-unknown="true"
+                                    onleaderselected={setContact}
+                                >
+                                </c-natout-leader-search>
+                            </div>
+                        </template>
+
+                        <template if:false={searchingContacts}>
+                            <lightning-record-edit-form 
+                                record-id={staffToUpdate.Id}
+                                object-api-name="National_Outings_Trip_Staff__c"
+                            >
+                                <lightning-messages>
+                                </lightning-messages>
+                                <div class="slds-p-vertical_xx-large">
+                                    <lightning-combobox
+                                        label="Role"
+                                        options={roleOptions}
+                                        value={staffToUpdate.Role__c}
+                                        data-field='Role__c'
+                                        onchange={setRole}
+                                        required
+                                    >
+                                    </lightning-combobox>
+                                </div>
+                            </lightning-record-edit-form>
+                            <div style="height: 300px;"></div>
+                        </template>
+                    </div>
+                    <div if:true={savingStaff} class="slds-is-relative">
+                        <lightning-spinner
+                            alternative-text="Loading..."
+                        >
+                        </lightning-spinner>
+                    </div>         
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Cancel" variant="neutral" onclick={closeModal}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <template if:false={searchingContacts}>
+                            <lightning-button label="Save" variant="brand" onclick={saveStaff}></lightning-button>
+                        </template>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+    </div>
+</template>

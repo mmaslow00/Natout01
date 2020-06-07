@@ -1,0 +1,70 @@
+<template>
+    <div class="c-container">
+        <article class="slds-card">
+            <div class="slds-card__header slds-grid">
+              <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body">
+                  <h2 class="slds-card__header-title">
+                      <span>Search for a Leader</span>
+                  </h2>
+                </div>
+              </header>
+            </div>
+            <div>
+                <lightning-input 
+                    label="Last Name begins with"
+                    value={lastName}
+                    minlength="2"
+                    onchange={setLastName}
+                    class="lastName"
+                    required
+                >
+                </lightning-input>
+                <lightning-input 
+                    label="First Name begins with"
+                    value={firstName}
+                    onchange={setFirstName}
+                >
+                </lightning-input>
+            </div>
+            <div if:true={loadingResults} class="slds-is-relative">
+                <lightning-spinner
+                    alternative-text="Loading..."
+                >
+                </lightning-spinner>
+            </div> 
+    
+            <div style="padding: 10px">
+                <lightning-button label = "Search" onclick={searchLeaders} class="slds-p-right_x-large">
+                </lightning-button>
+                <lightning-button label = "Cancel" onclick={cancelSelection} class="slds-p-right_x-large">
+                </lightning-button>
+                <template if:true={showUnknownButton}>
+                    <lightning-button label = "Leader Not Yet Known" onclick={leaderUnknown}>
+                    </lightning-button>
+                </template>
+                </div>
+            <template if:false={resultsFound}>
+                No Results Found
+            </template>
+            <template if:true={resultsFound}>
+                <table>
+                <template for:each={leaderList} for:item="ldr">
+                    <tr key={ldr.contactId} onclick={selectLeader}>
+                        <td>
+                        </td>
+                        <td>
+                            <a
+                            href="#"
+                            key={ldr.contactId}
+                            >
+                            {ldr.firstName} {ldr.lastName}
+                            </a>
+                        </td>
+                    </tr>
+                </template>
+                </table>
+            </template>
+        </article>
+    </div>
+</template>

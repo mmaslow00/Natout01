@@ -1,0 +1,723 @@
+<template>
+    <div class="slds-form c-container">
+        <div if:true={userCanEdit} class="save-button">
+            <lightning-button class="slds-m-top_small"
+                variant="brand"
+                name="save"
+                label="Save"
+                onclick={saveForm}>
+            </lightning-button>
+        </div>
+        <div if:false={userCanEdit} style="text-align: center; font-weight: bold;">
+            You are not authorized to make changes to this trip
+        </div>
+        
+        <div if:true={showApprovalWarnings} style="background-color: white; margin: 2%">
+            <div style="padding: 2%">
+            Approval Warnings
+            <ul class="slds-m-around_medium">
+                <template for:each={approvalWarnings} for:item="warn">
+                    <li key={warn.rowNum}>
+                        {warn.text}
+                    </li>
+                </template>
+            </ul>
+            </div>
+        </div>               
+
+       <div class="slds-form-element slds-form-element_stacked">
+            <lightning-record-edit-form 
+                record-id={recordId}
+                object-api-name="National_Outings_Trip__c"
+                onload={handleLoad}
+                onsubmit={handleUpdate}
+            >
+                <lightning-messages>
+                </lightning-messages>
+
+                <lightning-accordion active-section-name="Name">
+                    <lightning-accordion-section name="Name" label="Name">
+                        <label for="tripName">
+                            <abbr title="required" class="slds-required">*</abbr>
+                            Name
+                            <lightning-helptext 
+                                class="slds-p-left_xx-small"
+                                content="For lists and reports - limited to 80 characters"
+                            >
+                            </lightning-helptext>
+                        </label>
+                        <lightning-input-field
+                            field-name="Name"
+                            onchange={handleFieldChange}
+                            data-field="Name"
+                            data-id="tripName"
+                            variant="label-hidden"
+                            required
+                            disabled={userIsReadOnly}
+                        >
+                        </lightning-input-field>
+
+                        <label for="tripTitle">
+                            <abbr title="required" class="slds-required">*</abbr>
+                            Title
+                            <lightning-helptext 
+                                class="slds-p-left_xx-small"
+                                content="For publications - accepts up to 255 characters"
+                            >
+                            </lightning-helptext>
+                        </label>
+                        <lightning-input-field
+                            field-name="Title__c"
+                            onchange={handleFieldChange}
+                            data-field="Title__c"
+                            data-id="tripTitle"
+                            variant="label-hidden"
+                            required
+                            disabled={userIsReadOnly}
+                            >
+                        </lightning-input-field>
+
+                        <div if:true={userCanEdit}>
+                            <lightning-combobox
+                                label="Approval Status"
+                                placeholder="Choose Status"
+                                value={chosenStatus}
+                                options={statusOptions}
+                                onchange={handleStatusChange}
+                                class="approvalStatus"
+                            >
+                            </lightning-combobox>
+                        </div>
+                        <div if:false={userCanEdit}>
+                            <lightning-output-field field-name="Status__c">
+                            </lightning-output-field>
+                        </div>
+                
+                    </lightning-accordion-section>
+
+                    <lightning-accordion-section name="General" label="General Information">
+                        <div style="display: none">
+                            <lightning-input-field
+                                field-name="Subcommittee__c"
+                                data-field="Subcommittee__c"
+                            >
+                            </lightning-input-field>
+                            <lightning-input-field
+                                field-name="Trip_Type__c"
+                                data-field="Trip_Type__c"
+                            >
+                            </lightning-input-field>
+                            <lightning-input-field
+                                field-name="Status__c"
+                                data-field="Status__c"
+                            >
+                            </lightning-input-field>
+                        </div>
+                        <template if:false={tripIsInternational}>
+                            <lightning-combobox
+                                label="Trip Type"
+                                placeholder='Select a Trip Type'
+                                value={chosenTripType}
+                                options={tripTypeOptionList}
+                                onchange={handleTripTypeChange}
+                                required
+                            >
+                            </lightning-combobox>
+                            <lightning-combobox
+                                label="Subcommittee"
+                                placeholder='Select a Subcommittee'
+                                value={chosenSubcomm}
+                                options={subcommOptionList}
+                                onchange={handleSubcommChange}
+                                required
+                            >
+                            </lightning-combobox>
+                        </template>
+                        <lightning-input-field
+                            field-name="Start_Date__c"
+                            onchange={handleFieldChange}
+                            data-field="Start_Date__c"
+                            required
+                        >
+                        </lightning-input-field>
+                        <lightning-input-field
+                            field-name="End_Date__c"
+                            onchange={handleFieldChange}
+                            data-field="End_Date__c"
+                            required
+                        >
+                        </lightning-input-field>
+                        <lightning-input-field
+                            field-name="Participants__c"
+                            onchange={handleFieldChange}
+                            data-field="Participants__c"
+                        >
+                        </lightning-input-field>
+                        <lightning-input-field
+                            field-name="Planned_Staff__c"
+                            onchange={handleFieldChange}
+                            data-field="Planned_Staff__c"
+                        >
+                        </lightning-input-field>
+                        <div class="slds-p-top_small">
+                            <c-natout-trip-staff
+                                record-id={recordId}
+                                can-edit={userCanEdit}
+                            >
+                            </c-natout-trip-staff>
+                        </div>
+                    </lightning-accordion-section>
+
+                    <lightning-accordion-section name="Copy" label="Trip Copy and Marketing">
+                        <lightning-input-field
+                            field-name="First_Time_Run__c"
+                            onchange={handleFieldChange}
+                            data-field="First_Time_Run__c"
+                        >
+                        </lightning-input-field>
+                        <template if:false={tripRecord.First_Time_Run__c}>
+                            <lightning-input-field
+                                field-name="Prior_Trip__c"
+                                onchange={handleFieldChange}
+                                data-field="Prior_Trip__c"
+                            >
+                            </lightning-input-field>
+                        </template>
+                        <lightning-input-field
+                            field-name="Trip_Copy__c"
+                            onchange={handleFieldChange}
+                            data-field="Trip_Copy__c"
+                            disabled={repeatTrip}
+                        >
+                        </lightning-input-field>
+                        <div class="slds-form-element__label" if:true={tripRecord.First_Time_Run__c}>
+                            Number of words in Trip Copy: {wordCount}
+                        </div>
+                        <template if:false={tripRecord.First_Time_Run__c}>
+                            <lightning-input-field
+                                field-name="Prior_Trip_Copy_Changes__c"
+                                onchange={handleFieldChange}
+                                data-field="Prior_Trip_Copy_Changes__c"
+                            >
+                            </lightning-input-field>
+                        </template>
+                        <lightning-input-field
+                            field-name="Conservation_Emphasis__c"
+                            onchange={handleFieldChange}
+                            data-field="Conservation_Emphasis__c"
+                        >
+                        </lightning-input-field>
+                        <template if:false={tripIsInternational}>
+                            <lightning-input-field
+                                field-name="Area__c"
+                                onchange={handleFieldChange}
+                                data-field="Area__c"
+                            >
+                            </lightning-input-field>
+                        </template>
+                        <lightning-input-field
+                            field-name="Meals_Included__c"
+                            onchange={handleFieldChange}
+                            data-field="Meals_Included__c"
+                        >
+                        </lightning-input-field>
+                        <template if:true={showBPRating}>
+                            <lightning-input-field
+                                field-name="Backpack_Rating__c"
+                                onchange={handleFieldChange}
+                                data-field="Backpack_Rating__c"
+                            >
+                            </lightning-input-field>
+                        </template>
+                        <template if:true={showMinAge}>
+                            <lightning-input-field
+                                field-name="Minimum_Age__c"
+                                onchange={handleFieldChange}
+                                data-field="Minimum_Age__c"
+                            >
+                            </lightning-input-field>
+                        </template>
+                        <lightning-input-field
+                            field-name="Group_Type__c"
+                            onchange={handleFieldChange}
+                            data-field="Group_Type__c"
+                        >
+                        </lightning-input-field>
+                        <lightning-input-field
+                            field-name="Activity_Type__c"
+                            onchange={handleFieldChange}
+                            data-field="Activity_Type__c"
+                        >
+                        </lightning-input-field>
+                    </lightning-accordion-section>
+
+                    <lightning-accordion-section name="Location" label="Location Details, Safety and Risk">
+                        <template if:true={tripIsInternational}>
+                            <lightning-input-field
+                                field-name="Geographic_Area__c"
+                                onchange={handleFieldChange}
+                                data-field="Geographic_Area__c"
+                            >
+                            </lightning-input-field>
+                        </template>
+                        <template if:false={tripIsInternational}>
+                            <lightning-dual-listbox
+                                label="States - You May Select Up to 3"
+                                source-label="Available"
+                                selected-label="Selected"
+                                options={stateListOptions}
+                                value={chosenStates}
+                                onchange={handleStatesChange}
+                            >
+                            </lightning-dual-listbox>
+
+                            <lightning-input-field
+                                field-name="Country__c"
+                                onchange={handleFieldChange}
+                                data-field="Country__c"
+                            >
+                            </lightning-input-field>
+                        </template>
+
+                        <div style="display:none">
+                            <lightning-input-field
+                                field-name="International_Countries__c"
+                                data-field="International_Countries__c"
+                            >
+                            </lightning-input-field>
+                            <lightning-input-field
+                                field-name="States__c"
+                                data-field="States__c"
+                            >
+                            </lightning-input-field>
+                        </div>
+                        <template if:true={tripIsInternational}>
+                            <lightning-dual-listbox
+                                label="Countries - You May Select Up to 3"
+                                source-label="Available"
+                                selected-label="Selected"
+                                options={countryListOptions}
+                                value={chosenCountries}
+                                onchange={handleCountriesChange}
+                            >
+                            </lightning-dual-listbox>
+                        </template>
+
+                        <div class="slds-grid">
+                            <div class="location-div slds-col">
+                                <lightning-button 
+                                    class="slds-m-top_small"
+                                    label="Map Location" 
+                                    onclick={mapLocation}
+                                >
+                                </lightning-button>
+
+                                <lightning-input-field
+                                    field-name="Latitude__c"
+                                    onchange={handleFieldChange}
+                                    data-field="Latitude__c"
+                                >
+                                </lightning-input-field>
+
+                                <lightning-input-field
+                                    field-name="Longitude__c"
+                                    onchange={handleFieldChange}
+                                    data-field="Longitude__c"
+                                >
+                                </lightning-input-field>
+                            </div>
+                            <div class="slds-col slds-p-top_x-small">
+                                <template if:true={showMap}>
+                                    <lightning-map 
+                                        map-markers={mapMarkers}
+                                        zoom-level="7"
+                                    >
+                                    </lightning-map>
+                                </template>
+                            </div>
+                        </div>
+                        <template if:true={searchingForLocation}>
+                            <c-location-finder
+                                onlocationselected = {setLocation}
+                                oncancellocation = {cancelLocation}
+                                lat-lng = {latLng}
+                            >
+                            </c-location-finder>
+                        </template>
+                        <lightning-input-field
+                            field-name="Leader_Driving_Participants_During_Trip__c"
+                            onchange={handleFieldChange}
+                            data-field="Leader_Driving_Participants_During_Trip__c"
+                        >
+                        </lightning-input-field>
+                        <lightning-input-field
+                            field-name="Risks_Hazards__c"
+                            onchange={handleFieldChange}
+                            data-field="Risks_Hazards__c"
+                        >
+                        </lightning-input-field>
+                    </lightning-accordion-section>
+
+                    <lightning-accordion-section name="Budget" label="Budget">
+                        <lightning-accordion
+                            allow-multiple-sections-open
+                            active-section-name={activeBudgetSections}
+                            onsectiontoggle={handleBudgetSectionToggle}
+                        >
+                            <lightning-accordion-section name="budget-vol-travel" label="Volunteer Travel">                                
+                                <div class="slds-p-top_small">
+                                    <c-natout-trip-budget-vol-travel
+                                        record-id={recordId}
+                                        staff-role-options={staffRoleOptions}
+                                        can-edit={userCanEdit}
+                                    >
+                                    </c-natout-trip-budget-vol-travel>
+                                </div>
+                            </lightning-accordion-section>
+
+                            <lightning-accordion-section name="Meals" label="Meals">
+                                <lightning-layout horizontal-align="center">
+                                    <lightning-radio-group
+                                        label="Meals Options"
+                                        options={mealsBudgetOptions}
+                                        value={selectedMealsBudgetOption}
+                                        type="radio"
+                                        onchange={handleFieldChange}
+                                        data-field="Meals_Budget_Option__c"
+                                    >
+                                    </lightning-radio-group>
+                                </lightning-layout>
+                                <lightning-input-field
+                                    field-name="Meals_Comments__c"
+                                    onchange={handleFieldChange}
+                                    data-field="Meals_Comments__c"
+                                >
+                                </lightning-input-field>
+                                <template if:true={mealsBudgetSubcomm}>
+                                    <lightning-input-field
+                                        field-name="Meals_First_Day__c"
+                                        onchange={handleFieldChange}
+                                        data-field="Meals_First_Day__c"
+                                    >
+                                    </lightning-input-field>
+                                    <lightning-input-field
+                                        field-name="Meals_Last_Day__c"
+                                        onchange={handleFieldChange}
+                                        data-field="Meals_Last_Day__c"
+                                    >
+                                    </lightning-input-field>
+                                </template>                     
+                                <template if:true={mealsBudgetDay}>
+                                    <div class="slds-p-top_small">
+                                        <c-natout-trip-budget-meals
+                                            record-id={recordId}
+                                            trip-start-date={tripStartDate}
+                                            trip-end-date={tripEndDate}
+                                            num-staff={numStaff}
+                                            can-edit={userCanEdit}
+                                            >
+                                        </c-natout-trip-budget-meals>
+                                    </div>
+                                </template>
+                                <template if:false={mealsBudgetNone}>
+                                    <lightning-input-field
+                                        field-name="Fixed_Amount__c"
+                                        onchange={handleFieldChange}
+                                        data-field="Fixed_Amount__c"
+                                    >
+                                    </lightning-input-field>
+                                </template>
+                            </lightning-accordion-section>
+
+                            <lightning-accordion-section name="budget-transportation" label="On Trip Transportation">                                
+                                <lightning-input-field
+                                    field-name="Transportation_Comments__c"
+                                    onchange={handleFieldChange}
+                                    data-field="Transportation_Comments__c"
+                                >
+                                </lightning-input-field>
+                           <div class="slds-p-top_small">
+                                    <c-natout-trip-budget-transportation
+                                        record-id={recordId}
+                                        can-edit={userCanEdit}
+                                    >
+                                    </c-natout-trip-budget-transportation>
+                                </div>
+                            </lightning-accordion-section>
+
+                            <lightning-accordion-section name="budget-concessionaire" label={concessionaireTitle}>                                
+                                <lightning-input-field
+                                    field-name="Concessionaire_Comments__c"
+                                    onchange={handleFieldChange}
+                                    data-field="Concessionaire_Comments__c"
+                                >
+                                </lightning-input-field>
+                                <div class="slds-p-top_small">
+                                    <c-natout-trip-budget-concessionaire
+                                        record-id={recordId}
+                                        trip-is-international={tripIsInternational}
+                                        num-staff={numStaff}
+                                        can-edit={userCanEdit}
+                                    >
+                                    </c-natout-trip-budget-concessionaire>
+                                </div>
+                            </lightning-accordion-section>
+
+                            <lightning-accordion-section name="budget-other" label="Other">                                
+                                <div class="slds-p-top_small">
+                                    <template if:false={tripIsInternational}>
+                                        <lightning-input-field
+                                            field-name="Wilderness_Agency_Fees__c"
+                                            onchange={handleFieldChange}
+                                            data-field="Wilderness_Agency_Fees__c"
+                                        >
+                                        </lightning-input-field>
+                                        <lightning-input-field
+                                            field-name="Commercial_Agency_Fees__c"
+                                            onchange={handleFieldChange}
+                                            data-field="Commercial_Agency_Fees__c"
+                                        >
+                                        </lightning-input-field>
+                                    </template>
+                                    <lightning-input-field
+                                        field-name="Postage__c"
+                                        onchange={handleFieldChange}
+                                        data-field="Postage__c"
+                                    >
+                                    </lightning-input-field>
+                                    <lightning-input-field
+                                        field-name="Communication_Devices__c"
+                                        onchange={handleFieldChange}
+                                        data-field="Communication_Devices__c"
+                                    >
+                                    </lightning-input-field>
+                                    <lightning-input-field
+                                        field-name="Shipping__c"
+                                        onchange={handleFieldChange}
+                                        data-field="Shipping__c"
+                                    >
+                                    </lightning-input-field>
+                                    <lightning-input-field
+                                        field-name="Supplies_Equipment__c"
+                                        onchange={handleFieldChange}
+                                        data-field="Supplies_Equipment__c"
+                                    >
+                                    </lightning-input-field>
+                                </div>
+                            </lightning-accordion-section>
+                                <lightning-accordion-section name="budget-report" label="Budget Report">
+                                    <iframe src={budgetReportUrl} width="100%" height="800px">
+                                    </iframe>
+                                </lightning-accordion-section>
+                        </lightning-accordion>
+
+                    </lightning-accordion-section>
+                    
+                    <template if:false={tripIsInternational}>
+                        <lightning-accordion-section name="Permits" label="Permits">
+                            <lightning-layout horizontal-align="center">
+                                <lightning-radio-group
+                                    label="Permit Requirement Options"
+                                    options={permitRequirementOptions}
+                                    value={selectedPermitRequirementOption}
+                                    type="radio"
+                                    onchange={handleFieldChange}
+                                    data-field="Permit_Requirement_Options__c"
+                                >
+                                </lightning-radio-group>
+                            </lightning-layout>
+                            <lightning-input-field
+                                field-name="Permit_Comments__c"
+                                onchange={handleFieldChange}
+                                data-field="Permit_Comments__c"
+                            >
+                            </lightning-input-field>
+                            <div class="slds-p-top_small">
+                                <c-natout-trip-agencies
+                                    record-id={recordId}
+                                    can-edit={userCanEdit}
+                                    >
+                                </c-natout-trip-agencies>
+                            </div>
+                        </lightning-accordion-section>
+                    </template>
+
+                    <lightning-accordion-section name="Itinerary" label="Itinerary">
+                        <div class="slds-p-top_small">
+                            <c-natout-trip-itinerary
+                                record-id={recordId}
+                                trip-start-date={tripStartDate}
+                                trip-end-date={tripEndDate}
+                                agency-options={agencyOptions}
+                                can-edit={userCanEdit}
+                            >
+                            </c-natout-trip-itinerary>
+                        </div>
+                    </lightning-accordion-section>
+
+                    <lightning-accordion-section name="Vendors" label="Vendors">
+                        <lightning-input-field
+                            field-name="Vendor_Comments__c"
+                            onchange={handleFieldChange}
+                            data-field="Vendor_Comments__c"
+                        >
+                        </lightning-input-field>
+                        <div class="slds-p-top_small">
+                            <c-natout-trip-vendors
+                                record-id={recordId}
+                                trip-is-international={tripIsInternational}
+                                can-edit={userCanEdit}
+                            >
+                            </c-natout-trip-vendors>
+                        </div>
+                    </lightning-accordion-section>
+
+                    <lightning-accordion-section name="SatPhone" label="Sat Phone">
+                        <lightning-input-field
+                            field-name="Sat_Phone_Needed__c"
+                            onchange={handleFieldChange}
+                            data-field="Sat_Phone_Needed__c"
+                        >
+                        </lightning-input-field>
+                        <template if:true={satPhoneNeeded}>
+                            <label for="dateNeeded">
+                                Date Needed
+                            </label>
+                            <lightning-input-field
+                                field-name="Sat_Phone_Needed_Date__c"
+                                onchange={handleFieldChange}
+                                data-field="Sat_Phone_Needed_Date__c"
+                                data-id="dateNeeded"
+                                variant="label-hidden"
+                            >
+                            </lightning-input-field>
+                            <div class="slds-p-top_small slds-p-bottom_small">
+                                <strong>Ship To:</strong>
+                            </div>
+                            <label for="shipToName">
+                                Name
+                            </label>
+                            <lightning-input-field
+                                field-name="Sat_Phone_Ship_To_Name__c"
+                                onchange={handleFieldChange}
+                                data-field="Sat_Phone_Ship_To_Name__c"
+                                data-id="shipToName"
+                                variant="label-hidden"
+                            >
+                            </lightning-input-field>
+                            <label for="shipToAddress">
+                                Address
+                            </label>
+                            <lightning-input-field
+                                field-name="Sat_Phone_Ship_To_Address__c"
+                                onchange={handleFieldChange}
+                                data-field="Sat_Phone_Ship_To_Address__c"
+                                data-id="shipToAddress"
+                                variant="label-hidden"
+                            >
+                            </lightning-input-field>
+                            <label for="shipToCity">
+                                City
+                            </label>
+                            <lightning-input-field
+                                field-name="Sat_Phone_Ship_To_City__c"
+                                onchange={handleFieldChange}
+                                data-field="Sat_Phone_Ship_To_City__c"
+                                data-id="shipToCity"
+                                variant="label-hidden"
+                            >
+                            </lightning-input-field>
+                            <label for="shipToState">
+                                State
+                            </label>
+                            <lightning-input-field
+                                field-name="Sat_Phone_Ship_To_State__c"
+                                onchange={handleFieldChange}
+                                data-field="Sat_Phone_Ship_To_State__c"
+                                data-id="shipToState"
+                                variant="label-hidden"
+                            >
+                            </lightning-input-field>
+                            <label for="shipToZip">
+                                Zip Code
+                            </label>
+                            <lightning-input-field
+                                field-name="Sat_Phone_Ship_To_Zip_Code__c"
+                                onchange={handleFieldChange}
+                                data-field="Sat_Phone_Ship_To_Zip_Code__c"
+                                data-id="shipToZip"
+                                variant="label-hidden"
+                            >
+                            </lightning-input-field>
+                        </template>
+                    </lightning-accordion-section>
+
+                    <lightning-accordion-section name="Collaborators" label="Collaborators">
+                        <c-natout-trip-collaborators
+                            record-id={recordId}
+                            can-edit={userCanEdit}
+                            can-approve={userCanApprove}
+                        >
+                        </c-natout-trip-collaborators>
+                    </lightning-accordion-section>
+
+                </lightning-accordion>
+                <div if:true={userCanEdit} class="save-button">
+                    <lightning-button class="slds-m-top_small"
+                        variant="brand"
+                        name="save"
+                        label="Save"
+                        onclick={saveForm}>
+                    </lightning-button>
+                </div>
+            </lightning-record-edit-form>
+        </div>
+    </div>
+
+    <template if:true={showStatusDialog}>
+        <div>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeErrorDisplay}>
+                            <lightning-icon icon-name="utility:close" size="medium">
+                            </lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Submit For Approval</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <template if:true={statusChangeErrors}>
+                            The following errors prevent submission for approval:
+                            <ul class="slds-m-around_medium">
+                                <template for:each={errorList} for:item="err">
+                                    <li key={err.rowNum}>
+                                        {err.text}
+                                    </li>
+                                </template>
+                            </ul>
+                        </template>                
+                        <template if:false={statusChangeErrors}>
+                            <p>
+                                The trip is ready to be submitted for approval.
+                            </p>
+                            <p>
+                                Note that after saving the trip for with this status, you will no longer be 
+                                able to make further changes unless the approver returns it to you.
+                            </p>
+                        </template>
+                        </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Dismiss" variant="neutral" onclick={closeErrorDisplay}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+
+
+
+
+
+</template>

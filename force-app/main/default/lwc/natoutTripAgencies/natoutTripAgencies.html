@@ -1,0 +1,70 @@
+<template>
+    <div class="c-container">
+        <article class="slds-card">
+            <div class="slds-card__header slds-grid slds-page-header">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">
+                            <span>Permit Agencies</span>
+                        </h2>
+                    </div>
+                    <div if:true={canEdit} class="slds-no-flex">
+                        <button class="slds-button slds-button_neutral" onclick={createNewAgency}>New</button>
+                    </div>
+                </header>
+            </div>
+            <template if:true={showAgencyList}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={agencyList}
+                    columns={columns}
+                    onrowaction={handleRowAction}
+                    hide-checkbox-column="true"
+                >
+                </lightning-datatable>
+            </template>
+        </article>
+    
+        <template if:true={isModalOpen}>
+            <div>
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                                <lightning-icon icon-name="utility:close" size="medium">
+                                </lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Update Agency</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <template if:false={searchingAgencies}>
+                                <center>
+                                    <p><b>Agency:</b> {agencyToUpdate.accountName}</p>
+                                    <p><lightning-button variant="base" label="Change" onclick={searchAgencies}></lightning-button></p>
+                                </center>
+                            </template>
+    
+                            <template if:true={searchingAgencies}>
+                                <div style="height: 300px;">
+                                    <c-natout-account-search
+                                        account-type="Ranger"
+                                        onaccountselected={setAccount}
+                                    >
+                                    </c-natout-account-search>
+                                </div>
+                            </template>    
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning-button label="Cancel" variant="neutral" onclick={closeModal}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <template if:false={searchingAgencies}>
+                                <lightning-button label="Save" variant="brand" onclick={saveAgency}></lightning-button>
+                            </template>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </div>
+        </template>
+        </div>
+    </template>

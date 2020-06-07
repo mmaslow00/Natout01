@@ -1,0 +1,121 @@
+<template>
+    <div class="c-container" style="background-color: white;">
+        <lightning-layout horizontal-align="center">
+                <lightning-layout-item padding="around-small">
+                <lightning-radio-group name="radioGroup"
+                    label=""
+                    options={selectTypeOptions}
+                    value="myTrips"
+                    type="radio"
+                    onchange={handleSelectTypeChange}
+                >
+                </lightning-radio-group>
+            </lightning-layout-item>
+            <template if:true={selectTypeSubcomm}>
+            </template>
+        </lightning-layout>
+        <lightning-layout horizontal-align="center">
+            <lightning-layout-item>
+                <lightning-input 
+                    value={dtBegin} type="date" date-style="short" label="Earliest Depart Date"
+                    onchange={updateDtBegin}
+                >
+                </lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item>
+                <lightning-input 
+                    value={dtEnd} type="date" date-style="short" label="Latest Depart Date" class="slds-p-left_small"
+                    onchange={updateDtEnd}
+                >
+                </lightning-input>
+            </lightning-layout-item>
+        </lightning-layout>
+        <template if:true={selectTypeAny}>
+            <lightning-layout horizontal-align="center">
+                <lightning-layout-item padding="around-small">
+                    <lightning-combobox
+                        label="Trip Status"
+                        value={selectedStatus}
+                        options={statusOptions}
+                        onchange={handleStatusChange}
+                    >
+                    </lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <lightning-combobox
+                        label="Subcommittee"
+                        value={selectedSubcomm}
+                        options={subcommOptions}
+                        onchange={handleSubcommChange}
+                    >
+                    </lightning-combobox>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout horizontal-align="center">
+                <lightning-layout-item padding="around-small">
+                    <lightning-combobox
+                        label="Trip Type"
+                        value={selectedTripType}
+                        options={tripTypeOptions}
+                        onchange={handleTripTypeChange}
+                    >
+                    </lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <lightning-combobox
+                        label="State"
+                        value={selectedState}
+                        options={statesOptions}
+                        onchange={handleStateChange}
+                    >
+                    </lightning-combobox>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout horizontal-align="center">
+                <lightning-layout-item>
+                    <lightning-input
+                        label="Name Contains"
+                        value={selectedNameSearch}
+                        onchange={handleNameSearchChange}
+                    >
+                    </lightning-input>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+        <lightning-layout horizontal-align="center">
+            <lightning-layout-item padding="around-small">
+                <lightning-button variant="brand" label="Refresh List" onclick={retrieveList}></lightning-button>
+            </lightning-layout-item>
+            <template if:false={userIsNotAdmin}>
+                <lightning-layout-item padding="around-small">
+                    <lightning-button-menu label="Export Selected" onselect={exportSelected}>
+                        <lightning-menu-item label="Trip Details" value="trip">
+                        </lightning-menu-item>
+                        <lightning-menu-item label="Budget Details" value="budget">
+                        </lightning-menu-item>
+                    </lightning-button-menu>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <lightning-button label="Set Status of Selected Trips to Uploaded" onclick={markAsUploaded}>
+                    </lightning-button>
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
+        </div>
+    <lightning-datatable
+        key-field="id"
+        data={tripList.data}
+        columns={columns}
+        onrowaction={handleRowAction}
+        onsort={handleSort}
+        sorted-by={sortedBy}
+        sorted-direction={sortDirection}
+        hide-checkbox-column={userIsNotAdmin}
+    >
+    </lightning-datatable>
+
+    <div if:true={copying}>
+        <lightning-spinner alternative-text="Copying" size="large"></lightning-spinner>
+    </div>
+
+</template>
