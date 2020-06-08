@@ -40,11 +40,19 @@
                         <label for="tripName">
                             <abbr title="required" class="slds-required">*</abbr>
                             Name
+                            <div class="tooltip">
+                                <img src={infoBubbleIcon} class="tooltipIcon">
+                                <span class="tooltiptext">
+                                    For lists and reports - limited to 80 characters
+                                </span>
+                            </div>
+                            <!--
                             <lightning-helptext 
                                 class="slds-p-left_xx-small"
                                 content="For lists and reports - limited to 80 characters"
                             >
                             </lightning-helptext>
+                            -->
                         </label>
                         <lightning-input-field
                             field-name="Name"
@@ -60,11 +68,19 @@
                         <label for="tripTitle">
                             <abbr title="required" class="slds-required">*</abbr>
                             Title
+                            <div class="tooltip">
+                                <img src={infoBubbleIcon} class="tooltipIcon">
+                                <span class="tooltiptext">
+                                    For publications - accepts up to 255 characters
+                                </span>
+                            </div>
+                            <!--
                             <lightning-helptext 
                                 class="slds-p-left_xx-small"
                                 content="For publications - accepts up to 255 characters"
                             >
                             </lightning-helptext>
+                            -->
                         </label>
                         <lightning-input-field
                             field-name="Title__c"

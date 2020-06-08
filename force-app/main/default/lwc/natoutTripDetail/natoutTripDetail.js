@@ -9,6 +9,7 @@ import PERMIT_REQUIREMENT_FIELD from '@salesforce/schema/National_Outings_Trip__
 import getPicklistOptions from '@salesforce/apex/NatoutTripOptions.getOptions';
 import getUserAccess from '@salesforce/apex/NatoutUserInfo.getUserAccess';
 import { refreshApex } from '@salesforce/apex';
+import INFOBUBBLEICON from '@salesforce/resourceUrl/InfoBubbleIcon';
 
 export default class NatoutTripDetail extends LightningElement {
     @api recordId;
@@ -31,6 +32,8 @@ export default class NatoutTripDetail extends LightningElement {
     @track snackbarHeaderText = '';
     @track snackbarMessageText = '';
     @track errorList = [];
+    infoBubbleIcon = INFOBUBBLEICON;
+
 
     @wire(getObjectInfo, { objectApiName: TRIP_OBJECT })
     objectInfo;
@@ -713,6 +716,6 @@ export default class NatoutTripDetail extends LightningElement {
             cmp.classList.remove('show'); 
             cmp.classList.remove('success'); 
             cmp.classList.remove('failure'); 
-        }, 3000);
+        }, 4000);
       }
 }

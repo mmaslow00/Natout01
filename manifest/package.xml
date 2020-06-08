@@ -80,6 +80,10 @@
         <name>ApexPage</name>
     </types>       
     <types>
+         <members>InfoBubbleIcon</members>
+	     <name>StaticResource</name>
+    </types>    
+    <types>
          <members>NatoutTripsApp</members>
 	     <name>AuraDefinitionBundle</name>
     </types>    
