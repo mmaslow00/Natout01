@@ -1,4 +1,20 @@
 <apex:page sidebar="false" showheader="false" docType="html-5.0">
+    <style>  
+        #links {
+            font-size:14px;
+            margin-left: 45%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        #lightning {
+            margin-top: 10px;
+            margin-left: 5%;
+            margin-right: 5%;
+        } 
+    </style>
+    <div id="links">
+        <apex:outputLink value="/apex/NatoutTrip">Create New Trip</apex:outputLink>
+    </div>
     <apex:includeLightning />
     <div id="lightning" style="margin: 10px; font-size: 14px;" />
 	<script>

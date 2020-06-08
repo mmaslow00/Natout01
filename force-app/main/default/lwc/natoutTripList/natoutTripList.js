@@ -142,7 +142,7 @@ export default class NatoutTripList extends LightningElement {
         getTripList({ searchCriteria: parameterObject })
             .then(result => {
                 this.tripList.data = result.map(row => {
-                    let nameUrl = (this.userInfo.isInCommunity ? '/national-outings-trip/' : '/') + row.Id;
+                    let nameUrl = '/apex/NatoutTripDetail?id=' + row.Id;
                     let newRow = {...row , nameUrl};
                     return newRow;
                 });

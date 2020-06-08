@@ -96,19 +96,13 @@ export default class NatoutTrip extends NavigationMixin(LightningElement) {
                         title: 'Failed to Create Trip',
                         message: reduceErrors(error).join(', '),
                         variant: 'error'
-                    }),
+                    })
                 );
             });
         }
     }
     cancelForm() {
-        this[NavigationMixin.Navigate]({
-            type: 'standard__objectPage',
-            attributes: {
-                objectApiName: 'National_Outings_Trip__c',
-                actionName: 'list'
-            }
-        });
+        window.location.href = 'NatoutTripList';
     }
     get subcommOptionList() {
         if(this.picklistOptions != null) {
@@ -150,37 +144,7 @@ export default class NatoutTrip extends NavigationMixin(LightningElement) {
     }
 
     navigateToDetails() {
-        let currentLocation = window.location.href;
-        let lastDash = currentLocation.lastIndexOf('/');
-        currentLocation = currentLocation.substring(0, lastDash + 1);
-        let nextPage = currentLocation + 'national-outings-trip/' + this.tripId;
+        let nextPage = 'NatoutTripDetail?id=' + this.tripId;
         window.location.href = nextPage;
-
-        /*
-        this.tripPageRef = {
-            type: "comm_namedPage",
-            attributes: {
-                name: 'National_Outings_Trip_Detail__c',
-                recordId: this.tripId
-            }
-        };
-        this[NavigationMixin.GenerateUrl](this.tripPageRef)
-            .then(url => this.url = url);
-
-        this[NavigationMixin.Navigate]({
-            type: 'comm__namedPage',
-            attributes: {
-                recordId: this.tripId,
-                name: 'National_Outings_Trip_Detail__c',
-            }
-        });
-        this[NavigationMixin.Navigate]({
-            type: 'standard__recordPage',
-            attributes: {
-                recordId: this.tripId,
-                objectApiName: 'National_Outings_Trip__c',
-            }
-        });
-*/
     }
 }

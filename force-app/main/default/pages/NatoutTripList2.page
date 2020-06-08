@@ -1,0 +1,28 @@
+<apex:page sidebar="false" showheader="false" docType="html-5.0"
+    title="Sierra Club National Outings"
+    applyHTMLTag="FALSE" standardStylesheets="FALSE"
+>
+  <apex:composition template="template_sc_basic">
+    <apex:define name="head_tags">
+    <title> Sierra Club National Outings </title>
+    </apex:define>
+    <apex:define name="constituent_username_and_home">
+        <c:ConstituentUserNameAndHome ></c:ConstituentUserNameAndHome>
+    </apex:define>
+    <apex:define name="body">
+        <div id="lightning" style="font-size: 12px"/>
+    </apex:define>
+    <apex:define name="footer">
+    <apex:includeLightning />
+	<script>
+		$Lightning.use("c:NatoutTripsApp", function() {
+        $Lightning.createComponent("c:natoutTripList",
+          {},
+          "lightning",
+          function(cmp) {}
+      );
+    });
+    </script>
+    </apex:define>
+    </apex:composition>
+</apex:page>

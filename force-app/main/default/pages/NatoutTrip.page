@@ -1,6 +1,14 @@
 <apex:page >
+    <style>
+        #lightning {
+            margin-left: 10%;
+            margin-right: 5%;
+            margin-top:10px;
+        }
+    </style>
+
     <apex:includeLightning />
-    <div id="lightning" />
+    <div id="lightning"/>
 	<script>
 		$Lightning.use("c:NatoutTripsApp", function() {
         $Lightning.createComponent("c:natoutTrip",
