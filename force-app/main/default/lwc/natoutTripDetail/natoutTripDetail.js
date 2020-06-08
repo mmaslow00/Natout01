@@ -1,7 +1,7 @@
 import { LightningElement, api, track, wire } from 'lwc';
 import { updateRecord } from 'lightning/uiRecordApi';
-//import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { reduceErrors } from 'c/ldsUtils';
+import {showSnackbar} from 'c/ldsUtils';
 import { getPicklistValues } from 'lightning/uiObjectInfoApi';
 import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 import TRIP_OBJECT from '@salesforce/schema/National_Outings_Trip__c';
@@ -33,7 +33,6 @@ export default class NatoutTripDetail extends LightningElement {
     @track snackbarMessageText = '';
     @track errorList = [];
     infoBubbleIcon = INFOBUBBLEICON;
-
 
     @wire(getObjectInfo, { objectApiName: TRIP_OBJECT })
     objectInfo;
@@ -139,31 +138,13 @@ export default class NatoutTripDetail extends LightningElement {
             }, true);
         if(! allValid) {
             saveErrors = true;
-            this.showSnackbar('failure', 'Trip Update Failed', 'Please enter all required fields');
-            /*
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: 'Trip Update Failed',
-                    message: 'Please enter all required fields',
-                    variant: 'error'
-                })
-            );
-            */
+            showSnackbar(this, 'failure', 'Trip Update Failed', 'Please enter all required fields');
         }
         if(this.loadedStatus === 'Started' && this.tripRecord.Status__c === 'Submitted') {
             this.statusChangeErrors = this.statusStartedToSubmitted();
             if(this.statusChangeErrors.length > 0) {
                 saveErrors = true;
-                this.showSnackbar('failure', 'Trip Update Failed', 'There are Status Change errors');
-                /*
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Trip Update Failed',
-                        message: 'Status Change Errors',
-                        variant: 'error'
-                    })
-                );
-                */
+                showSnackbar(this, 'failure', 'Trip Update Failed', 'There are Status Change errors');
                 this.showStatusDialog = true;
             }
         }
@@ -180,32 +161,14 @@ export default class NatoutTripDetail extends LightningElement {
             .then(result => {
                 this.message = result;
                 this.error = undefined;
-                this.showSnackbar('success', 'Trip Updated', 'Trip was successfully updated');
-                /*
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Trip Updated',
-                        message: 'Trip successfully updated',
-                        variant: 'success'
-                    })
-                );
-                */
+                showSnackbar(this, 'success', 'Trip Updated', 'Trip was successfully updated');
                 if(this.loadedStatus === 'Started' && this.tripRecord.Status__c === 'Submitted') {
                     return refreshApex(this.userAccess);
                 }
             })
             .catch(error => {
                 this.error = error;
-                this.showSnackbar('failure', 'Update Failed', reduceErrors(error).join(', '));
-                /*
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Trip Update Failed',
-                        message: reduceErrors(error).join(', '),
-                        variant: 'error'
-                    })
-                );
-                */
+                showSnackbar(this, 'failure', 'Update Failed', reduceErrors(error).join(', '));
             });
         }   
     }
@@ -701,21 +664,4 @@ export default class NatoutTripDetail extends LightningElement {
 
         return errors;
     }
-    showSnackbar(type, header, message) {
-        let cmp = this.template.querySelector('.snackbar');
-        if(type === 'success') {
-            cmp.classList.add('success');
-        }
-        else if(type === 'failure') {
-            cmp.classList.add('failure');
-        }
-        this.snackbarHeaderText = header;
-        this.snackbarMessageText = message;
-        cmp.classList.add('show');
-        setTimeout(function() { 
-            cmp.classList.remove('show'); 
-            cmp.classList.remove('success'); 
-            cmp.classList.remove('failure'); 
-        }, 4000);
-      }
 }

@@ -64,6 +64,7 @@
     from {bottom: 80px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
   }
+
   .tooltip {
     position: relative;
     display: inline-block;
