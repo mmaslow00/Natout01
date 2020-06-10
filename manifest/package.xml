@@ -62,6 +62,8 @@
         <members>natoutTripList</members>
         <members>natoutTripStaff</members>
         <members>natoutTripVendors</members>
+        <members>snackbar</members>
+        <members>tooltip</members>
         <name>LightningComponentBundle</name>  
     </types>
     <types>
