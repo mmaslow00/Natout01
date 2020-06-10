@@ -19,6 +19,6 @@ export default class Snackbar extends LightningElement {
             div.classList.remove('show'); 
             div.classList.remove('success'); 
             div.classList.remove('failure'); 
-        }, 4000);    
+        }, 3500);    
     }
 }

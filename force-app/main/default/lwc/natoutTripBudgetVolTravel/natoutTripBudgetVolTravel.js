@@ -1,6 +1,6 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import getVolTravelList from '@salesforce/apex/NatoutTripBudgetController.getVolTravelList';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+//import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { createRecord } from 'lightning/uiRecordApi';
 import { updateRecord } from 'lightning/uiRecordApi';
 import { deleteRecord } from 'lightning/uiRecordApi';
@@ -63,6 +63,8 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
 
         }
         else if(result.error) {
+            this.showSnackbar('failure','Error retrieving list',reduceErrors(error).join(', '));
+            /*
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: 'Error retrieving list',
@@ -70,6 +72,7 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
                     variant: 'error'
                 })
             );
+            */
         }
     }
 
@@ -103,6 +106,8 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
                 if(confirm('Delete this Budget Item?')) {
                     deleteRecord(retrievedItem.Id)
                     .then(() => {
+                        this.showSnackbar('success','Success','Budget Item Deleted');
+                        /*
                         this.dispatchEvent(
                             new ShowToastEvent({
                                 title: 'Success',
@@ -110,9 +115,12 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
                                 variant: 'success'
                             })
                         );
+                        */
                         return refreshApex(this.wiredBudget);
                     })
                     .catch(error => {
+                        this.showSnackbar('failure','Error deleting record',reduceErrors(error).join(', '));
+                        /*
                         this.dispatchEvent(
                             new ShowToastEvent({
                                 title: 'Error deleting record',
@@ -120,6 +128,7 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
                                 variant: 'error'
                             })
                         );
+                        */
                     });                    
                 }
                 break;
@@ -187,6 +196,8 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
             this.saveSuccessful = false;
         }
         if( ! this.saveSuccessful ) {
+            this.showSnackbar('failure','Unable to Save Budget Item','You must specify an amount');
+            /*
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: 'Unable to Save Budget Item',
@@ -194,6 +205,7 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
                     variant: 'error'
                 }),
             );
+            */
             return;
         }
         if(this.itemToUpdate.Id) {
@@ -207,6 +219,8 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
                 if(createNew) {
                     this.createNewRecord();
                 }
+                this.showSnackbar('success','Budget Item Updated','Budget Item sucessfully updated');
+                /*
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: 'Budget Item Updated',
@@ -214,11 +228,14 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
                         variant: 'success',
                     }),
                 );
+                */
                 return refreshApex(this.wiredBudget);
             })
             .catch(error => {
                 this.error = error;
                 this.saveSuccessful = false;
+                this.showSnackbar('failure','Update Failed',reduceErrors(error).join(', '));
+                /*
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: 'Update Failed',
@@ -226,6 +243,7 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
                         variant: 'error'
                     }),
                 );
+                */
             });
         } else {
             createRecord ({
@@ -239,6 +257,8 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
                 if(createNew) {
                     this.createNewRecord();
                 }
+                this.showSnackbar('success','Budget Item Added','Budget Item successfully added');
+                /*
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: 'Budget Item Added',
@@ -246,11 +266,14 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
                         variant: 'success',
                     }),
                 );
+                */
                 return refreshApex(this.wiredBudget);
             })
             .catch(error => {
                 this.error = error;
                 this.saveSuccessful = false;
+                this.showSnackbar('failure','Error Creating Budget Item',reduceErrors(error).join(', '));
+                /*
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: 'Staff Update Failed',
@@ -258,6 +281,7 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
                         variant: 'error'
                     }),
                 );
+                */
             });
         }
     }
@@ -276,6 +300,9 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
             }
         }
         return cols;
+    }
+    showSnackbar(type, header, text) {
+        this.template.querySelector('c-snackbar').show(type, header, text);
     }
     @api getRowCount() {
         return this.budgetList.length;
