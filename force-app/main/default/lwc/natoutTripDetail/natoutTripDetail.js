@@ -1,7 +1,6 @@
 import { LightningElement, api, track, wire } from 'lwc';
 import { updateRecord } from 'lightning/uiRecordApi';
 import { reduceErrors } from 'c/ldsUtils';
-import {showSnackbar} from 'c/ldsUtils';
 import { getPicklistValues } from 'lightning/uiObjectInfoApi';
 import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 import TRIP_OBJECT from '@salesforce/schema/National_Outings_Trip__c';
@@ -29,8 +28,6 @@ export default class NatoutTripDetail extends LightningElement {
     tripTypeOptions = null;
     chosenTripType = null;
     chosenStatus = null;
-    @track snackbarHeaderText = '';
-    @track snackbarMessageText = '';
     @track errorList = [];
     infoBubbleIcon = INFOBUBBLEICON;
 
@@ -138,13 +135,13 @@ export default class NatoutTripDetail extends LightningElement {
             }, true);
         if(! allValid) {
             saveErrors = true;
-            showSnackbar(this, 'failure', 'Trip Update Failed', 'Please enter all required fields');
+            this.showSnackbar('failure', 'Trip Update Failed', 'Please enter all required fields');
         }
         if(this.loadedStatus === 'Started' && this.tripRecord.Status__c === 'Submitted') {
             this.statusChangeErrors = this.statusStartedToSubmitted();
             if(this.statusChangeErrors.length > 0) {
                 saveErrors = true;
-                showSnackbar(this, 'failure', 'Trip Update Failed', 'There are Status Change errors');
+                this.showSnackbar('failure', 'Trip Update Failed', 'There are Status Change errors');
                 this.showStatusDialog = true;
             }
         }
@@ -161,14 +158,14 @@ export default class NatoutTripDetail extends LightningElement {
             .then(result => {
                 this.message = result;
                 this.error = undefined;
-                showSnackbar(this, 'success', 'Trip Updated', 'Trip was successfully updated');
+                this.showSnackbar('success', 'Trip Updated', 'Trip was successfully updated');
                 if(this.loadedStatus === 'Started' && this.tripRecord.Status__c === 'Submitted') {
                     return refreshApex(this.userAccess);
                 }
             })
             .catch(error => {
                 this.error = error;
-                showSnackbar(this, 'failure', 'Update Failed', reduceErrors(error).join(', '));
+                this.showSnackbar('failure', 'Update Failed', reduceErrors(error).join(', '));
             });
         }   
     }
@@ -663,5 +660,8 @@ export default class NatoutTripDetail extends LightningElement {
         }
 
         return errors;
+    }
+    showSnackbar(type, header, text) {
+        this.template.querySelector('c-snackbar').show(type, header, text);
     }
 }
