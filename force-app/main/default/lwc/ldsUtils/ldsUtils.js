@@ -35,22 +35,3 @@ export function reduceErrors(errors) {
             .filter(message => !!message)
     );
 }
-
-export function showSnackbar(component, type, header, message) {
-    let div = component.template.querySelector('.snackbar');
-
-    if(type === 'success') {
-        div.classList.add('success');
-    }
-    else if(type === 'failure') {
-        div.classList.add('failure');
-    }
-    component.snackbarHeaderText = header;
-    component.snackbarMessageText = message;
-    div.classList.add('show');
-    setTimeout(function() { 
-        div.classList.remove('show'); 
-        div.classList.remove('success'); 
-        div.classList.remove('failure'); 
-    }, 4000);
-  }
