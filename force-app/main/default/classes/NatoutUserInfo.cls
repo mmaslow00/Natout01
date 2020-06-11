@@ -48,6 +48,7 @@ public with sharing class NatoutUserInfo {
         Id userId = System.UserInfo.getUserId();
         UserAccess uAccess = new UserAccess();
 
+        /* National Outings Admins get full access */
         AggregateResult[] rslt = [
             SELECT COUNT(Id) cnt FROM National_Outings_Admin__c
             WHERE User__c = :userId
@@ -70,11 +71,14 @@ public with sharing class NatoutUserInfo {
             WHERE Id = :tripId
         ];
 
+        /* Trip creators get edit access until status is set to submitted */
         if(trip.OwnerId == userId) {
             if(trip.Status__c == 'Started' || trip.Status__c == 'Returned' || trip.Status__c == null) {
                 uAccess.canEdit = true;
             }
         }
+
+        /* Certain subcomittee positions get approval access */
         Id contactId = getContactId();
         String subcommName = trip.Subcommittee__c;
         List<Leadership__c> ldrList = [
@@ -85,10 +89,16 @@ public with sharing class NatoutUserInfo {
             AND Club_Entity__r.Name = :subcommName
         ];
         if( ! ldrList.isEmpty()) {
-            uAccess.canApprove = true;
-            uAccess.canEdit = true;
+            switch on trip.Status__c {
+                when 'Started', 'Returned', 'Submitted' {
+                    uAccess.canApprove = true;
+                    uAccess.canEdit = true;
+                }
+            }
         }
-        if( ! (uAccess.canApprove && uAccess.canEdit) ) {
+
+        /* Collaborators get appropriate access */
+        if( ! (uAccess.canEdit && uAccess.canApprove) ) {
             List<National_Outings_Trip_Collaborator__c> collabList = [
                 SELECT Access__c 
                 FROM National_Outings_Trip_Collaborator__c
@@ -96,15 +106,22 @@ public with sharing class NatoutUserInfo {
             ];
             for(National_Outings_Trip_Collaborator__c collab : collabList) {
                 if(collab.Access__c == 'Approve') {
-                    uAccess.canApprove = true;
-                    uAccess.canEdit = true;
+                    switch on trip.Status__c {
+                        when 'Started', 'Returned', 'Submitted' {
+                            uAccess.canApprove = true;
+                            uAccess.canEdit = true;
+                        }
+                    }
                 }
                 else {
-                    uAccess.canEdit = true;
+                    switch on trip.Status__c {
+                        when 'Started', 'Returned' {
+                            uAccess.canEdit = true;
+                        }
+                    }
                 }
             }
         }
-
         return uAccess;
     }
     private class UserInfo {
