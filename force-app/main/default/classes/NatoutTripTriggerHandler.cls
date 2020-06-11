@@ -3,39 +3,48 @@ public with sharing class NatoutTripTriggerHandler {
     }
     public static void beforeInsert(List<National_Outings_Trip__c> tripList) {
         Id contactId = getUserContactId();
-        Contact userContact = [
-            SELECT Name, MailingStreet, MailingCity, MailingState, MailingPostalCode
-            FROM Contact
-            WHERE Id = :contactId
-        ];
-        for(National_Outings_Trip__c trip : tripList) {
-            trip.Sat_Phone_Ship_To_Name__c = userContact.Name;
-            trip.Sat_Phone_Ship_To_Address__c = userContact.MailingStreet;
-            trip.Sat_Phone_Ship_To_City__c = userContact.MailingCity;
-            trip.Sat_Phone_Ship_To_State__c = userContact.MailingState;
-            trip.Sat_Phone_Ship_To_Zip_Code__c = userContact.MailingPostalCode;
+        if(contactId != null) {
+            Contact userContact = [
+                SELECT Name, MailingStreet, MailingCity, MailingState, MailingPostalCode
+                FROM Contact
+                WHERE Id = :contactId
+            ];
+            for(National_Outings_Trip__c trip : tripList) {
+                trip.Sat_Phone_Ship_To_Name__c = userContact.Name;
+                trip.Sat_Phone_Ship_To_Address__c = userContact.MailingStreet;
+                trip.Sat_Phone_Ship_To_City__c = userContact.MailingCity;
+                trip.Sat_Phone_Ship_To_State__c = userContact.MailingState;
+                trip.Sat_Phone_Ship_To_Zip_Code__c = userContact.MailingPostalCode;
+            }
         }
         return;
     }
     public static void afterInsert(List<National_Outings_Trip__c> tripList) {
         Id contactId = getUserContactId();
-        List<National_Outings_Trip_Staff__c> staffList = new List<National_Outings_Trip_Staff__c>();
-        for(National_Outings_Trip__c trip : tripList) {
-            staffList.add(
-                new National_Outings_Trip_Staff__c(
-                    National_Outings_Trip__c = trip.Id,
-                    Contact__c = contactId,
-                    Role__c = 'Leader'
-                )
-            );
+        if(contactId != null) {
+            List<National_Outings_Trip_Staff__c> staffList = new List<National_Outings_Trip_Staff__c>();
+            for(National_Outings_Trip__c trip : tripList) {
+                staffList.add(
+                    new National_Outings_Trip_Staff__c(
+                        National_Outings_Trip__c = trip.Id,
+                        Contact__c = contactId,
+                        Role__c = 'Leader'
+                    )
+                );
+            }
+            insert staffList;
         }
-        insert staffList;
     }
     private static Id getUserContactId() {
         Id userId = UserInfo.getUserId();
-        Id contactId;
+        Id contactId=null;
         if(UserInfo.getUserType() == 'Standard') {
-            contactId = [select Contact__c from User_Lookups__c where User__c = :userId].Contact__c;
+            List<User_Lookups__c> uLookupList = [
+                SELECT Contact__c FROM User_Lookups__c WHERE User__c = :userId
+            ];
+            if(uLookupList.size() > 0) {
+                contactId = uLookupList[0].Contact__c;
+            }
         }
         else {
             contactId = [select ContactId from User where Id=:userId].ContactId;
