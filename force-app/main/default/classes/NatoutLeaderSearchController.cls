@@ -1,7 +1,4 @@
 public with sharing class NatoutLeaderSearchController {
-    public NatoutLeaderSearchController() {
-
-    }
     @AuraEnabled (cacheable=true)
     public static List<SearchResult> getLeaderList(String lastName, String firstName) {
         lastName = lastName + '%';
@@ -29,10 +26,9 @@ public with sharing class NatoutLeaderSearchController {
             result.lastName = (String)ar.get('lastName');
             resultList.add(result);
         }
-        System.debug('resultList: ' + resultList);
         return resultList;
     }
-    private class SearchResult {
+    @TestVisible private class SearchResult {
         @AuraEnabled
         public String contactId {get; set;}
         @AuraEnabled

@@ -1,7 +1,4 @@
 public with sharing class NatoutAccountSearchController {
-    public NatoutAccountSearchController() {
-
-    }
     @AuraEnabled (cacheable=true)
     public static List<Account> getAccountList(String accountType, String searchName) {
         Id recTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get('Organization').getRecordTypeId();        
@@ -15,7 +12,6 @@ public with sharing class NatoutAccountSearchController {
             'ORDER BY Name';
 
         List<Account> accountList = Database.query(sql);
-        System.debug('accountList: ' + accountList);
         return accountList;
     }
 }
