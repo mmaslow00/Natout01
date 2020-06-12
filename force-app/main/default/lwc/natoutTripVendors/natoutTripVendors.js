@@ -1,6 +1,5 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import getVendorList from '@salesforce/apex/NatoutTripVendorsController.getVendorList';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { createRecord } from 'lightning/uiRecordApi';
 import { updateRecord } from 'lightning/uiRecordApi';
 import { deleteRecord } from 'lightning/uiRecordApi';
@@ -69,23 +68,11 @@ export default class NatoutTripVendors extends LightningElement {
                 if(confirm('Delete this Vendor?')) {
                     deleteRecord(retrievedVendor.Id)
                     .then(() => {
-                        this.dispatchEvent(
-                            new ShowToastEvent({
-                                title: 'Success',
-                                message: 'Vendor Deleted',
-                                variant: 'success'
-                            })
-                        );
+                        this.showSnackbar('success','Success','Vendor Deleted');
                         return refreshApex(this.wiredVendors);
                     })
                     .catch(error => {
-                        this.dispatchEvent(
-                            new ShowToastEvent({
-                                title: 'Error deleting record',
-                                message: reduceErrors(error).join(', '),
-                                variant: 'error'
-                            })
-                        );
+                        this.showSnackbar('failure','Error deleting record',reduceErrors(error).join(', '));
                     });                    
                 }
                 break;
@@ -153,13 +140,7 @@ export default class NatoutTripVendors extends LightningElement {
             Account__c: this.vendorToUpdate.Account__c
         };
         if( ! vendorRecord.Account__c ) {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: 'Update Failed',
-                    message: 'You must choose a Vendor',
-                    variant: 'error'
-                }),
-            );
+            this.showSnackbar('failure','Update Failed','You must choose a Vendor');
             this.saveSuccessful = false;
             return;
         }
@@ -180,25 +161,13 @@ export default class NatoutTripVendors extends LightningElement {
                 if(createNew) {
                     this.createNewRecord();
                 }
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Vendor Updated',
-                        message: 'Vendor successfully updated',
-                        variant: 'success',
-                    }),
-                );
+                this.showSnackbar('success','Vendor Updated','Vendor successfully updated');
                 return refreshApex(this.wiredVendors);
             })
             .catch(error => {
                 this.error = error;
                 this.saveSuccessful = false;
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Update Failed',
-                        message: reduceErrors(error).join(', '),
-                        variant: 'error'
-                    }),
-                );
+                this.showSnackbar('failure','Update Failed',reduceErrors(error).join(', '));
             });
         } else {
             createRecord ({
@@ -216,25 +185,13 @@ export default class NatoutTripVendors extends LightningElement {
                 if(createNew) {
                     this.createNewRecord();
                 }
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Vendor Added',
-                        message: 'Vendor successfully added',
-                        variant: 'success',
-                    }),
-                );
+                this.showSnackbar('success','Vendor Added','Vendor successfully added');
                 return refreshApex(this.wiredVendors);
             })
             .catch(error => {
                 this.error = error;
                 this.saveSuccessful = false;
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Update Failed',
-                        message: reduceErrors(error).join(', '),
-                        variant: 'error'
-                    }),
-                );
+                this.showSnackbar('failure','Update Failed',reduceErrors(error).join(', '));
             });
         }
     }
@@ -268,5 +225,8 @@ export default class NatoutTripVendors extends LightningElement {
             }
         }
         return cols;
+    }
+    showSnackbar(type, header, text) {
+        this.template.querySelector('c-snackbar').show(type, header, text);
     }
 }

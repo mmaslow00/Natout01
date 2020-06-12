@@ -1,6 +1,5 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import getItineraryList from '@salesforce/apex/NatoutTripItineraryController.getItineraryList';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { createRecord } from 'lightning/uiRecordApi';
 import { updateRecord } from 'lightning/uiRecordApi';
 import { deleteRecord } from 'lightning/uiRecordApi';
@@ -53,13 +52,7 @@ export default class NatoutTripItinerary extends LightningElement {
              
         }
         else if(result.error) {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: 'Error retrieving list',
-                    message: reduceErrors(error).join(', '),
-                    variant: 'error'
-                })
-            );
+            this.showSnackbar('failure','Error retrieving list',reduceErrors(error).join(', '));
         }
     }
     handleRowAction(event) {
@@ -84,23 +77,11 @@ export default class NatoutTripItinerary extends LightningElement {
                 if(confirm('Delete this Day?')) {
                     deleteRecord(retrievedItem.Id)
                     .then(() => {
-                        this.dispatchEvent(
-                            new ShowToastEvent({
-                                title: 'Success',
-                                message: 'Item Deleted',
-                                variant: 'success'
-                            })
-                        );
+                        this.showSnackbar('success','Success','Item Deleted');
                         return refreshApex(this.wiredItinerary);
                     })
                     .catch(error => {
-                        this.dispatchEvent(
-                            new ShowToastEvent({
-                                title: 'Error deleting record',
-                                message: reduceErrors(error).join(', '),
-                                variant: 'error'
-                            })
-                        );
+                        this.showSnackbar('failure','Error deleting record',reduceErrors(error).join(', '));
                     });                    
                 }
                 break;
@@ -158,13 +139,7 @@ export default class NatoutTripItinerary extends LightningElement {
             return validSoFar && inputCmp.reportValidity();
             }, true);
         if(! allValid) {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: 'Failed to Save Item',
-                    message: 'Please enter all required fields',
-                    variant: 'error'
-                })
-            );
+            this.showSnackbar('failure','Failed to Save Item','Please enter all required fields');
             this.saveSuccessful = false;
         }
         if(this.saveSuccessful) {
@@ -184,25 +159,13 @@ export default class NatoutTripItinerary extends LightningElement {
                     if(createNew) {
                         this.createNextDay();
                     }
-                    this.dispatchEvent(
-                        new ShowToastEvent({
-                            title: 'Item Updated',
-                            message: 'Item successfully updated',
-                            variant: 'success',
-                        }),
-                    );
+                    this.showSnackbar('success','Item Updated','Item successfully updated');
                     return refreshApex(this.wiredItinerary);
                 })
                 .catch(error => {
                     this.saveSuccessful = false;
                     this.error = error;
-                    this.dispatchEvent(
-                        new ShowToastEvent({
-                            title: 'Update Failed',
-                            message: reduceErrors(error).join(', '),
-                            variant: 'error'
-                        }),
-                    );
+                    this.showSnackbar('failure','Update Failed',reduceErrors(error).join(', '));
                 });
             } else {
                 createRecord ({
@@ -221,25 +184,13 @@ export default class NatoutTripItinerary extends LightningElement {
                     if(createNew) {
                         this.createNextDay();
                     }
-                    this.dispatchEvent(
-                        new ShowToastEvent({
-                            title: 'Item Added',
-                            message: 'Item successfully added',
-                            variant: 'success',
-                        }),
-                    );
+                    this.showSnackbar('success','Item Added','Item successfully added');
                     return refreshApex(this.wiredItinerary);
                 })
                 .catch(error => {
                     this.error = error;
                     this.saveSuccessful = false;
-                    this.dispatchEvent(
-                        new ShowToastEvent({
-                            title: 'Update Failed',
-                            message: reduceErrors(error).join(', '),
-                            variant: 'error'
-                        }),
-                    );
+                    this.showSnackbar('failure','Update Failed',reduceErrors(error).join(', '));
                 });
             }
         }
@@ -327,6 +278,9 @@ export default class NatoutTripItinerary extends LightningElement {
             }
         }
         return cols;
+    }
+    showSnackbar(type, header, text) {
+        this.template.querySelector('c-snackbar').show(type, header, text);
     }
     @api getRowCount() {
         return this.itineraryList.length;

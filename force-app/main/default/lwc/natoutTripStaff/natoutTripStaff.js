@@ -1,6 +1,5 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import getStaffList from '@salesforce/apex/NatoutTripStaffController.getStaffList';
-//import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { createRecord } from 'lightning/uiRecordApi';
 import { updateRecord } from 'lightning/uiRecordApi';
 import { deleteRecord } from 'lightning/uiRecordApi';
@@ -84,29 +83,11 @@ export default class NatoutTripStaff extends LightningElement {
                     .then(() => {
                         this.savingStaff = false;
                         this.showSnackbar('success','Success','Staff Member Deleted');
-                        /*
-                        this.dispatchEvent(
-                            new ShowToastEvent({
-                                title: 'Success',
-                                message: 'Staff Member Deleted',
-                                variant: 'success'
-                            })
-                        );
-                        */
                         return refreshApex(this.wiredStaff);
                     })
                     .catch(error => {
                         this.savingStaff = false;
                         this.showSnackbar('failure','Error deleting record',reduceErrors(error).join(', '));
-                        /*
-                        this.dispatchEvent(
-                            new ShowToastEvent({
-                                title: 'Error deleting record',
-                                message: reduceErrors(error).join(', '),
-                                variant: 'error'
-                            })
-                        );
-                        */
                     });                    
                 }
                 break;
@@ -154,15 +135,6 @@ export default class NatoutTripStaff extends LightningElement {
             .catch(error => {
                 this.error = error;
                 this.showSnackbar('failure','Error Retrieving List',reduceErrors(error).join(', '));
-                /*
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Error Retrieving List',
-                        message: reduceErrors(error).join(', '),
-                        variant: 'error'
-                    }),
-                );
-                */
             });
     }
 
@@ -198,30 +170,12 @@ export default class NatoutTripStaff extends LightningElement {
                     this.error = undefined;
                     this.savingStaff = false;
                     this.showSnackbar('success','Staff Updated','Staff successfully updated');
-                    /*
-                    this.dispatchEvent(
-                        new ShowToastEvent({
-                            title: 'Staff Updated',
-                            message: 'Staff successfully updated',
-                            variant: 'success',
-                        }),
-                    );
-                    */
                     return refreshApex(this.wiredStaff);
                 })
                 .catch(error => {
                     this.error = error;
                     this.savingStaff = false;
                     this.showSnackbar('failure','Staff Update Failed',reduceErrors(error).join(', '));
-                    /*
-                    this.dispatchEvent(
-                        new ShowToastEvent({
-                            title: 'Staff Update Failed',
-                            message: reduceErrors(error).join(', '),
-                            variant: 'error'
-                        }),
-                    );
-                    */
                 });
             } else {
                 createRecord ({
@@ -233,30 +187,12 @@ export default class NatoutTripStaff extends LightningElement {
                     this.error = undefined;
                     this.savingStaff = false;
                     this.showSnackbar('success','Staff Member Added','Staff successfully added');
-                    /*
-                    this.dispatchEvent(
-                        new ShowToastEvent({
-                            title: 'Staff Member Added',
-                            message: 'Staff successfully added',
-                            variant: 'success',
-                        }),
-                    );
-                    */
                     return refreshApex(this.wiredStaff);
                 })
                 .catch(error => {
                     this.error = error;
                     this.savingStaff = false;
                     this.showSnackbar('failure','Staff Update Failed',reduceErrors(error).join(', '));
-                    /*
-                    this.dispatchEvent(
-                        new ShowToastEvent({
-                            title: 'Staff Update Failed',
-                            message: reduceErrors(error).join(', '),
-                            variant: 'error'
-                        }),
-                    );
-                    */
                 });
             }
             this.closeModal();

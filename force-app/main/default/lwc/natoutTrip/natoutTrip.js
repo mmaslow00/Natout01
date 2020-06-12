@@ -1,7 +1,6 @@
 import { LightningElement, api, track, wire } from 'lwc';
 import { createRecord } from 'lightning/uiRecordApi';
 import { reduceErrors } from 'c/ldsUtils';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { NavigationMixin } from 'lightning/navigation';
 import getPicklistOptions from '@salesforce/apex/NatoutTripOptions.getOptions';
 
@@ -56,13 +55,7 @@ export default class NatoutTrip extends NavigationMixin(LightningElement) {
             return validSoFar && inputCmp.reportValidity();
             }, true);
         if(this.tripRecord.Start_Date__c > this.tripRecord.End_Date__c) {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: 'Failed to Create Trip',
-                    message: 'End Date Must Be After Start Date',
-                    variant: 'error'
-                }),
-            );
+            this.showSnackbar('failure','Failed to Create Trip','End Date Must Be After Start Date');
             return;
         }
         if (allValid) {
@@ -91,13 +84,7 @@ export default class NatoutTrip extends NavigationMixin(LightningElement) {
             .catch(error => {
                 this.error = error;
                 this.savingTrip = false;
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Failed to Create Trip',
-                        message: reduceErrors(error).join(', '),
-                        variant: 'error'
-                    })
-                );
+                this.showSnackbar('failure','Failed to Create Trip',reduceErrors(error).join(', '));
             });
         }
     }
@@ -146,5 +133,8 @@ export default class NatoutTrip extends NavigationMixin(LightningElement) {
     navigateToDetails() {
         let nextPage = 'NatoutTripDetail?id=' + this.tripId;
         window.location.href = nextPage;
+    }
+    showSnackbar(type, header, text) {
+        this.template.querySelector('c-snackbar').show(type, header, text);
     }
 }

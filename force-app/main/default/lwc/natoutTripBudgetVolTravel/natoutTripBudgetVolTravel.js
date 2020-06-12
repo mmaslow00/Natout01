@@ -1,6 +1,5 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import getVolTravelList from '@salesforce/apex/NatoutTripBudgetController.getVolTravelList';
-//import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { createRecord } from 'lightning/uiRecordApi';
 import { updateRecord } from 'lightning/uiRecordApi';
 import { deleteRecord } from 'lightning/uiRecordApi';
@@ -64,15 +63,6 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
         }
         else if(result.error) {
             this.showSnackbar('failure','Error retrieving list',reduceErrors(error).join(', '));
-            /*
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: 'Error retrieving list',
-                    message: reduceErrors(error).join(', '),
-                    variant: 'error'
-                })
-            );
-            */
         }
     }
 
@@ -107,28 +97,10 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
                     deleteRecord(retrievedItem.Id)
                     .then(() => {
                         this.showSnackbar('success','Success','Budget Item Deleted');
-                        /*
-                        this.dispatchEvent(
-                            new ShowToastEvent({
-                                title: 'Success',
-                                message: 'Budget Item Deleted',
-                                variant: 'success'
-                            })
-                        );
-                        */
                         return refreshApex(this.wiredBudget);
                     })
                     .catch(error => {
                         this.showSnackbar('failure','Error deleting record',reduceErrors(error).join(', '));
-                        /*
-                        this.dispatchEvent(
-                            new ShowToastEvent({
-                                title: 'Error deleting record',
-                                message: reduceErrors(error).join(', '),
-                                variant: 'error'
-                            })
-                        );
-                        */
                     });                    
                 }
                 break;
@@ -197,15 +169,6 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
         }
         if( ! this.saveSuccessful ) {
             this.showSnackbar('failure','Unable to Save Budget Item','You must specify an amount');
-            /*
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: 'Unable to Save Budget Item',
-                    message: 'You must specify an amount',
-                    variant: 'error'
-                }),
-            );
-            */
             return;
         }
         if(this.itemToUpdate.Id) {
@@ -220,30 +183,12 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
                     this.createNewRecord();
                 }
                 this.showSnackbar('success','Budget Item Updated','Budget Item sucessfully updated');
-                /*
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Budget Item Updated',
-                        message: 'Budget Item successfully updated',
-                        variant: 'success',
-                    }),
-                );
-                */
                 return refreshApex(this.wiredBudget);
             })
             .catch(error => {
                 this.error = error;
                 this.saveSuccessful = false;
                 this.showSnackbar('failure','Update Failed',reduceErrors(error).join(', '));
-                /*
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Update Failed',
-                        message: reduceErrors(error).join(', '),
-                        variant: 'error'
-                    }),
-                );
-                */
             });
         } else {
             createRecord ({
@@ -258,30 +203,12 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
                     this.createNewRecord();
                 }
                 this.showSnackbar('success','Budget Item Added','Budget Item successfully added');
-                /*
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Budget Item Added',
-                        message: 'Budget Item successfully added',
-                        variant: 'success',
-                    }),
-                );
-                */
                 return refreshApex(this.wiredBudget);
             })
             .catch(error => {
                 this.error = error;
                 this.saveSuccessful = false;
                 this.showSnackbar('failure','Error Creating Budget Item',reduceErrors(error).join(', '));
-                /*
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Staff Update Failed',
-                        message: reduceErrors(error).join(', '),
-                        variant: 'error'
-                    }),
-                );
-                */
             });
         }
     }

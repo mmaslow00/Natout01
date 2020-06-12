@@ -4,7 +4,6 @@ import getUserInfo from '@salesforce/apex/NatoutUserInfo.getUserInfo';
 import copyTrip from '@salesforce/apex/NatoutTripCopy.copy';
 import markUploaded from '@salesforce/apex/NatoutTripCopy.markUploaded';
 import { deleteRecord } from 'lightning/uiRecordApi';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getPicklistOptions from '@salesforce/apex/NatoutTripOptions.getOptions';
 import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 import TRIP_OBJECT from '@salesforce/schema/National_Outings_Trip__c';
@@ -173,23 +172,11 @@ export default class NatoutTripList extends LightningElement {
             }
             markUploaded({idList: idList})
             .then(() => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Success',
-                        message: 'Status of Selected Trips Set to Uploaded',
-                        variant: 'success'
-                    })
-                );
+                this.showSnackbar('success','Success','Status of Selected Trips Set to Uploaded');
                 this.retrieveList();
             })
             .catch(error => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Error attempting to set status to uploaded',
-                        message: reduceErrors(error).join(', '),
-                        variant: 'error'
-                    })
-                );
+                this.showSnackbar('failure','Error attempting to set status to uploaded',reduceErrors(error).join(', '));
             });                    
         }
     }
@@ -261,23 +248,11 @@ export default class NatoutTripList extends LightningElement {
                 if(confirm('Are you sure you want to delete this trip?')) {
                     deleteRecord(row.Id)
                     .then(() => {
-                        this.dispatchEvent(
-                            new ShowToastEvent({
-                                title: 'Success',
-                                message: 'Trip Deleted',
-                                variant: 'success'
-                            })
-                        );
+                        this.showSnackbar('success','Success','Trip Deleted');
                         this.retrieveList();
                     })
                     .catch(error => {
-                        this.dispatchEvent(
-                            new ShowToastEvent({
-                                title: 'Error deleting record',
-                                message: reduceErrors(error).join(', '),
-                                variant: 'error'
-                            })
-                        );
+                        this.showSnackbar('failure','Error deleting record',reduceErrors(error).join(', '));
                     });                    
                 }
                 break;
@@ -350,5 +325,8 @@ export default class NatoutTripList extends LightningElement {
             return ! this.userAccess.data.isAdmin;
         }
         return false;
+    }
+    showSnackbar(type, header, text) {
+        this.template.querySelector('c-snackbar').show(type, header, text);
     }
 }

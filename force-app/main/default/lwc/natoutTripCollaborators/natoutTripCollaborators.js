@@ -1,6 +1,5 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import getCollaboratorList from '@salesforce/apex/NatoutTripCollaboratorController.getCollaboratorList';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { createRecord } from 'lightning/uiRecordApi';
 import { updateRecord } from 'lightning/uiRecordApi';
 import { deleteRecord } from 'lightning/uiRecordApi';
@@ -61,23 +60,11 @@ export default class NatoutTripCollaborators extends LightningElement {
                 if(confirm('Delete this Collaborator?')) {
                     deleteRecord(retrievedCollab.Id)
                     .then(() => {
-                        this.dispatchEvent(
-                            new ShowToastEvent({
-                                title: 'Success',
-                                message: 'Collaborator Deleted',
-                                variant: 'success'
-                            })
-                        );
+                        this.showSnackbar('success','Success','Collaborator Deleted');
                         return refreshApex(this.wiredCollabs);
                     })
                     .catch(error => {
-                        this.dispatchEvent(
-                            new ShowToastEvent({
-                                title: 'Error deleting record',
-                                message: reduceErrors(error).join(', '),
-                                variant: 'error'
-                            })
-                        );
+                        this.showSnackbar('failure','Error deleting record',reduceErrors(error).join(', '));
                     });                    
                 }
                 break;
@@ -117,13 +104,7 @@ export default class NatoutTripCollaborators extends LightningElement {
     }
     saveCollab() {
         if( ! this.collabToUpdate.Contact__c ) {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: 'Update Failed',
-                    message: 'You must choose a Collaborator',
-                    variant: 'error'
-                }),
-            );
+            this.showSnackbar('failure','Update Failed','You must choose a Collaborator');
             return;
         }
 
@@ -138,24 +119,12 @@ export default class NatoutTripCollaborators extends LightningElement {
             .then(result => {
                 this.message = result;
                 this.error = undefined;
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Collaborator Updated',
-                        message: 'Collaborator successfully updated',
-                        variant: 'success',
-                    }),
-                );
+                this.showSnackbar('success','Collaborator Updated','Collaborator successfully updated');
                 return refreshApex(this.wiredCollabs);
             })
             .catch(error => {
                 this.error = error;
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Update Failed',
-                        message: reduceErrors(error).join(', '),
-                        variant: 'error'
-                    }),
-                );
+                this.showSnackbar('failure','Update Failed',reduceErrors(error).join(', '));
             });
         } else {
             createRecord ({
@@ -169,24 +138,12 @@ export default class NatoutTripCollaborators extends LightningElement {
             .then(result => {
                 this.message = result;
                 this.error = undefined;
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Collaborator Added',
-                        message: 'Collaborator successfully added',
-                        variant: 'success',
-                    }),
-                );
+                this.showSnackbar('success','Collaborator Added','Collaborator successfully added');
                 return refreshApex(this.wiredCollabs);
             })
             .catch(error => {
                 this.error = error;
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Update Failed',
-                        message: reduceErrors(error).join(', '),
-                        variant: 'error'
-                    }),
-                );
+                this.showSnackbar('failure','Update Failed',reduceErrors(error).join(', '));
             });
         }
         this.closeModal();
@@ -215,5 +172,8 @@ export default class NatoutTripCollaborators extends LightningElement {
             {label: 'Edit', value: 'Edit'},
             {label: 'Approve', value: 'Approve'}
         ];
+    }
+    showSnackbar(type, header, text) {
+        this.template.querySelector('c-snackbar').show(type, header, text);
     }
 }

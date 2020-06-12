@@ -3,98 +3,99 @@
         <div style="text-align: center;">
             <b>Create a New Trip</b>
         </div>
-    <lightning-record-edit-form 
-        object-api-name="National_Outings_Trip__c"
-        onsubmit={handleSave}
-    >
-        <lightning-messages>
-        </lightning-messages>
+        <lightning-record-edit-form 
+            object-api-name="National_Outings_Trip__c"
+            onsubmit={handleSave}
+        >
+            <lightning-messages>
+            </lightning-messages>
 
-        <lightning-layout class="slds-p-bottom_medium">
-            <lightning-layout-item>
-                <lightning-radio-group 
-                    label="Type of Trip"
-                    options={options}
-                    value={tripCategory}
-                    type="radio"
-                    onchange={setTypeOption}
+            <lightning-layout class="slds-p-bottom_medium">
+                <lightning-layout-item>
+                    <lightning-radio-group 
+                        label="Type of Trip"
+                        options={options}
+                        value={tripCategory}
+                        type="radio"
+                        onchange={setTypeOption}
+                    >
+                    </lightning-radio-group>
+                </lightning-layout-item>
+            </lightning-layout>
+
+            <label for="tripName">
+                <abbr title="required" class="slds-required">*</abbr>
+                Name
+            </label>
+            <lightning-input-field
+                field-name="Name"
+                onchange={handleFieldChange}
+                data-field="Name"
+                data-id="tripName"
+                variant="label-hidden"
+                required
+            >
+            </lightning-input-field>
+
+            <template if:true={isDomesticTrip}>
+                <lightning-combobox
+                    label="Subcommittee"
+                    placeholder='Select a Subcommittee'
+                    value={chosenSubcomm}
+                    options={subcommOptionList}
+                    onchange={handleSubcommChange}
+                    data-field='subcommittee'
+                    required
                 >
-                </lightning-radio-group>
-            </lightning-layout-item>
-        </lightning-layout>
-
-        <label for="tripName">
-            <abbr title="required" class="slds-required">*</abbr>
-            Name
-        </label>
-        <lightning-input-field
-            field-name="Name"
-            onchange={handleFieldChange}
-            data-field="Name"
-            data-id="tripName"
-            variant="label-hidden"
-            required
-        >
-        </lightning-input-field>
-
-        <template if:true={isDomesticTrip}>
-            <lightning-combobox
-                label="Subcommittee"
-                placeholder='Select a Subcommittee'
-                value={chosenSubcomm}
-                options={subcommOptionList}
-                onchange={handleSubcommChange}
-                data-field='subcommittee'
-                required
+                </lightning-combobox>        
+                <lightning-combobox
+                    label="Trip Type"
+                    placeholder='Select a Trip Type'
+                    value={chosenTripType}
+                    options={tripTypeOptions}
+                    onchange={handleTripTypeChange}
+                    data-field='triptype'
+                    required
+                >
+                </lightning-combobox>
+            </template>
+            <lightning-input-field
+                field-name="Start_Date__c"
+                onchange={handleFieldChange}
+                onblur={onBlurHandler}
+                data-field="Start_Date__c"
+                class="startDate"
             >
-            </lightning-combobox>        
-            <lightning-combobox
-                label="Trip Type"
-                placeholder='Select a Trip Type'
-                value={chosenTripType}
-                options={tripTypeOptions}
-                onchange={handleTripTypeChange}
-                data-field='triptype'
-                required
+            </lightning-input-field>
+            <lightning-input-field
+                field-name="End_Date__c"
+                onchange={handleFieldChange}
+                data-field="End_Date__c"
+                class="endDate"
             >
-            </lightning-combobox>
-        </template>
-        <lightning-input-field
-            field-name="Start_Date__c"
-            onchange={handleFieldChange}
-            onblur={onBlurHandler}
-            data-field="Start_Date__c"
-            class="startDate"
-        >
-        </lightning-input-field>
-        <lightning-input-field
-            field-name="End_Date__c"
-            onchange={handleFieldChange}
-            data-field="End_Date__c"
-            class="endDate"
-        >
-        </lightning-input-field>
-    </lightning-record-edit-form>
-    <div class="slds-p-top_large">
-        <div if:true={savingTrip} class="slds-is-relative">
-            <lightning-spinner
-                alternative-text="Saving..."
+            </lightning-input-field>
+        </lightning-record-edit-form>
+        <div class="slds-p-top_large">
+            <div if:true={savingTrip} class="slds-is-relative">
+                <lightning-spinner
+                    alternative-text="Saving..."
+                >
+                </lightning-spinner>
+            </div>         
+            <lightning-button
+                variant="brand"
+                name="Save"
+                label="Create New Trip"
+                onclick={saveForm}
+                disabled={savingTrip}
             >
-            </lightning-spinner>
-        </div>         
-    <lightning-button
-        variant="brand"
-        name="Save"
-        label="Create New Trip"
-        onclick={saveForm}
-        disabled={savingTrip}
-    >
-    </lightning-button>
-    <lightning-button class="slds-p-left_xx-large"
-        name="Cancel"
-        label="Cancel"
-        onclick={cancelForm}>
-    </lightning-button>
+            </lightning-button>
+            <lightning-button class="slds-p-left_xx-large"
+                name="Cancel"
+                label="Cancel"
+                onclick={cancelForm}>
+            </lightning-button>
+        </div>
     </div>
-    </div>
+    <c-snackbar></c-snackbar>
 </template>

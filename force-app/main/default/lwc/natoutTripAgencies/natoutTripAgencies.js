@@ -1,6 +1,5 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import getAgencyList from '@salesforce/apex/NatoutTripAgenciesController.getAgencyList';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { createRecord } from 'lightning/uiRecordApi';
 import { updateRecord } from 'lightning/uiRecordApi';
 import { deleteRecord } from 'lightning/uiRecordApi';
@@ -70,23 +69,11 @@ export default class NatoutTripAgencies extends LightningElement {
                 if(confirm('Delete this Agency?')) {
                     deleteRecord(retrievedAgency.Id)
                     .then(() => {
-                        this.dispatchEvent(
-                            new ShowToastEvent({
-                                title: 'Success',
-                                message: 'Agency Deleted',
-                                variant: 'success'
-                            })
-                        );
+                        this.showSnackbar('success','Success','Agency Deleted');
                         return refreshApex(this.wiredAgencies);
                     })
                     .catch(error => {
-                        this.dispatchEvent(
-                            new ShowToastEvent({
-                                title: 'Error deleting record',
-                                message: reduceErrors(error).join(', '),
-                                variant: 'error'
-                            })
-                        );
+                        this.showSnackbar('failure','Error deleting record',reduceErrors(error).join(', '));
                     });                    
                 }
                 break;
@@ -127,13 +114,7 @@ export default class NatoutTripAgencies extends LightningElement {
             Account__c: this.agencyToUpdate.Account__c
         };
         if( ! agencyRecord.Account__c ) {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: 'Update Failed',
-                    message: 'You must choose an Agency',
-                    variant: 'error'
-                }),
-            );
+            this.showSnackbar('failure','Update Failed','You must choose an Agency');
             return;
         }
 
@@ -148,24 +129,12 @@ export default class NatoutTripAgencies extends LightningElement {
             .then(result => {
                 this.message = result;
                 this.error = undefined;
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Agency Updated',
-                        message: 'Agency successfully updated',
-                        variant: 'success',
-                    }),
-                );
+                this.showSnackbar('success','Agency Updated','Agency successfully updated');
                 return refreshApex(this.wiredAgencies);
             })
             .catch(error => {
                 this.error = error;
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Update Failed',
-                        message: reduceErrors(error).join(', '),
-                        variant: 'error'
-                    }),
-                );
+                this.showSnackbar('failure','Update Failed',reduceErrors(error).join(', '));
             });
         } else {
             createRecord ({
@@ -178,24 +147,12 @@ export default class NatoutTripAgencies extends LightningElement {
             .then(result => {
                 this.message = result;
                 this.error = undefined;
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Agency Added',
-                        message: 'Agency successfully added',
-                        variant: 'success',
-                    }),
-                );
+                this.showSnackbar('success','Agency Added','Agency successfully added');
                 return refreshApex(this.wiredAgencies);
             })
             .catch(error => {
                 this.error = error;
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: 'Update Failed',
-                        message: reduceErrors(error).join(', '),
-                        variant: 'error'
-                    }),
-                );
+                this.showSnackbar('failure','Update Failed',reduceErrors(error).join(', '));
             });
         }
         this.closeModal();
@@ -212,5 +169,8 @@ export default class NatoutTripAgencies extends LightningElement {
             }
         }
         return cols;
+    }
+    showSnackbar(type, header, text) {
+        this.template.querySelector('c-snackbar').show(type, header, text);
     }
 }
