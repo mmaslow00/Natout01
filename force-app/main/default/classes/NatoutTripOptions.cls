@@ -1,6 +1,4 @@
 public with sharing class NatoutTripOptions {
-    public NatoutTripOptions() {
-    }
     @AuraEnabled (cacheable=true)
     public static TripOptions getOptions() {
         TripOptions tripOptions = new TripOptions();

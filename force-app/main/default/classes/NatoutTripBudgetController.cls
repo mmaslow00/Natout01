@@ -1,7 +1,4 @@
 public with sharing class NatoutTripBudgetController {
-    public NatoutTripBudgetController() {
-
-    }
     @AuraEnabled(cacheable = true)
     public static List<National_Outings_Trip_Budget_Item__c> getVolTravelList(String tripId) {
         List<National_Outings_Trip_Budget_Item__c> budgetList = [
@@ -10,7 +7,6 @@ public with sharing class NatoutTripBudgetController {
             WHERE National_Outings_Trip__c = :tripId
                 AND Budget_Category__c = 'Volunteer Travel'
         ];
-        System.debug('Returning budgetList: ' + budgetList);
         return budgetList;
     }  
     @AuraEnabled(cacheable = true)
@@ -22,7 +18,6 @@ public with sharing class NatoutTripBudgetController {
                 AND Budget_Category__c = 'Meals'
             ORDER BY Day_Number__c
         ];
-        System.debug('Returning budgetList: ' + budgetList);
         return budgetList;
     }  
     @AuraEnabled(cacheable = true)
@@ -33,7 +28,6 @@ public with sharing class NatoutTripBudgetController {
             WHERE National_Outings_Trip__c = :tripId
                 AND Budget_Category__c = 'Transportation'
         ];
-        System.debug('Returning budgetList: ' + budgetList);
         return budgetList;
     }  
     @AuraEnabled(cacheable = true)
@@ -44,7 +38,6 @@ public with sharing class NatoutTripBudgetController {
             WHERE National_Outings_Trip__c = :tripId
                 AND Budget_Category__c = 'Concessionaires'
         ];
-        System.debug('Returning budgetList: ' + budgetList);
         return budgetList;
     }  
 }

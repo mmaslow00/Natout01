@@ -1,6 +1,4 @@
 public with sharing class NatoutTripStaffController {
-    public NatoutTripStaffController() {}
-
     @AuraEnabled (cacheable=true)
     public static List<National_Outings_Trip_Staff__c> getStaffList(String tripId) {
         System.debug('Retrieving staff for trip Id: ' + tripId);
@@ -12,7 +10,6 @@ public with sharing class NatoutTripStaffController {
             FROM National_Outings_Trip_Staff__c
             WHERE National_Outings_Trip__c = :tripId
         ];
-        System.debug('Returning staffList: ' + staffList);
         return staffList;
     }
 }

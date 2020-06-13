@@ -1,7 +1,4 @@
 public with sharing class NatoutTripItineraryController {
-    public NatoutTripItineraryController() {
-
-    }
     @AuraEnabled (cacheable=true)
     public static List<National_Outings_Trip_Itinerary__c> getItineraryList(String tripId) {
         List<National_Outings_Trip_Itinerary__c> itineraryList = [
@@ -11,7 +8,6 @@ public with sharing class NatoutTripItineraryController {
             WHERE National_Outings_Trip__c = :tripId
             ORDER BY Day_Number__c
         ];
-        System.debug('Returning itineraryList: ' + itineraryList);
         return itineraryList;
     }
 }

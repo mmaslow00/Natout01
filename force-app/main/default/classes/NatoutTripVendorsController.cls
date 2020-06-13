@@ -1,6 +1,4 @@
 public with sharing class NatoutTripVendorsController {
-    public NatoutTripVendorsController() {
-    }
     @AuraEnabled (cacheable=true)
     public static List<National_Outings_Trip_Vendor__c> getVendorList(String tripId) {
         List<National_Outings_Trip_Vendor__c> vendorList = [
