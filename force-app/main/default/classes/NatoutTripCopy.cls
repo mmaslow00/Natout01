@@ -1,6 +1,4 @@
 public with sharing class NatoutTripCopy {
-    public NatoutTripCopy() {
-    }
     @AuraEnabled
     public static String copy(String tripId) {
         String retVal = null;
@@ -18,7 +16,6 @@ public with sharing class NatoutTripCopy {
 
         List<SObject> relObjList = new List<SObject>();
         relObjList.addAll(getRelatedObjList('National_Outings_Trip_Budget_Item__c', tripId, retVal));
-        relObjList.addAll(getRelatedObjList('National_Outings_Trip_Permit__c', tripId, retVal));
         relObjList.addAll(getRelatedObjList('National_Outings_Trip_Agency__c', tripId, retVal));
         relObjList.addAll(getRelatedObjList('National_Outings_Trip_Itinerary__c', tripId, retVal));
         relObjList.addAll(getRelatedObjList('National_Outings_Trip_Vendor__c', tripId, retVal));
@@ -37,7 +34,6 @@ public with sharing class NatoutTripCopy {
 
     private static List<SObject> getRelatedObjList(String objName, Id fromTripId, Id toTripId) {
         List<SObject> toObjList = new List<SObject>();
-
         String query = 'SELECT ' +
             getFieldList(objName) +
             ' FROM ' + objName + ' WHERE National_Outings_Trip__c = :fromTripId';
@@ -47,7 +43,6 @@ public with sharing class NatoutTripCopy {
             toObj.put('National_Outings_Trip__c', toTripId);
             toObjList.add(toObj);
         }
-
         return toObjList;
     }
 
