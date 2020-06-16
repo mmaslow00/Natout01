@@ -228,7 +228,7 @@ export default class NatoutTripList extends LightningElement {
             { label: 'Copy', name: 'copy'}
         ];
         if (row.OwnerId === userId) {
-            if(row.Status__c === 'Started') {
+            if(row.Status__c === 'Started' || row.Status__c === 'Returned') {
                 actions.push({
                     'label': 'Delete',
                     'name': 'delete'

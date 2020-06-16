@@ -99,7 +99,7 @@ export default class NatoutTripDetail extends LightningElement {
     handleStatusChange(e) {
         let previousStatus = this.chosenStatus;
         this.chosenStatus = e.target.value;
-        if(previousStatus === 'Started' && this.chosenStatus === 'Submitted') {
+        if((previousStatus === 'Started' || previousStatus === 'Returned') && this.chosenStatus === 'Submitted') {
             this.errorList = this.statusStartedToSubmitted();
             if(this.errorList.length > 0) {
                 this.template.querySelector('.approvalStatus').value = previousStatus;
@@ -135,7 +135,7 @@ export default class NatoutTripDetail extends LightningElement {
             saveErrors = true;
             this.showSnackbar('failure', 'Trip Update Failed', 'Please enter all required fields');
         }
-        if(this.loadedStatus === 'Started' && this.tripRecord.Status__c === 'Submitted') {
+        if((this.loadedStatus === 'Started' || this.loadedStatus === 'Returned') && this.tripRecord.Status__c === 'Submitted') {
             this.statusChangeErrors = this.statusStartedToSubmitted();
             if(this.statusChangeErrors.length > 0) {
                 saveErrors = true;
@@ -577,20 +577,30 @@ export default class NatoutTripDetail extends LightningElement {
         }
         else {
             let areas = this.tripRecord.Area__c;
-            if(areas.length == 0) {
+            if( ! areas) {
+                errors.push({rowNum: rowNum++, text: 'At least one Area is Required'});
+            }    
+            else if(areas.length == 0) {
                 errors.push({rowNum: rowNum++, text: 'At least one Area is Required'});
             }
-            areas = this.tripRecord.Area__c.split(';');
-            if(areas.length > 3) {
-                errors.push({rowNum: rowNum++, text: 'You cannot specify more than 3 Areas'});
+            else {
+                areas = this.tripRecord.Area__c.split(';');
+                if(areas.length > 3) {
+                    errors.push({rowNum: rowNum++, text: 'You cannot specify more than 3 Areas'});
+                }
             }
             let actTypes = this.tripRecord.Activity_Type__c;
-            if(actTypes.length == 0) {
+            if( ! actTypes ) {
                 errors.push({rowNum: rowNum++, text: 'At least one Activity Type is Required'});
             }
-            actTypes = this.tripRecord.Activity_Type__c.split(';');
-            if(actTypes.length > 3) {
-                errors.push({rowNum: rowNum++, text: 'You cannot specify more than 3 Activity Types'});
+            else if(actTypes.length == 0) {
+                errors.push({rowNum: rowNum++, text: 'At least one Activity Type is Required'});
+            }
+            else {
+                actTypes = this.tripRecord.Activity_Type__c.split(';');
+                if(actTypes.length > 3) {
+                    errors.push({rowNum: rowNum++, text: 'You cannot specify more than 3 Activity Types'});
+                }
             }
 
             if(this.chosenStates.length > 3) {
@@ -617,8 +627,15 @@ export default class NatoutTripDetail extends LightningElement {
         let budgetCount = 
             this.template.querySelector('c-natout-trip-budget-concessionaire').getRowCount() +
             this.template.querySelector('c-natout-trip-budget-vol-travel').getRowCount() +
-            this.template.querySelector('c-natout-trip-budget-meals').getRowCount() +
             this.template.querySelector('c-natout-trip-budget-transportation').getRowCount();
+
+        if(budgetCount == 0) {
+            let mealsBudgetComponent = this.template.querySelector('c-natout-trip-budget-meals');
+            if(mealsBudgetComponent) {
+                budgetCount += mealsBudgetComponent.getRowCount();
+            }
+        }
+
         if(budgetCount == 0) {
             if( ! 
                 (
@@ -632,7 +649,7 @@ export default class NatoutTripDetail extends LightningElement {
             ) {
                 errors.push({rowNum: rowNum++, text: 'Missing Budget'});
             }
-
+            
         }
         if( this.tripRecord.Sat_Phone_Needed__c ) {
             let date = this.template.querySelector('[data-field=Sat_Phone_Needed_Date__c]').value;
