@@ -26,20 +26,31 @@
     </types>
     <types>
         <members>NatoutAccountSearchController</members>
+        <members>NatoutAccountSearchControllerTest</members>
         <members>NatoutLeaderSearchController</members>
+        <members>NatoutLeaderSearchControllerTest</members>
         <members>NatoutTripAgenciesController</members>
+        <members>NatoutTripAgenciesControllerTest</members>
         <members>NatoutTripBudgetController</members>
         <members>NatoutTripBudgetExportController</members>
         <members>NatoutTripBudgetReportController</members>
+        <members>NatoutTripBudgetReportControllerTest</members>
         <members>NatoutTripCollaboratorController</members>
+        <members>NatoutTripCollaboratorControllerTest</members>
         <members>NatoutTripCopy</members>
+        <members>NatoutTripCopyTest</members>
         <members>NatoutTripExportController</members>
         <members>NatoutTripItineraryController</members>
+        <members>NatoutTripItineraryControllerTest</members>
         <members>NatoutTripListController</members>
+        <members>NatoutTripListControllerTest</members>
         <members>NatoutTripListSearchCriteria</members>
         <members>NatoutTripOptions</members>
+        <members>NatoutTripOptionsTest</members>
         <members>NatoutTripStaffController</members>
+        <members>NatoutTripStaffControllerTest</members>
         <members>NatoutTripVendorsController</members>
+        <members>NatoutTripVendorsControllerTest</members>
         <members>NatoutTripVendorExportController</members>
         <members>NatoutTripTriggerHandler</members>
         <members>NatoutUserInfo</members>
