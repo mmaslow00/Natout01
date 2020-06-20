@@ -40,6 +40,7 @@
         <members>NatoutTripCopy</members>
         <members>NatoutTripCopyTest</members>
         <members>NatoutTripExportController</members>
+        <members>NatoutTripExportControllerTest</members>
         <members>NatoutTripItineraryController</members>
         <members>NatoutTripItineraryControllerTest</members>
         <members>NatoutTripListController</members>
@@ -51,7 +52,6 @@
         <members>NatoutTripStaffControllerTest</members>
         <members>NatoutTripVendorsController</members>
         <members>NatoutTripVendorsControllerTest</members>
-        <members>NatoutTripVendorExportController</members>
         <members>NatoutTripTriggerHandler</members>
         <members>NatoutUserInfo</members>
         <name>ApexClass</name>

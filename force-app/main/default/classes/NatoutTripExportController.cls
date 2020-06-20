@@ -145,26 +145,28 @@ public with sharing class NatoutTripExportController {
             }
 
             List<Staff> staffList = staffMap.get(trip.Id);
-            for(Staff stf : staffList) {
-                if(stf.role == 'Leader') {
-                    row.staffRole1 = stf.role;
-                    row.staffName1 = stf.name;
-                    row.staffExternalId1 = stf.externalId;
-                }
-                else if(row.staffRole2 == null) {
-                    row.staffRole2 = stf.role;
-                    row.staffName2 = stf.name;
-                    row.staffExternalId2 = stf.externalId;
-                }
-                else if(row.staffRole3 == null) {
-                    row.staffRole3 = stf.role;
-                    row.staffName3 = stf.name;
-                    row.staffExternalId3 = stf.externalId;
-                }
-                else if(row.staffRole4 == null) {
-                    row.staffRole4 = stf.role;
-                    row.staffName4 = stf.name;
-                    row.staffExternalId4 = stf.externalId;
+            if(staffList != null) {
+                for(Staff stf : staffList) {
+                    if(stf.role == 'Leader') {
+                        row.staffRole1 = stf.role;
+                        row.staffName1 = stf.name;
+                        row.staffExternalId1 = stf.externalId;
+                    }
+                    else if(row.staffRole2 == null) {
+                        row.staffRole2 = stf.role;
+                        row.staffName2 = stf.name;
+                        row.staffExternalId2 = stf.externalId;
+                    }
+                    else if(row.staffRole3 == null) {
+                        row.staffRole3 = stf.role;
+                        row.staffName3 = stf.name;
+                        row.staffExternalId3 = stf.externalId;
+                    }
+                    else if(row.staffRole4 == null) {
+                        row.staffRole4 = stf.role;
+                        row.staffName4 = stf.name;
+                        row.staffExternalId4 = stf.externalId;
+                    }
                 }
             }
             row.permitRequirements = trip.Permit_Requirement_Options__c;
