@@ -1,6 +1,4 @@
 public with sharing class NatoutTripTriggerHandler {
-    public NatoutTripTriggerHandler() {
-    }
     public static void beforeInsert(List<National_Outings_Trip__c> tripList) {
         Id contactId = getUserContactId();
         if(contactId != null) {
