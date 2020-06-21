@@ -1,6 +1,5 @@
 import { LightningElement, track, wire } from 'lwc';
 import getTripList from '@salesforce/apex/NatoutTripListController.getTripList';
-import getUserInfo from '@salesforce/apex/NatoutUserInfo.getUserInfo';
 import copyTrip from '@salesforce/apex/NatoutTripCopy.copy';
 import markUploaded from '@salesforce/apex/NatoutTripCopy.markUploaded';
 import { deleteRecord } from 'lightning/uiRecordApi';
@@ -19,7 +18,6 @@ const statusOptions = [
 ];
 
 export default class NatoutTripList extends LightningElement {
-    userInfo = {};
     columns;
     @track tripList = { data: [] }
     selectedSubcomm = 'any';
@@ -62,8 +60,9 @@ export default class NatoutTripList extends LightningElement {
     }
 
    connectedCallback() {
-       this.retrieveUserData();
-   }
+       this.dtBegin = this.getDefaultDate();
+       this.retrieveList();
+    }
 
     get selectTypeOptions () {
         let radioOptions = [];
@@ -113,19 +112,6 @@ export default class NatoutTripList extends LightningElement {
         }
         return null;
     }
-    retrieveUserData() {
-        getUserInfo()
-        .then(result => {
-            this.userInfo = result;
-            this.dtBegin = this.getDefaultDate();
-            this.retrieveList();
-        })
-        .catch(error => {
-            this.error = error;
-            this.userInfo = undefined;
-        });
-    }
-
     retrieveList() {
         let parameterObject = {
             userTrips: ! this.selectTypeAny,
@@ -181,11 +167,7 @@ export default class NatoutTripList extends LightningElement {
         }
     }
     navigateToTrip(id) {
-        let currentLocation = window.location.href;
-        let endOfString = '/natout/s/';
-        let lastDash = currentLocation.indexOf(endOfString) + endOfString.length;
-        currentLocation = currentLocation.substring(0, lastDash);
-        let nextPage = currentLocation + 'national-outings-trip/' + id;
+        let nextPage = 'NatoutTripDetail?id=' + id;
         window.location.href = nextPage;
     }
     getDefaultDate() {

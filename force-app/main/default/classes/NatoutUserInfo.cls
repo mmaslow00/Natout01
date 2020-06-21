@@ -1,23 +1,4 @@
 public with sharing class NatoutUserInfo {
-    public NatoutUserInfo() {
-    }
-    public static String communityId=Network.getNetworkId();
-    @AuraEnabled(cacheable=true)
-    public static UserInfo getUserInfo() {
-        UserInfo userInfo = new UserInfo();
-        if(communityId == null) {
-            userInfo.isInCommunity = false;
-        }
-        else {
-            userInfo.isInCommunity = true;
-        }
-        List<String> subcommList = new List<String>();
-        for(String position : getSubcommList()) {
-            subcommList.add(position);
-        }
-        userInfo.subcommList = subcommList;
-        return userInfo;
-    }
     private static Id getContactId() {
         Id userId = System.UserInfo.getUserId();
         Id contactId;
@@ -28,20 +9,6 @@ public with sharing class NatoutUserInfo {
             contactId = [select ContactId from User where Id=:userId].ContactId;
         }
         return contactId;
-    }
-    private static List<String> getSubcommList() {
-        Id contactId = getContactId();
-        List<Leadership__c> leaderList = [
-            SELECT Club_Entity__r.Name FROM Leadership__c WHERE
-            Contact__c = :contactId
-            AND Club_Entity__r.Entity_Category__c = 'Outings' AND Entity_Team_Type__c = 'National Outing Subcomm' 
-            AND Position_Status__c = 'Active' AND Leader_Position__r.Name IN ('Chair','Sub-comm Co-Chair')
-        ];
-        List<String> subcommList = new List<String>();
-        for(Leadership__c ldr : leaderList) {
-            subcommList.add(ldr.Club_Entity__r.Name);
-        }
-        return subcommList;
     }
     @AuraEnabled (cacheable=true)
     public static UserAccess getUserAccess(String tripId) {
@@ -123,12 +90,6 @@ public with sharing class NatoutUserInfo {
             }
         }
         return uAccess;
-    }
-    private class UserInfo {
-        @AuraEnabled
-        public Boolean isInCommunity {get; set;}
-        @AuraEnabled
-        public List<String> subcommList {get; set;}
     }
     private class UserAccess {
         public UserAccess() {
