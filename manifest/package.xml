@@ -86,7 +86,6 @@
         <members>NatoutTripExport</members>
         <members>NatoutTripBudgetExport</members>
         <members>NatoutTripBudgetReport</members>
-        <members>NatoutTripVendorExport</members>
         <members>NatoutTripDetail</members>
         <members>NatoutTripList</members>
         <members>NatoutTrip</members>
