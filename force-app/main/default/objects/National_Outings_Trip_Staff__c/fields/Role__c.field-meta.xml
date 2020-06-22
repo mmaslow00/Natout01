@@ -16,14 +16,14 @@
                 <label>Assistant Commissary</label>
             </value>
             <value>
-                <fullName>Assistant_Leader</fullName>
+                <fullName>Assistant Leader</fullName>
                 <default>false</default>
-                <label>Assistant-Leader</label>
+                <label>Assistant Leader</label>
             </value>
             <value>
-                <fullName>Assistant-Leader 2</fullName>
+                <fullName>Assistant Leader 2</fullName>
                 <default>false</default>
-                <label>Assistant-Leader 2</label>
+                <label>Assistant Leader 2</label>
             </value>
             <value>
                 <fullName>Assistant Leader 3</fullName>

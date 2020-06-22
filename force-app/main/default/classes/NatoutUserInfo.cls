@@ -51,7 +51,7 @@ public with sharing class NatoutUserInfo {
         List<Leadership__c> ldrList = [
             SELECT Id FROM Leadership__c WHERE
             Contact__c = :contactId
-            AND Club_Entity__r.Entity_Category__c = 'Outings' AND Entity_Team_Type__c = 'National Outing Subcomm' 
+            AND Club_Entity__r.Entity_Category__c = 'Outings' AND Club_Entity__r.Type__c = 'National Outing Subcomm' 
             AND Position_Status__c = 'Active' AND Leader_Position__r.Name IN ('Chair','Sub-comm Co-Chair','Vice Chair')
             AND Club_Entity__r.Name = :subcommName
         ];
@@ -91,7 +91,7 @@ public with sharing class NatoutUserInfo {
         }
         return uAccess;
     }
-    private class UserAccess {
+    public class UserAccess {
         public UserAccess() {
             this.canEdit = false;
             this.canApprove = false;

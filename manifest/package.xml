@@ -32,7 +32,9 @@
         <members>NatoutTripAgenciesController</members>
         <members>NatoutTripAgenciesControllerTest</members>
         <members>NatoutTripBudgetController</members>
+        <members>NatoutTripBudgetControllerTest</members>
         <members>NatoutTripBudgetExportController</members>
+        <members>NatoutTripBudgetExportControllerTest</members>
         <members>NatoutTripBudgetReportController</members>
         <members>NatoutTripBudgetReportControllerTest</members>
         <members>NatoutTripCollaboratorController</members>
@@ -53,7 +55,9 @@
         <members>NatoutTripVendorsController</members>
         <members>NatoutTripVendorsControllerTest</members>
         <members>NatoutTripTriggerHandler</members>
+        <members>NatoutTripTriggerHandlerTest</members>
         <members>NatoutUserInfo</members>
+        <members>NatoutUserInfoTest</members>
         <name>ApexClass</name>
     </types>
     <types>  

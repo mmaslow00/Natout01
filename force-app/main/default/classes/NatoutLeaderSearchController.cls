@@ -28,7 +28,7 @@ public with sharing class NatoutLeaderSearchController {
         }
         return resultList;
     }
-    @TestVisible private class SearchResult {
+    public class SearchResult {
         @AuraEnabled
         public String contactId {get; set;}
         @AuraEnabled
