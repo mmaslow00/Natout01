@@ -89,6 +89,13 @@ public with sharing class NatoutUserInfoTest {
         );
         insert contact2;
         User user2 = createUser(contact2);
+        System.runAs(user2) {
+            uAccess = NatoutUserInfo.getUserAccess(trip.Id);
+            System.assertEquals(false, uAccess.canEdit);
+            System.assertEquals(false, uAccess.canApprove);
+            System.assertEquals(false, uAccess.isAdmin);
+        }
+        
         National_Outings_Trip_Collaborator__c collab = new National_Outings_Trip_Collaborator__c(
             National_Outings_Trip__c = trip.Id,
             Contact__c = contact2.Id,
