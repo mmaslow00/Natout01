@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>47.0</apiVersion>
+    <apiVersion>48.0</apiVersion>
     <isExposed>false</isExposed>
-    <targets>
-        <target>lightning__RecordPage</target>
-        <target>lightning__AppPage</target>
-        <target>lightningCommunity__Page</target>
-        <target>lightningCommunity__Default</target>
-    </targets>
-    <targetConfigs>
-        <targetConfig targets="lightning__RecordPage, lightning__AppPage, lightningCommunity__Default">
-            <property name="accountType" type="String" label="Account Type"/>
-        </targetConfig>
-    </targetConfigs>
 </LightningComponentBundle>
