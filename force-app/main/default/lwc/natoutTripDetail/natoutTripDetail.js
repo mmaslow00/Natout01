@@ -623,6 +623,9 @@ export default class NatoutTripDetail extends LightningElement {
             if(agencyCount < 1) {
                 errors.push({rowNum: rowNum++, text: 'At least one permit must be entered'});
             }
+            if( ! (this.tripRecord.Entry_Trail_Head__c && this.tripRecord.Exit_Trail_Head__c) ) {
+                errors.push({rowNum: rowNum++, text: 'Entry and Exit Trail Heads are required'});
+            }
         }
         let budgetCount = 
             this.template.querySelector('c-natout-trip-budget-concessionaire').getRowCount() +
