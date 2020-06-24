@@ -526,6 +526,13 @@
                     </lightning-accordion-section>
                     
                     <template if:false={tripIsInternational}>
+                        <div style="display:none">
+                            <lightning-input-field
+                                field-name="Permit_Requirement_Options__c"
+                                data-field="Permit_Requirement_Options__c"
+                            >
+                            </lightning-input-field>
+                        </div>
                         <lightning-accordion-section name="Permits" label="Permits">
                             <lightning-layout horizontal-align="center">
                                 <lightning-radio-group
