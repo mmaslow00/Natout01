@@ -126,8 +126,11 @@ export default class NatoutTripList extends LightningElement {
 
         getTripList({ searchCriteria: parameterObject })
             .then(result => {
+                let lastSlash = window.location.pathname.lastIndexOf('/');
+                let pathStart = window.location.pathname.substring(0,lastSlash + 1);
+                let path = window.location.origin + pathStart + 'NatoutTripDetail?id=';
                 this.tripList.data = result.map(row => {
-                    let nameUrl = '/apex/NatoutTripDetail?id=' + row.Id;
+                    let nameUrl = path + row.Id;
                     let newRow = {...row , nameUrl};
                     return newRow;
                 });
