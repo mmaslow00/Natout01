@@ -18,8 +18,7 @@ export default class NatoutTrip extends NavigationMixin(LightningElement) {
         Subcommittee__c: '',
         Start_Date__c: null,
         End_Date__c: null,
-        Status__c: 'Started',
-        Permit_Requirement_Options__c: 'Commercial Permit (s) are not required'
+        Status__c: 'Started'
     }
  
     @wire(getPicklistOptions)

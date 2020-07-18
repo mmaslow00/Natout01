@@ -13,7 +13,7 @@
             <sorted>false</sorted>
             <value>
                 <fullName>Commercial Permit (s) are not required</fullName>
-                <default>false</default>
+                <default>true</default>
                 <label>Commercial Permit (s) are not required</label>
             </value>
             <value>
