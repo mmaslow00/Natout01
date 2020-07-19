@@ -1,4 +1,4 @@
-<apex:page sidebar="false" showheader="false" docType="html-5.0">
+<apex:page sidebar="false" showheader="false" docType="html-5.0" title="Create a New Trip">
     <style>
         #lightning {
             margin-left: 10%;

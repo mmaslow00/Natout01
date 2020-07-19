@@ -1,4 +1,4 @@
-<apex:page sidebar="false" showheader="false" docType="html-5.0">
+<apex:page sidebar="false" showheader="false" docType="html-5.0" title="Sierra Club National Outings">
     <style>  
         #links {
             font-size:14px;

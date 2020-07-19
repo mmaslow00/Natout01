@@ -57,7 +57,6 @@ export default class NatoutTripList extends LightningElement {
             {label: 'Type', fieldName: 'Trip_Type__c', sortable: true},
             { type: 'action', typeAttributes: { rowActions: this.getRowActions } },
         ];
-        document.title = 'Sierra Club National Outings';
     }
 
    connectedCallback() {
