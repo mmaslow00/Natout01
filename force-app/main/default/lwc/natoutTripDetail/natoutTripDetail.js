@@ -61,6 +61,7 @@ export default class NatoutTripDetail extends LightningElement {
             this.chosenTripType = this.tripRecord.Trip_Type__c;
             this.chosenStatus = this.tripRecord.Status__c;
             this.loadedStatus = this.tripRecord.Status__c;
+            document.title = this.tripRecord.Name;
             this.loadedForm = true;
         }
     }

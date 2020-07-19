@@ -23,6 +23,11 @@ export default class NatoutTrip extends NavigationMixin(LightningElement) {
  
     @wire(getPicklistOptions)
     picklistOptions;
+
+    constructor() {
+        super();
+        document.title = 'Create a New Trip';
+    }
     
     get options() {
         return [
