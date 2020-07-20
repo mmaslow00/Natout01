@@ -37,10 +37,8 @@
                     </header>
                     <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
                         <template if:false={searchingContacts}>
-                            <center>
-                                <p><b>Staff Member:</b> {staffToUpdate.FirstName} {staffToUpdate.LastName}</p>
-                                <p><lightning-button variant="base" label="Change" onclick={searchContacts}></lightning-button></p>
-                            </center>
+                            <p><b>Staff Member:</b> {staffToUpdate.FirstName} {staffToUpdate.LastName}</p>
+                            <p><lightning-button variant="base" label="Change" onclick={searchContacts}></lightning-button></p>
                         </template>
 
                         <template if:true={searchingContacts}>
