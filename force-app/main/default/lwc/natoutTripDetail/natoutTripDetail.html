@@ -172,7 +172,11 @@
                             to reduce the burden on leaders and staff and ensure consistent and high-quality content that sells. 
                             Please follow these instructions closely so that your submission is accurate and complete. 
                             Once the trip guide editor receives your submission, they will review and follow up, if necessary, 
-                            with questions or to review significant edits. Check out our trip copy guide for handy writing tips, examples, and the trip copy archive.
+                            with questions or to review significant edits. 
+                            &nbsp;<a href="https://docs.google.com/document/d/1ZBkEPilrcAsQtiutRoaIwNSaQ27iqATamVJZ49jNn_A" target="_blank">
+                                Check out our trip copy guide
+                            </a>&nbsp;
+                            for handy writing tips, examples, and the trip copy archive.
                         </div>
                         <label class="slds-form-element__label" for="firstTimeRun">
                             First Time Run
@@ -420,7 +424,7 @@
                         </template>
                         <label class="slds-form-element__label" for="leaderDriving">
                             Leader Driving Participants During Trip?
-                            <c-tooltip text="Will the trip leader be driving participants during the trip? If so, they will also need to complete a Driver Policy and Declarations/Transportation Declaration (Word | PDF). See the form for submission instructions.">                                
+                            <c-tooltip text="Will the trip leader be driving participants during the trip? If so, they will also need to complete a Driver Policy and Declarations/Transportation Declaration. See the form for submission instructions.">                                
                             </c-tooltip>
                         </label>
                         <lightning-input-field
@@ -431,6 +435,13 @@
                             variant="label-hidden"
                         >
                         </lightning-input-field>
+                        <div class="slds-form-element__label">
+                            Driver Policy and Declarations/Transportation Declaration Document (
+                            <a href="https://community.sierraclub.org/file/3090/download/" target="_blank">Word</a>
+                            |
+                            <a href="https://community.sierraclub.org/file/3092/download/" target="_blank">PDF</a>)
+                        </div>
+                        <div style="clear: both;">
                         <label class="slds-form-element__label" for="risksHazards">
                             Risks/Hazards
                             <c-tooltip text="Risks and Hazards: 1) List major risks and hazards associated with this trip. 2) What strategies will you use to mitigate them? 3) What options for communications in field are available? 4) Name any dangerous wildlife in the trip area you may encounter. 5) Are you familiar with the protocols for this dangerous wildlife?">                                
@@ -444,6 +455,7 @@
                             variant="label-hidden"
                         >
                         </lightning-input-field>
+                        </div>
                     </lightning-accordion-section>
 
                     <lightning-accordion-section name="Budget" label="Budget">
@@ -473,7 +485,7 @@
                                 </div>
                                 <lightning-layout horizontal-align="center">
                                     <lightning-radio-group
-                                        label="Meals Options"
+                                        label="Meal Options"
                                         options={mealsBudgetOptions}
                                         value={selectedMealsBudgetOption}
                                         type="radio"
@@ -601,6 +613,9 @@
                                 </div>
                             </lightning-accordion-section>
                                 <lightning-accordion-section name="budget-report" label="Budget Report">
+                                    <div>
+                                        The trip price is an estimate based upon the values you entered and a standard overhead allocation. Your final price will be determined once processed by the office.
+                                    </div>
                                     <iframe src={budgetReportUrl} width="100%" height="800px">
                                     </iframe>
                                 </lightning-accordion-section>
@@ -617,6 +632,11 @@
                             </lightning-input-field>
                         </div>
                         <lightning-accordion-section name="Permits" label="Permits">
+                            <div>
+                                For more information on Permits, see the 
+                                &nbsp;<a href="https://community.sierraclub.org/section/outings/national-outings/permits" target="_blank">Permits</a>&nbsp;
+                                section on Campfire.
+                            </div>
                             <lightning-layout horizontal-align="center">
                                 <lightning-radio-group
                                     label="Permit Requirement Options"
@@ -687,10 +707,17 @@
                     </lightning-accordion-section>
 
                     <lightning-accordion-section name="SatPhone" label="Sat Phone">
+                        <label class="slds-form-element__label" for="satPhoneNeeded">
+                            SAT Phone Needed?
+                            <c-tooltip text="Is a SAT phone needed?">                                
+                            </c-tooltip>
+                        </label>
                         <lightning-input-field
                             field-name="Sat_Phone_Needed__c"
                             onchange={handleFieldChange}
                             data-field="Sat_Phone_Needed__c"
+                            data-id="satPhoneNeeded"
+                            variant="label-hidden"
                         >
                         </lightning-input-field>
                         <template if:true={satPhoneNeeded}>
@@ -767,6 +794,10 @@
                     </lightning-accordion-section>
 
                     <lightning-accordion-section name="Collaborators" label="Collaborators">
+                        <div>
+                            Please enter the name, role, and access level of anyone working with you on this trip submission. 
+                            This could be a home school mentor, trip submission reviewer, subcommittee chair, or someone else.
+                        </div>
                         <c-natout-trip-collaborators
                             record-id={recordId}
                             can-edit={userCanEdit}

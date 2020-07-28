@@ -3,7 +3,7 @@
     <fullName>Meals_First_Day__c</fullName>
     <defaultValue>0</defaultValue>
     <externalId>false</externalId>
-    <label>Meals First Day</label>
+    <label>Number of Meals on First Day</label>
     <precision>2</precision>
     <required>false</required>
     <scale>0</scale>

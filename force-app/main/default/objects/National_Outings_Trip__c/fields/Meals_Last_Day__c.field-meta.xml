@@ -3,7 +3,7 @@
     <fullName>Meals_Last_Day__c</fullName>
     <defaultValue>0</defaultValue>
     <externalId>false</externalId>
-    <label>Meals Last Day</label>
+    <label>Number of Meals on Last Day</label>
     <precision>2</precision>
     <required>false</required>
     <scale>0</scale>
