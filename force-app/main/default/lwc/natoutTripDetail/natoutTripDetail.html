@@ -35,11 +35,11 @@
                 <lightning-messages>
                 </lightning-messages>
 
-                <label for="tripName">
+                <label class="slds-form-element__label" for="tripName">
                     <abbr title="required" class="slds-required">*</abbr>
-                    Name
+                    Submission Name
                     <c-tooltip
-                        text="For lists and reports - limited to 80 characters"
+                        text="For internal reference, e.g., Mary's trip"
                     >
                     </c-tooltip>
                 </label>
@@ -54,11 +54,11 @@
                 >
                 </lightning-input-field>
 
-                <label for="tripTitle">
+                <label class="slds-form-element__label" for="tripTitle">
                     <abbr title="required" class="slds-required">*</abbr>
-                    Title
+                    Trip Title
                     <c-tooltip
-                        text="For publications - accepts up to 255 characters"
+                        text="For publications, e.g., Service in Arches National Park, Utah"
                     >
                     </c-tooltip>
                 </label>
@@ -167,10 +167,24 @@
                     </lightning-accordion-section>
 
                     <lightning-accordion-section name="Copy" label="Trip Copy and Marketing">
+                        <div style="margin-bottom: 10px;">
+                            Here you will submit the short trip description that appears in our annual trip catalog. Our goal is to recycle content, when possible, 
+                            to reduce the burden on leaders and staff and ensure consistent and high-quality content that sells. 
+                            Please follow these instructions closely so that your submission is accurate and complete. 
+                            Once the trip guide editor receives your submission, they will review and follow up, if necessary, 
+                            with questions or to review significant edits. Check out our trip copy guide for handy writing tips, examples, and the trip copy archive.
+                        </div>
+                        <label class="slds-form-element__label" for="firstTimeRun">
+                            First Time Run
+                            <c-tooltip text="Is this the first time this trip has been run?">                                
+                            </c-tooltip>
+                        </label>
                         <lightning-input-field
                             field-name="First_Time_Run__c"
                             onchange={handleFieldChange}
                             data-field="First_Time_Run__c"
+                            data-id="firstTimeRun"
+                            variant="label-hidden"
                         >
                         </lightning-input-field>
                         <template if:false={tripRecord.First_Time_Run__c}>
@@ -181,38 +195,57 @@
                             >
                             </lightning-input-field>
                         </template>
+
+                        <label class="slds-form-element__label" for="tripCopy">
+                            Trip Copy
+                            <c-tooltip
+                                text="Trip copy (30 words max for service trips, 60 words for all others, including family service trips)"
+                            >
+                            </c-tooltip>
+                        </label>
                         <lightning-input-field
                             field-name="Trip_Copy__c"
                             onchange={handleFieldChange}
+                            data-id="tripCopy"
                             data-field="Trip_Copy__c"
                             disabled={repeatTrip}
+                            variant="label-hidden"
                         >
                         </lightning-input-field>
-                        <div class="slds-form-element__label" if:true={tripRecord.First_Time_Run__c}>
+
+                        <div class="slds-form-element__label" style="margin-bottom: 5px;" if:true={tripRecord.First_Time_Run__c}>
                             Number of words in Trip Copy: {wordCount}
                         </div>
                         <template if:false={tripRecord.First_Time_Run__c}>
+                            <label class="slds-form-element__label" for="priorCopyChanges">
+                                Prior Trip Copy Changes
+                                <c-tooltip text="Do you need to make changes to the previous trip copy? If so, briefly describe these changes below. If not, you may leave this field blank and we will reuse the previous trip copy as-is.">
+                                </c-tooltip>
+                            </label>
                             <lightning-input-field
                                 field-name="Prior_Trip_Copy_Changes__c"
                                 onchange={handleFieldChange}
                                 data-field="Prior_Trip_Copy_Changes__c"
+                                data-id="priorCopyChanges"
+                                variant="label-hidden"
                             >
                             </lightning-input-field>
                         </template>
+                        <div style="clear: both">
+                        <label class="slds-form-element__label" for="conservation">
+                            Conservation Emphasis
+                            <c-tooltip text="Describe the conservation emphasis for this trip and when this will be discussed on the trip.">                                
+                            </c-tooltip>
+                        </label>
                         <lightning-input-field
                             field-name="Conservation_Emphasis__c"
                             onchange={handleFieldChange}
                             data-field="Conservation_Emphasis__c"
+                            data-id="conservation"
+                            variant="label-hidden"
                         >
                         </lightning-input-field>
-                        <template if:false={tripIsInternational}>
-                            <lightning-input-field
-                                field-name="Area__c"
-                                onchange={handleFieldChange}
-                                data-field="Area__c"
-                            >
-                            </lightning-input-field>
-                        </template>
+                        </div>
                         <lightning-input-field
                             field-name="Meals_Included__c"
                             onchange={handleFieldChange}
@@ -235,16 +268,34 @@
                             >
                             </lightning-input-field>
                         </template>
+                        <label class="slds-form-element__label" for="groupType">
+                            Group Type
+                            <c-tooltip text="Specialty trip type: Is this trip designed for a particular group of people? If so, please select this group from the following list so that it will appear in online searches for these terms. Otherwise, it will default to adults of all ages.">                                
+                            </c-tooltip>
+                        </label>
                         <lightning-input-field
                             field-name="Group_Type__c"
                             onchange={handleFieldChange}
                             data-field="Group_Type__c"
+                            data-id="groupType"
+                            variant="label-hidden"
                         >
                         </lightning-input-field>
+                        <label class="slds-form-element__label" for="groupType">
+                            Activity Type
+                            <c-tooltip text="Secondary activities: Does this trip include additional activities not conveyed by the trip type, e.g. a base camp trip that also includes an overnight kayak excursion? If so, please select these activities. This will ensure that your trip appears in search results for these terms on our website.">                                
+                            </c-tooltip>
+
+                            <div style="margin-top:4px; margin-bottom:4px; clear:both">
+                            Select an item from the Available table on the left and use the right arrow to add it to the Selected table on the right. To remove an item from the Selected table, select it and use the left arrow.
+                            </div>
+                        </label>
                         <lightning-input-field
                             field-name="Activity_Type__c"
                             onchange={handleFieldChange}
                             data-field="Activity_Type__c"
+                            data-id="groupType"
+                            variant="label-hidden"
                         >
                         </lightning-input-field>
                     </lightning-accordion-section>
@@ -259,8 +310,11 @@
                             </lightning-input-field>
                         </template>
                         <template if:false={tripIsInternational}>
+                            <div style="margin-top:4px; margin-bottom:4px; font-size:small; clear:both">
+                                Select an item from the Available table on the left and use the right arrow to add it to the Selected table on the right. To remove an item from the Selected table, select it and use the left arrow.
+                            </div>
                             <lightning-dual-listbox
-                                label="States - You May Select Up to 3"
+                                label="States: please select up to 3"
                                 source-label="Available"
                                 selected-label="Selected"
                                 options={stateListOptions}
@@ -273,6 +327,22 @@
                                 field-name="Country__c"
                                 onchange={handleFieldChange}
                                 data-field="Country__c"
+                            >
+                            </lightning-input-field>
+
+                            <div style="margin-top:10px; margin-bottom:4px; font-size:small; clear:both">
+                                Select an item from the Available table on the left and use the right arrow to add it to the Selected table on the right. To remove an item from the Selected table, select it and use the left arrow.
+                            </div>
+
+                            <label class="slds-form-element__label" style="font-weight:bold;" for="area">
+                                Areas: Please select up to 3
+                            </label>
+                            <lightning-input-field
+                                field-name="Area__c"
+                                onchange={handleFieldChange}
+                                data-field="Area__c"
+                                data-id="area"
+                                variant="label-hidden"
                             >
                             </lightning-input-field>
                         </template>
@@ -290,6 +360,9 @@
                             </lightning-input-field>
                         </div>
                         <template if:true={tripIsInternational}>
+                            <div style="margin-top:4px; margin-bottom:4px; font-size:small; clear:both">
+                                Select an item from the Available table on the left and use the right arrow to add it to the Selected table on the right. To remove an item from the Selected table, select it and use the left arrow.
+                            </div>
                             <lightning-dual-listbox
                                 label="Countries - You May Select Up to 3"
                                 source-label="Available"
@@ -309,6 +382,9 @@
                                     onclick={mapLocation}
                                 >
                                 </lightning-button>
+                                <c-tooltip
+                                    text="Map location: Use the map location tool to select the park or region that is the focus of your trip. If the trip takes place in harder-to-define area, such as a portion of the Missouri River, search for a landmark featured in the trip, such as the town of Arrow Rock, Missouri.">
+                                </c-tooltip>
 
                                 <lightning-input-field
                                     field-name="Latitude__c"
@@ -342,16 +418,30 @@
                             >
                             </c-location-finder>
                         </template>
+                        <label class="slds-form-element__label" for="leaderDriving">
+                            Leader Driving Participants During Trip?
+                            <c-tooltip text="Will the trip leader be driving participants during the trip? If so, they will also need to complete a Driver Policy and Declarations/Transportation Declaration (Word | PDF). See the form for submission instructions.">                                
+                            </c-tooltip>
+                        </label>
                         <lightning-input-field
                             field-name="Leader_Driving_Participants_During_Trip__c"
                             onchange={handleFieldChange}
                             data-field="Leader_Driving_Participants_During_Trip__c"
+                            data-id="leaderDriving"
+                            variant="label-hidden"
                         >
                         </lightning-input-field>
+                        <label class="slds-form-element__label" for="risksHazards">
+                            Risks/Hazards
+                            <c-tooltip text="Risks and Hazards: 1) List major risks and hazards associated with this trip. 2) What strategies will you use to mitigate them? 3) What options for communications in field are available? 4) Name any dangerous wildlife in the trip area you may encounter. 5) Are you familiar with the protocols for this dangerous wildlife?">                                
+                            </c-tooltip>
+                        </label>
                         <lightning-input-field
                             field-name="Risks_Hazards__c"
                             onchange={handleFieldChange}
                             data-field="Risks_Hazards__c"
+                            data-id="risksHazards"
+                            variant="label-hidden"
                         >
                         </lightning-input-field>
                     </lightning-accordion-section>

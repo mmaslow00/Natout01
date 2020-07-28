@@ -5,7 +5,11 @@
             <header class="slds-media slds-media_center slds-has-flexi-truncate">
                 <div class="slds-media__body">
                     <h2 class="slds-card__header-title">
-                        <span>Trip Staff</span>
+                        <span>
+                            Trip Staff
+                            <c-tooltip text="Enter the roles for all planned trip staff even if you don't know their names yet. If this is the case, add the role and enter 'Unknown' in the Name field.">                                
+                            </c-tooltip>
+                        </span>
                     </h2>
                 </div>
                 <div if:true={canEdit} class="slds-no-flex">
