@@ -192,10 +192,17 @@
                         >
                         </lightning-input-field>
                         <template if:false={tripRecord.First_Time_Run__c}>
-                            <lightning-input-field
+                            <label class="slds-form-element__label" for="priorTripNo">
+                                Prior Trip #
+                                <c-tooltip text="Previous trip number, e.g., 20015A">                                
+                                </c-tooltip>
+                            </label>
+                                <lightning-input-field
                                 field-name="Prior_Trip__c"
                                 onchange={handleFieldChange}
                                 data-field="Prior_Trip__c"
+                                data-id="priorTripNo"
+                                variant="label-hidden"
                             >
                             </lightning-input-field>
                         </template>
@@ -464,7 +471,8 @@
                             active-section-name={activeBudgetSections}
                             onsectiontoggle={handleBudgetSectionToggle}
                         >
-                            <lightning-accordion-section name="budget-vol-travel" label="Volunteer Travel">                                
+                        See this table [URL] for the standard values used in various budget categories below.
+                        <lightning-accordion-section name="budget-vol-travel" label="Volunteer Travel">                                
                                 <div class="slds-p-top_small">
                                     <c-natout-trip-budget-vol-travel
                                         record-id={recordId}
