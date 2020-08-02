@@ -1,0 +1,20 @@
+<template>
+    <template for:each={commentsList} for:item="com">
+        <div key={com.Id}>
+            <p>
+                {com.submitter}&nbsp;
+                <lightning-formatted-date-time
+                    value={com.CreatedDate}
+                    year="numeric"
+                    month="numeric"
+                    day="numeric"
+                    hour="2-digit"
+                    minute="2-digit"
+                    time-zone-name="short"
+                >
+                </lightning-formatted-date-time>
+            </p>                
+            <p class="slds-p-top_x-small slds-p-bottom_medium">{com.Comments__c}</p>
+        </div>
+    </template>        
+</template>
