@@ -173,7 +173,7 @@
                             Please follow these instructions closely so that your submission is accurate and complete. 
                             Once the trip guide editor receives your submission, they will review and follow up, if necessary, 
                             with questions or to review significant edits. 
-                            &nbsp;<a href="https://docs.google.com/document/d/1ZBkEPilrcAsQtiutRoaIwNSaQ27iqATamVJZ49jNn_A" target="_blank">
+                            &nbsp;<a href="https://community.sierraclub.org/page/trip-copy-0" target="_blank">
                                 Check out our trip copy guide
                             </a>&nbsp;
                             for handy writing tips, examples, and the trip copy archive.
@@ -279,9 +279,9 @@
                             >
                             </lightning-input-field>
                         </template>
-                        <label class="slds-form-element__label" for="groupType">
-                            Group Type
-                            <c-tooltip text="Specialty trip type: Is this trip designed for a particular group of people? If so, please select this group from the following list so that it will appear in online searches for these terms. Otherwise, it will default to adults of all ages.">                                
+                        <label class="slds-form-element__label" for="groupType">                            
+                            Specialty Trip Type
+                            <c-tooltip text="Is this trip designed for a particular group of people? If so, please select this group from the following list so that it will appear in online searches for these terms. Otherwise, it will default to adults of all ages.">                                
                             </c-tooltip>
                         </label>
                         <lightning-input-field
@@ -293,10 +293,9 @@
                         >
                         </lightning-input-field>
                         <label class="slds-form-element__label" for="groupType">
-                            Activity Type
-                            <c-tooltip text="Secondary activities: Does this trip include additional activities not conveyed by the trip type, e.g. a base camp trip that also includes an overnight kayak excursion? If so, please select these activities. This will ensure that your trip appears in search results for these terms on our website.">                                
+                            Secondary Activities
+                            <c-tooltip text="Does this trip include additional activities not conveyed by the trip type, e.g. a base camp trip that also includes an overnight kayak excursion? If so, please select these activities. This will ensure that your trip appears in search results for these terms on our website.">
                             </c-tooltip>
-
                             <div style="margin-top:4px; margin-bottom:4px; clear:both">
                             Select an item from the Available table on the left and use the right arrow to add it to the Selected table on the right. To remove an item from the Selected table, select it and use the left arrow.
                             </div>
@@ -394,7 +393,7 @@
                                 >
                                 </lightning-button>
                                 <c-tooltip
-                                    text="Map location: Use the map location tool to select the park or region that is the focus of your trip. If the trip takes place in harder-to-define area, such as a portion of the Missouri River, search for a landmark featured in the trip, such as the town of Arrow Rock, Missouri.">
+                                    text="Use the map location tool to select the park or region that is the focus of your trip. If the trip takes place in harder-to-define area, such as a portion of the Missouri River, search for a landmark featured in the trip, such as the town of Arrow Rock, Missouri.">
                                 </c-tooltip>
 
                                 <lightning-input-field
@@ -431,7 +430,7 @@
                         </template>
                         <label class="slds-form-element__label" for="leaderDriving">
                             Leader Driving Participants During Trip?
-                            <c-tooltip text="Will the trip leader be driving participants during the trip? If so, they will also need to complete a Driver Policy and Declarations/Transportation Declaration. See the form for submission instructions.">                                
+                            <c-tooltip text="If the leader will be driving participants during the trip, they will also need to complete a Driver Policy and Declarations/Transportation Declaration, below. See the form for submission instructions.">                                
                             </c-tooltip>
                         </label>
                         <lightning-input-field
@@ -451,7 +450,7 @@
                         <div style="clear: both;">
                         <label class="slds-form-element__label" for="risksHazards">
                             Risks/Hazards
-                            <c-tooltip text="Risks and Hazards: 1) List major risks and hazards associated with this trip. 2) What strategies will you use to mitigate them? 3) What options for communications in field are available? 4) Name any dangerous wildlife in the trip area you may encounter. 5) Are you familiar with the protocols for this dangerous wildlife?">                                
+                            <c-tooltip text="1) List major risks and hazards associated with this trip. 2) What strategies will you use to mitigate them? 3) What options for communications in field are available? 4) Name any dangerous wildlife in the trip area you may encounter. 5) Are you familiar with the protocols for this dangerous wildlife?">                                
                             </c-tooltip>
                         </label>
                         <lightning-input-field
@@ -803,8 +802,9 @@
 
                     <lightning-accordion-section name="Collaborators" label="Collaborators">
                         <div>
-                            Please enter the name, role, and access level of anyone working with you on this trip submission. 
-                            This could be a home school mentor, trip submission reviewer, subcommittee chair, or someone else.
+                            Please enter the name, role, and access level of any active National Outings committee member who is 
+                            working with you on this trip submission. This could be a home school mentor, trip submission reviewer, 
+                            subcommittee chair, or someone else.
                         </div>
                         <c-natout-trip-collaborators
                             record-id={recordId}

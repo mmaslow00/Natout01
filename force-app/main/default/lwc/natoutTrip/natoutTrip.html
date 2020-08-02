@@ -23,9 +23,13 @@
                 </lightning-layout-item>
             </lightning-layout>
 
-            <label for="tripName">
+            <label class="slds-form-element__label" for="tripName">
                 <abbr title="required" class="slds-required">*</abbr>
-                Name
+                Submission Name
+                <c-tooltip
+                    text="For internal reference, e.g., Mary's trip"
+                >
+                </c-tooltip>
             </label>
             <lightning-input-field
                 field-name="Name"
@@ -37,6 +41,24 @@
             >
             </lightning-input-field>
 
+            <label class="slds-form-element__label" for="tripTitle">
+                <abbr title="required" class="slds-required">*</abbr>
+                Trip Title
+                <c-tooltip
+                    text="For publications, e.g., Service in Arches National Park, Utah"
+                >
+                </c-tooltip>
+            </label>
+            <lightning-input-field
+                field-name="Title__c"
+                onchange={handleFieldChange}
+                data-field="Title__c"
+                data-id="tripTitle"
+                variant="label-hidden"
+                required
+            >
+            </lightning-input-field>
+        
             <template if:true={isDomesticTrip}>
                 <lightning-combobox
                     label="Subcommittee"

@@ -70,7 +70,6 @@ export default class NatoutTrip extends NavigationMixin(LightningElement) {
             if(this.tripRecord.Start_Date__c === null) {
                 this.tripRecord.Start_Date__c = this.template.querySelector('.startDate').value;
             }
-            this.tripRecord.Title__c = this.tripRecord.Name;
             this.savingTrip = true;
             createRecord({
                 apiName: 'National_Outings_Trip__c',
