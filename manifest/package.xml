@@ -90,6 +90,10 @@
         <name>ApexTrigger</name>
     </types>       
     <types>
+        <members>NatoutTripStyles</members>
+        <name>ApexComponent</name>
+    </types>       
+    <types>
         <members>LocationFinderLightning</members>
         <members>NatoutTripExport</members>
         <members>NatoutTripBudgetExport</members>

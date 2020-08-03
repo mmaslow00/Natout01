@@ -1,21 +1,13 @@
 <apex:page sidebar="false" showheader="false" docType="html-5.0">
     <style>  
-        #links {
-            font-size:14px;
-            margin-left: 10%;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-        #lightning {
-            margin-top: 10px;
-            margin-left: 5%;
-            margin-right: 5%;
-        } 
     </style>
-    <div id="links">
-        <apex:outputLink value="/apex/NatoutTripList" style="margin-right:10%">Return to List</apex:outputLink>
-        <apex:outputLink value="/apex/NatoutTrip">Create New Trip</apex:outputLink>
-    </div>
+
+    <c:NatoutTripStyles />
+
+    <ul id="links" class="container">
+        <li><apex:outputLink value="/apex/NatoutTripList">Return to List</apex:outputLink></li>
+        <li><apex:outputLink value="/apex/NatoutTrip">Create New Trip</apex:outputLink></li>
+    </ul>
     <apex:includeLightning />
     <div id="lightning"/>
 	<script>

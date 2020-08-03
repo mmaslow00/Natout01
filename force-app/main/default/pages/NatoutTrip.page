@@ -1,11 +1,6 @@
 <apex:page sidebar="false" showheader="false" docType="html-5.0" title="Create a New Trip">
-    <style>
-        #lightning {
-            margin-left: 10%;
-            margin-right: 5%;
-            margin-top:10px;
-        }
-    </style>
+ 
+    <c:NatoutTripStyles />
 
     <apex:includeLightning />
     <div id="lightning"/>
@@ -18,4 +13,5 @@
       );
     });
     </script>
+
 </apex:page>

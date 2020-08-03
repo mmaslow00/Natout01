@@ -1,0 +1,120 @@
+<apex:component layout="none">
+  <!-- component: NatoutTripStyles -->
+
+   <style>
+        #lightning {
+            margin: 15px auto;
+            max-width: 1140px;
+        }
+       #lightning_full {
+           max-width: 100%;
+       }
+       #lightning_full > * {
+           margin: 15px;
+       }
+       
+        #links {
+           font-size: 14px;
+           margin: 20px auto;
+           padding: 0 15px;
+       }
+        #links li {
+            display: inline-block;
+            margin: 0;
+            margin-right: 20px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        #trip-display-1 {
+            max-width: 600px;
+            margin: 0 0;
+        }
+        #trip-display-1 h2 {
+            font-weight: bold;
+            font-size: 16px;
+        }
+       #tag_line {
+           float: left;
+           width: 75%;
+       }
+
+           #tag_line a {
+               display: block;
+               line-height: 50px;
+               font-size: 18px;
+               font-weight: normal;
+               height: 50px;
+               color: #9d9d9d;
+               text-transform: uppercase;
+               text-decoration: none;
+           }
+
+       #logo {
+           float: left;
+           width: 25%;
+           text-align: right;
+       }
+
+           #logo img {
+               padding-top: 4px;
+               width: 109px;
+               height: 44px;
+           }
+
+       @media (max-width: 650px) {
+           .hidden-xs {
+               display: none;
+           }
+
+           #logo {
+               width: 100%;
+           }
+       }
+        #header_logo {
+            background: #3c3c3c;
+            color: white;
+            height: 50px;
+        }
+        #header_title {
+            clear: both;
+            padding: 0;
+            background: #eee;
+            height: 39px;
+        }
+        #header_title h1 {
+            font-size: 18px;
+            margin: 0;
+            color: #333;
+            font-weight: normal;
+            line-height: 39px;
+        }
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+    </style>
+
+    <header>
+        <div id="header_logo">
+          <div class="container">
+              <div class="hidden-xs" id="tag_line">
+                <a class="navbar-brand" href="#" >Explore, enjoy and protect the plant</a>
+              </div>
+              <div id="logo">
+                <a title="Sierra Club" href="http://www.sierraclub.org/"><img src="/campfire/resource/1462304594000/SC109x45LogoWhite" alt="Sierra Club Logo"/></a>
+              </div>
+          </div>
+        </div>
+      <div id="header_title">
+        <div class="container">
+        <h1>National Outings Trip Submission</h1>
+        </div>
+      </div>
+    </header>
+
+
+
+  <!-- component: NatoutTripStyles -->
+</apex:component>

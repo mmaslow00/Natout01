@@ -1,27 +1,20 @@
 <apex:page sidebar="false" showheader="false" docType="html-5.0" title="Sierra Club National Outings">
     <style>  
-        #links {
-            font-size:14px;
-            margin-left: 45%;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-        #lightning {
-            margin-top: 10px;
-            margin-left: 5%;
-            margin-right: 5%;
-        } 
     </style>
-    <div id="links">
-        <apex:outputLink value="/apex/NatoutTrip">Create New Trip</apex:outputLink>
-    </div>
+
+    <c:NatoutTripStyles />
+
+    <ul id="links" class="container">
+        <li><apex:outputLink value="/apex/NatoutTrip">Create New Trip</apex:outputLink></li>
+    </ul>
+
     <apex:includeLightning />
-    <div id="lightning" style="margin: 10px; font-size: 14px;" />
+    <div id="lightning_full" style="margin: 10px; font-size: 14px;" />
 	<script>
 		$Lightning.use("c:NatoutTripsApp", function() {
         $Lightning.createComponent("c:natoutTripList",
           {},
-          "lightning",
+          "lightning_full",
           function(cmp) {}
       );
     });
