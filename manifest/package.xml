@@ -6,6 +6,7 @@
         <members>National_Outings_Trip_Agency__c</members>
         <members>National_Outings_Trip_Budget_Item__c</members>
         <members>National_Outings_Trip_Collaborator__c</members>
+        <members>National_Outings_Trip_Comments__c</members>  
         <members>National_Outings_Trip_Itinerary__c</members>
         <members>National_Outings_Trip_Staff__c</members>
         <members>National_Outings_Trip_Vendor__c</members>
@@ -39,6 +40,8 @@
         <members>NatoutTripBudgetReportControllerTest</members>
         <members>NatoutTripCollaboratorController</members>
         <members>NatoutTripCollaboratorControllerTest</members>
+        <members>NatoutTripCommentsController</members>
+        <members>NatoutTripCommentsControllerTest</members>
         <members>NatoutTripCopy</members>
         <members>NatoutTripCopyTest</members>
         <members>NatoutTripExportController</members>
@@ -72,6 +75,7 @@
         <members>natoutTripBudgetTransportation</members>
         <members>natoutTripBudgetVolTravel</members>
         <members>natoutTripCollaborators</members>
+        <members>natoutTripComments</members>
         <members>natoutTripDetail</members>
         <members>natoutTripItinerary</members>
         <members>natoutTripList</members>
