@@ -23,9 +23,9 @@
                 </template>
             </ul>
             </div>
-        </div>               
-
-       <div class="slds-form-element slds-form-element_stacked">
+        </div>
+        
+        <div class="slds-form-element slds-form-element_stacked">
             <lightning-record-edit-form 
                 record-id={recordId}
                 object-api-name="National_Outings_Trip__c"
@@ -814,6 +814,14 @@
                         </c-natout-trip-collaborators>
                     </lightning-accordion-section>
 
+                    <lightning-accordion-section name="Comments" label="Comments">
+                        <c-natout-trip-comments  
+                            record-id={recordId}
+                            can-edit={userCanEdit}
+                        >
+                        </c-natout-trip-comments>
+                    </lightning-accordion-section>
+            
                 </lightning-accordion>
                 <div if:true={userCanEdit} class="save-button">
                     <lightning-button class="slds-m-top_small"
@@ -824,12 +832,6 @@
                     </lightning-button>
                 </div>
             </lightning-record-edit-form>
-<!--
-            <c-natout-trip-comments  
-                record-id={recordId}
-            >
-            </c-natout-trip-comments>
--->
         </div>
     </div>
 

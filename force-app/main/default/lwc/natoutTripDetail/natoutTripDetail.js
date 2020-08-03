@@ -8,6 +8,7 @@ import PERMIT_REQUIREMENT_FIELD from '@salesforce/schema/National_Outings_Trip__
 import getPicklistOptions from '@salesforce/apex/NatoutTripOptions.getOptions';
 import getUserAccess from '@salesforce/apex/NatoutUserInfo.getUserAccess';
 import { refreshApex } from '@salesforce/apex';
+import userId from '@salesforce/user/Id';
 
 export default class NatoutTripDetail extends LightningElement {
     @api recordId;
@@ -123,6 +124,9 @@ export default class NatoutTripDetail extends LightningElement {
         //until no diffs (seems odd, but it was)
         this.activeBudgetSections = sectionDiff;
         }
+    }
+    isTestUser() {
+        return this.userId == '005i0000001EvN1AAK';
     }
     saveForm() {
         // eslint-disable-next-line no-console
