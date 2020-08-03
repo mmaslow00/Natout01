@@ -5,7 +5,7 @@
         </lightning-button>
     </div>
     <template for:each={commentsList} for:item="com">
-        <div key={com.Id}>
+        <div key={com.Id} class="slds-p-top_medium">
             <p>
                 From:
                 &nbsp;{com.submitter}&nbsp;
@@ -14,13 +14,13 @@
                     year="numeric"
                     month="numeric"
                     day="numeric"
-                    hour="2-digit"
+                    hour="numeric"
                     minute="2-digit"
                     time-zone-name="short"
                 >
                 </lightning-formatted-date-time>
             </p>                
-            <p class="slds-p-top_xx-small slds-p-bottom_large">{com.Comments__c}</p>
+            <p class="slds-box slds-theme_default">{com.Comments__c}</p>
         </div>
     </template>    
     
