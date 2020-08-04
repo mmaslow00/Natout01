@@ -9,14 +9,20 @@
     </ul>
 
     <apex:includeLightning />
-    <div id="lightning_full" style="margin: 10px; font-size: 14px;" />
+    <div id="lightning_full"><i class="fas fa-3x fa-cog fa-spin" id="spinner"></i></div>
 	<script>
 		$Lightning.use("c:NatoutTripsApp", function() {
         $Lightning.createComponent("c:natoutTripList",
           {},
           "lightning_full",
-          function(cmp) {}
+          function(cmp) {
+            document.getElementById('spinner').style.display = 'none';
+          }
       );
     });
     </script>
+
+    <c:NatoutTripFooter />
+
+
 </apex:page>

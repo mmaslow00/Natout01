@@ -9,13 +9,15 @@
         <li><apex:outputLink value="/apex/NatoutTrip">Create New Trip</apex:outputLink></li>
     </ul>
     <apex:includeLightning />
-    <div id="lightning"/>
+    <div id="lightning"><i class="fas fa-3x fa-cog fa-spin" id="spinner"></i></div>
 	<script>
 		$Lightning.use("c:NatoutTripsApp", function() {
         $Lightning.createComponent("c:natoutTripDetail",
           {recordId: getUrlVars()["id"]},
           "lightning",
-          function(cmp) {}
+          function(cmp) {
+            document.getElementById('spinner').style.display = 'none';
+          }
       );
     });
     function getUrlVars() {
@@ -24,6 +26,10 @@
             vars[key] = value;
         });
         return vars;
-    }    
+    }
     </script>
+
+    <c:NatoutTripFooter />
+
+
 </apex:page>
