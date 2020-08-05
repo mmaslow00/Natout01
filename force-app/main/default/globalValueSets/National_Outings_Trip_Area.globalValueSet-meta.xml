@@ -1,604 +1,579 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <customValue>
-        <fullName>Absaroka</fullName>
+        <fullName>Absaroka Wilderness Area</fullName>
         <default>false</default>
-        <label>Absaroka</label>
+        <label>Absaroka Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Acadia</fullName>
+        <fullName>Acadia National Park</fullName>
         <default>false</default>
-        <label>Acadia</label>
+        <label>Acadia National Park</label>
     </customValue>
     <customValue>
-        <fullName>Adirondack</fullName>
+        <fullName>Adirondack State Park</fullName>
         <default>false</default>
-        <label>Adirondack</label>
+        <label>Adirondack State Park</label>
     </customValue>
     <customValue>
-        <fullName>Alpine Lakes</fullName>
+        <fullName>Alpine Lakes Wilderness Area</fullName>
         <default>false</default>
-        <label>Alpine Lakes</label>
+        <label>Alpine Lakes Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Anaconda Pintler</fullName>
+        <fullName>Anaconda Pintler Wilderness Area</fullName>
         <default>false</default>
-        <label>Anaconda Pintler</label>
+        <label>Anaconda Pintler Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Ansel Adams</fullName>
+        <fullName>Ansel Adams Wilderness Area</fullName>
         <default>false</default>
-        <label>Ansel Adams</label>
+        <label>Ansel Adams Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Anza-Borrego</fullName>
+        <fullName>Anza-Borrego State Park</fullName>
         <default>false</default>
-        <label>Anza-Borrego</label>
+        <label>Anza-Borrego State Park</label>
     </customValue>
     <customValue>
-        <fullName>Apache-Sitgreaves</fullName>
+        <fullName>Apache-Sitgreaves National Forest</fullName>
         <default>false</default>
-        <label>Apache-Sitgreaves</label>
+        <label>Apache-Sitgreaves National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Aransas</fullName>
+        <fullName>Aransas National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Aransas</label>
+        <label>Aransas National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Arapahoe</fullName>
+        <fullName>Arapahoe National Forest</fullName>
         <default>false</default>
-        <label>Arapahoe</label>
+        <label>Arapahoe National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Arc Dome</fullName>
+        <fullName>Arc Dome Wilderness Area</fullName>
         <default>false</default>
-        <label>Arc Dome</label>
+        <label>Arc Dome Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Arches</fullName>
+        <fullName>Arches National Park</fullName>
         <default>false</default>
-        <label>Arches</label>
+        <label>Arches National Park</label>
     </customValue>
     <customValue>
-        <fullName>Arctic Nntl Wildlife Ref</fullName>
+        <fullName>Arctic National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Arctic Nntl Wildlife Ref</label>
+        <label>Arctic National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Arkansas</fullName>
+        <fullName>Arkansas National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Arkansas</label>
+        <label>Arkansas National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Ashley</fullName>
+        <fullName>Ashley National Forest</fullName>
         <default>false</default>
-        <label>Ashley</label>
+        <label>Ashley National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Assateague Island</fullName>
+        <fullName>Assateague Island National Seashore</fullName>
         <default>false</default>
-        <label>Assateague Island</label>
+        <label>Assateague Island National Seashore</label>
     </customValue>
     <customValue>
-        <fullName>Aulavik</fullName>
+        <fullName>Aulavik National Park</fullName>
         <default>false</default>
-        <label>Aulavik</label>
+        <label>Aulavik National Park</label>
     </customValue>
     <customValue>
-        <fullName>Auyuittuq</fullName>
+        <fullName>Auyuittuq National Park</fullName>
         <default>false</default>
-        <label>Auyuittuq</label>
+        <label>Auyuittuq National Park</label>
     </customValue>
     <customValue>
-        <fullName>Aztec Ruins</fullName>
+        <fullName>Aztec Ruins National Monument</fullName>
         <default>false</default>
-        <label>Aztec Ruins</label>
+        <label>Aztec Ruins National Monument</label>
     </customValue>
     <customValue>
-        <fullName>Badlands</fullName>
+        <fullName>Badlands National Park</fullName>
         <default>false</default>
-        <label>Badlands</label>
+        <label>Badlands National Park</label>
     </customValue>
     <customValue>
-        <fullName>Bandelier</fullName>
+        <fullName>Bandelier National Monument</fullName>
         <default>false</default>
-        <label>Bandelier</label>
+        <label>Bandelier National Monument</label>
     </customValue>
     <customValue>
-        <fullName>Banff</fullName>
+        <fullName>Banff National Park</fullName>
         <default>false</default>
-        <label>Banff</label>
+        <label>Banff National Park</label>
     </customValue>
     <customValue>
-        <fullName>Baxter</fullName>
+        <fullName>BaxterState Park</fullName>
         <default>false</default>
-        <label>Baxter</label>
+        <label>BaxterState Park</label>
     </customValue>
     <customValue>
-        <fullName>Beaverhead-Dearlodge</fullName>
+        <fullName>Beaverhead-Dearlodge National Forest</fullName>
         <default>false</default>
-        <label>Beaverhead-Dearlodge</label>
+        <label>Beaverhead-Dearlodge National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Bentsen-Rio Grande Valley</fullName>
+        <fullName>Bentsen-Rio Grande Valley State Park</fullName>
         <default>false</default>
-        <label>Bentsen-Rio Grande Valley</label>
+        <label>Bentsen-Rio Grande Valley State Park</label>
     </customValue>
     <customValue>
-        <fullName>Big Basin</fullName>
+        <fullName>Big Basin State Park</fullName>
         <default>false</default>
-        <label>Big Basin</label>
+        <label>Big Basin State Park</label>
     </customValue>
     <customValue>
-        <fullName>Big Bend</fullName>
+        <fullName>Big Bend National Park</fullName>
         <default>false</default>
-        <label>Big Bend</label>
+        <label>Big Bend National Park</label>
     </customValue>
     <customValue>
-        <fullName>Big Horn</fullName>
+        <fullName>Big Horn National Forest</fullName>
         <default>false</default>
-        <label>Big Horn</label>
+        <label>Big Horn National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Big Island (Hawaii)</fullName>
+        <fullName>Big South Fork National Recreation Area</fullName>
         <default>false</default>
-        <label>Big Island (Hawaii)</label>
+        <label>Big South Fork National Recreation Area</label>
     </customValue>
     <customValue>
-        <fullName>Big South Fork</fullName>
+        <fullName>Black ElkWilderness Area</fullName>
         <default>false</default>
-        <label>Big South Fork</label>
+        <label>Black ElkWilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Big Sur</fullName>
+        <fullName>Black Hills National Forest</fullName>
         <default>false</default>
-        <label>Big Sur</label>
+        <label>Black Hills National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Black Elk</fullName>
+        <fullName>Blackfeet Indian Reservation</fullName>
         <default>false</default>
-        <label>Black Elk</label>
+        <label>Blackfeet Indian Reservation</label>
     </customValue>
     <customValue>
-        <fullName>Blackfeet</fullName>
+        <fullName>Blackstone River &amp; CanalState Park</fullName>
         <default>false</default>
-        <label>Blackfeet</label>
+        <label>Blackstone River &amp; CanalState Park</label>
     </customValue>
     <customValue>
-        <fullName>Black Hills</fullName>
+        <fullName>Blue Range Wilderness Area</fullName>
         <default>false</default>
-        <label>Black Hills</label>
+        <label>Blue Range Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Blackstone River &amp; Canal</fullName>
+        <fullName>Blue Spring State Park</fullName>
         <default>false</default>
-        <label>Blackstone River &amp; Canal</label>
+        <label>Blue Spring State Park</label>
     </customValue>
     <customValue>
-        <fullName>Blue Range</fullName>
+        <fullName>Bob Marshall Wilderness Area</fullName>
         <default>false</default>
-        <label>Blue Range</label>
+        <label>Bob Marshall Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Blue Ridge Mountains</fullName>
+        <fullName>Bodie State Park</fullName>
         <default>false</default>
-        <label>Blue Ridge Mountains</label>
+        <label>Bodie State Park</label>
     </customValue>
     <customValue>
-        <fullName>Blue Spring</fullName>
+        <fullName>Boise National Forest</fullName>
         <default>false</default>
-        <label>Blue Spring</label>
+        <label>Boise National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Bob Marshall</fullName>
+        <fullName>Boundary Waters Wilderness Area</fullName>
         <default>false</default>
-        <label>Bob Marshall</label>
+        <label>Boundary Waters Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Bodie</fullName>
+        <fullName>Bridger Wilderness Area</fullName>
         <default>false</default>
-        <label>Bodie</label>
+        <label>Bridger Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Boise</fullName>
+        <fullName>Bridger-Teton National Forest</fullName>
         <default>false</default>
-        <label>Boise</label>
+        <label>Bridger-Teton National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Boundary Waters</fullName>
+        <fullName>Bruce Peninsula National Park</fullName>
         <default>false</default>
-        <label>Boundary Waters</label>
+        <label>Bruce Peninsula National Park</label>
     </customValue>
     <customValue>
-        <fullName>Bridger-Teton</fullName>
+        <fullName>Bryce Canyon National Park</fullName>
         <default>false</default>
-        <label>Bridger-Teton</label>
+        <label>Bryce Canyon National Park</label>
     </customValue>
     <customValue>
-        <fullName>Bridger Wilderness</fullName>
+        <fullName>Buck Island Reef National Monument</fullName>
         <default>false</default>
-        <label>Bridger Wilderness</label>
+        <label>Buck Island Reef National Monument</label>
     </customValue>
     <customValue>
-        <fullName>Brooks Range</fullName>
+        <fullName>Buenos Aires National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Brooks Range</label>
+        <label>Buenos Aires National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Bruce Peninsula</fullName>
+        <fullName>Buffalo National River</fullName>
         <default>false</default>
-        <label>Bruce Peninsula</label>
+        <label>Buffalo National River</label>
     </customValue>
     <customValue>
-        <fullName>Bryce Canyon</fullName>
+        <fullName>Calaveras Big Trees State Park</fullName>
         <default>false</default>
-        <label>Bryce Canyon</label>
+        <label>Calaveras Big Trees State Park</label>
     </customValue>
     <customValue>
-        <fullName>Buck Island Reef</fullName>
+        <fullName>Camel&apos;s Hump State Park</fullName>
         <default>false</default>
-        <label>Buck Island Reef</label>
+        <label>Camel&apos;s Hump State Park</label>
     </customValue>
     <customValue>
-        <fullName>Buenos Aires</fullName>
+        <fullName>Canaan Valley State Park</fullName>
         <default>false</default>
-        <label>Buenos Aires</label>
+        <label>Canaan Valley State Park</label>
     </customValue>
     <customValue>
-        <fullName>Buffalo</fullName>
+        <fullName>Canaveral National Seashore</fullName>
         <default>false</default>
-        <label>Buffalo</label>
+        <label>Canaveral National Seashore</label>
     </customValue>
     <customValue>
-        <fullName>Calaveras Big Trees</fullName>
+        <fullName>Canyon de Chelly National Monument</fullName>
         <default>false</default>
-        <label>Calaveras Big Trees</label>
+        <label>Canyon de Chelly National Monument</label>
     </customValue>
     <customValue>
-        <fullName>Camel&apos;s Hump</fullName>
+        <fullName>Canyon Rims Recreation Area</fullName>
         <default>false</default>
-        <label>Camel&apos;s Hump</label>
+        <label>Canyon Rims Recreation Area</label>
     </customValue>
     <customValue>
-        <fullName>Canaan Valley</fullName>
+        <fullName>Canyonlands National Park</fullName>
         <default>false</default>
-        <label>Canaan Valley</label>
+        <label>Canyonlands National Park</label>
     </customValue>
     <customValue>
-        <fullName>Canadian Arctic</fullName>
+        <fullName>Cape Cod National Seashore</fullName>
         <default>false</default>
-        <label>Canadian Arctic</label>
+        <label>Cape Cod National Seashore</label>
     </customValue>
     <customValue>
-        <fullName>Canaveral</fullName>
+        <fullName>Cape Hatteras National Seashore</fullName>
         <default>false</default>
-        <label>Canaveral</label>
+        <label>Cape Hatteras National Seashore</label>
     </customValue>
     <customValue>
-        <fullName>Canyon de Chelly</fullName>
+        <fullName>Capitol Reef National Park</fullName>
         <default>false</default>
-        <label>Canyon de Chelly</label>
+        <label>Capitol Reef National Park</label>
     </customValue>
     <customValue>
-        <fullName>Canyonlands</fullName>
+        <fullName>Caribbean National Forest</fullName>
         <default>false</default>
-        <label>Canyonlands</label>
+        <label>Caribbean National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Canyon Rims</fullName>
+        <fullName>Carlsbad Caverns National Park</fullName>
         <default>false</default>
-        <label>Canyon Rims</label>
+        <label>Carlsbad Caverns National Park</label>
     </customValue>
     <customValue>
-        <fullName>Cape Cod</fullName>
+        <fullName>Carrizo Plain National Monument</fullName>
         <default>false</default>
-        <label>Cape Cod</label>
+        <label>Carrizo Plain National Monument</label>
     </customValue>
     <customValue>
-        <fullName>Cape Hatteras</fullName>
+        <fullName>CarsonNational Forest</fullName>
         <default>false</default>
-        <label>Cape Hatteras</label>
+        <label>CarsonNational Forest</label>
     </customValue>
     <customValue>
-        <fullName>Capitol Reef</fullName>
+        <fullName>Carson-Iceberg Wilderness Area</fullName>
         <default>false</default>
-        <label>Capitol Reef</label>
+        <label>Carson-Iceberg Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Caribbean</fullName>
+        <fullName>Cascade-Siskiyou National Monument</fullName>
         <default>false</default>
-        <label>Caribbean</label>
+        <label>Cascade-Siskiyou National Monument</label>
     </customValue>
     <customValue>
-        <fullName>Carlsbad Caverns</fullName>
+        <fullName>Cedar Keys National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Carlsbad Caverns</label>
+        <label>Cedar Keys National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Carrizo Plain</fullName>
+        <fullName>Chaco Culture National Historical Park</fullName>
         <default>false</default>
-        <label>Carrizo Plain</label>
+        <label>Chaco Culture National Historical Park</label>
     </customValue>
     <customValue>
-        <fullName>Carson</fullName>
+        <fullName>Channel Islands National Park</fullName>
         <default>false</default>
-        <label>Carson</label>
+        <label>Channel Islands National Park</label>
     </customValue>
     <customValue>
-        <fullName>Carson-Iceberg</fullName>
+        <fullName>Chassahowitzka National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Carson-Iceberg</label>
+        <label>Chassahowitzka National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Cascade-Siskiyou</fullName>
+        <fullName>Chattahoochee National Forest</fullName>
         <default>false</default>
-        <label>Cascade-Siskiyou</label>
+        <label>Chattahoochee National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Cedar Keys</fullName>
+        <fullName>Chattooga National River</fullName>
         <default>false</default>
-        <label>Cedar Keys</label>
+        <label>Chattooga National River</label>
     </customValue>
     <customValue>
-        <fullName>Chaco Culture</fullName>
+        <fullName>Chesapeake &amp; Ohio Canal National Historical Park</fullName>
         <default>false</default>
-        <label>Chaco Culture</label>
+        <label>Chesapeake &amp; Ohio Canal National Historical Park</label>
     </customValue>
     <customValue>
-        <fullName>Channel Islands</fullName>
+        <fullName>Cheyenne Indian Reservation</fullName>
         <default>false</default>
-        <label>Channel Islands</label>
+        <label>Cheyenne Indian Reservation</label>
     </customValue>
     <customValue>
-        <fullName>Chassahowitzka</fullName>
+        <fullName>Chilkoot Trail National Historical Park</fullName>
         <default>false</default>
-        <label>Chassahowitzka</label>
+        <label>Chilkoot Trail National Historical Park</label>
     </customValue>
     <customValue>
-        <fullName>Chattahoochee</fullName>
+        <fullName>Chincotegue National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Chattahoochee</label>
+        <label>Chincotegue National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Chattooga</fullName>
+        <fullName>Chiricahua Wilderness Area</fullName>
         <default>false</default>
-        <label>Chattooga</label>
+        <label>Chiricahua Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Chesapeake &amp; Ohio Canal</fullName>
+        <fullName>Chugach National Forest</fullName>
         <default>false</default>
-        <label>Chesapeake &amp; Ohio Canal</label>
+        <label>Chugach National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Cheyenne</fullName>
+        <fullName>Cloud Peak Wilderness Area</fullName>
         <default>false</default>
-        <label>Cheyenne</label>
+        <label>Cloud Peak Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Chilkoot Trail</fullName>
+        <fullName>Cobscook Bay State Park</fullName>
         <default>false</default>
-        <label>Chilkoot Trail</label>
+        <label>Cobscook Bay State Park</label>
     </customValue>
     <customValue>
-        <fullName>Chimney Rock Hist Area</fullName>
+        <fullName>Coconino National Forest</fullName>
         <default>false</default>
-        <label>Chimney Rock Hist Area</label>
+        <label>Coconino National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Chincotegue</fullName>
+        <fullName>Collegiate Peaks Wilderness Area</fullName>
         <default>false</default>
-        <label>Chincotegue</label>
+        <label>Collegiate Peaks Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Chiricahua</fullName>
+        <fullName>Colorado National Monument</fullName>
         <default>false</default>
-        <label>Chiricahua</label>
+        <label>Colorado National Monument</label>
     </customValue>
     <customValue>
-        <fullName>Chugach</fullName>
+        <fullName>Coronado National Forest</fullName>
         <default>false</default>
-        <label>Chugach</label>
+        <label>Coronado National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Cloud Peak</fullName>
+        <fullName>Cottonwood Point Wilderness Area</fullName>
         <default>false</default>
-        <label>Cloud Peak</label>
+        <label>Cottonwood Point Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Cobscook Bay</fullName>
+        <fullName>Cottonwoodpoint Bureau of Land Management</fullName>
         <default>false</default>
-        <label>Cobscook Bay</label>
+        <label>Cottonwoodpoint Bureau of Land Management</label>
     </customValue>
     <customValue>
-        <fullName>Coconino</fullName>
+        <fullName>Crack Cayon Wilderness Study Area</fullName>
         <default>false</default>
-        <label>Coconino</label>
+        <label>Crack Cayon Wilderness Study Area</label>
     </customValue>
     <customValue>
-        <fullName>Collegiate Peaks</fullName>
+        <fullName>Crane National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Collegiate Peaks</label>
+        <label>Crane National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Colorado</fullName>
+        <fullName>Crater Lake National Park</fullName>
         <default>false</default>
-        <label>Colorado</label>
+        <label>Crater Lake National Park</label>
     </customValue>
     <customValue>
-        <fullName>Colorado River</fullName>
+        <fullName>Crow Indian Reservation</fullName>
         <default>false</default>
-        <label>Colorado River</label>
+        <label>Crow Indian Reservation</label>
     </customValue>
     <customValue>
-        <fullName>Coronado</fullName>
+        <fullName>Culebra National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Coronado</label>
+        <label>Culebra National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Cottonwoodpoint</fullName>
+        <fullName>Cumberland Falls State Park</fullName>
         <default>false</default>
-        <label>Cottonwoodpoint</label>
+        <label>Cumberland Falls State Park</label>
     </customValue>
     <customValue>
-        <fullName>Cottonwood Point</fullName>
+        <fullName>Cumberland Island National Seashore</fullName>
         <default>false</default>
-        <label>Cottonwood Point</label>
+        <label>Cumberland Island National Seashore</label>
     </customValue>
     <customValue>
-        <fullName>Crack Cayon</fullName>
+        <fullName>Current River National River</fullName>
         <default>false</default>
-        <label>Crack Cayon</label>
+        <label>Current River National River</label>
     </customValue>
     <customValue>
-        <fullName>Crane</fullName>
+        <fullName>Custer National Forest</fullName>
         <default>false</default>
-        <label>Crane</label>
+        <label>Custer National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Crater Lake</fullName>
+        <fullName>Daniel Boone National Forest</fullName>
         <default>false</default>
-        <label>Crater Lake</label>
+        <label>Daniel Boone National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Crow</fullName>
+        <fullName>Dark Canyon Wilderness Area</fullName>
         <default>false</default>
-        <label>Crow</label>
+        <label>Dark Canyon Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Culebra</fullName>
+        <fullName>Death Valley National Park</fullName>
         <default>false</default>
-        <label>Culebra</label>
+        <label>Death Valley National Park</label>
     </customValue>
     <customValue>
-        <fullName>Cumberland Falls</fullName>
+        <fullName>Denali National Park</fullName>
         <default>false</default>
-        <label>Cumberland Falls</label>
+        <label>Denali National Park</label>
     </customValue>
     <customValue>
-        <fullName>Cumberland Island</fullName>
+        <fullName>Denali State Park</fullName>
         <default>false</default>
-        <label>Cumberland Island</label>
+        <label>Denali State Park</label>
     </customValue>
     <customValue>
-        <fullName>Current River</fullName>
+        <fullName>Desolation Canyon National Historical Park</fullName>
         <default>false</default>
-        <label>Current River</label>
+        <label>Desolation Canyon National Historical Park</label>
     </customValue>
     <customValue>
-        <fullName>Custer</fullName>
+        <fullName>Desolation Sound Provincial Park</fullName>
         <default>false</default>
-        <label>Custer</label>
+        <label>Desolation Sound Provincial Park</label>
     </customValue>
     <customValue>
-        <fullName>Daniel Boone</fullName>
+        <fullName>Desolation Wilderness Area</fullName>
         <default>false</default>
-        <label>Daniel Boone</label>
+        <label>Desolation Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Dark Canyon</fullName>
+        <fullName>Diablo Range Bureau of Land Management</fullName>
         <default>false</default>
-        <label>Dark Canyon</label>
+        <label>Diablo Range Bureau of Land Management</label>
     </customValue>
     <customValue>
-        <fullName>Death Valley</fullName>
+        <fullName>Dinkey Lakes Wilderness Area</fullName>
         <default>false</default>
-        <label>Death Valley</label>
+        <label>Dinkey Lakes Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>De Long Mountains</fullName>
+        <fullName>Dinosaur National Monument</fullName>
         <default>false</default>
-        <label>De Long Mountains</label>
+        <label>Dinosaur National Monument</label>
     </customValue>
     <customValue>
-        <fullName>Denali</fullName>
+        <fullName>Dixie National Forest</fullName>
         <default>false</default>
-        <label>Denali</label>
+        <label>Dixie National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Desolation</fullName>
+        <fullName>Dolly Sods Wilderness Area</fullName>
         <default>false</default>
-        <label>Desolation</label>
+        <label>Dolly Sods Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Desolation Canyon</fullName>
+        <fullName>Donner State Park</fullName>
         <default>false</default>
-        <label>Desolation Canyon</label>
+        <label>Donner State Park</label>
     </customValue>
     <customValue>
-        <fullName>Desolation Sound</fullName>
+        <fullName>Dry Tortugas National Park</fullName>
         <default>false</default>
-        <label>Desolation Sound</label>
+        <label>Dry Tortugas National Park</label>
     </customValue>
     <customValue>
-        <fullName>Diablo Range</fullName>
+        <fullName>Eagle Cap Wilderness Area</fullName>
         <default>false</default>
-        <label>Diablo Range</label>
+        <label>Eagle Cap Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Dinkey Lakes</fullName>
+        <fullName>East Mojave National Preserve</fullName>
         <default>false</default>
-        <label>Dinkey Lakes</label>
+        <label>East Mojave National Preserve</label>
     </customValue>
     <customValue>
-        <fullName>Dinosaur</fullName>
+        <fullName>Ecola State Park</fullName>
         <default>false</default>
-        <label>Dinosaur</label>
+        <label>Ecola State Park</label>
     </customValue>
     <customValue>
-        <fullName>Dixie</fullName>
+        <fullName>Eel River National Wild Scenic River</fullName>
         <default>false</default>
-        <label>Dixie</label>
+        <label>Eel River National Wild Scenic River</label>
     </customValue>
     <customValue>
-        <fullName>Dolly Sods</fullName>
+        <fullName>El Malpais National Monument</fullName>
         <default>false</default>
-        <label>Dolly Sods</label>
+        <label>El Malpais National Monument</label>
     </customValue>
     <customValue>
-        <fullName>Donner</fullName>
+        <fullName>El Yunque National Forest</fullName>
         <default>false</default>
-        <label>Donner</label>
+        <label>El Yunque National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Dry Tortugas</fullName>
+        <fullName>Elbow-Sheep Wildland Provincial Park</fullName>
         <default>false</default>
-        <label>Dry Tortugas</label>
+        <label>Elbow-Sheep Wildland Provincial Park</label>
     </customValue>
     <customValue>
-        <fullName>Eagle Cap</fullName>
+        <fullName>Eldorado National Forest</fullName>
         <default>false</default>
-        <label>Eagle Cap</label>
+        <label>Eldorado National Forest</label>
     </customValue>
     <customValue>
-        <fullName>East Mojave</fullName>
+        <fullName>Elkhorn Slough Natl Estuarine Research</fullName>
         <default>false</default>
-        <label>East Mojave</label>
-    </customValue>
-    <customValue>
-        <fullName>Ecola</fullName>
-        <default>false</default>
-        <label>Ecola</label>
-    </customValue>
-    <customValue>
-        <fullName>Eel River</fullName>
-        <default>false</default>
-        <label>Eel River</label>
-    </customValue>
-    <customValue>
-        <fullName>Elbow-Sheep Wildland PP</fullName>
-        <default>false</default>
-        <label>Elbow-Sheep Wildland PP</label>
-    </customValue>
-    <customValue>
-        <fullName>Eldorado</fullName>
-        <default>false</default>
-        <label>Eldorado</label>
-    </customValue>
-    <customValue>
-        <fullName>Elkhorn Slough</fullName>
-        <default>false</default>
-        <label>Elkhorn Slough</label>
+        <label>Elkhorn Slough Natl Estuarine Research</label>
     </customValue>
     <customValue>
         <fullName>Ellesmere Island</fullName>
@@ -606,634 +581,589 @@
         <label>Ellesmere Island</label>
     </customValue>
     <customValue>
-        <fullName>El Malpais</fullName>
+        <fullName>Emigrant Wilderness Area</fullName>
         <default>false</default>
-        <label>El Malpais</label>
+        <label>Emigrant Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>El Yunque</fullName>
+        <fullName>Everglades National Park</fullName>
         <default>false</default>
-        <label>El Yunque</label>
+        <label>Everglades National Park</label>
     </customValue>
     <customValue>
-        <fullName>Emigrant</fullName>
+        <fullName>Fitzpatrick Wilderness Area</fullName>
         <default>false</default>
-        <label>Emigrant</label>
+        <label>Fitzpatrick Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Everglades</fullName>
+        <fullName>Five Ponds Wilderness Area</fullName>
         <default>false</default>
-        <label>Everglades</label>
+        <label>Five Ponds Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Finger Lakes</fullName>
+        <fullName>Flat Tops Wilderness Area</fullName>
         <default>false</default>
-        <label>Finger Lakes</label>
+        <label>Flat Tops Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Fitzpatrick</fullName>
+        <fullName>Flathead National Forest</fullName>
         <default>false</default>
-        <label>Fitzpatrick</label>
+        <label>Flathead National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Five Ponds</fullName>
+        <fullName>Florida Keys Marine Sanctuary</fullName>
         <default>false</default>
-        <label>Five Ponds</label>
+        <label>Florida Keys Marine Sanctuary</label>
     </customValue>
     <customValue>
-        <fullName>Flathead</fullName>
+        <fullName>Frank Church Wilderness Area</fullName>
         <default>false</default>
-        <label>Flathead</label>
+        <label>Frank Church Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Flat Tops</fullName>
+        <fullName>Galiuro Wilderness Area</fullName>
         <default>false</default>
-        <label>Flat Tops</label>
+        <label>Galiuro Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Florida Keys</fullName>
+        <fullName>Gallatin National Forest</fullName>
         <default>false</default>
-        <label>Florida Keys</label>
+        <label>Gallatin National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Frank Church</fullName>
+        <fullName>Gates of the Arctic National Park</fullName>
         <default>false</default>
-        <label>Frank Church</label>
+        <label>Gates of the Arctic National Park</label>
     </customValue>
     <customValue>
-        <fullName>Galiuro</fullName>
+        <fullName>George Washington National Forest</fullName>
         <default>false</default>
-        <label>Galiuro</label>
+        <label>George Washington National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Gallatin</fullName>
+        <fullName>Gettysburg Nat&apos;l Military Park</fullName>
         <default>false</default>
-        <label>Gallatin</label>
+        <label>Gettysburg Nat&apos;l Military Park</label>
     </customValue>
     <customValue>
-        <fullName>Gates of the Arctic</fullName>
+        <fullName>Gifford Pinchot National Forest</fullName>
         <default>false</default>
-        <label>Gates of the Arctic</label>
+        <label>Gifford Pinchot National Forest</label>
     </customValue>
     <customValue>
-        <fullName>George Washington</fullName>
+        <fullName>Gila Wilderness Area</fullName>
         <default>false</default>
-        <label>George Washington</label>
+        <label>Gila Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Gettysburg</fullName>
+        <fullName>Glacier Bay National Park</fullName>
         <default>false</default>
-        <label>Gettysburg</label>
+        <label>Glacier Bay National Park</label>
     </customValue>
     <customValue>
-        <fullName>Gifford Pinchot</fullName>
+        <fullName>Glacier National Park</fullName>
         <default>false</default>
-        <label>Gifford Pinchot</label>
+        <label>Glacier National Park</label>
     </customValue>
     <customValue>
-        <fullName>Gila</fullName>
+        <fullName>Glacier Peak Wilderness Area</fullName>
         <default>false</default>
-        <label>Gila</label>
+        <label>Glacier Peak Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Glacier</fullName>
+        <fullName>Glen Canyon National Recreation Area</fullName>
         <default>false</default>
-        <label>Glacier</label>
+        <label>Glen Canyon National Recreation Area</label>
     </customValue>
     <customValue>
-        <fullName>Glacier Bay</fullName>
+        <fullName>Goat Rocks Wilderness Area</fullName>
         <default>false</default>
-        <label>Glacier Bay</label>
+        <label>Goat Rocks Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Glacier Peak</fullName>
+        <fullName>Golden Ears Provincial Park</fullName>
         <default>false</default>
-        <label>Glacier Peak</label>
+        <label>Golden Ears Provincial Park</label>
     </customValue>
     <customValue>
-        <fullName>Glen Canyon</fullName>
+        <fullName>Golden Trout Wilderness Area</fullName>
         <default>false</default>
-        <label>Glen Canyon</label>
+        <label>Golden Trout Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Goat Rocks</fullName>
+        <fullName>Grand Canyon National Park</fullName>
         <default>false</default>
-        <label>Goat Rocks</label>
+        <label>Grand Canyon National Park</label>
     </customValue>
     <customValue>
-        <fullName>Golden Ears</fullName>
+        <fullName>Grand Canyon-Parashant National Monument</fullName>
         <default>false</default>
-        <label>Golden Ears</label>
+        <label>Grand Canyon-Parashant National Monument</label>
     </customValue>
     <customValue>
-        <fullName>Golden Trout</fullName>
+        <fullName>Grand Gulch Primitive Area</fullName>
         <default>false</default>
-        <label>Golden Trout</label>
+        <label>Grand Gulch Primitive Area</label>
     </customValue>
     <customValue>
-        <fullName>Grand Canyon</fullName>
+        <fullName>Grand Manan Island</fullName>
         <default>false</default>
-        <label>Grand Canyon</label>
+        <label>Grand Manan Island</label>
     </customValue>
     <customValue>
-        <fullName>Grand Canyon-Parashant</fullName>
+        <fullName>Grand Staircase-Escalante National Monument</fullName>
         <default>false</default>
-        <label>Grand Canyon-Parashant</label>
+        <label>Grand Staircase-Escalante National Monument</label>
     </customValue>
     <customValue>
-        <fullName>Grand Gulch P</fullName>
+        <fullName>Grand Teton National Park</fullName>
         <default>false</default>
-        <label>Grand Gulch P</label>
+        <label>Grand Teton National Park</label>
     </customValue>
     <customValue>
-        <fullName>Grand Manan</fullName>
+        <fullName>Granite Chief Wilderness Area</fullName>
         <default>false</default>
-        <label>Grand Manan</label>
+        <label>Granite Chief Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Grand Staircase-Escalante</fullName>
+        <fullName>Great Basin National Park</fullName>
         <default>false</default>
-        <label>Grand Staircase-Escalante</label>
+        <label>Great Basin National Park</label>
     </customValue>
     <customValue>
-        <fullName>Grand Teton</fullName>
+        <fullName>Great Smoky Mountains National Park</fullName>
         <default>false</default>
-        <label>Grand Teton</label>
+        <label>Great Smoky Mountains National Park</label>
     </customValue>
     <customValue>
-        <fullName>Granite Chief</fullName>
+        <fullName>Green Mountain National Forest</fullName>
         <default>false</default>
-        <label>Granite Chief</label>
+        <label>Green Mountain National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Great Basin</fullName>
+        <fullName>Green River National River</fullName>
         <default>false</default>
-        <label>Great Basin</label>
+        <label>Green River National River</label>
     </customValue>
     <customValue>
-        <fullName>Great Smoky Mountains</fullName>
+        <fullName>Gros Morne National Park</fullName>
         <default>false</default>
-        <label>Great Smoky Mountains</label>
+        <label>Gros Morne National Park</label>
     </customValue>
     <customValue>
-        <fullName>Green Mountain</fullName>
+        <fullName>Gros Ventre Wilderness Area</fullName>
         <default>false</default>
-        <label>Green Mountain</label>
+        <label>Gros Ventre Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Green River</fullName>
+        <fullName>Groton State Forest</fullName>
         <default>false</default>
-        <label>Green River</label>
+        <label>Groton State Forest</label>
     </customValue>
     <customValue>
-        <fullName>Gros Morne</fullName>
+        <fullName>Guadalupe Mtns. National Park</fullName>
         <default>false</default>
-        <label>Gros Morne</label>
+        <label>Guadalupe Mtns. National Park</label>
     </customValue>
     <customValue>
-        <fullName>Gros Ventre</fullName>
+        <fullName>Gunnison National Forest</fullName>
         <default>false</default>
-        <label>Gros Ventre</label>
+        <label>Gunnison National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Groton</fullName>
+        <fullName>Haena Beach State Park</fullName>
         <default>false</default>
-        <label>Groton</label>
+        <label>Haena Beach State Park</label>
     </customValue>
     <customValue>
-        <fullName>Guadalupe Mtns.</fullName>
+        <fullName>Haleakala National Park</fullName>
         <default>false</default>
-        <label>Guadalupe Mtns.</label>
+        <label>Haleakala National Park</label>
     </customValue>
     <customValue>
-        <fullName>Gunnison</fullName>
+        <fullName>Hapuna State Park</fullName>
         <default>false</default>
-        <label>Gunnison</label>
+        <label>Hapuna State Park</label>
     </customValue>
     <customValue>
-        <fullName>Haena Beach</fullName>
+        <fullName>Harper&apos;s Ferry National Historical Park</fullName>
         <default>false</default>
-        <label>Haena Beach</label>
+        <label>Harper&apos;s Ferry National Historical Park</label>
     </customValue>
     <customValue>
-        <fullName>Haleakala</fullName>
+        <fullName>Hart Mountain National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Haleakala</label>
+        <label>Hart Mountain National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Hapuna</fullName>
+        <fullName>Havasupai Indian Reservation</fullName>
         <default>false</default>
-        <label>Hapuna</label>
+        <label>Havasupai Indian Reservation</label>
     </customValue>
     <customValue>
-        <fullName>Harper&apos;s Ferry</fullName>
+        <fullName>Hawaii Volcanoes National Park</fullName>
         <default>false</default>
-        <label>Harper&apos;s Ferry</label>
+        <label>Hawaii Volcanoes National Park</label>
     </customValue>
     <customValue>
-        <fullName>Hart Mountain</fullName>
+        <fullName>Hawk Mountain Sanctuary</fullName>
         <default>false</default>
-        <label>Hart Mountain</label>
+        <label>Hawk Mountain Sanctuary</label>
     </customValue>
     <customValue>
-        <fullName>Havasupai</fullName>
+        <fullName>Hell&apos;s Canyon National Recreation Area</fullName>
         <default>false</default>
-        <label>Havasupai</label>
+        <label>Hell&apos;s Canyon National Recreation Area</label>
     </customValue>
     <customValue>
-        <fullName>Hawaii Volcanoes</fullName>
+        <fullName>Henry M Jackson Wilderness Area</fullName>
         <default>false</default>
-        <label>Hawaii Volcanoes</label>
+        <label>Henry M Jackson Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Hawk Mountain</fullName>
+        <fullName>High Uintas Wilderness Area</fullName>
         <default>false</default>
-        <label>Hawk Mountain</label>
+        <label>High Uintas Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Hell&apos;s Canyon</fullName>
+        <fullName>Holy Cross Wilderness Area</fullName>
         <default>false</default>
-        <label>Hell&apos;s Canyon</label>
+        <label>Holy Cross Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Henry M Jackson</fullName>
+        <fullName>Homosassa National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Henry M Jackson</label>
+        <label>Homosassa National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>High Uintas</fullName>
+        <fullName>Hoover Wilderness Area</fullName>
         <default>false</default>
-        <label>High Uintas</label>
+        <label>Hoover Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Holy Cross</fullName>
+        <fullName>Hovenweep National Monument</fullName>
         <default>false</default>
-        <label>Holy Cross</label>
+        <label>Hovenweep National Monument</label>
     </customValue>
     <customValue>
-        <fullName>Homosassa</fullName>
+        <fullName>Humboldt-Toiyabe National Forest</fullName>
         <default>false</default>
-        <label>Homosassa</label>
+        <label>Humboldt-Toiyabe National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Hoover</fullName>
+        <fullName>Hunter-Frying Pan Wilderness Area</fullName>
         <default>false</default>
-        <label>Hoover</label>
+        <label>Hunter-Frying Pan Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Hovenweep</fullName>
+        <fullName>Indian Heaven Wilderness Area</fullName>
         <default>false</default>
-        <label>Hovenweep</label>
+        <label>Indian Heaven Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Humboldt-Toiyabe</fullName>
+        <fullName>Inyo National Forest</fullName>
         <default>false</default>
-        <label>Humboldt-Toiyabe</label>
+        <label>Inyo National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Hunter-Frying Pan</fullName>
+        <fullName>Isla Culebra National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Hunter-Frying Pan</label>
+        <label>Isla Culebra National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Indian Heaven</fullName>
+        <fullName>Isle Royale National Park</fullName>
         <default>false</default>
-        <label>Indian Heaven</label>
+        <label>Isle Royale National Park</label>
     </customValue>
     <customValue>
-        <fullName>Inyo</fullName>
+        <fullName>Ivvavik National Park</fullName>
         <default>false</default>
-        <label>Inyo</label>
+        <label>Ivvavik National Park</label>
     </customValue>
     <customValue>
-        <fullName>Isla Culebra</fullName>
+        <fullName>Jasper National Park</fullName>
         <default>false</default>
-        <label>Isla Culebra</label>
+        <label>Jasper National Park</label>
     </customValue>
     <customValue>
-        <fullName>Isle Royale</fullName>
+        <fullName>John Muir Wilderness Area</fullName>
         <default>false</default>
-        <label>Isle Royale</label>
+        <label>John Muir Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Ivvavik</fullName>
+        <fullName>John Pennekamp State Park</fullName>
         <default>false</default>
-        <label>Ivvavik</label>
+        <label>John Pennekamp State Park</label>
     </customValue>
     <customValue>
-        <fullName>Jasper</fullName>
+        <fullName>Jonathan Dickinson State Park</fullName>
         <default>false</default>
-        <label>Jasper</label>
+        <label>Jonathan Dickinson State Park</label>
     </customValue>
     <customValue>
-        <fullName>John Muir</fullName>
+        <fullName>Joshua Tree National Park</fullName>
         <default>false</default>
-        <label>John Muir</label>
+        <label>Joshua Tree National Park</label>
     </customValue>
     <customValue>
-        <fullName>John Pennekamp</fullName>
+        <fullName>Joyce Kilmer Wilderness Area</fullName>
         <default>false</default>
-        <label>John Pennekamp</label>
+        <label>Joyce Kilmer Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Jonathan Dickinson</fullName>
+        <fullName>Kachemak Bay State Park</fullName>
         <default>false</default>
-        <label>Jonathan Dickinson</label>
+        <label>Kachemak Bay State Park</label>
     </customValue>
     <customValue>
-        <fullName>Joshua Tree</fullName>
+        <fullName>Kaibab National Forest</fullName>
         <default>false</default>
-        <label>Joshua Tree</label>
+        <label>Kaibab National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Joyce Kilmer</fullName>
+        <fullName>Kalopa State Recreation Area</fullName>
         <default>false</default>
-        <label>Joyce Kilmer</label>
+        <label>Kalopa State Recreation Area</label>
     </customValue>
     <customValue>
-        <fullName>Kachemak Bay</fullName>
+        <fullName>Kaniksu National Forest</fullName>
         <default>false</default>
-        <label>Kachemak Bay</label>
+        <label>Kaniksu National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Kaibab</fullName>
+        <fullName>Karta Wilderness Area</fullName>
         <default>false</default>
-        <label>Kaibab</label>
+        <label>Karta Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Kalopa</fullName>
+        <fullName>Katmai National Park</fullName>
         <default>false</default>
-        <label>Kalopa</label>
+        <label>Katmai National Park</label>
     </customValue>
     <customValue>
-        <fullName>Kananaskis</fullName>
+        <fullName>Katy State Park</fullName>
         <default>false</default>
-        <label>Kananaskis</label>
+        <label>Katy State Park</label>
     </customValue>
     <customValue>
-        <fullName>Kaniksu</fullName>
+        <fullName>Kauai Island</fullName>
         <default>false</default>
-        <label>Kaniksu</label>
+        <label>Kauai Island</label>
     </customValue>
     <customValue>
-        <fullName>Karta</fullName>
+        <fullName>Kenai Fjords National Park</fullName>
         <default>false</default>
-        <label>Karta</label>
+        <label>Kenai Fjords National Park</label>
     </customValue>
     <customValue>
-        <fullName>Katmai</fullName>
+        <fullName>Kenai National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Katmai</label>
+        <label>Kenai National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Katy</fullName>
+        <fullName>King&apos;s Canyon National Park</fullName>
         <default>false</default>
-        <label>Katy</label>
+        <label>King&apos;s Canyon National Park</label>
     </customValue>
     <customValue>
-        <fullName>Kauai</fullName>
+        <fullName>Klamath National Forest</fullName>
         <default>false</default>
-        <label>Kauai</label>
+        <label>Klamath National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Kenai</fullName>
+        <fullName>Klondike Gold Rush National Historical Park</fullName>
         <default>false</default>
-        <label>Kenai</label>
+        <label>Klondike Gold Rush National Historical Park</label>
     </customValue>
     <customValue>
-        <fullName>Kenai Fjords</fullName>
+        <fullName>Kluane National Park</fullName>
         <default>false</default>
-        <label>Kenai Fjords</label>
+        <label>Kluane National Park</label>
     </customValue>
     <customValue>
-        <fullName>King&apos;s Canyon</fullName>
+        <fullName>Kodiak Island Island</fullName>
         <default>false</default>
-        <label>King&apos;s Canyon</label>
+        <label>Kodiak Island Island</label>
     </customValue>
     <customValue>
-        <fullName>Kipawa</fullName>
+        <fullName>Kodiak National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Kipawa</label>
+        <label>Kodiak National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Klamath</fullName>
+        <fullName>Kokee State Park</fullName>
         <default>false</default>
-        <label>Klamath</label>
+        <label>Kokee State Park</label>
     </customValue>
     <customValue>
-        <fullName>Klondike Gold Rush</fullName>
+        <fullName>Kootenai National Forest</fullName>
         <default>false</default>
-        <label>Klondike Gold Rush</label>
+        <label>Kootenai National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Kluane</fullName>
+        <fullName>Kootenay National Park</fullName>
         <default>false</default>
-        <label>Kluane</label>
+        <label>Kootenay National Park</label>
     </customValue>
     <customValue>
-        <fullName>Kodiak Island</fullName>
+        <fullName>La GaritaWilderness Area</fullName>
         <default>false</default>
-        <label>Kodiak Island</label>
+        <label>La GaritaWilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Kodiak Nntl Wildlife Ref</fullName>
+        <fullName>La Verendrye Reserve Wilderness Area</fullName>
         <default>false</default>
-        <label>Kodiak Nntl Wildlife Ref</label>
+        <label>La Verendrye Reserve Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Kokee</fullName>
+        <fullName>Laguna Atascosa National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Kokee</label>
+        <label>Laguna Atascosa National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Kootenai</fullName>
+        <fullName>Lake Chelan National Recreation Area</fullName>
         <default>false</default>
-        <label>Kootenai</label>
+        <label>Lake Chelan National Recreation Area</label>
     </customValue>
     <customValue>
-        <fullName>Kootenay</fullName>
+        <fullName>Lake Chelan-Sawtooth Wilderness Area</fullName>
         <default>false</default>
-        <label>Kootenay</label>
+        <label>Lake Chelan-Sawtooth Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>La Garita</fullName>
+        <fullName>Lake Clark National Park</fullName>
         <default>false</default>
-        <label>La Garita</label>
+        <label>Lake Clark National Park</label>
     </customValue>
     <customValue>
-        <fullName>Laguna Atascosa</fullName>
+        <fullName>Lake Mead National Recreation Area</fullName>
         <default>false</default>
-        <label>Laguna Atascosa</label>
+        <label>Lake Mead National Recreation Area</label>
     </customValue>
     <customValue>
-        <fullName>Lake Chelan</fullName>
+        <fullName>Lake Superior Provincial Park</fullName>
         <default>false</default>
-        <label>Lake Chelan</label>
+        <label>Lake Superior Provincial Park</label>
     </customValue>
     <customValue>
-        <fullName>Lake Chelan-Sawtooth</fullName>
+        <fullName>Lake Woodruff National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Lake Chelan-Sawtooth</label>
+        <label>Lake Woodruff National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Lake Clark</fullName>
+        <fullName>Lake Woodruff Wilderness Area</fullName>
         <default>false</default>
-        <label>Lake Clark</label>
+        <label>Lake Woodruff Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Lake Mead</fullName>
+        <fullName>Lassen National Park</fullName>
         <default>false</default>
-        <label>Lake Mead</label>
+        <label>Lassen National Park</label>
     </customValue>
     <customValue>
-        <fullName>Lake Superior</fullName>
+        <fullName>Lewis &amp; Clark National Forest</fullName>
         <default>false</default>
-        <label>Lake Superior</label>
+        <label>Lewis &amp; Clark National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Lake Tahoe</fullName>
+        <fullName>Linville Gorge Wilderness Area</fullName>
         <default>false</default>
-        <label>Lake Tahoe</label>
+        <label>Linville Gorge Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Lake Tahoe Area</fullName>
+        <fullName>Lizard Head Wilderness Area</fullName>
         <default>false</default>
-        <label>Lake Tahoe Area</label>
+        <label>Lizard Head Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Lake Woodruff NWR</fullName>
+        <fullName>Los Padres National Forest</fullName>
         <default>false</default>
-        <label>Lake Woodruff NWR</label>
+        <label>Los Padres National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Lake Woodruff Wilderness</fullName>
+        <fullName>Lost Coast National Conservation Area</fullName>
         <default>false</default>
-        <label>Lake Woodruff Wilderness</label>
+        <label>Lost Coast National Conservation Area</label>
     </customValue>
     <customValue>
-        <fullName>Lassen</fullName>
+        <fullName>Lost Creek Wilderness Area</fullName>
         <default>false</default>
-        <label>Lassen</label>
+        <label>Lost Creek Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>La Verendrye Reserve</fullName>
+        <fullName>MacArthur Beach State Park</fullName>
         <default>false</default>
-        <label>La Verendrye Reserve</label>
+        <label>MacArthur Beach State Park</label>
     </customValue>
     <customValue>
-        <fullName>Lewis &amp; Clark</fullName>
+        <fullName>Mammoth Cave National Park</fullName>
         <default>false</default>
-        <label>Lewis &amp; Clark</label>
+        <label>Mammoth Cave National Park</label>
     </customValue>
     <customValue>
-        <fullName>Linville Gorge</fullName>
+        <fullName>Manassas National Battlefield</fullName>
         <default>false</default>
-        <label>Linville Gorge</label>
+        <label>Manassas National Battlefield</label>
     </customValue>
     <customValue>
-        <fullName>Lizard Head</fullName>
+        <fullName>Manistee National Forest</fullName>
         <default>false</default>
-        <label>Lizard Head</label>
+        <label>Manistee National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Los Padres</fullName>
+        <fullName>Manti-LaSal National Forest</fullName>
         <default>false</default>
-        <label>Los Padres</label>
+        <label>Manti-LaSal National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Lost Coast</fullName>
+        <fullName>Marble Mountain Wilderness Area</fullName>
         <default>false</default>
-        <label>Lost Coast</label>
+        <label>Marble Mountain Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Lost Creek</fullName>
+        <fullName>Maroon-Bells Wilderness Area</fullName>
         <default>false</default>
-        <label>Lost Creek</label>
+        <label>Maroon-Bells Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>MacArthur Beach</fullName>
+        <fullName>Maui Island</fullName>
         <default>false</default>
-        <label>MacArthur Beach</label>
+        <label>Maui Island</label>
     </customValue>
     <customValue>
-        <fullName>Mammoth Cave</fullName>
+        <fullName>Mauna Kea State Recreation Area</fullName>
         <default>false</default>
-        <label>Mammoth Cave</label>
+        <label>Mauna Kea State Recreation Area</label>
     </customValue>
     <customValue>
-        <fullName>Manassas</fullName>
+        <fullName>McArthur-Burney Falls State Park</fullName>
         <default>false</default>
-        <label>Manassas</label>
+        <label>McArthur-Burney Falls State Park</label>
     </customValue>
     <customValue>
-        <fullName>Manistee</fullName>
+        <fullName>Merritt Island National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Manistee</label>
+        <label>Merritt Island National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Manti-LaSal</fullName>
+        <fullName>Mesa Verde National Park</fullName>
         <default>false</default>
-        <label>Manti-LaSal</label>
+        <label>Mesa Verde National Park</label>
     </customValue>
     <customValue>
-        <fullName>Marble Mountain</fullName>
+        <fullName>Midway Atoll National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Marble Mountain</label>
+        <label>Midway Atoll National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Marin County</fullName>
+        <fullName>Minarets Wilderness Area</fullName>
         <default>false</default>
-        <label>Marin County</label>
+        <label>Minarets Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Maroon-Bells</fullName>
+        <fullName>Missouri National River</fullName>
         <default>false</default>
-        <label>Maroon-Bells</label>
-    </customValue>
-    <customValue>
-        <fullName>Martha&apos;s Vineyard</fullName>
-        <default>false</default>
-        <label>Martha&apos;s Vineyard</label>
-    </customValue>
-    <customValue>
-        <fullName>Maui</fullName>
-        <default>false</default>
-        <label>Maui</label>
-    </customValue>
-    <customValue>
-        <fullName>Mauna Kea</fullName>
-        <default>false</default>
-        <label>Mauna Kea</label>
-    </customValue>
-    <customValue>
-        <fullName>McArthur-Burney Falls</fullName>
-        <default>false</default>
-        <label>McArthur-Burney Falls</label>
-    </customValue>
-    <customValue>
-        <fullName>Merritt Island</fullName>
-        <default>false</default>
-        <label>Merritt Island</label>
-    </customValue>
-    <customValue>
-        <fullName>Mesa Verde</fullName>
-        <default>false</default>
-        <label>Mesa Verde</label>
-    </customValue>
-    <customValue>
-        <fullName>Midway Atoll</fullName>
-        <default>false</default>
-        <label>Midway Atoll</label>
-    </customValue>
-    <customValue>
-        <fullName>Minarets</fullName>
-        <default>false</default>
-        <label>Minarets</label>
-    </customValue>
-    <customValue>
-        <fullName>Missouri</fullName>
-        <default>false</default>
-        <label>Missouri</label>
+        <label>Missouri National River</label>
     </customValue>
     <customValue>
         <fullName>Mojave National Preserve</fullName>
@@ -1241,824 +1171,764 @@
         <label>Mojave National Preserve</label>
     </customValue>
     <customValue>
-        <fullName>Mokelumne Wilderness</fullName>
+        <fullName>Mokelumne Wilderness Area</fullName>
         <default>false</default>
-        <label>Mokelumne Wilderness</label>
+        <label>Mokelumne Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Molokai</fullName>
+        <fullName>Molokai Island</fullName>
         <default>false</default>
-        <label>Molokai</label>
+        <label>Molokai Island</label>
     </customValue>
     <customValue>
-        <fullName>Monarch</fullName>
+        <fullName>Monarch Wilderness Area</fullName>
         <default>false</default>
-        <label>Monarch</label>
+        <label>Monarch Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Monongahela</fullName>
+        <fullName>Monongahela National Forest</fullName>
         <default>false</default>
-        <label>Monongahela</label>
+        <label>Monongahela National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Monticello</fullName>
+        <fullName>Monticello Bureau of Land Management</fullName>
         <default>false</default>
-        <label>Monticello</label>
+        <label>Monticello Bureau of Land Management</label>
     </customValue>
     <customValue>
-        <fullName>Moran</fullName>
+        <fullName>Moran State Park</fullName>
         <default>false</default>
-        <label>Moran</label>
+        <label>Moran State Park</label>
     </customValue>
     <customValue>
-        <fullName>Mt. Adams</fullName>
+        <fullName>Mt. Adams Wilderness Area</fullName>
         <default>false</default>
-        <label>Mt. Adams</label>
+        <label>Mt. Adams Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Mt. Agamenticus</fullName>
+        <fullName>Mt. Assinibone Provincial Park</fullName>
         <default>false</default>
-        <label>Mt. Agamenticus</label>
+        <label>Mt. Assinibone Provincial Park</label>
     </customValue>
     <customValue>
-        <fullName>Mt. Assinibone</fullName>
+        <fullName>Mt. Baker National Forest</fullName>
         <default>false</default>
-        <label>Mt. Assinibone</label>
+        <label>Mt. Baker National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Mt. Baker</fullName>
+        <fullName>Mt. Edniza Wilderness Area</fullName>
         <default>false</default>
-        <label>Mt. Baker</label>
+        <label>Mt. Edniza Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Mt. Edniza</fullName>
+        <fullName>Mt. Hood National Forest</fullName>
         <default>false</default>
-        <label>Mt. Edniza</label>
+        <label>Mt. Hood National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Mt. Hood</fullName>
+        <fullName>Mt. Hood Wilderness Area</fullName>
         <default>false</default>
-        <label>Mt. Hood</label>
+        <label>Mt. Hood Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Mt. Massive</fullName>
+        <fullName>Mt. Massive Wilderness Area</fullName>
         <default>false</default>
-        <label>Mt. Massive</label>
+        <label>Mt. Massive Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Mt. Rainier</fullName>
+        <fullName>Mt. Rainier National Park</fullName>
         <default>false</default>
-        <label>Mt. Rainier</label>
+        <label>Mt. Rainier National Park</label>
     </customValue>
     <customValue>
-        <fullName>Mt. Robson</fullName>
+        <fullName>Mt. Robson Provincial Park</fullName>
         <default>false</default>
-        <label>Mt. Robson</label>
+        <label>Mt. Robson Provincial Park</label>
     </customValue>
     <customValue>
-        <fullName>Mt. Rogers</fullName>
+        <fullName>Mt. Rogers National Recreation Area</fullName>
         <default>false</default>
-        <label>Mt. Rogers</label>
+        <label>Mt. Rogers National Recreation Area</label>
     </customValue>
     <customValue>
-        <fullName>Mt. Saint Helens</fullName>
+        <fullName>Mt. Saint Helens National Monument</fullName>
         <default>false</default>
-        <label>Mt. Saint Helens</label>
+        <label>Mt. Saint Helens National Monument</label>
     </customValue>
     <customValue>
-        <fullName>Mt. Shasta</fullName>
+        <fullName>Mt. Shasta Wilderness Area</fullName>
         <default>false</default>
-        <label>Mt. Shasta</label>
+        <label>Mt. Shasta Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Mt. Sneffels</fullName>
+        <fullName>Mt. Sneffels Wilderness Area</fullName>
         <default>false</default>
-        <label>Mt. Sneffels</label>
+        <label>Mt. Sneffels Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Mt. Washington</fullName>
+        <fullName>Mt. Washington State Park</fullName>
         <default>false</default>
-        <label>Mt. Washington</label>
+        <label>Mt. Washington State Park</label>
     </customValue>
     <customValue>
-        <fullName>Mt. Zirkel</fullName>
+        <fullName>Mt. Zirkel Wilderness Area</fullName>
         <default>false</default>
-        <label>Mt. Zirkel</label>
+        <label>Mt. Zirkel Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Muddy Creek</fullName>
+        <fullName>Muddy Creek Wilderness Study Area</fullName>
         <default>false</default>
-        <label>Muddy Creek</label>
+        <label>Muddy Creek Wilderness Study Area</label>
     </customValue>
     <customValue>
-        <fullName>Myakka River</fullName>
+        <fullName>Myakka River State Park</fullName>
         <default>false</default>
-        <label>Myakka River</label>
+        <label>Myakka River State Park</label>
     </customValue>
     <customValue>
-        <fullName>Nahanni Natl. Pk Preserve</fullName>
+        <fullName>Na Pali Coast State Park</fullName>
         <default>false</default>
-        <label>Nahanni Natl. Pk Preserve</label>
+        <label>Na Pali Coast State Park</label>
     </customValue>
     <customValue>
-        <fullName>Nantahala</fullName>
+        <fullName>Nahanni National Preserve</fullName>
         <default>false</default>
-        <label>Nantahala</label>
+        <label>Nahanni National Preserve</label>
     </customValue>
     <customValue>
-        <fullName>Na Pali Coast</fullName>
+        <fullName>Nantahala National Forest</fullName>
         <default>false</default>
-        <label>Na Pali Coast</label>
+        <label>Nantahala National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Natchez Trace</fullName>
+        <fullName>Natchez Trace Parkway</fullName>
         <default>false</default>
-        <label>Natchez Trace</label>
+        <label>Natchez Trace Parkway</label>
     </customValue>
     <customValue>
-        <fullName>Natural Bridges</fullName>
+        <fullName>Natural Bridges National Monument</fullName>
         <default>false</default>
-        <label>Natural Bridges</label>
+        <label>Natural Bridges National Monument</label>
     </customValue>
     <customValue>
-        <fullName>Navajo</fullName>
+        <fullName>NavajoIndian Reservation</fullName>
         <default>false</default>
-        <label>Navajo</label>
+        <label>NavajoIndian Reservation</label>
     </customValue>
     <customValue>
-        <fullName>Noatak Nntl Preserve</fullName>
+        <fullName>No Return Wilderness Area</fullName>
         <default>false</default>
-        <label>Noatak Nntl Preserve</label>
+        <label>No Return Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Nokai Dome</fullName>
+        <fullName>Noatak National Preserve</fullName>
         <default>false</default>
-        <label>Nokai Dome</label>
+        <label>Noatak National Preserve</label>
     </customValue>
     <customValue>
-        <fullName>No Return</fullName>
+        <fullName>Nokai Dome Wilderness Study Area</fullName>
         <default>false</default>
-        <label>No Return</label>
+        <label>Nokai Dome Wilderness Study Area</label>
     </customValue>
     <customValue>
-        <fullName>North Cascades</fullName>
+        <fullName>North Cascades National Park</fullName>
         <default>false</default>
-        <label>North Cascades</label>
+        <label>North Cascades National Park</label>
     </customValue>
     <customValue>
-        <fullName>North Maine Woods</fullName>
+        <fullName>Ocala National Forest</fullName>
         <default>false</default>
-        <label>North Maine Woods</label>
+        <label>Ocala National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Nunavut Territory</fullName>
+        <fullName>Ohio River Islands National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Nunavut Territory</label>
+        <label>Ohio River Islands National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Ocala</fullName>
+        <fullName>Okanogan National Forest</fullName>
         <default>false</default>
-        <label>Ocala</label>
+        <label>Okanogan National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Ohio River Islands</fullName>
+        <fullName>Okefanokee National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Ohio River Islands</label>
+        <label>Okefanokee National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Okanogan</fullName>
+        <fullName>Olympic National Park</fullName>
         <default>false</default>
-        <label>Okanogan</label>
+        <label>Olympic National Park</label>
     </customValue>
     <customValue>
-        <fullName>Okefanokee</fullName>
+        <fullName>Oswald West State Park</fullName>
         <default>false</default>
-        <label>Okefanokee</label>
+        <label>Oswald West State Park</label>
     </customValue>
     <customValue>
-        <fullName>Olympic</fullName>
+        <fullName>Ottawa National Forest</fullName>
         <default>false</default>
-        <label>Olympic</label>
+        <label>Ottawa National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Oswald West</fullName>
+        <fullName>Otter Creek Wilderness Area</fullName>
         <default>false</default>
-        <label>Oswald West</label>
+        <label>Otter Creek Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Ottawa</fullName>
+        <fullName>Paiute Wilderness Area</fullName>
         <default>false</default>
-        <label>Ottawa</label>
+        <label>Paiute Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Otter Creek</fullName>
+        <fullName>Panhandle National Forest</fullName>
         <default>false</default>
-        <label>Otter Creek</label>
+        <label>Panhandle National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Owyhee-Bruneau Canyonland</fullName>
+        <fullName>Papineau-Labelle Wildlife Reserve</fullName>
         <default>false</default>
-        <label>Owyhee-Bruneau Canyonland</label>
+        <label>Papineau-Labelle Wildlife Reserve</label>
     </customValue>
     <customValue>
-        <fullName>Ozarks</fullName>
+        <fullName>Parc de La Verendrye Provincial Park</fullName>
         <default>false</default>
-        <label>Ozarks</label>
+        <label>Parc de La Verendrye Provincial Park</label>
     </customValue>
     <customValue>
-        <fullName>Paiute</fullName>
+        <fullName>Paria Canyon Wilderness Area</fullName>
         <default>false</default>
-        <label>Paiute</label>
+        <label>Paria Canyon Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Panhandle</fullName>
+        <fullName>Paysaten Wilderness Area</fullName>
         <default>false</default>
-        <label>Panhandle</label>
+        <label>Paysaten Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Papineau-Labelle</fullName>
+        <fullName>Pecos Wilderness Area</fullName>
         <default>false</default>
-        <label>Papineau-Labelle</label>
+        <label>Pecos Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Parc de La Verendrye</fullName>
+        <fullName>Pelican Island National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Parc de La Verendrye</label>
+        <label>Pelican Island National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Paria Canyon</fullName>
+        <fullName>Penobscott Wilderness Area</fullName>
         <default>false</default>
-        <label>Paria Canyon</label>
+        <label>Penobscott Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Paysaten</fullName>
+        <fullName>Pharaoh Lake Wilderness Area</fullName>
         <default>false</default>
-        <label>Paysaten</label>
+        <label>Pharaoh Lake Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Pecos</fullName>
+        <fullName>Pickett State Park</fullName>
         <default>false</default>
-        <label>Pecos</label>
+        <label>Pickett State Park</label>
     </customValue>
     <customValue>
-        <fullName>Pelican Island</fullName>
+        <fullName>Pictured Rocks National Lakeshore</fullName>
         <default>false</default>
-        <label>Pelican Island</label>
+        <label>Pictured Rocks National Lakeshore</label>
     </customValue>
     <customValue>
-        <fullName>Penobscott</fullName>
+        <fullName>Pike National Forest</fullName>
         <default>false</default>
-        <label>Penobscott</label>
+        <label>Pike National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Pharaoh Lake</fullName>
+        <fullName>Pine Barrens Wilderness Area</fullName>
         <default>false</default>
-        <label>Pharaoh Lake</label>
+        <label>Pine Barrens Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Pickett</fullName>
+        <fullName>Pisgah National Forest</fullName>
         <default>false</default>
-        <label>Pickett</label>
+        <label>Pisgah National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Pictured Rocks</fullName>
+        <fullName>Plumas National Forest</fullName>
         <default>false</default>
-        <label>Pictured Rocks</label>
+        <label>Plumas National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Pike</fullName>
+        <fullName>Point Reyes National Seashore</fullName>
         <default>false</default>
-        <label>Pike</label>
+        <label>Point Reyes National Seashore</label>
     </customValue>
     <customValue>
-        <fullName>Pine Barrens</fullName>
+        <fullName>Pokomoke State Forest</fullName>
         <default>false</default>
-        <label>Pine Barrens</label>
+        <label>Pokomoke State Forest</label>
     </customValue>
     <customValue>
-        <fullName>Pisgah</fullName>
+        <fullName>Popo Agie Wilderness Area</fullName>
         <default>false</default>
-        <label>Pisgah</label>
+        <label>Popo Agie Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Plumas</fullName>
+        <fullName>Powderhorn Wilderness Area</fullName>
         <default>false</default>
-        <label>Plumas</label>
+        <label>Powderhorn Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Point Reyes</fullName>
+        <fullName>Queen Charlotte Island</fullName>
         <default>false</default>
-        <label>Point Reyes</label>
+        <label>Queen Charlotte Island</label>
     </customValue>
     <customValue>
-        <fullName>Pokomoke</fullName>
+        <fullName>Quetico Provincial Park</fullName>
         <default>false</default>
-        <label>Pokomoke</label>
+        <label>Quetico Provincial Park</label>
     </customValue>
     <customValue>
-        <fullName>Popo Agie</fullName>
+        <fullName>Rainbow Bridge National Monument</fullName>
         <default>false</default>
-        <label>Popo Agie</label>
+        <label>Rainbow Bridge National Monument</label>
     </customValue>
     <customValue>
-        <fullName>Powderhorn</fullName>
+        <fullName>Red Rock Canyon National Conservation Area</fullName>
         <default>false</default>
-        <label>Powderhorn</label>
+        <label>Red Rock Canyon National Conservation Area</label>
     </customValue>
     <customValue>
-        <fullName>Prince William Sound</fullName>
+        <fullName>Red Rock Wilderness Area</fullName>
         <default>false</default>
-        <label>Prince William Sound</label>
+        <label>Red Rock Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Queen Charlotte</fullName>
+        <fullName>Redwoods National Park</fullName>
         <default>false</default>
-        <label>Queen Charlotte</label>
+        <label>Redwoods National Park</label>
     </customValue>
     <customValue>
-        <fullName>Quetico</fullName>
+        <fullName>Rio Grande National Forest</fullName>
         <default>false</default>
-        <label>Quetico</label>
+        <label>Rio Grande National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Rainbow Bridge</fullName>
+        <fullName>Ritchey Woods State Preserve</fullName>
         <default>false</default>
-        <label>Rainbow Bridge</label>
+        <label>Ritchey Woods State Preserve</label>
     </customValue>
     <customValue>
-        <fullName>Red River Gorge</fullName>
+        <fullName>River of No Return Wilderness Area</fullName>
         <default>false</default>
-        <label>Red River Gorge</label>
+        <label>River of No Return Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Red Rock</fullName>
+        <fullName>Rocky Mountain National Park</fullName>
         <default>false</default>
-        <label>Red Rock</label>
+        <label>Rocky Mountain National Park</label>
     </customValue>
     <customValue>
-        <fullName>Red Rock Canyon</fullName>
+        <fullName>Rogue National River</fullName>
         <default>false</default>
-        <label>Red Rock Canyon</label>
+        <label>Rogue National River</label>
     </customValue>
     <customValue>
-        <fullName>Redwoods</fullName>
+        <fullName>Roosevelt National Forest</fullName>
         <default>false</default>
-        <label>Redwoods</label>
+        <label>Roosevelt National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Richardson Mountains</fullName>
+        <fullName>Routt National Forest</fullName>
         <default>false</default>
-        <label>Richardson Mountains</label>
+        <label>Routt National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Rio Grande</fullName>
+        <fullName>Ruby Mountains Wilderness Area</fullName>
         <default>false</default>
-        <label>Rio Grande</label>
+        <label>Ruby Mountains Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Ritchey Woods</fullName>
+        <fullName>Russian Wilderness Area</fullName>
         <default>false</default>
-        <label>Ritchey Woods</label>
+        <label>Russian Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>River of No Return</fullName>
+        <fullName>Saddle Mtn State Park</fullName>
         <default>false</default>
-        <label>River of No Return</label>
+        <label>Saddle Mtn State Park</label>
     </customValue>
     <customValue>
-        <fullName>Riverside Park</fullName>
+        <fullName>Saguaro National Park</fullName>
         <default>false</default>
-        <label>Riverside Park</label>
+        <label>Saguaro National Park</label>
     </customValue>
     <customValue>
-        <fullName>Rocky Mountain</fullName>
+        <fullName>Salmon River Bureau of Land Management</fullName>
         <default>false</default>
-        <label>Rocky Mountain</label>
+        <label>Salmon River Bureau of Land Management</label>
     </customValue>
     <customValue>
-        <fullName>Rogue</fullName>
+        <fullName>San Isabel National Forest</fullName>
         <default>false</default>
-        <label>Rogue</label>
+        <label>San Isabel National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Roosevelt</fullName>
+        <fullName>San Juan Island</fullName>
         <default>false</default>
-        <label>Roosevelt</label>
+        <label>San Juan Island</label>
     </customValue>
     <customValue>
-        <fullName>Routt</fullName>
+        <fullName>San Juan National Forest</fullName>
         <default>false</default>
-        <label>Routt</label>
+        <label>San Juan National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Ruby Mountains</fullName>
+        <fullName>San Juan Wilderness Wilderness Area</fullName>
         <default>false</default>
-        <label>Ruby Mountains</label>
+        <label>San Juan Wilderness Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Russian</fullName>
+        <fullName>Santa Ana National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Russian</label>
+        <label>Santa Ana National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Saddle Mtn</fullName>
+        <fullName>Santa Catalina Island</fullName>
         <default>false</default>
-        <label>Saddle Mtn</label>
+        <label>Santa Catalina Island</label>
     </customValue>
     <customValue>
-        <fullName>Saguaro</fullName>
+        <fullName>Santa Fe National Forest</fullName>
         <default>false</default>
-        <label>Saguaro</label>
+        <label>Santa Fe National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Salmon River</fullName>
+        <fullName>Sawtooth National Forest</fullName>
         <default>false</default>
-        <label>Salmon River</label>
+        <label>Sawtooth National Forest</label>
     </customValue>
     <customValue>
-        <fullName>San Isabel</fullName>
+        <fullName>Sawtooth Wilderness Area</fullName>
         <default>false</default>
-        <label>San Isabel</label>
+        <label>Sawtooth Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>San Juan Is.</fullName>
+        <fullName>Scapegoat Wilderness Area</fullName>
         <default>false</default>
-        <label>San Juan Is.</label>
+        <label>Scapegoat Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>San Juan N</fullName>
+        <fullName>Sequoia National Forest</fullName>
         <default>false</default>
-        <label>San Juan N</label>
+        <label>Sequoia National Forest</label>
     </customValue>
     <customValue>
-        <fullName>San Juan Wilderness</fullName>
+        <fullName>Sequoia National Park</fullName>
         <default>false</default>
-        <label>San Juan Wilderness</label>
+        <label>Sequoia National Park</label>
     </customValue>
     <customValue>
-        <fullName>Santa Ana</fullName>
+        <fullName>Sevilleta National Wildlife Refuge</fullName>
         <default>false</default>
-        <label>Santa Ana</label>
+        <label>Sevilleta National Wildlife Refuge</label>
     </customValue>
     <customValue>
-        <fullName>Santa Catalina</fullName>
+        <fullName>Shasta-Trinity National Forest</fullName>
         <default>false</default>
-        <label>Santa Catalina</label>
+        <label>Shasta-Trinity National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Santa Fe</fullName>
+        <fullName>Shawnee National Forest</fullName>
         <default>false</default>
-        <label>Santa Fe</label>
+        <label>Shawnee National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Sawtooth</fullName>
+        <fullName>Shenandoah National Park</fullName>
         <default>false</default>
-        <label>Sawtooth</label>
+        <label>Shenandoah National Park</label>
     </customValue>
     <customValue>
-        <fullName>Scapegoat</fullName>
+        <fullName>Shoshone National Forest</fullName>
         <default>false</default>
-        <label>Scapegoat</label>
+        <label>Shoshone National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Sequoia</fullName>
+        <fullName>SierraNational Forest</fullName>
         <default>false</default>
-        <label>Sequoia</label>
+        <label>SierraNational Forest</label>
     </customValue>
     <customValue>
-        <fullName>Sevilleta</fullName>
+        <fullName>Sinkyone Wilderness Area</fullName>
         <default>false</default>
-        <label>Sevilleta</label>
+        <label>Sinkyone Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Shasta-Trinity</fullName>
+        <fullName>Siskiyou National Forest</fullName>
         <default>false</default>
-        <label>Shasta-Trinity</label>
+        <label>Siskiyou National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Shawnee</fullName>
+        <fullName>Sitka National Historical Park</fullName>
         <default>false</default>
-        <label>Shawnee</label>
+        <label>Sitka National Historical Park</label>
     </customValue>
     <customValue>
-        <fullName>Shenandoah</fullName>
+        <fullName>Slickrock Wilderness Area</fullName>
         <default>false</default>
-        <label>Shenandoah</label>
+        <label>Slickrock Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Shoshone</fullName>
+        <fullName>Snoqualmie National Forest</fullName>
         <default>false</default>
-        <label>Shoshone</label>
+        <label>Snoqualmie National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Sierra</fullName>
+        <fullName>South Cumberland State Recreation Area</fullName>
         <default>false</default>
-        <label>Sierra</label>
+        <label>South Cumberland State Recreation Area</label>
     </customValue>
     <customValue>
-        <fullName>Sinkyone</fullName>
+        <fullName>Spencer Spit State Park</fullName>
         <default>false</default>
-        <label>Sinkyone</label>
+        <label>Spencer Spit State Park</label>
     </customValue>
     <customValue>
-        <fullName>Siskiyou</fullName>
+        <fullName>St. Joseph Peninsula State Park</fullName>
         <default>false</default>
-        <label>Siskiyou</label>
+        <label>St. Joseph Peninsula State Park</label>
     </customValue>
     <customValue>
-        <fullName>Sitka</fullName>
+        <fullName>Stanislaus National Forest</fullName>
         <default>false</default>
-        <label>Sitka</label>
+        <label>Stanislaus National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Slickrock</fullName>
+        <fullName>Stephen Foster State Park</fullName>
         <default>false</default>
-        <label>Slickrock</label>
+        <label>Stephen Foster State Park</label>
     </customValue>
     <customValue>
-        <fullName>Snoqualmie</fullName>
+        <fullName>Strathcona Provincial Park</fullName>
         <default>false</default>
-        <label>Snoqualmie</label>
+        <label>Strathcona Provincial Park</label>
     </customValue>
     <customValue>
-        <fullName>South Cumberland</fullName>
+        <fullName>Sumter National Forest</fullName>
         <default>false</default>
-        <label>South Cumberland</label>
+        <label>Sumter National Forest</label>
     </customValue>
     <customValue>
-        <fullName>South Florida</fullName>
+        <fullName>Superior National Forest</fullName>
         <default>false</default>
-        <label>South Florida</label>
+        <label>Superior National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Spencer Spit</fullName>
+        <fullName>Superstition Wilderness Area</fullName>
         <default>false</default>
-        <label>Spencer Spit</label>
+        <label>Superstition Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>St. Joseph Peninsula SP</fullName>
+        <fullName>Susquehannock State Forest</fullName>
         <default>false</default>
-        <label>St. Joseph Peninsula SP</label>
+        <label>Susquehannock State Forest</label>
     </customValue>
     <customValue>
-        <fullName>Stanislaus</fullName>
+        <fullName>Sylvainia Wilderness Area</fullName>
         <default>false</default>
-        <label>Stanislaus</label>
+        <label>Sylvainia Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Stehekin Valley</fullName>
+        <fullName>Table Rock State Park</fullName>
         <default>false</default>
-        <label>Stehekin Valley</label>
+        <label>Table Rock State Park</label>
     </customValue>
     <customValue>
-        <fullName>Stephen Foster</fullName>
+        <fullName>Tahoe National Forest</fullName>
         <default>false</default>
-        <label>Stephen Foster</label>
+        <label>Tahoe National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Strathcona</fullName>
+        <fullName>Targhee National Forest</fullName>
         <default>false</default>
-        <label>Strathcona</label>
+        <label>Targhee National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Sumter</fullName>
+        <fullName>Tatshenshini-AlsekWilderness Area</fullName>
         <default>false</default>
-        <label>Sumter</label>
+        <label>Tatshenshini-AlsekWilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Superior</fullName>
+        <fullName>Terra Nova National Park</fullName>
         <default>false</default>
-        <label>Superior</label>
+        <label>Terra Nova National Park</label>
     </customValue>
     <customValue>
-        <fullName>Superstition</fullName>
+        <fullName>Tiadaghton State Forest</fullName>
         <default>false</default>
-        <label>Superstition</label>
+        <label>Tiadaghton State Forest</label>
     </customValue>
     <customValue>
-        <fullName>Susquehannock</fullName>
+        <fullName>Toiyabe National Forest</fullName>
         <default>false</default>
-        <label>Susquehannock</label>
+        <label>Toiyabe National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Suwannee</fullName>
+        <fullName>Tombstone Territorial Park</fullName>
         <default>false</default>
-        <label>Suwannee</label>
+        <label>Tombstone Territorial Park</label>
     </customValue>
     <customValue>
-        <fullName>Sylvainia</fullName>
+        <fullName>Tongass National Forest</fullName>
         <default>false</default>
-        <label>Sylvainia</label>
+        <label>Tongass National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Table Rock</fullName>
+        <fullName>Tonto National Forest</fullName>
         <default>false</default>
-        <label>Table Rock</label>
+        <label>Tonto National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Tahoe</fullName>
+        <fullName>Tortugas Island</fullName>
         <default>false</default>
-        <label>Tahoe</label>
+        <label>Tortugas Island</label>
     </customValue>
     <customValue>
-        <fullName>Talkeetna Mountains</fullName>
+        <fullName>Trinity AlpsWilderness Area</fullName>
         <default>false</default>
-        <label>Talkeetna Mountains</label>
+        <label>Trinity AlpsWilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Targhee</fullName>
+        <fullName>Tuktut Nogait National Park</fullName>
         <default>false</default>
-        <label>Targhee</label>
+        <label>Tuktut Nogait National Park</label>
     </customValue>
     <customValue>
-        <fullName>Tatshenshini-Alsek</fullName>
+        <fullName>Tweedsmuir Provincial Park</fullName>
         <default>false</default>
-        <label>Tatshenshini-Alsek</label>
+        <label>Tweedsmuir Provincial Park</label>
     </customValue>
     <customValue>
-        <fullName>Terra Nova</fullName>
+        <fullName>Uncompaghre National Forest</fullName>
         <default>false</default>
-        <label>Terra Nova</label>
+        <label>Uncompaghre National Forest</label>
     </customValue>
     <customValue>
-        <fullName>TetonS</fullName>
+        <fullName>Upper Missouri Natl Wild Scenic River</fullName>
         <default>false</default>
-        <label>TetonS</label>
+        <label>Upper Missouri Natl Wild Scenic River</label>
     </customValue>
     <customValue>
-        <fullName>Tiadaghton</fullName>
+        <fullName>Valley Forge National Historical Park</fullName>
         <default>false</default>
-        <label>Tiadaghton</label>
+        <label>Valley Forge National Historical Park</label>
     </customValue>
     <customValue>
-        <fullName>Toiyabe</fullName>
+        <fullName>Ventana Wilderness Area</fullName>
         <default>false</default>
-        <label>Toiyabe</label>
+        <label>Ventana Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Tombstone Territorial Par</fullName>
+        <fullName>Vermilion Cliffs Wilderness Area</fullName>
         <default>false</default>
-        <label>Tombstone Territorial Par</label>
+        <label>Vermilion Cliffs Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Tongass</fullName>
+        <fullName>Vince Shute Sanctuary</fullName>
         <default>false</default>
-        <label>Tongass</label>
+        <label>Vince Shute Sanctuary</label>
     </customValue>
     <customValue>
-        <fullName>Tonto</fullName>
+        <fullName>Virgin Islands National Park</fullName>
         <default>false</default>
-        <label>Tonto</label>
+        <label>Virgin Islands National Park</label>
     </customValue>
     <customValue>
-        <fullName>Tortugas</fullName>
+        <fullName>Volcanoes National Park</fullName>
         <default>false</default>
-        <label>Tortugas</label>
+        <label>Volcanoes National Park</label>
     </customValue>
     <customValue>
-        <fullName>Trinity Alps</fullName>
+        <fullName>Voyageurs National Park</fullName>
         <default>false</default>
-        <label>Trinity Alps</label>
+        <label>Voyageurs National Park</label>
     </customValue>
     <customValue>
-        <fullName>Tuktut Nogait</fullName>
+        <fullName>Waianapanapa State Park</fullName>
         <default>false</default>
-        <label>Tuktut Nogait</label>
+        <label>Waianapanapa State Park</label>
     </customValue>
     <customValue>
-        <fullName>Tweedsmuir</fullName>
+        <fullName>Wallowa Whitman National Forest</fullName>
         <default>false</default>
-        <label>Tweedsmuir</label>
+        <label>Wallowa Whitman National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Uncompaghre</fullName>
+        <fullName>Wamanu EsturineSanctuary</fullName>
         <default>false</default>
-        <label>Uncompaghre</label>
+        <label>Wamanu EsturineSanctuary</label>
     </customValue>
     <customValue>
-        <fullName>Upper Missouri</fullName>
+        <fullName>Washakie Wilderness Area</fullName>
         <default>false</default>
-        <label>Upper Missouri</label>
+        <label>Washakie Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Valley Forge</fullName>
+        <fullName>Waterton Glacier Intl Peace Park</fullName>
         <default>false</default>
-        <label>Valley Forge</label>
+        <label>Waterton Glacier Intl Peace Park</label>
     </customValue>
     <customValue>
-        <fullName>Ventana</fullName>
+        <fullName>Weminuche Wilderness Area</fullName>
         <default>false</default>
-        <label>Ventana</label>
+        <label>Weminuche Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Vermilion Cliffs</fullName>
+        <fullName>Wenatchee National Forest</fullName>
         <default>false</default>
-        <label>Vermilion Cliffs</label>
+        <label>Wenatchee National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Vince Shute</fullName>
+        <fullName>West Elk Wilderness Area</fullName>
         <default>false</default>
-        <label>Vince Shute</label>
+        <label>West Elk Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Virgin Islands</fullName>
+        <fullName>White Goat Wilderness Area</fullName>
         <default>false</default>
-        <label>Virgin Islands</label>
+        <label>White Goat Wilderness Area</label>
     </customValue>
     <customValue>
-        <fullName>Volcanoes</fullName>
+        <fullName>White Mountain National Forest</fullName>
         <default>false</default>
-        <label>Volcanoes</label>
+        <label>White Mountain National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Voyageurs</fullName>
+        <fullName>White River National Forest</fullName>
         <default>false</default>
-        <label>Voyageurs</label>
+        <label>White River National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Waianapanapa</fullName>
+        <fullName>Willamette National Forest</fullName>
         <default>false</default>
-        <label>Waianapanapa</label>
+        <label>Willamette National Forest</label>
     </customValue>
     <customValue>
-        <fullName>Wallowa Whitman</fullName>
+        <fullName>Wrangell-St. Elias National Park</fullName>
         <default>false</default>
-        <label>Wallowa Whitman</label>
+        <label>Wrangell-St. Elias National Park</label>
     </customValue>
     <customValue>
-        <fullName>Wamanu Esturine</fullName>
+        <fullName>Yellowstone National Park</fullName>
         <default>false</default>
-        <label>Wamanu Esturine</label>
+        <label>Yellowstone National Park</label>
     </customValue>
     <customValue>
-        <fullName>Washakie</fullName>
+        <fullName>Yoho National Park</fullName>
         <default>false</default>
-        <label>Washakie</label>
+        <label>Yoho National Park</label>
     </customValue>
     <customValue>
-        <fullName>Waterton Glacier</fullName>
+        <fullName>Yosemite National Park</fullName>
         <default>false</default>
-        <label>Waterton Glacier</label>
-    </customValue>
-    <customValue>
-        <fullName>Weminuche</fullName>
-        <default>false</default>
-        <label>Weminuche</label>
-    </customValue>
-    <customValue>
-        <fullName>Wenatchee</fullName>
-        <default>false</default>
-        <label>Wenatchee</label>
-    </customValue>
-    <customValue>
-        <fullName>West Elk</fullName>
-        <default>false</default>
-        <label>West Elk</label>
-    </customValue>
-    <customValue>
-        <fullName>White Goat</fullName>
-        <default>false</default>
-        <label>White Goat</label>
-    </customValue>
-    <customValue>
-        <fullName>White Mountain</fullName>
-        <default>false</default>
-        <label>White Mountain</label>
-    </customValue>
-    <customValue>
-        <fullName>White River</fullName>
-        <default>false</default>
-        <label>White River</label>
-    </customValue>
-    <customValue>
-        <fullName>Willamette</fullName>
-        <default>false</default>
-        <label>Willamette</label>
-    </customValue>
-    <customValue>
-        <fullName>Wrangell-St. Elias</fullName>
-        <default>false</default>
-        <label>Wrangell-St. Elias</label>
-    </customValue>
-    <customValue>
-        <fullName>Yellowstone</fullName>
-        <default>false</default>
-        <label>Yellowstone</label>
-    </customValue>
-    <customValue>
-        <fullName>Yoho</fullName>
-        <default>false</default>
-        <label>Yoho</label>
-    </customValue>
-    <customValue>
-        <fullName>Yosemite</fullName>
-        <default>false</default>
-        <label>Yosemite</label>
-    </customValue>
-    <customValue>
-        <fullName>Yukon-Charley Rivers NaPr</fullName>
-        <default>false</default>
-        <label>Yukon-Charley Rivers NaPr</label>
+        <label>Yosemite National Park</label>
     </customValue>
     <customValue>
         <fullName>Yukon Territory</fullName>
@@ -2066,9 +1936,14 @@
         <label>Yukon Territory</label>
     </customValue>
     <customValue>
-        <fullName>Zion</fullName>
+        <fullName>Yukon-Charley Rivers National Preserve</fullName>
         <default>false</default>
-        <label>Zion</label>
+        <label>Yukon-Charley Rivers National Preserve</label>
+    </customValue>
+    <customValue>
+        <fullName>Zion National Park</fullName>
+        <default>false</default>
+        <label>Zion National Park</label>
     </customValue>
     <masterLabel>National Outings Trip Area</masterLabel>
     <sorted>false</sorted>
