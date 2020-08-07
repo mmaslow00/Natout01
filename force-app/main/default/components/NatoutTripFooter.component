@@ -1,0 +1,31 @@
+<apex:component layout="none">
+  <!-- component: NatoutTripFooter -->
+
+   <style>
+       footer {
+           background-color: #89D2D8;
+           text-align: left;
+           margin-top: 30px;
+           padding: 20px 0;
+           font-size: 14px;
+       }
+        footer ul {
+            padding-left: 20px;
+        }
+    </style>
+
+    <footer>
+        <div class="container">
+
+            <h2>Trip Submission Help</h2>
+            <ul>
+                <li>For trip submission deadlines, instructions, and other resources, visit <a href="https://community.sierraclub.org/section/outings/national-outings/trip-stages/submit" target="_blank">Trip Stages>Submit</a>.</li>
+                <li>If you have specific submission questions for staff (trip copy, budget, brochures, permits, etc.), please use the <a href="https://community.sierraclub.org/page/who-contact-office" target="_blank">Who To Contact in the Office page</a> to find the appropriate person and their contact information.</li>
+                <li>For technical support with the trip submission system, contact <a href="mailto:tony.rango@sierraclub.org?subject=Trip%20Submission%20Help">tony.rango@sierraclub.org</a>.</li>
+            </ul>
+
+        </div>
+    </footer>
+
+  <!-- component: NatoutTripFooter -->
+</apex:component>

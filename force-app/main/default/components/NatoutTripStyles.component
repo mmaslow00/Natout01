@@ -1,17 +1,20 @@
 <apex:component layout="none">
   <!-- component: NatoutTripStyles -->
-
+   <script src="https://kit.fontawesome.com/fd58a09a53.js" crossorigin="anonymous"></script>
    <style>
         #lightning {
             margin: 15px auto;
             max-width: 1140px;
+            min-height: 300px;
         }
        #lightning_full {
            max-width: 100%;
        }
-       #lightning_full > * {
-           margin: 15px;
-       }
+        #lightning_full > * {
+            margin: 10px;
+            font-size: 14px;
+            margin: 15px;
+        }
        
         #links {
            font-size: 14px;
@@ -25,6 +28,10 @@
             font-weight: bold;
             font-size: 16px;
         }
+
+       #spinner {
+           color: #9F9F9B;
+       }
 
         #trip-display-1 {
             max-width: 600px;
@@ -94,6 +101,11 @@
             margin: 0 auto;
             padding: 0 15px;
         }
+       .slds-scope h2 {
+           font-weight: bold;
+           font-size: 16px;
+           color: black;
+       }
     </style>
 
     <header>
