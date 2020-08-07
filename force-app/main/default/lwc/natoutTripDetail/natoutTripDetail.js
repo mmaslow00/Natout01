@@ -560,7 +560,17 @@ export default class NatoutTripDetail extends LightningElement {
             errors.push({rowNum: rowNum++, text: 'Number of Planned Staff is Required'});
         } else if(parseInt(this.tripRecord.Planned_Staff__c) < 1) {
             errors.push({rowNum: rowNum++, text: 'Number of Planned Staff is Required'});
+        } else {
+            let staffComponent = this.template.querySelector('c-natout-trip-staff');
+            let optionsList = [];
+            if(staffComponent != null) {
+                optionsList = staffComponent.getTripRoles();
+            }
+            if(optionsList.length > this.tripRecord.Planned_Staff__c) {
+                errors.push({rowNum: rowNum++, text: 'More Staff Entered than Planned'});
+            }
         }
+
         if(this.tripRecord.First_Time_Run__c) {
             if( ! this.tripRecord.Trip_Copy__c ) {
                 errors.push({rowNum: rowNum++, text: 'Trip Copy is Required for a First Time Trip'});
