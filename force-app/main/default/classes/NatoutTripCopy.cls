@@ -7,6 +7,7 @@ public with sharing class NatoutTripCopy {
             ' FROM National_Outings_Trip__c WHERE Id = :tripId';
         National_Outings_Trip__c fromTrip = Database.query(query);
         National_Outings_Trip__c toTrip = fromTrip.clone(false, true, false, false);
+        toTrip.Status__c = 'Started';
         toTrip.Name = 'Copy of ' + fromTrip.Name;
         Database.SaveResult rslt = Database.insert(toTrip);
         if( ! rslt.isSuccess()) {
