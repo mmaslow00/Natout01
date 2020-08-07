@@ -2,19 +2,19 @@
   <!-- component: NatoutTripFooter -->
 
    <style>
-       footer {
+       #page_footer {
            background-color: #89D2D8;
            text-align: left;
            margin-top: 30px;
            padding: 20px 0;
            font-size: 14px;
        }
-        footer ul {
+        #page_footer ul {
             padding-left: 20px;
         }
     </style>
 
-    <footer>
+    <footer id="page_footer">
         <div class="container">
 
             <h2>Trip Submission Help</h2>
