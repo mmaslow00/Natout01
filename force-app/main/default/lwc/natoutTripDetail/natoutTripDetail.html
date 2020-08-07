@@ -293,11 +293,14 @@
                         >
                         </lightning-input-field>
                         <label class="slds-form-element__label" for="groupType">
-                            Secondary Activities
+                            <b>Secondary Activities: Please select up to 2</b>
                             <c-tooltip text="Does this trip include additional activities not conveyed by the trip type, e.g. a base camp trip that also includes an overnight kayak excursion? If so, please select these activities. This will ensure that your trip appears in search results for these terms on our website.">
                             </c-tooltip>
                             <div style="margin-top:4px; margin-bottom:4px; clear:both">
-                            Select an item from the Available table on the left and use the right arrow to add it to the Selected table on the right. To remove an item from the Selected table, select it and use the left arrow.
+                                Select an item from the Available table on the left and use the right arrow to add it to the Chosen table on the right. To remove an item from the Selected table, select it and use the left arrow.
+                            </div>
+                            <div style="margin-top:4px; margin-bottom:4px; clear:both">
+                                If your area is not listed, email tony.rango@sierraclub.org to have it added. This update will need to made before the trip can be submitted.
                             </div>
                         </label>
                         <lightning-input-field
@@ -321,12 +324,12 @@
                         </template>
                         <template if:false={tripIsInternational}>
                             <div style="margin-top:4px; margin-bottom:4px; font-size:small; clear:both">
-                                Select an item from the Available table on the left and use the right arrow to add it to the Selected table on the right. To remove an item from the Selected table, select it and use the left arrow.
+                                Select an item from the Available table on the left and use the right arrow to add it to the Chosen table on the right. To remove an item from the Selected table, select it and use the left arrow.
                             </div>
                             <lightning-dual-listbox
                                 label="States: please select up to 3"
                                 source-label="Available"
-                                selected-label="Selected"
+                                selected-label="Chosen"
                                 options={stateListOptions}
                                 value={chosenStates}
                                 onchange={handleStatesChange}
@@ -341,7 +344,7 @@
                             </lightning-input-field>
 
                             <div style="margin-top:10px; margin-bottom:4px; font-size:small; clear:both">
-                                Select an item from the Available table on the left and use the right arrow to add it to the Selected table on the right. To remove an item from the Selected table, select it and use the left arrow.
+                                Select an item from the Available table on the left and use the right arrow to add it to the Chosen table on the right. To remove an item from the Selected table, select it and use the left arrow.
                             </div>
 
                             <label class="slds-form-element__label" style="font-weight:bold;" for="area">
@@ -371,12 +374,12 @@
                         </div>
                         <template if:true={tripIsInternational}>
                             <div style="margin-top:4px; margin-bottom:4px; font-size:small; clear:both">
-                                Select an item from the Available table on the left and use the right arrow to add it to the Selected table on the right. To remove an item from the Selected table, select it and use the left arrow.
+                                Select an item from the Available table on the left and use the right arrow to add it to the Chosen table on the right. To remove an item from the Selected table, select it and use the left arrow.
                             </div>
                             <lightning-dual-listbox
                                 label="Countries - You May Select Up to 3"
                                 source-label="Available"
-                                selected-label="Selected"
+                                selected-label="Chosen"
                                 options={countryListOptions}
                                 value={chosenCountries}
                                 onchange={handleCountriesChange}

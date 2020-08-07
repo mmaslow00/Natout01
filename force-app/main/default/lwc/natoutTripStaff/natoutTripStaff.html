@@ -7,13 +7,15 @@
                     <h2 class="slds-card__header-title">
                         <span>
                             Trip Staff
-                            <c-tooltip text="Enter the roles for all planned trip staff even if you don't know their names yet. If this is the case, add the role and enter 'Unknown' in the Name field.">                                
+                            <c-tooltip
+                                text="Enter all planned trip staff even if you don't know their names yet. If this is the case, select the 'Leader Not Yet Known' option, then select their role."
+                            >                                
                             </c-tooltip>
                         </span>
                     </h2>
                 </div>
                 <div if:true={canEdit} class="slds-no-flex">
-                    <button class="slds-button slds-button_neutral" onclick={createNewStaff}>New</button>
+                    <button class="slds-button slds-button_neutral" onclick={createNewStaff}>Add Trip Staff</button>
                 </div>
             </header>
         </div>

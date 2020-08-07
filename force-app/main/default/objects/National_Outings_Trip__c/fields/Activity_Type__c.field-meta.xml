@@ -31,11 +31,6 @@
                 <label>Canoe</label>
             </value>
             <value>
-                <fullName>International</fullName>
-                <default>false</default>
-                <label>International</label>
-            </value>
-            <value>
                 <fullName>Supported Trekking</fullName>
                 <default>false</default>
                 <label>Supported Trekking</label>

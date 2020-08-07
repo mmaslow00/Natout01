@@ -147,6 +147,7 @@ export default class NatoutTripStaff extends LightningElement {
             LastName: ''
         };
         this.editRole = null;
+        this.searchingContacts = true;
         this.openModal();
     }
     saveStaff() {
