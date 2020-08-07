@@ -19,6 +19,14 @@ public with sharing class NatoutTripCopy {
         relObjList.addAll(getRelatedObjList('National_Outings_Trip_Agency__c', tripId, retVal));
         relObjList.addAll(getRelatedObjList('National_Outings_Trip_Itinerary__c', tripId, retVal));
         relObjList.addAll(getRelatedObjList('National_Outings_Trip_Vendor__c', tripId, retVal));
+
+        List<National_Outings_Trip_Staff__c> staffList = getRelatedObjList('National_Outings_Trip_Staff__c', tripId, retVal);
+        for(National_Outings_Trip_Staff__c staff : staffList) {
+            if(staff.Role__c != 'Leader') {
+                relObjList.add(staff);
+            }
+        }
+
         List<Database.SaveResult> rsltList = Database.insert(relObjList);
 
         return retVal;

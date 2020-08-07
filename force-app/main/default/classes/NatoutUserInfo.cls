@@ -1,5 +1,5 @@
 public with sharing class NatoutUserInfo {
-    private static Id getContactId() {
+    public static Id getContactId() {
         Id userId = System.UserInfo.getUserId();
         Id contactId;
         if(System.UserInfo.getUserType() == 'Standard') {
