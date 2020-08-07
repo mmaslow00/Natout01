@@ -72,9 +72,12 @@
                     disabled={userIsReadOnly}
                     >
                 </lightning-input-field>
-            <lightning-accordion active-section-name="Approval Status">
+                <lightning-accordion 
+                    active-section-name={activeTripSections}
+                    allow-multiple-sections-open
+                    onsectiontoggle={handleTripSectionToggle}
+                >
                     <lightning-accordion-section name="Approval Status" label="Approval Status">
-
                         <div if:true={userCanEdit}>
                             <lightning-combobox
                                 label="Approval Status"

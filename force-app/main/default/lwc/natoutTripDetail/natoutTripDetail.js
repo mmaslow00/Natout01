@@ -15,6 +15,7 @@ export default class NatoutTripDetail extends LightningElement {
     @track tripRecord = {};
     @track wordCount = null;
     @track activeBudgetSections = [];
+    @track activeTripSections = ["Approval Status"];
     @track searchingForLocation = false;
     @track showMap = false;
     @track showStatusDialog;
@@ -123,6 +124,15 @@ export default class NatoutTripDetail extends LightningElement {
         //only update if there is a difference (as handleToggleSection is reexecuted
         //until no diffs (seems odd, but it was)
         this.activeBudgetSections = sectionDiff;
+        }
+    }
+    handleTripSectionToggle(event) {
+        const openSections = event.detail.openSections;
+        let sectionDiff = openSections.filter( x => !this.activeTripSections.includes(x) );
+        if (sectionDiff.length > 0) {
+        //only update if there is a difference (as handleToggleSection is reexecuted
+        //until no diffs (seems odd, but it was)
+        this.activeTripSections = sectionDiff;
         }
     }
     isTestUser() {
