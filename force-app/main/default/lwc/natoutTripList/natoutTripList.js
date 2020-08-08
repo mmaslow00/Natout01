@@ -135,7 +135,8 @@ export default class NatoutTripList extends LightningElement {
                     let leaderName = '';
                     let newRow = {...row , nameUrl};
                     if(row.National_Outings_Trip_Staffs__r) {
-                        leaderName = row.National_Outings_Trip_Staffs__r[0].Contact__r.LastName + ', ' + row.National_Outings_Trip_Staffs__r[0].Contact__r.FirstName;
+                        let leader = row.National_Outings_Trip_Staffs__r[0].Contact__r;
+                        leaderName = leader.LastName + ', ' + leader.FirstName;
                     }
                     newRow = {...newRow, leaderName};
                     return newRow;
