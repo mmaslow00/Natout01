@@ -52,6 +52,7 @@ export default class NatoutTripList extends LightningElement {
                     day: "2-digit"
                 },
                 fieldName: 'Start_Date__c' },
+            {label: 'Leader', fieldName: 'leaderName', sortable: true},                
             {label: 'Subcommittee', fieldName: 'Subcommittee__c', sortable: true},
             {label: 'Status', fieldName: 'Status__c', sortable: true},
             {label: 'Type', fieldName: 'Trip_Type__c', sortable: true},
@@ -131,7 +132,12 @@ export default class NatoutTripList extends LightningElement {
                 let path = window.location.origin + pathStart + 'NatoutTripDetail?id=';
                 this.tripList.data = result.map(row => {
                     let nameUrl = path + row.Id;
+                    let leaderName = '';
                     let newRow = {...row , nameUrl};
+                    if(row.National_Outings_Trip_Staffs__r) {
+                        leaderName = row.National_Outings_Trip_Staffs__r[0].Contact__r.LastName + ', ' + row.National_Outings_Trip_Staffs__r[0].Contact__r.FirstName;
+                    }
+                    newRow = {...newRow, leaderName};
                     return newRow;
                 });
                 this.error = undefined;

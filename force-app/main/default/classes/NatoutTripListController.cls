@@ -14,7 +14,8 @@ public with sharing class NatoutTripListController {
             endDate = Date.valueOf(searchCriteria.dtEnd);
         }
         String sql = 
-            'SELECT Id, Name, Start_Date__c, Status__c, Subcommittee__c, Trip_Type__c, OwnerId ' +
+            'SELECT Id, Name, Start_Date__c, Status__c, Subcommittee__c, Trip_Type__c, OwnerId, ' +
+            '(select Contact__r.LastName, Contact__r.FirstName from National_Outings_Trip_Staffs__r where Role__c = \'' + 'Leader' + '\') ' +
             'FROM National_Outings_Trip__c ';
 
         String whereClause = '';
