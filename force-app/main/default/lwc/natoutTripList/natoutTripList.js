@@ -272,7 +272,10 @@ export default class NatoutTripList extends LightningElement {
             idString += selectedRows[i].Id;
         }
         if(idString.length > 0) {
-            window.open('/' + linkValue + '?trips=' + idString);
+            let lastSlash = window.location.pathname.lastIndexOf('/');
+            let pathStart = window.location.pathname.substring(0,lastSlash + 1);
+            let url = window.location.origin + pathStart + linkValue + '?trips=' + idString;
+            window.open(url);
         }
     }
 

@@ -267,7 +267,7 @@ public with sharing class NatoutTripExportController {
         List<National_Outings_Trip_Agency__c> agencyList = [
             SELECT
                 National_Outings_Trip__c,  
-                Account__r.Name
+                Account__r.External_Id__c
             FROM National_Outings_Trip_Agency__c
             WHERE National_Outings_Trip__c in :tripIdList
         ];
@@ -282,7 +282,7 @@ public with sharing class NatoutTripExportController {
                 lastTripId = agency.National_Outings_Trip__c;
                 tripAgencyList = new List<String>();
             }
-            tripAgencyList.add(agency.Account__r.Name);
+            tripAgencyList.add(agency.Account__r.External_ID__c);
         }
         agencyMap.put(lastTripId, tripAgencyList);
 
