@@ -71,6 +71,11 @@ public with sharing class NatoutTripBudgetExportController {
             else {
                 ExportRow row = new ExportRow(trip.Id);
                 row.itemName = item.Item_Category__c;
+                if(item.Budget_Category__c == 'Concessionaires') {
+                    if(item.Item_Category__c == 'Other') {
+                        row.itemName = 'Other - Concessionaire';
+                    }
+                }
                 row.amount = item.Amount__c;
                 row.numStaff = item.Number_Staff__c;
                 if(item.Budget_Category__c == 'Volunteer Travel') {
