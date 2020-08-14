@@ -79,6 +79,9 @@ public with sharing class NatoutTripBudgetExportController {
                 row.amount = item.Amount__c;
                 row.numStaff = item.Number_Staff__c;
                 if(item.Budget_Category__c == 'Volunteer Travel') {
+                    if(item.Item_Category__c.startsWith('Other')) {
+                        row.itemName = 'Other - Volunteer';
+                    }
                     row.role = item.Staff_Role__c;
                 }
                 else {
