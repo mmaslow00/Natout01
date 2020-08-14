@@ -106,6 +106,17 @@
            font-size: 16px;
            color: black;
        }
+       .instructions {
+           padding: 1%;
+           max-width: 800px;
+           text-align: left;
+           margin-left: 5px;
+       }
+       .instructions-wide {
+           padding: 1%;
+           text-align: left;
+           margin-left: 5px;
+      }
     </style>
 
     <header>

@@ -245,10 +245,10 @@ export default class NatoutTripDetail extends LightningElement {
         }
         return retVal;
     }
-    get showBPRating() {
+    get isBPTrip() {
         let retVal = false;
-        if(this.tripRecord.Trip_Type__c) {
-            if(this.tripRecord.Trip_Type__c.indexOf('Backpack') >= 0) {
+        if(this.chosenTripType) {
+            if(this.chosenTripType.indexOf('Backpack') >= 0) {
                 retVal = true;
             }
         }

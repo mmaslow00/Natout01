@@ -19,7 +19,7 @@ const columns = [
 const itemCategories = [
     { label: 'Airfare', value: 'Airfare'},
     { label: 'Mileage', value: 'Mileage'},
-    { label: 'Other - Volunteer', value: 'Other - Volunteer'},
+    { label: 'Other - airport parking, baggage fees, etc.', value: 'Other - airport parking, baggage fees, etc.'},
     { label: 'Subsistence', value: 'Subsistence'},
     { label: 'Transportation - In country', value: 'Transportation - In country'},
     { label: 'Transportation - US', value: 'Transportation - US'},

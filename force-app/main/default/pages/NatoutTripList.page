@@ -4,6 +4,19 @@
 
     <c:NatoutTripStyles />
 
+    <div class="instructions-wide">
+    <p>
+        Welcome to the National Outings trip submission system. Here you will enter the essential information staff and your subcommittee will need to process your trip including general information, marketing copy, budget, itinerary, and more. 
+    </p>
+    <p>
+      Below is a list of trips you have started or submitted. If you are designated as a collaborator, e.g., a co-leader, homeschool mentor, or other leader who has been given permission to edit/assist with another leader’s trip submission, you will see it below.
+    </p>
+    <p>
+      Click on any column to sort trips in ascending or descending order. To view an individual trip, select the blue link in the Name column. To start a new trip, select Create New Trip below.            
+    </p>
+    </div>
+
+
     <ul id="links" class="container">
         <li><apex:outputLink value="/apex/NatoutTrip">Create New Trip</apex:outputLink></li>
     </ul>

@@ -246,19 +246,26 @@
                             </lightning-input-field>
                         </template>
                         <div style="clear: both">
-                        <label class="slds-form-element__label" for="conservation">
-                            Conservation Emphasis
-                            <c-tooltip text="Describe the conservation emphasis for this trip and when this will be discussed on the trip.">                                
-                            </c-tooltip>
-                        </label>
-                        <lightning-input-field
+                            <label class="slds-form-element__label" for="conservation">
+                                Conservation Emphasis
+                                <c-tooltip text="Describe the conservation emphasis for this trip and when this will be discussed on the trip.">                                
+                                </c-tooltip>
+                            </label>
+                        </div>
+                        <div style="clear: both">
+                            For more information, see the <a href="https://community.sierraclub.org/section/outings/national-outings/conservation" target="_blank">
+                                Conservation section on Campfire.
+                            </a>
+                        </div>
+                        <div style="clear:both">
+                            <lightning-input-field
                             field-name="Conservation_Emphasis__c"
                             onchange={handleFieldChange}
                             data-field="Conservation_Emphasis__c"
                             data-id="conservation"
                             variant="label-hidden"
-                        >
-                        </lightning-input-field>
+                            >
+                            </lightning-input-field>
                         </div>
                         <lightning-input-field
                             field-name="Meals_Included__c"
@@ -266,7 +273,7 @@
                             data-field="Meals_Included__c"
                         >
                         </lightning-input-field>
-                        <template if:true={showBPRating}>
+                        <template if:true={isPBTrip}>
                             <lightning-input-field
                                 field-name="Backpack_Rating__c"
                                 onchange={handleFieldChange}
@@ -303,7 +310,7 @@
                                 Select an item from the Available table on the left and use the right arrow to add it to the Chosen table on the right. To remove an item from the Chosen table, select it and use the left arrow.
                             </div>
                             <div style="margin-top:4px; margin-bottom:4px; clear:both">
-                                If your area is not listed, email tony.rango@sierraclub.org to have it added. This update will need to made before the trip can be submitted.
+                                If your area is not listed, leave a comment and check the staff notification box to have it added. This update will need to made before the trip can be submitted.
                             </div>
                         </label>
                         <lightning-input-field
@@ -399,7 +406,7 @@
                                 >
                                 </lightning-button>
                                 <c-tooltip
-                                    text="Use the map location tool to select the park or region that is the focus of your trip. If the trip takes place in harder-to-define area, such as a portion of the Missouri River, search for a landmark featured in the trip, such as the town of Arrow Rock, Missouri.">
+                                    text="Use the map location tool to select the park or region that is the focus of your trip, then select 'Save Location.' If the trip takes place in harder-to-define area, such as a portion of the Missouri River, search for a landmark featured in the trip, such as the town of Arrow Rock, Missouri.">
                                 </c-tooltip>
 
                                 <lightning-input-field
@@ -476,8 +483,15 @@
                             active-section-name={activeBudgetSections}
                             onsectiontoggle={handleBudgetSectionToggle}
                         >
-                        See this table [URL] for the standard values used in various budget categories below.
-                        <lightning-accordion-section name="budget-vol-travel" label="Volunteer Travel">                                
+                        <template if:true={tripIsInternational}>
+                            <p>
+                            Enter your budget items in US dollars and notate the currency exchange rate used.
+                            </p>
+                        </template>
+                        <p>
+                            See this table [URL] for the standard values used in various budget categories below.
+                        </p>
+                            <lightning-accordion-section name="budget-vol-travel" label="Volunteer Travel">                                
                                 <div class="slds-p-top_small">
                                     <c-natout-trip-budget-vol-travel
                                         record-id={recordId}
@@ -667,18 +681,20 @@
                                 >
                                 </lightning-radio-group>
                             </lightning-layout>
-                            <lightning-input-field
-                                field-name="Entry_Trail_Head__c"
-                                onchange={handleFieldChange}
-                                data-field="Entry_Trail_Head__c"
-                            >
-                            </lightning-input-field>
-                            <lightning-input-field
-                                field-name="Exit_Trail_Head__c"
-                                onchange={handleFieldChange}
-                                data-field="Exit_Trail_Head__c"
-                            >
-                            </lightning-input-field>
+                            <template if:true={isBPTrip}>
+                                <lightning-input-field
+                                    field-name="Entry_Trail_Head__c"
+                                    onchange={handleFieldChange}
+                                    data-field="Entry_Trail_Head__c"
+                                >
+                                </lightning-input-field>
+                                <lightning-input-field
+                                    field-name="Exit_Trail_Head__c"
+                                    onchange={handleFieldChange}
+                                    data-field="Exit_Trail_Head__c"
+                                >
+                                </lightning-input-field>
+                            </template>
                             <lightning-input-field
                                 field-name="Permit_Comments__c"
                                 onchange={handleFieldChange}
@@ -686,10 +702,11 @@
                             >
                             </lightning-input-field>
                             <div class="slds-p-top_small">
+                                If your permit agency is not listed, leave a comment and check the staff notification box to have it added. This update will need to made before the trip can be submitted.
                                 <c-natout-trip-agencies
                                     record-id={recordId}
                                     can-edit={userCanEdit}
-                                    >
+                                >
                                 </c-natout-trip-agencies>
                             </div>
                         </lightning-accordion-section>
@@ -715,6 +732,7 @@
                             data-field="Vendor_Comments__c"
                         >
                         </lightning-input-field>
+                        If your vendor is not listed, leave a comment and check the staff notification box to have it added. This update will need to made before the trip can be submitted.                        
                         <div class="slds-p-top_small">
                             <c-natout-trip-vendors
                                 record-id={recordId}
@@ -725,10 +743,10 @@
                         </div>
                     </lightning-accordion-section>
 
-                    <lightning-accordion-section name="SatPhone" label="Sat Phone">
+                    <lightning-accordion-section name="SatPhone" label="Satellite Phone">
                         <label class="slds-form-element__label" for="satPhoneNeeded">
-                            SAT Phone Needed?
-                            <c-tooltip text="Is a SAT phone needed?">                                
+                            Satellite Phone Needed?
+                            <c-tooltip text="Is a Satellite phone needed?">                                
                             </c-tooltip>
                         </label>
                         <lightning-input-field
@@ -814,9 +832,9 @@
 
                     <lightning-accordion-section name="Collaborators" label="Collaborators">
                         <div>
-                            Please enter the name, role, and access level of any active National Outings committee member who is 
-                            working with you on this trip submission. This could be a home school mentor, trip submission reviewer, 
-                            subcommittee chair, or someone else.
+                            Leaders now have the option to add a collaborator to their trip submissions. 
+                            This can be any active National Outings committee member, e.g., a co-leader, homeschool mentor, or other leader, 
+                            who you want to have permission to edit/assist with your trip submission. All other leaders will have read-only access.
                         </div>
                         <c-natout-trip-collaborators
                             record-id={recordId}

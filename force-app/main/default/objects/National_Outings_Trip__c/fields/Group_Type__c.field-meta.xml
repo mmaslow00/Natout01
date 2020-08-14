@@ -65,6 +65,11 @@
                 <default>false</default>
                 <label>20s/30s</label>
             </value>
+            <value>
+                <fullName>Training</fullName>
+                <default>false</default>
+                <label>Training</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>
