@@ -1,6 +1,6 @@
 <template>
     <div class="slds-form c-container">
-        <div if:true={userCanEdit} class="save-button">
+        <div if:true={userCanEdit} class="slds-text-align_center save-button">
             <lightning-button class="slds-m-top_small"
                 variant="brand"
                 name="save"
@@ -398,7 +398,7 @@
                         </template>
 
                         <div class="slds-grid">
-                            <div class="location-div slds-col">
+                            <div class="slds-text-align_center location-div slds-col">
                                 <lightning-button 
                                     class="slds-m-top_small"
                                     label="Map Location" 
@@ -853,7 +853,7 @@
                     </lightning-accordion-section>
             
                 </lightning-accordion>
-                <div if:true={userCanEdit} class="save-button">
+                <div if:true={userCanEdit} class="slds-text-align_center save-button">
                     <lightning-button class="slds-m-top_small"
                         variant="brand"
                         name="save"
