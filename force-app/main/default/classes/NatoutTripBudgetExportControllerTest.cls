@@ -26,6 +26,7 @@ public with sharing class NatoutTripBudgetExportControllerTest {
         itemList.add(new National_Outings_Trip_Budget_Item__c(
             National_Outings_Trip__c = trip.Id,
             Budget_Category__c = 'Volunteer Travel',
+            Item_Category__c = 'Other - airport parking, baggage fees, etc.',
             Amount__c = 10
         ));
 
@@ -46,6 +47,7 @@ public with sharing class NatoutTripBudgetExportControllerTest {
         itemList.add(new National_Outings_Trip_Budget_Item__c(
             National_Outings_Trip__c = trip.Id,
             Budget_Category__c = 'Concessionaires',
+            Item_Category__c = 'Other',
             Amount__c = 10
         ));
         insert itemList;

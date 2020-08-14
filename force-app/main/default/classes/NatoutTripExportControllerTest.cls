@@ -83,16 +83,19 @@ public with sharing class NatoutTripExportControllerTest {
 
         Account agency1 = new Account(
             Name='Agency 1',
+            External_Id__c = '1',
             RecordTypeId = accountOrgTypeId
         );
         accountList.add(agency1);
         Account agency2 = new Account(
             Name='Agency 2',
+            External_Id__c = '2',
             RecordTypeId = accountOrgTypeId
         );
         accountList.add(agency2);
         Account agency3 = new Account(
             Name='Agency 3',
+            External_Id__c = '3',
             RecordTypeId = accountOrgTypeId
         );
         accountList.add(agency3);

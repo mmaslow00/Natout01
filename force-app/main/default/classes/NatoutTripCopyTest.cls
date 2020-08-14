@@ -23,6 +23,12 @@ public with sharing class NatoutTripCopyTest {
 
         insert budgetItem;
 
+        National_Outings_Trip_Staff__c staff = new National_Outings_Trip_Staff__c(
+            National_Outings_Trip__c = trip.Id,
+            Role__c = 'Assistant Leader'
+        );
+        insert staff;
+
         NatoutTripCopy tripCopy = new NatoutTripCopy();
         String copyId = NatoutTripCopy.copy(trip.Id);
         List<National_Outings_Trip_Budget_Item__c> budgetList = [SELECT Id from National_Outings_Trip_Budget_Item__c where National_Outings_Trip__c = :copyId];
