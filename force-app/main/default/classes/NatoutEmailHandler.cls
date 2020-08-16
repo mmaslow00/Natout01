@@ -1,21 +1,132 @@
 public with sharing class NatoutEmailHandler {
     public static final String testEmailAddr = 'mmaslow00@gmail.com';
+    public static final String staffEmailAddr = 'mmaslow00+staff@gmail.com';
 
     public static List<TriggeredSendEmail__c> statusChanged(List<National_Outings_Trip__c> tripList, Map<Id, National_Outings_Trip__c> oldMap) {
-        Map<Id, National_Outings_Trip__c> tripMap = new Map<Id, National_Outings_Trip__c>();
-        Set<String> subcomms = new Set<String>();
-        Map<String, List<Recipient>> officerMap = new Map<String, List<Recipient>>();
-        Map<Id, List<Recipient>> collaboratorMap = new Map<Id, List<Recipient>>();
-        Map<Id, Recipient> leaderMap = new Map<Id, Recipient>();
+        Map<Id, List<Recipient>> creatorMap = getCreators(tripList);
+        Map<Id, List<Recipient>> approverMap = getApprovers(tripList);
+
         List<TriggeredSendEmail__c> tseList = new List<TriggeredSendEmail__c>();
 
         for(National_Outings_Trip__c trip : tripList) {
-            National_Outings_Trip__c oldTrip = oldMap.get(trip.Id);
-            if(trip.Status__c != oldTrip.Status__c) {
-                tripMap.put(trip.Id, trip);
-                subcomms.add(trip.Subcommittee__c);
+            National_Outings_Trip__c prevTrip = oldMap.get(trip.Id);
+            if((prevTrip.Status__c == 'Started' || prevTrip.Status__c == 'Returned')) {
+                if(trip.Status__c == 'Submitted') {
+                    List<Recipient> recipientList = approverMap.get(trip.Id);
+                    String msgText = startedToSubmittedText(trip.Name);
+                    String msgPrefix = 'In production, this email would be sent to: ';
+                    String subject = 'Trip submission for ' + trip.Name + ' ready for review';
+                    for(Recipient rcp : recipientList) {
+                        msgPrefix += rcp.emailAddr + ' ';
+                    }
+                    String textToSend = msgPrefix + ' : ' + msgText;
+                    for(Recipient rcp : recipientList) {
+                        //rcp.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, textToSend));
+                        tseList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, textToSend));
+                    }
+                }
+            }
+            else if(prevTrip.Status__c == 'Submitted' && trip.Status__c == 'Approved by Chair') {
+                List<Recipient> recipientList = creatorMap.get(trip.Id);
+                String msgText = submittedToApprovedByChairText(trip.Name, trip.Subcommittee__c);
+                String subject = 'Trip submission for ' + trip.Name + ' approved by chair and/or collaborator';
+                String msgPrefix = 'In production, this email would be sent to: ';
+                for(Recipient rcp : recipientList) {
+                    msgPrefix += rcp.emailAddr + ' ';
+                }
+                String textToSend = msgPrefix + ' : ' + msgText;
+                for(Recipient rcp : recipientList) {
+                    //rcp.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, textToSend));
+                    tseList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, textToSend));
+                }
+            }
+            else if(prevTrip.Status__c == 'Approved by Chair' && trip.Status__c == 'Approved by Staff') {
+                List<Recipient> recipientList = creatorMap.get(trip.Id);
+                String msgText = approvedByChairToApprovedByStaffText(trip.Name);
+                String subject = 'Trip submission for ' + trip.Name + ' approved by staff';
+                String msgPrefix = 'In production, this email would be sent to: ';
+                for(Recipient rcp : recipientList) {
+                    msgPrefix += rcp.emailAddr + ' ';
+                }
+                String textToSend = msgPrefix + ' : ' + msgText;
+                for(Recipient rcp : recipientList) {
+                    //rcp.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, textToSend));
+                    tseList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, textToSend));
+                }
+            }
+            else if(prevTrip.Status__c == 'Submitted' && trip.Status__c == 'Returned') {
+                List<Recipient> recipientList = creatorMap.get(trip.Id);
+                String msgText = submittedToReturnedText(trip.Name, trip.Subcommittee__c);
+                String subject = 'Trip submission for ' + trip.Name + ' returned';
+                String msgPrefix = 'In production, this email would be sent to: ';
+                for(Recipient rcp : recipientList) {
+                    msgPrefix += rcp.emailAddr + ' ';
+                }
+                String textToSend = msgPrefix + ' : ' + msgText;
+                for(Recipient rcp : recipientList) {
+                    //rcp.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, textToSend));
+                    tseList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, textToSend));
+                }
             }
         }
+        return tseList;
+    }
+    private static Map<Id, List<Recipient>> getCreators(List<National_Outings_Trip__c> tripList) {
+        Set<Id> tripIds = new Set<Id>();
+        for(National_Outings_Trip__c trip : tripList) {
+            tripIds.add(trip.Id);
+        }
+
+        Map<Id, List<Recipient>> creatorMap = new Map<Id, List<Recipient>>();
+
+        //Trip Leaders
+        List<National_Outings_Trip_Staff__c> tripLeaderList = [
+            SELECT National_Outings_Trip__c, Contact__c, Contact__r.Email
+            FROM National_Outings_Trip_Staff__c
+            WHERE 
+                Role__c = 'Leader'
+                AND National_Outings_Trip__c in :tripIds
+        ];
+        for(National_Outings_Trip_Staff__c staff : tripLeaderList) {
+            List<Recipient> recipientList = creatorMap.get(staff.National_Outings_Trip__c);
+            if(recipientList == null) {
+                recipientList = new List<Recipient>();
+            }
+            recipientList.add(new Recipient(staff.Contact__c, staff.Contact__r.Email));
+            creatorMap.put(staff.National_Outings_Trip__c, recipientList);
+        }
+
+        //Collaborators added by Leaders
+        List<National_Outings_Trip_Collaborator__c> collabList = [
+            SELECT
+                National_Outings_Trip__c, 
+                Contact__c,
+                Contact__r.Email
+            FROM National_Outings_Trip_Collaborator__c
+            WHERE National_Outings_Trip__c in :tripIds AND Access__c = 'Edit'
+        ];
+        for(National_Outings_Trip_Collaborator__c collab : collabList) {
+            List<Recipient> recipientList = creatorMap.get(collab.National_Outings_Trip__c);
+            if(recipientList == null) {
+                recipientList = new List<Recipient>();
+            }
+            recipientList.add(new Recipient(collab.Contact__c, collab.Contact__r.Email));
+            creatorMap.put(collab.National_Outings_Trip__c, recipientList);
+        }
+        return creatorMap;
+    }
+    private static Map<Id, List<Recipient>> getApprovers(List<National_Outings_Trip__c> tripList) {
+        Set<String> subcomms = new Set<String>();
+        Set<Id> tripIds = new Set<Id>();
+
+        for(National_Outings_Trip__c trip : tripList) {
+            subcomms.add(trip.Subcommittee__c);
+            tripIds.add(trip.Id);
+        }
+
+        //Subcommittee Officers with approval authority
+
+        //First, create officerMap to find subcommittee officers by subcommittee name
         List<Leadership__c> subcommOfficerList = [
             SELECT
                 Club_Entity__r.Name,
@@ -27,16 +138,29 @@ public with sharing class NatoutEmailHandler {
                 AND Position_Status__c = 'Active' AND Leader_Position__r.Name IN ('Chair','Sub-comm Co-Chair','Vice Chair')
                 AND Club_Entity__r.Name in :subcomms
         ];
-        for(Leadership__c ldr : subcommOfficerList) {
-            List<Recipient> recipientList = officerMap.get(ldr.Club_Entity__r.Name);
+        Map<String, List<Recipient>> officerMap = new Map<String, List<Recipient>>();
+        for(Leadership__c officer : subcommOfficerList) {
+            List<Recipient> recipientList = officerMap.get(officer.Club_Entity__r.Name);
             if(recipientList == null) {
                 recipientList = new List<Recipient>();
             }
-            recipientList.add(new Recipient(ldr.Contact__c, ldr.Contact__r.Email));
-            officerMap.put(ldr.Club_Entity__r.Name, recipientList);
+            recipientList.add(new Recipient(officer.Contact__c, officer.Contact__r.Email));
+            officerMap.put(officer.Club_Entity__r.Name, recipientList);
         }
 
-        Set<Id> tripIds = tripMap.keySet();
+        //Now create approverMap. 
+        
+        //First add list of subcommittee officers by Trip Id
+        Map<Id, List<Recipient>> approverMap = new Map<Id, List<Recipient>>();
+
+        for(National_Outings_Trip__c trip : tripList) {
+            List<Recipient> recipientList = officerMap.get(trip.Subcommittee__c);
+            if(recipientList != null) {
+                approverMap.put(trip.Id, recipientList);
+            }
+        }
+
+        //Next. add Trip Collaborators with approval authority (appointed by subcommittee officers with approval authority)
         List<National_Outings_Trip_Collaborator__c> collabList = [
             SELECT
                 National_Outings_Trip__c, 
@@ -44,85 +168,19 @@ public with sharing class NatoutEmailHandler {
                 Contact__c,
                 Contact__r.Email
             FROM National_Outings_Trip_Collaborator__c
-            WHERE National_Outings_Trip__c in :tripIds
+            WHERE National_Outings_Trip__c in :tripIds AND Access__c = 'Approve'
         ];
+
         for(National_Outings_Trip_Collaborator__c collab : collabList) {
-            if(collab.Access__c == 'Approve') {
-                List<Recipient> recipientList = collaboratorMap.get(collab.National_Outings_Trip__c);
-                if(recipientList == null) {
-                    recipientList = new List<Recipient>();
-                }
-                recipientList.add(new Recipient(collab.Contact__c, collab.Contact__r.Email));
-                collaboratorMap.put(collab.National_Outings_Trip__c, recipientList);
+            List<Recipient> recipientList = approverMap.get(collab.National_Outings_Trip__c);
+            if(recipientList == null) {
+                recipientList = new List<Recipient>();
             }
+            recipientList.add(new Recipient(collab.Contact__c, collab.Contact__r.Email));
+            approverMap.put(collab.National_Outings_Trip__c, recipientList);
         }
-
-        List<National_Outings_Trip_Staff__c> tripLeaderList = [
-            SELECT National_Outings_Trip__c, Contact__c, Contact__r.Email
-            FROM National_Outings_Trip_Staff__c
-            WHERE 
-                Role__c = 'Leader'
-                AND National_Outings_Trip__c in :tripIds
-        ];
-        for(National_Outings_Trip_Staff__c staff : tripLeaderList) {
-            leaderMap.put(staff.National_Outings_Trip__c, new Recipient(staff.Contact__c, staff.Contact__r.Email));
-        }
-
-        for(National_Outings_Trip__c trip : tripList) {
-            National_Outings_Trip__c prevTrip = oldMap.get(trip.Id);
-            if((prevTrip.Status__c == 'Started' || prevTrip.Status__c == 'Returned')) {
-                if(trip.Status__c == 'Submitted') {
-                    List<Recipient> recipientList = new List<Recipient>();
-                    recipientList.addAll(officerMap.get(trip.Subcommittee__c));
-                    List<Recipient> collaborators = collaboratorMap.get(trip.Id);
-                    if(collaborators != null) {
-                        recipientList.addAll(collaborators);
-                    }
-
-                    String msgText = startedToSubmittedText(trip.Name);
-                    String msgPrefix = 'In production, this email would be sent to: \n';
-                    String subject = 'Trip submission for ' + trip.Name + ' ready for review';
-                    for(Recipient rcp : recipientList) {
-                        msgPrefix += rcp.emailAddr + '\n';
-                    }
-                    String textToSend = msgPrefix + '\n\n' + msgText;
-                    for(Recipient rcp : recipientList) {
-                        //rcp.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, textToSend));
-                        tseList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, textToSend));
-                    }
-                }
-            }
-            else if(prevTrip.Status__c == 'Submitted' && trip.Status__c == 'Approved by Chair') {
-                Recipient recip = leaderMap.get(trip.Id);
-                String msgText = submittedToApprovedByChairText(trip.Name, trip.Subcommittee__c);
-                String subject = 'Trip submission for ' + trip.Name + ' approved by chair and/or collaborator';
-                String msgPrefix = 'In production, this email would be sent to: \n';
-                msgPrefix += recip.emailAddr + '\n';
-                String textToSend = msgPrefix + '\n\n' + msgText;
-                tseList.add(createTriggeredSend(recip.contactId, testEmailAddr, subject, textToSend));
-            }
-            else if(prevTrip.Status__c == 'Approved by Chair' && trip.Status__c == 'Approved by Staff') {
-                Recipient recip = leaderMap.get(trip.Id);                
-                String msgText = approvedByChairToApprovedByStaffText(trip.Name);
-                String subject = 'Trip submission for ' + trip.Name + ' approved by staff';
-                String msgPrefix = 'In production, this email would be sent to: \n';
-                msgPrefix += recip.emailAddr + '\n';
-                String textToSend = msgPrefix + '\n\n' + msgText;
-                tseList.add(createTriggeredSend(recip.contactId, testEmailAddr, subject, textToSend));
-            }
-            else if(prevTrip.Status__c == 'Submitted' && trip.Status__c == 'Returned') {
-                Recipient recip = leaderMap.get(trip.Id);                
-                String msgText = submittedToReturnedText(trip.Name, trip.Subcommittee__c);
-                String subject = 'Trip submission for ' + trip.Name + ' returned';
-                String msgPrefix = 'In production, this email would be sent to: \n';
-                msgPrefix += recip.emailAddr + '\n';
-                String textToSend = msgPrefix + '\n\n' + msgText;
-                tseList.add(createTriggeredSend(recip.contactId, testEmailAddr, subject, textToSend));
-            }
-        }
-        return tseList;
+        return approverMap;
     }
-
     private static String startedToSubmittedText(String tripName) {
         String msg = 
             'Trip submission for ' +
@@ -137,7 +195,7 @@ public with sharing class NatoutEmailHandler {
     }
     private static String submittedToApprovedByChairText(String tripName, String subCommName) {
         String msg =
-            'Trip submission ' +
+            'Trip submission for ' +
             tripName + ' ' +
             'has been approved the ' +
             subCommName + ' ' +
@@ -149,7 +207,7 @@ public with sharing class NatoutEmailHandler {
     }
     private static String approvedByChairToApprovedByStaffText(String tripName) {
         String msg =
-            'Trip submission ' +
+            'Trip submission for ' +
             tripName + ' ' +
             'has been approved by staff. ' +
             'If there are any changes to your trip now that it is in the system, ' +
@@ -169,13 +227,50 @@ public with sharing class NatoutEmailHandler {
         return msg;
     }
 
+    public static List<TriggeredSendEmail__c> notifyOfComments(List<National_Outings_Trip_Comments__c> commentsList) {
+        Set<Id> tripIds = new Set<Id>();
+        for(National_Outings_Trip_Comments__c comments : commentsList) {
+            tripIds.add(comments.National_Outings_Trip__c);
+        }
+        List<National_Outings_Trip__c> tripList = [
+            SELECT Id, Name, Subcommittee__c FROM National_Outings_Trip__c WHERE Id in :tripIds
+        ];
+        Map<Id, National_Outings_Trip__c> tripMap = new Map<Id, National_Outings_Trip__c>(tripList);
+        Map<Id, List<Recipient>> creatorMap = getCreators(tripList);
+        Map<Id, List<Recipient>> approverMap = getApprovers(tripList);
+
+        List<TriggeredSendEmail__c> sendList = new List<TriggeredSendEmail__c>();
+        for(National_Outings_Trip_Comments__c comments : commentsList) {
+            National_Outings_Trip__c trip = tripMap.get(comments.National_Outings_Trip__c);
+            String subject = 'New Comment for Trip ' + trip.Name;
+            if(comments.Notify_Creators__c) {
+                List<Recipient> recipientList = creatorMap.get(comments.National_Outings_Trip__c);
+                for(Recipient rcp : recipientList) {
+                    //rcp.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, comments.Comments__c));
+                    sendList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, comments.Comments__c));
+                }
+            }
+            if(comments.Notify_Approvers__c) {
+                List<Recipient> recipientList = approverMap.get(comments.National_Outings_Trip__c);
+                for(Recipient rcp : recipientList) {
+                    //rcp.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, comments.Comments__c));
+                    sendList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, comments.Comments__c));
+                }
+            }
+            if(comments.Notify_Staff__c) {
+                sendList.add(createTriggeredSend(null, staffEmailAddr, subject, comments.Comments__c));
+            }
+        }
+        return sendList;
+    }
+
     private static TriggeredSendEmail__c createTriggeredSend(Id contactId, String emailAddr, String subject, String msg) {
         JSONGenerator gen = JSON.createGenerator(false);
         gen.writeStartObject();
         gen.writeFieldName('To');
         gen.writeStartObject();
         gen.writeStringField('Address', emailAddr);
-        gen.writeStringField('SubscriberKey', contactId);
+        gen.writeStringField('SubscriberKey', contactId == null ? emailAddr : contactId);
         gen.writeFieldName('ContactAttributes');
         gen.writeStartObject();
         gen.writeFieldName('SubscriberAttributes');
