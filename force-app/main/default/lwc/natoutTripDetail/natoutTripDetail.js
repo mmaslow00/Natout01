@@ -151,8 +151,8 @@ export default class NatoutTripDetail extends LightningElement {
             this.showSnackbar('failure', 'Trip Update Failed', 'Please enter all required fields');
         }
         if((this.loadedStatus === 'Started' || this.loadedStatus === 'Returned') && this.tripRecord.Status__c === 'Submitted') {
-            this.statusChangeErrors = this.statusStartedToSubmitted();
-            if(this.statusChangeErrors.length > 0) {
+            this.errorList = this.statusStartedToSubmitted();
+            if(this.statusChangeErrors) {
                 saveErrors = true;
                 this.showSnackbar('failure', 'Trip Update Failed', 'There are Status Change errors');
                 this.showStatusDialog = true;

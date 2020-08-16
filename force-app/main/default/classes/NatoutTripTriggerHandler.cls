@@ -33,6 +33,20 @@ public with sharing class NatoutTripTriggerHandler {
             insert staffList;
         }
     }
+    public static void afterUpdate(List<National_Outings_Trip__c> tripList, Map<Id,National_Outings_Trip__c> oldMap ) {
+        List<National_Outings_Trip__c> changedTrips = new List<National_Outings_Trip__c>();
+        for(National_Outings_Trip__c trip : tripList) {
+            National_Outings_Trip__c prevTrip = oldMap.get(trip.Id);
+            if(prevTrip.Status__c != trip.Status__c) {
+                changedTrips.add(trip);
+            }
+        }
+        if( ! changedTrips.isEmpty() ) {
+            List<TriggeredSendEmail__c> emailList =
+                NatoutEmailHandler.statusChanged(changedTrips, oldMap);
+            System.debug('emailList: ' + emailList);
+        }
+    }
     private static Id getUserContactId() {
         Id userId = UserInfo.getUserId();
         Id contactId=null;
