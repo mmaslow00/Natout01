@@ -44,6 +44,7 @@ public with sharing class NatoutTripTriggerHandler {
         if( ! changedTrips.isEmpty() ) {
             List<TriggeredSendEmail__c> emailList =
                 NatoutEmailHandler.statusChanged(changedTrips, oldMap);
+            //insert emailList;
             System.debug('emailList: ' + emailList);
         }
     }
