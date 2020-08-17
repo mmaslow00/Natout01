@@ -9,7 +9,14 @@ export default class NatoutTripComments extends LightningElement {
     @api canEdit = false;
     @track commentsList = [];
     @track modalOpen = false;
-    
+
+    checkboxOptions = [
+        {label: 'Leader and any collborators they appoint', value: 'Leaders'},
+        {label: 'Subcommittee officers and any collaborators they appoint', value: 'Officers'},
+        {label: 'National Outings staff', value: 'Staff'}
+    ];
+    checkboxValues = [];
+  
     @wire(getCommentsList, {tripId: '$recordId'})
     wiredCommentsList(result) {
         if (result.data) {
@@ -30,6 +37,9 @@ export default class NatoutTripComments extends LightningElement {
     handleChange(e) {
         this.tripComment = e.target.value;
     }
+    handleCheckboxChange(e) {
+        this.checkboxValues = e.detail.value;
+    }
     get isModalOpen() {
         return this.modalOpen;
     }
@@ -49,11 +59,15 @@ export default class NatoutTripComments extends LightningElement {
                 apiName: 'National_Outings_Trip_Comments__c',
                 fields: {
                     National_Outings_Trip__c: this.recordId,
-                    Comments__c: this.tripComment
+                    Comments__c: this.tripComment,
+                    Notify_Approvers__c: (this.checkboxValues.indexOf('Officers') >= 0),
+                    Notify_Creators__c: (this.checkboxValues.indexOf('Leaders') >= 0),
+                    Notify_Staff__c: (this.checkboxValues.indexOf('Staff') >= 0)
                 }
             }).then(result => {
                 this.showSnackbar('success', 'Comment Saved');
                 this.modalOpen = false;
+                this.checkboxValues = [];
                 return refreshApex(this.wiredComments);
             })
             .catch(error => {

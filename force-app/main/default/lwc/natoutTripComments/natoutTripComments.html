@@ -37,9 +37,15 @@
                         <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Comment</h2>
                     </header>
                     <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <lightning-checkbox-group name="Checkbox Group"
+                            label="Send comments to:"
+                            options={checkboxOptions}
+                            value={checkboxValues}
+                            onchange={handleCheckboxChange}>
+                        </lightning-checkbox-group>
 
                         <lightning-textarea
-                            label="New Comment" 
+                            label="Comment" 
                             placeholder="Enter a New Comment"
                             required
                             onchange={handleChange}

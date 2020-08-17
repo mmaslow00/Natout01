@@ -181,10 +181,10 @@ public with sharing class NatoutEmailHandler {
             'Trip submission for ' +
             tripName + ' ' +
             'has been submitted and is now ready for your review. ' +
-            'If you’re satisfied with it, select “Approved by Chair,” and it will be sent to staff for processing. ' +
+            'If you’re satisfied with it, select "Approved by Chair", and it will be sent to staff for processing. ' +
             'You may also make adjustments or add comments at the end of the form before approving. ' + 
             'If you’re not satisfied with it, add any questions or requested changes to the comments section ' +
-            'and select “Returned” to return it back to the trip leader for further edits.'
+            'and select "Returned" to return it back to the trip leader for further edits.'
             ;
         return msg;
     }
