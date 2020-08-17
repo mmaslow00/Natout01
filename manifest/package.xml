@@ -28,6 +28,8 @@
     <types>
         <members>NatoutAccountSearchController</members>
         <members>NatoutAccountSearchControllerTest</members>
+        <members>NatoutEmailHandler</members>
+        <members>NatoutEmailHandlerTest</members>
         <members>NatoutLeaderSearchController</members>
         <members>NatoutLeaderSearchControllerTest</members>
         <members>NatoutTripAgenciesController</members>
@@ -86,6 +88,7 @@
         <name>LightningComponentBundle</name>  
     </types>
     <types>
+        <members>NatoutTripCommentsTrigger</members>
         <members>NatoutTripTrigger</members>
         <name>ApexTrigger</name>
     </types>       
