@@ -10,12 +10,15 @@ export default class NatoutTripComments extends LightningElement {
     @track commentsList = [];
     @track modalOpen = false;
 
-    checkboxOptions = [
-        {label: 'Leader and any collborators they appoint', value: 'Leaders'},
-        {label: 'Subcommittee officers and any collaborators they appoint', value: 'Officers'},
-        {label: 'National Outings staff', value: 'Staff'}
-    ];
-    checkboxValues = [];
+    constructor() {
+        super();
+        this.checkboxOptions = [
+            {label: 'Leader and any collborators they appoint', value: 'Leaders'},
+            {label: 'Subcommittee officers and any collaborators they appoint', value: 'Officers'},
+            {label: 'National Outings staff', value: 'Staff'}
+        ];
+        this.checkboxValues = [];
+    }
   
     @wire(getCommentsList, {tripId: '$recordId'})
     wiredCommentsList(result) {
