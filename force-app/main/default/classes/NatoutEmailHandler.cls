@@ -1,6 +1,6 @@
 public with sharing class NatoutEmailHandler {
-    public static final String testEmailAddr = 'mmaslow00@gmail.com';
-    public static final String staffEmailAddr = 'mmaslow00+staff@gmail.com';
+    public static final String testEmailAddr = 'tony.rango@sierraclub.org';
+    public static final String staffEmailAddr = 'tony.rango@sierraclub.org';
 
     public static List<TriggeredSendEmail__c> statusChanged(List<National_Outings_Trip__c> tripList, Map<Id, National_Outings_Trip__c> oldMap) {
         Map<Id, List<Recipient>> creatorMap = getCreators(tripList);
@@ -224,8 +224,10 @@ public with sharing class NatoutEmailHandler {
 
     public static List<TriggeredSendEmail__c> notifyOfComments(List<National_Outings_Trip_Comments__c> commentsList) {
         Set<Id> tripIds = new Set<Id>();
+        Set<Id> commentsIds = new Set<Id>();
         for(National_Outings_Trip_Comments__c comments : commentsList) {
             tripIds.add(comments.National_Outings_Trip__c);
+            commentsIds.add(comments.Id);
         }
         List<National_Outings_Trip__c> tripList = [
             SELECT Id, Name, Subcommittee__c FROM National_Outings_Trip__c WHERE Id in :tripIds
@@ -235,9 +237,20 @@ public with sharing class NatoutEmailHandler {
         Map<Id, List<Recipient>> approverMap = getApprovers(tripList);
 
         List<TriggeredSendEmail__c> sendList = new List<TriggeredSendEmail__c>();
-        for(National_Outings_Trip_Comments__c comments : commentsList) {
+        List<National_Outings_Trip_Comments__c> commentsWithCreatorList = [
+            SELECT 
+                National_Outings_Trip__c, 
+                Comments__c,
+                Notify_Creators__c,
+                Notify_Approvers__c,
+                Notify_Staff__c,
+                CreatedBy.Name
+            FROM National_Outings_Trip_Comments__c
+            WHERE Id in :commentsIds
+        ];
+        for(National_Outings_Trip_Comments__c comments : commentsWithCreatorList) {
             National_Outings_Trip__c trip = tripMap.get(comments.National_Outings_Trip__c);
-            String subject = 'New Comment for Trip ' + trip.Name;
+            String subject = 'New Comment for Trip ' + trip.Name + ' from ' + comments.CreatedBy.Name;
             if(comments.Notify_Creators__c) {
                 List<Recipient> recipientList = creatorMap.get(comments.National_Outings_Trip__c);
                 for(Recipient rcp : recipientList) {
@@ -271,7 +284,7 @@ public with sharing class NatoutEmailHandler {
         gen.writeFieldName('SubscriberAttributes');
         gen.writeStartObject();
         gen.writeStringField('Subject', subject);
-        gen.writeStringField('MessageBody', msg);
+        gen.writeStringField('TEXT__Body', msg);
         gen.writeEndObject();
         gen.writeEndObject();
         gen.writeEndObject();
