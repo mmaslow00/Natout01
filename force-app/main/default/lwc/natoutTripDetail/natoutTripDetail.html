@@ -171,15 +171,17 @@
 
                     <lightning-accordion-section name="Copy" label="Trip Copy and Marketing">
                         <div style="margin-bottom: 10px;">
-                            Here you will submit the short trip description that appears in our annual trip catalog. Our goal is to recycle content, when possible, 
-                            to reduce the burden on leaders and staff and ensure consistent and high-quality content that sells. 
-                            Please follow these instructions closely so that your submission is accurate and complete. 
-                            Once the trip guide editor receives your submission, they will review and follow up, if necessary, 
-                            with questions or to review significant edits. 
-                            &nbsp;<a href="https://community.sierraclub.org/page/trip-copy-0" target="_blank">
-                                Check out our trip copy guide
-                            </a>&nbsp;
-                            for handy writing tips, examples, and the trip copy archive.
+                            <p class="infop">
+                                Here you will submit the short trip description that appears in our annual trip catalog. Our goal is to recycle content, when possible, 
+                                to reduce the burden on leaders and staff and ensure consistent and high-quality content that sells. 
+                                Please follow these instructions closely so that your submission is accurate and complete. 
+                                Once the trip guide editor receives your submission, they will review and follow up, if necessary, 
+                                with questions or to review significant edits. 
+                                &nbsp;<a href="https://community.sierraclub.org/page/trip-copy-0" target="_blank">
+                                    Check out our trip copy guide
+                                </a>&nbsp;
+                                for handy writing tips, examples, and the trip copy archive.
+                            </p>
                         </div>
                         <label class="slds-form-element__label" for="firstTimeRun">
                             First Time Run
@@ -253,9 +255,11 @@
                             </label>
                         </div>
                         <div style="clear: both">
-                            For more information, see the <a href="https://community.sierraclub.org/section/outings/national-outings/conservation" target="_blank">
-                                Conservation section on Campfire.
-                            </a>
+                            <p class="infop">
+                                For more information, see the <a href="https://community.sierraclub.org/section/outings/national-outings/conservation" target="_blank">
+                                    Conservation section on Campfire.
+                                </a>
+                            </p>
                         </div>
                         <div style="clear:both">
                             <lightning-input-field
@@ -333,11 +337,13 @@
                             </lightning-input-field>
                         </template>
                         <template if:false={tripIsInternational}>
-                            <div style="margin-top:4px; margin-bottom:4px; font-size:small; clear:both">
-                                Select an item from the Available table on the left and use the right arrow to add it to the Chosen table on the right. To remove an item from the Chosen table, select it and use the left arrow.
+                            <div style="margin-top:4px; margin-bottom:4px; clear:both">
+                                <p class="infop">
+                                    Select an item from the Available table on the left and use the right arrow to add it to the Chosen table on the right. To remove an item from the Chosen table, select it and use the left arrow.
+                                </p>
                             </div>
                             <lightning-dual-listbox
-                                label="States: please select up to 3"
+                                label="States: Please select up to 3"
                                 source-label="Available"
                                 selected-label="Chosen"
                                 options={stateListOptions}
@@ -353,12 +359,24 @@
                             >
                             </lightning-input-field>
 
+                            <!--
                             <div style="margin-top:10px; margin-bottom:4px; font-size:small; clear:both">
-                                Select an item from the Available table on the left and use the right arrow to add it to the Chosen table on the right. To remove an item from the Chosen table, select it and use the left arrow.
                             </div>
+                            -->
 
-                            <label class="slds-form-element__label" style="font-weight:bold;" for="area">
-                                Areas: Please select up to 3
+                            <label class="slds-form-element__label" for="area">
+                                <p class="infop">
+                                    Select an item from the Available table on the left and use the right arrow to add it to the Chosen table on the right. To remove an item from the Chosen table, select it and use the left arrow.
+                                </p>
+                                <p class="infop">
+                                    If your area is not listed, please use the Comments section at the end of the submission form to request that it be added.
+                                </p>
+                                <p class="infop">
+                                    Note: when adding your comment, you must check the staff notification box; otherwise staff will not receive this request. This update will need to be made before the trip can be submitted.
+                                </p>
+                                <p style="font-weight: bold; margin-top: 5px;">
+                                    Areas: Please select up to 3
+                                </p>
                             </label>
                             <lightning-input-field
                                 field-name="Area__c"
@@ -383,8 +401,10 @@
                             </lightning-input-field>
                         </div>
                         <template if:true={tripIsInternational}>
-                            <div style="margin-top:4px; margin-bottom:4px; font-size:small; clear:both">
-                                Select an item from the Available table on the left and use the right arrow to add it to the Chosen table on the right. To remove an item from the Chosen table, select it and use the left arrow.
+                            <div style="margin-top:4px; margin-bottom:4px; clear:both">
+                                <p class="infop">
+                                    Select an item from the Available table on the left and use the right arrow to add it to the Chosen table on the right. To remove an item from the Chosen table, select it and use the left arrow.
+                                </p>
                             </div>
                             <lightning-dual-listbox
                                 label="Countries - You May Select Up to 3"
@@ -483,14 +503,20 @@
                             active-section-name={activeBudgetSections}
                             onsectiontoggle={handleBudgetSectionToggle}
                         >
-                        <template if:true={tripIsInternational}>
-                            <p>
-                            Enter your budget items in US dollars and notate the currency exchange rate used.
+                            <template if:true={tripIsInternational}>
+                                <p class="infop">
+                                Enter your budget items in US dollars and notate the currency exchange rate used.
+                                </p>
+                            </template>
+                            <p class="infop">
+                                See this table [URL] for the standard values used in various budget categories below.
                             </p>
-                        </template>
-                        <p>
-                            See this table [URL] for the standard values used in various budget categories below.
-                        </p>
+                            <p class="infop">
+                                Before adding the costs for your trip, you will need to determine which are fixed per trip and which are variable/per-person. Once this has been done, enter the following sections and select the New button to open the Update Budget Item window. Complete each field in the window and select Save to add the cost and return to the form or Save and New to add the cost and enter a new one. Saved costs will appear in the table when you return to the form.
+                            </p>
+                            <p class="infop">
+                                Note: Your trip already has subcommittee standard values, which will be included automatically. Enter any additional costs you would like to include. Estimate satellite phone costs at $15/day.
+                            </p>
                             <lightning-accordion-section name="budget-vol-travel" label="Volunteer Travel">                                
                                 <div class="slds-p-top_small">
                                     <c-natout-trip-budget-vol-travel
@@ -647,7 +673,9 @@
                             </lightning-accordion-section>
                                 <lightning-accordion-section name="budget-report" label="Budget Report">
                                     <div>
-                                        The trip price is an estimate based upon the values you entered and a standard overhead allocation. Your final price will be determined once processed by the office.
+                                        <p class="infop">
+                                            The trip price is an estimate based upon the values you entered and a standard overhead allocation. Your final price will be determined once processed by the office. See standard overhead allocation amounts here.
+                                        </p>
                                     </div>
                                     <iframe src={budgetReportUrl} width="100%" height="800px">
                                     </iframe>
@@ -666,9 +694,11 @@
                         </div>
                         <lightning-accordion-section name="Permits" label="Permits">
                             <div>
-                                For more information on Permits, see the 
-                                &nbsp;<a href="https://community.sierraclub.org/section/outings/national-outings/permits" target="_blank">Permits</a>&nbsp;
-                                section on Campfire.
+                                <p class="infop">
+                                    For more information on Permits, see the 
+                                    &nbsp;<a href="https://community.sierraclub.org/section/outings/national-outings/permits" target="_blank">Permits</a>&nbsp;
+                                    section on Campfire.
+                                </p>
                             </div>
                             <lightning-layout horizontal-align="center">
                                 <lightning-radio-group
@@ -714,7 +744,12 @@
                             >
                             </lightning-input-field>
                             <div class="slds-p-top_small">
-                                If your permit agency is not listed, leave a comment and check the staff notification box to have it added. This update will need to made before the trip can be submitted.
+                                <p class="infop">
+                                    If your permit agency is not listed, please use the Comments section at the end of the submission form to request that it be added.
+                                </p>
+                                <p class="infop">
+                                    Note: when adding your comment, you must check the staff notification box; otherwise staff will not receive this request. This update will need to be made before the trip can be submitted.
+                                </p>
                                 <c-natout-trip-agencies
                                     record-id={recordId}
                                     can-edit={userCanEdit}
@@ -744,7 +779,12 @@
                             data-field="Vendor_Comments__c"
                         >
                         </lightning-input-field>
-                        If your vendor is not listed, leave a comment and check the staff notification box to have it added. This update will need to made before the trip can be submitted.                        
+                        <p class="infop">
+                            If your vendor is not listed, please use the Comments section at the end of the submission form to request that it be added.
+                        </p>
+                        <p class="infop">
+                            Note: when adding your comment, you must check the staff notification box; otherwise staff will not receive this request. This update will need to be made before the trip can be submitted.
+                        </p>
                         <div class="slds-p-top_small">
                             <c-natout-trip-vendors
                                 record-id={recordId}
@@ -844,9 +884,11 @@
 
                     <lightning-accordion-section name="Collaborators" label="Collaborators">
                         <div>
-                            Leaders now have the option to add a collaborator to their trip submissions. 
-                            This can be any active National Outings committee member, e.g., a co-leader, homeschool mentor, or other leader, 
-                            who you want to have permission to edit/assist with your trip submission. All other leaders will have read-only access.
+                            <p class="infop">
+                                Leaders now have the option to add a collaborator to their trip submissions. 
+                                This can be any active National Outings committee member, e.g., a co-leader, homeschool mentor, or other leader, 
+                                who you want to have permission to edit/assist with your trip submission. All other leaders will have read-only access.
+                            </p>
                         </div>
                         <c-natout-trip-collaborators
                             record-id={recordId}
@@ -857,6 +899,11 @@
                     </lightning-accordion-section>
 
                     <lightning-accordion-section name="Comments" label="Comments">
+                        <p class="infop" style="margin-bottom: 10px;">
+                            Use this section to leave comments for your subcommittee, collaborator(s), or staff. 
+                            If you would like them to receive an email notification, select their role from the notifications list at the top of the New Comment window. 
+                            Otherwise, they will only see the comment when they log in and review your submission.                        
+                        </p>
                         <c-natout-trip-comments  
                             record-id={recordId}
                             can-edit={userCanEdit}

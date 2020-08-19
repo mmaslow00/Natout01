@@ -11,6 +11,11 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
+                <fullName>Backpack</fullName>
+                <default>false</default>
+                <label>Backpack</label>
+            </value>
+            <value>
                 <fullName>Base Camp</fullName>
                 <default>false</default>
                 <label>Base Camp</label>
@@ -21,19 +26,9 @@
                 <label>Bicycle</label>
             </value>
             <value>
-                <fullName>Backpack</fullName>
-                <default>false</default>
-                <label>Backpack</label>
-            </value>
-            <value>
                 <fullName>Canoe</fullName>
                 <default>false</default>
                 <label>Canoe</label>
-            </value>
-            <value>
-                <fullName>Supported Trekking</fullName>
-                <default>false</default>
-                <label>Supported Trekking</label>
             </value>
             <value>
                 <fullName>Hut-to-Hut Trekking</fullName>
@@ -56,11 +51,6 @@
                 <label>Raft</label>
             </value>
             <value>
-                <fullName>Small Boat</fullName>
-                <default>false</default>
-                <label>Small Boat</label>
-            </value>
-            <value>
                 <fullName>Scuba</fullName>
                 <default>false</default>
                 <label>Scuba</label>
@@ -71,9 +61,19 @@
                 <label>Service/Volunteer</label>
             </value>
             <value>
+                <fullName>Small Boat</fullName>
+                <default>false</default>
+                <label>Small Boat</label>
+            </value>
+            <value>
                 <fullName>Snow</fullName>
                 <default>false</default>
                 <label>Snow</label>
+            </value>
+            <value>
+                <fullName>Supported Trekking</fullName>
+                <default>false</default>
+                <label>Supported Trekking</label>
             </value>
         </valueSetDefinition>
     </valueSet>

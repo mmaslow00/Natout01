@@ -206,10 +206,17 @@ public with sharing class NatoutTripBudgetReportController {
             switch on budgetItem.Option__c {
                 when 'Staff' {
                     Decimal numStaff = budgetItem.Number_Staff__c == null ? getTrip().Planned_Staff__c : budgetItem.Number_Staff__c;
+                    if(numStaff == null) {
+                        numStaff = 0;
+                    }
                     row.staffAmount += (budgetItem.Amount__c * numStaff);
                 }
                 when 'Participants' {
-                    row.partAmount += (budgetItem.Amount__c * getTrip().Participants__c);
+                    Decimal numParts = getTrip().Participants__c;
+                    if(numParts == null) {
+                        numParts = 0;
+                    }
+                    row.partAmount += (budgetItem.Amount__c * numParts);
                 }
                 when 'Trip' {
                     row.tripAmount += budgetItem.Amount__c;
