@@ -11,6 +11,21 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
+                <fullName>20s/30s</fullName>
+                <default>false</default>
+                <label>20s/30s</label>
+            </value>
+            <value>
+                <fullName>30s/40s</fullName>
+                <default>false</default>
+                <label>30s/40s</label>
+            </value>
+            <value>
+                <fullName>40s/50s</fullName>
+                <default>false</default>
+                <label>40s/50s</label>
+            </value>
+            <value>
                 <fullName>Beginners</fullName>
                 <default>false</default>
                 <label>Beginners</label>
@@ -21,19 +36,14 @@
                 <label>Family</label>
             </value>
             <value>
-                <fullName>40s/50s</fullName>
-                <default>false</default>
-                <label>40s/50s</label>
-            </value>
-            <value>
                 <fullName>Grandparent/Grandkids</fullName>
                 <default>false</default>
                 <label>Grandparent/Grandkids</label>
             </value>
             <value>
-                <fullName>LGBT+</fullName>
+                <fullName>LGBTQ+</fullName>
                 <default>false</default>
-                <label>LGBT+</label>
+                <label>LGBTQ+</label>
             </value>
             <value>
                 <fullName>Multigenerational</fullName>
@@ -51,24 +61,14 @@
                 <label>Teen</label>
             </value>
             <value>
-                <fullName>30s/40s</fullName>
+                <fullName>Training</fullName>
                 <default>false</default>
-                <label>30s/40s</label>
+                <label>Training</label>
             </value>
             <value>
                 <fullName>Women</fullName>
                 <default>false</default>
                 <label>Women</label>
-            </value>
-            <value>
-                <fullName>20s/30s</fullName>
-                <default>false</default>
-                <label>20s/30s</label>
-            </value>
-            <value>
-                <fullName>Training</fullName>
-                <default>false</default>
-                <label>Training</label>
             </value>
         </valueSetDefinition>
     </valueSet>

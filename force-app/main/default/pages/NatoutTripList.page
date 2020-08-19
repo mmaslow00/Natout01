@@ -4,15 +4,12 @@
 
     <c:NatoutTripStyles />
     
-    <div class="instructions-wide">
+    <div class="instructions">
     <p>
       Welcome to the National Outings trip submission system. Here you will enter the essential information staff and your subcommittee will need to process your trip including general information, marketing copy, budget, itinerary, and more. 
     </p>
     <p>
-      Here you will find a list of trips. The default view, My Trips, shows trips you have started or submitted. Select All Trips to browse or search trips submitted by all leaders, which you may view in read-only mode. If you have been designated as a trip collaborator,  e.g., a co-leader, homeschool mentor, or other leader who has been given permission to assist with/editanother leader’s trip submission, you will access it here. 
-    </p>
-    <p>
-      Below is a list of trips you have started or submitted. If you are designated as a collaborator, e.g., a co-leader, homeschool mentor, or other leader who has been given permission to edit/assist with another leader’s trip submission, you will see it below.
+      Here you will find a list of trips. The default view, My Trips, shows trips you have started or submitted. Select All Trips to browse or search trips submitted by all leaders, which you may view in read-only mode. If you have been designated as a trip collaborator,  e.g., a co-leader, homeschool mentor, or other leader who has been given permission to assist with/edit another leader’s trip submission, you will access it here. 
     </p>
     <p>
       Click on any column to sort trips in ascending or descending order. To open an individual trip, select the blue link in the Name column.

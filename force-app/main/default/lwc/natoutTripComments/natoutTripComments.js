@@ -13,7 +13,7 @@ export default class NatoutTripComments extends LightningElement {
     constructor() {
         super();
         this.checkboxOptions = [
-            {label: 'Leader and any collaborators they appoint', value: 'Leaders'},
+            {label: 'Trip Leader and any collaborators they appoint', value: 'Leaders'},
             {label: 'Subcommittee officers and any collaborators they appoint', value: 'Officers'},
             {label: 'National Outings staff', value: 'Staff'}
         ];
