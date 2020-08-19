@@ -111,11 +111,12 @@
            max-width: 800px;
            text-align: left;
            margin-left: 5px;
+           font-size: 14px;
        }
        .instructions-wide {
            padding: 1%;
            text-align: left;
-           margin-left: 5px;
+           font-size: 14px;
       }
     </style>
 
