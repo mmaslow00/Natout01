@@ -164,5 +164,13 @@ public with sharing class NatoutTripBudgetReportControllerTest {
         }
         tripPrice = ctl.getTripPrice();
 
+        trip.Planned_Staff__c = null;
+        trip.Participants__c = null;
+        update trip;
+        
+        ctl = new NatoutTripBudgetReportController();
+        Test.setCurrentPage(pageRef);
+        ApexPages.currentPage().getParameters().put('trip', trip.Id);
+        Pagereference errorPage = ctl.checkForNulls();
     }
 }
