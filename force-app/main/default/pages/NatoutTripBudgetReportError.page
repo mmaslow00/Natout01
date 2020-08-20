@@ -1,4 +1,4 @@
-<apex:page>
+<apex:page sidebar="false" showHeader="false">
     <style>
         body {
             margin:10px;
