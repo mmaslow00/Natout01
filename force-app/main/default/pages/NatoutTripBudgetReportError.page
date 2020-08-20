@@ -1,0 +1,20 @@
+<apex:page>
+    <style>
+        body {
+            margin:10px;
+            font-size:13px;
+        }
+    </style>
+    <h1>ERROR</h1>
+    <p>
+        In order to generate a budget report, you need to specify the number of participants 
+        and the number of planned staff.
+    </p>
+    <p>
+        Please go to the General Information section, enter the number of 
+        participants and planned staff, and save the trip.
+    </p>
+    <p>
+        Then close and re-open this section to view the report.
+    </p>
+</apex:page>

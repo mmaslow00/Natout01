@@ -102,6 +102,7 @@
         <members>NatoutTripExport</members>
         <members>NatoutTripBudgetExport</members>
         <members>NatoutTripBudgetReport</members>
+        <members>NatoutTripBudgetReportError</members>
         <members>NatoutTripDetail</members>
         <members>NatoutTripList</members>
         <members>NatoutTrip</members>

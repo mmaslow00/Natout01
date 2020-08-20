@@ -12,6 +12,15 @@ public with sharing class NatoutTripBudgetReportController {
     private SimpleList standardValuesSummary;
     private SimpleList mealsSummary;
 
+    public Pagereference checkForNulls() {
+        National_Outings_Trip__c trip = getTrip();
+        if(trip.Participants__c == null || trip.Planned_Staff__c == null) {
+            Pagereference pageRef = new Pagereference('/apex/NatoutTripBudgetReportError');
+            pageRef.setRedirect(true);
+            return pageRef;
+        }
+        return null;
+    }
     private List<National_Outings_Trip_Budget_Item__c> getBudgetList() {
         if(budgetList == null) {
             String idParameter = ApexPages.currentPage().getParameters().get('trip');

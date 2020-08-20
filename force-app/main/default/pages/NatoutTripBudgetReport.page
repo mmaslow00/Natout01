@@ -1,4 +1,5 @@
 <apex:page sidebar="false" showHeader="false"
+    action="{!checkForNulls}"
     controller="NatoutTripBudgetReportController"
 >
 <style>
