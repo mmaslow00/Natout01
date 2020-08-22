@@ -1,4 +1,4 @@
-public with sharing class NatoutLeaderSearchController {
+public without sharing class NatoutLeaderSearchController {
     @AuraEnabled (cacheable=true)
     public static List<SearchResult> getLeaderList(String lastName, String firstName) {
         lastName = lastName + '%';

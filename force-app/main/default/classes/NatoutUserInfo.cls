@@ -1,4 +1,4 @@
-public with sharing class NatoutUserInfo {
+public without sharing class NatoutUserInfo {
     public static Id getContactId() {
         Id userId = System.UserInfo.getUserId();
         Id contactId;
