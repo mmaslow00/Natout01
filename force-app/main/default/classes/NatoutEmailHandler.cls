@@ -1,4 +1,4 @@
-public with sharing class NatoutEmailHandler {
+public without sharing class NatoutEmailHandler {
     public static final String testEmailAddr = 'tony.rango@sierraclub.org';
     public static final String staffEmailAddr = 'tony.rango@sierraclub.org';
 
