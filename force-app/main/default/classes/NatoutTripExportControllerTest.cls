@@ -24,7 +24,7 @@ public with sharing class NatoutTripExportControllerTest {
             Country__c = 'USA',
             Latitude__c = 90,
             Longitude__c = -120,
-            Area__c = 'Big Sur;Big Basin;Big Horn',
+            Area__c = 'Big Basin State Park;Big Bend National Park;Big Horn National Forest',
             Geographic_Area__c = 'Asia',
             Activity_Type__c = 'Backpack;Bicycle;Base Camp',
             Group_Type__c = 'Multigenerational',
