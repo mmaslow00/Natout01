@@ -15,22 +15,26 @@ const columns = [
         label: 'Day', 
         fieldName: 'Day_Number__c',
         type: 'number',
-        initialWidth: 60
+        initialWidth: 60,
+        hideDefaultActions: true, wrapText: true
     },
     { 
         label: 'Number of Staff', 
         fieldName: 'Number_Staff__c',
-        type: 'number'
+        type: 'number',
+        hideDefaultActions: true, wrapText: true
     },
     { 
         label: 'Participant Amount', 
         fieldName: 'Participant_Amount__c',
-        type: 'currency'
+        type: 'currency',
+        hideDefaultActions: true, wrapText: true
     },
     { 
         label: 'Staff Amount', 
         fieldName: 'Staff_Amount__c',
-        type: 'currency'
+        type: 'currency',
+        hideDefaultActions: true, wrapText: true
     }
 ];
 

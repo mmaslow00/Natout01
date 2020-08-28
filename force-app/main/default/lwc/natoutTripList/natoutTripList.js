@@ -51,11 +51,12 @@ export default class NatoutTripList extends LightningElement {
                     month: "2-digit",
                     day: "2-digit"
                 },
+                hideDefaultActions: true, wrapText: true,
                 fieldName: 'Start_Date__c' },
-            {label: 'Leader', fieldName: 'leaderName', sortable: true},                
-            {label: 'Subcommittee', fieldName: 'Subcommittee__c', sortable: true},
-            {label: 'Status', fieldName: 'Status__c', sortable: true},
-            {label: 'Type', fieldName: 'Trip_Type__c', sortable: true},
+            {label: 'Leader', fieldName: 'leaderName', sortable: true, hideDefaultActions: true, wrapText: true},                
+            {label: 'Subcommittee', fieldName: 'Subcommittee__c', sortable: true, hideDefaultActions: true, wrapText: true},
+            {label: 'Status', fieldName: 'Status__c', sortable: true, hideDefaultActions: true, wrapText: true},
+            {label: 'Type', fieldName: 'Trip_Type__c', sortable: true, hideDefaultActions: true, wrapText: true},
             { type: 'action', typeAttributes: { rowActions: this.getRowActions } },
         ];
     }

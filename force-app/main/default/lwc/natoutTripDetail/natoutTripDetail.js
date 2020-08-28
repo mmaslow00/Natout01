@@ -135,9 +135,6 @@ export default class NatoutTripDetail extends LightningElement {
         this.activeTripSections = sectionDiff;
         }
     }
-    isTestUser() {
-        return this.userId == '005i0000001EvN1AAK';
-    }
     saveForm() {
         // eslint-disable-next-line no-console
         //console.log('Trip for save => ', JSON.stringify(this.tripRecord));

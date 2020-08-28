@@ -11,9 +11,9 @@ const actions = [
     { label: 'Delete', name: 'delete' }
 ];
 const columns = [
-    { label: 'Category', fieldName: 'Item_Category__c' },
-    { label: 'Amount', fieldName: 'amountDisplay'},
-    { label: 'Role', fieldName: 'Staff_Role__c' }
+    { label: 'Category', fieldName: 'Item_Category__c', type: 'text', wrapText: true, hideDefaultActions: true  },
+    { label: 'Amount', fieldName: 'amountDisplay', hideDefaultActions: true},
+    { label: 'Role', fieldName: 'Staff_Role__c', hideDefaultActions: true, wrapText: true }
 ];
 
 const itemCategories = [

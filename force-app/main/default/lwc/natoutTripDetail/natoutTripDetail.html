@@ -39,7 +39,7 @@
                     <abbr title="required" class="slds-required">*</abbr>
                     Submission Name
                     <c-tooltip
-                        text="For internal reference, e.g., Mary's trip"
+                    text="This name will appear on the TSS dashboard where users browse trip submissions and allows leaders to name their trip without impacting the official trip title. Since trip titles are not year specific, this allows leaders to keep track of trips as they prefer to organize them, e.g., Mary's 2025 Colorado Rockies Service Trip."
                     >
                     </c-tooltip>
                 </label>
@@ -507,17 +507,15 @@
                         >
                             <template if:true={tripIsInternational}>
                                 <p class="infop">
-                                Enter your budget items in US dollars and notate the currency exchange rate used.
+                                    Enter your budget items in US dollars and notate the currency exchange rate used. 
+                                    <a href="https://docs.google.com/spreadsheets/d/1mmJH9S-Hqw5HnNCWvR1q1QefMQPh_rcMgLNORzCLSmE" target="_blank">See exchange rates</a> for the current budget cycle (updated every six months).
                                 </p>
                             </template>
                             <p class="infop">
-                                <a href="https://community.sierraclub.org/page/standard-values" target="_blank">See this table</a> for the standard values used in various budget categories below.
+                                Before adding the costs for your trip, you will need to determine which are fixed per trip and which are variable/per-person. Once this has been done, enter the following sections and select the New button to open the Update Budget Item window. Complete each field in the window and select Save to add the cost and return to the form or Save and New to add the cost and enter a new one. Saved costs will appear in the table when you return to the form. To edit or delete a saved cost, click the down arrow at the end of the row.
                             </p>
                             <p class="infop">
-                                Before adding the costs for your trip, you will need to determine which are fixed per trip and which are variable/per-person. Once this has been done, enter the following sections and select the New button to open the Update Budget Item window. Complete each field in the window and select Save to add the cost and return to the form or Save and New to add the cost and enter a new one. Saved costs will appear in the table when you return to the form.
-                            </p>
-                            <p class="infop">
-                                Note: Your trip already has subcommittee standard values, which will be included automatically. Enter any additional costs you would like to include. Estimate satellite phone costs at $15/day.
+                                Note: Your trip already has <a href="https://community.sierraclub.org/page/standard-values" target="_blank">subcommittee standard values</a>, which will be included automatically. Enter any additional costs you would like to include. Estimate satellite phone costs at $15/day.
                             </p>
                             <lightning-accordion-section name="budget-vol-travel" label="Volunteer Travel">                                
                                 <div class="slds-p-top_small">
@@ -601,13 +599,19 @@
                             </lightning-accordion-section>
 
                             <lightning-accordion-section name="budget-transportation" label="On Trip Transportation">                                
-                                <lightning-input-field
-                                    field-name="Transportation_Comments__c"
-                                    onchange={handleFieldChange}
-                                    data-field="Transportation_Comments__c"
-                                >
-                                </lightning-input-field>
-                           <div class="slds-p-top_small">
+                            <p class="slds-text-align_left infop">
+                            Note: Staff expenses are associated with a person similar to participant expenses such as lodging, rentals, gratuities, etc. 
+                            The system will multiply the number of staff by the expense. Trip expenses are associated with the trip and don't vary based upon the number of staff, 
+                            such as vehicle rental or a fixed-price shuttle and charter aircraft.
+                            </p>
+
+                            <lightning-input-field
+                                field-name="Transportation_Comments__c"
+                                onchange={handleFieldChange}
+                                data-field="Transportation_Comments__c"
+                            >
+                            </lightning-input-field>
+                            <div class="slds-p-top_small">
                                     <c-natout-trip-budget-transportation
                                         record-id={recordId}
                                         can-edit={userCanEdit}

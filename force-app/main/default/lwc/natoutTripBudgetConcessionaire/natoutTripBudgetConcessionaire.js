@@ -11,10 +11,10 @@ const actions = [
     { label: 'Delete', name: 'delete' }
 ];
 const columns = [
-    { label: 'Option', fieldName: 'Option__c' },
-    { label: 'Category', fieldName: 'Item_Category__c'},
-    { label: 'Amount', fieldName: 'Amount__c', type: 'currency' },
-    { label: 'Staff', fieldName: 'Number_Staff__c', type: 'number' }
+    { label: 'Option', fieldName: 'Option__c', hideDefaultActions: true, wrapText: true},
+    { label: 'Category', fieldName: 'Item_Category__c', hideDefaultActions: true, wrapText: true},
+    { label: 'Amount', fieldName: 'Amount__c', type: 'currency', hideDefaultActions: true, wrapText: true },
+    { label: 'Staff', fieldName: 'Number_Staff__c', type: 'number', hideDefaultActions: true, wrapText: true }
 ];
 
 const staffPartCategories = [
