@@ -1,5 +1,5 @@
 public without sharing class NatoutEmailHandler {
-    public static final String testEmailAddr = 'tony.rango@sierraclub.org';
+    //public static final String testEmailAddr = 'tony.rango@sierraclub.org';
     public static final String staffEmailAddr = 'tony.rango@sierraclub.org';
 
     public static List<TriggeredSendEmail__c> statusChanged(List<National_Outings_Trip__c> tripList, Map<Id, National_Outings_Trip__c> oldMap) {
@@ -15,10 +15,10 @@ public without sharing class NatoutEmailHandler {
                     List<Recipient> recipientList = approverMap.get(trip.Id);
                     String msgText = startedToSubmittedText(trip.Name);
                     String subject = 'Trip submission for ' + trip.Name + ' ready for review';
-                    String textToSend = getMsgPrefix(recipientList) + ' : ' + msgText;
+                    //String textToSend = getMsgPrefix(recipientList) + ' : ' + msgText;
                     for(Recipient rcp : recipientList) {
-                        //rcp.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, textToSend));
-                        tseList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, textToSend));
+                        //tseList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, textToSend));
+                        tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
                     }
                 }
             }
@@ -26,35 +26,36 @@ public without sharing class NatoutEmailHandler {
                 List<Recipient> recipientList = creatorMap.get(trip.Id);
                 String msgText = submittedToApprovedByChairText(trip.Name, trip.Subcommittee__c);
                 String subject = 'Trip submission for ' + trip.Name + ' approved by chair and/or collaborator';
-                String textToSend = getMsgPrefix(recipientList) + ' : ' + msgText;
+                //String textToSend = getMsgPrefix(recipientList) + ' : ' + msgText;
                 for(Recipient rcp : recipientList) {
-                    //rcp.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, textToSend));
-                    tseList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, textToSend));
+                    //tseList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, textToSend));
+                    tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
                 }
             }
             else if(prevTrip.Status__c == 'Approved by Chair' && trip.Status__c == 'Approved by Staff') {
                 List<Recipient> recipientList = creatorMap.get(trip.Id);
                 String msgText = approvedByChairToApprovedByStaffText(trip.Name);
                 String subject = 'Trip submission for ' + trip.Name + ' approved by staff';
-                String textToSend = getMsgPrefix(recipientList) + ' : ' + msgText;
+                //String textToSend = getMsgPrefix(recipientList) + ' : ' + msgText;
                 for(Recipient rcp : recipientList) {
-                    //rcp.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, textToSend));
-                    tseList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, textToSend));
+                    //tseList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, textToSend));
+                    tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
                 }
             }
             else if(prevTrip.Status__c == 'Submitted' && trip.Status__c == 'Returned') {
                 List<Recipient> recipientList = creatorMap.get(trip.Id);
                 String msgText = submittedToReturnedText(trip.Name, trip.Subcommittee__c);
                 String subject = 'Trip submission for ' + trip.Name + ' returned';
-                String textToSend = getMsgPrefix(recipientList) + ' : ' + msgText;
+                //String textToSend = getMsgPrefix(recipientList) + ' : ' + msgText;
                 for(Recipient rcp : recipientList) {
-                    //rcp.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, textToSend));
-                    tseList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, textToSend));
+                    //tseList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, textToSend));
+                    tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
                 }
             }
         }
         return tseList;
     }
+    /*
     private static String getMsgPrefix(List<Recipient> recipientList) {
         String emails = '';
         for(Recipient rcp : recipientList) {
@@ -64,7 +65,8 @@ public without sharing class NatoutEmailHandler {
             emails += rcp.emailAddr;
         }
         return 'In production, this email would be sent to: ' + emails;
-}
+    }
+    */
     private static Map<Id, List<Recipient>> getCreators(List<National_Outings_Trip__c> tripList) {
         Set<Id> tripIds = new Set<Id>();
         for(National_Outings_Trip__c trip : tripList) {
@@ -254,15 +256,15 @@ public without sharing class NatoutEmailHandler {
             if(comments.Notify_Creators__c) {
                 List<Recipient> recipientList = creatorMap.get(comments.National_Outings_Trip__c);
                 for(Recipient rcp : recipientList) {
-                    //rcp.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, comments.Comments__c));
-                    sendList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, comments.Comments__c));
+                    //sendList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, comments.Comments__c));
+                    sendList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, comments.Comments__c));
                 }
             }
             if(comments.Notify_Approvers__c) {
                 List<Recipient> recipientList = approverMap.get(comments.National_Outings_Trip__c);
                 for(Recipient rcp : recipientList) {
-                    //rcp.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, comments.Comments__c));
-                    sendList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, comments.Comments__c));
+                    //sendList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, comments.Comments__c));
+                    sendList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, comments.Comments__c));
                 }
             }
             if(comments.Notify_Staff__c) {
