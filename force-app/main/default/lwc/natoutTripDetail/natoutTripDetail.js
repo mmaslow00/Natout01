@@ -29,6 +29,7 @@ export default class NatoutTripDetail extends LightningElement {
     tripTypeOptions = null;
     chosenTripType = null;
     chosenStatus = null;
+    changeEventCaptured = false;
     @track errorList = [];
 
     @wire(getObjectInfo, { objectApiName: TRIP_OBJECT })
@@ -43,6 +44,19 @@ export default class NatoutTripDetail extends LightningElement {
     @wire(getUserAccess, {tripId: '$recordId'})
     userAccess;
 
+    constructor() {
+        super();
+        window.natoutTripDetailChangeMade = false;
+        window.addEventListener('beforeunload', function (e) {
+            if(natoutTripDetailChangeMade) {
+                // Cancel the event
+                e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+                // Chrome requires returnValue to be set
+                e.returnValue = 'Save Changes?';
+                return 'Save Changes?';
+            }
+          });        
+    }
     handleLoad(event) {
         if (!this.loadedForm) {
             let fields = Object.values(event.detail.records)[0].fields;
@@ -65,6 +79,15 @@ export default class NatoutTripDetail extends LightningElement {
             this.loadedStatus = this.tripRecord.Status__c;
             document.title = this.tripRecord.Name;
             this.loadedForm = true;
+        }
+        else if( ! this.changeEventCaptured) {
+            var inp=this.template.querySelectorAll('lightning-input-field, lightning-combobox, lightning-dual-listbox, lightning-radio-group');
+            inp.forEach(function(element){
+                element.addEventListener('change', evt => {
+                    window.natoutTripDetailChangeMade = true;
+                });
+            });
+            this.changeEventCaptured = true;
         }
     }
     renderedCallback() {
@@ -169,6 +192,7 @@ export default class NatoutTripDetail extends LightningElement {
                 this.message = result;
                 this.error = undefined;
                 this.showSnackbar('success', 'Trip Updated', 'Trip was successfully updated');
+                window.natoutTripDetailChangeMade = false;
                 if(this.loadedStatus === 'Started' && this.tripRecord.Status__c === 'Submitted') {
                     return refreshApex(this.userAccess);
                 }
