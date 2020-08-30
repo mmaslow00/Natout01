@@ -52,8 +52,8 @@ export default class NatoutTripDetail extends LightningElement {
                 // Cancel the event
                 e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
                 // Chrome requires returnValue to be set
-                e.returnValue = 'Save Changes?';
-                return 'Save Changes?';
+                e.returnValue = 'Changes you made may not be saved.';
+                return;
             }
           });        
     }
