@@ -1,5 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>NatoutAccountSearchController</members>
+        <members>NatoutAccountSearchControllerTest</members>
+        <members>NatoutEmailHandler</members>
+        <members>NatoutEmailHandlerTest</members>
+        <members>NatoutLeaderSearchController</members>
+        <members>NatoutLeaderSearchControllerTest</members>
+        <members>NatoutTripAgenciesController</members>
+        <members>NatoutTripAgenciesControllerTest</members>
+        <members>NatoutTripBudgetController</members>
+        <members>NatoutTripBudgetControllerTest</members>
+        <members>NatoutTripBudgetExportController</members>
+        <members>NatoutTripBudgetExportControllerTest</members>
+        <members>NatoutTripBudgetReportController</members>
+        <members>NatoutTripBudgetReportControllerTest</members>
+        <members>NatoutTripCollaboratorController</members>
+        <members>NatoutTripCollaboratorControllerTest</members>
+        <members>NatoutTripCommentsController</members>
+        <members>NatoutTripCommentsControllerTest</members>
+        <members>NatoutTripCopy</members>
+        <members>NatoutTripCopyTest</members>
+        <members>NatoutTripExportController</members>
+        <members>NatoutTripExportControllerTest</members>
+        <members>NatoutTripItineraryController</members>
+        <members>NatoutTripItineraryControllerTest</members>
+        <members>NatoutTripListController</members>
+        <members>NatoutTripListControllerTest</members>
+        <members>NatoutTripListSearchCriteria</members>
+        <members>NatoutTripOptions</members>
+        <members>NatoutTripOptionsTest</members>
+        <members>NatoutTripStaffController</members>
+        <members>NatoutTripStaffControllerTest</members>
+        <members>NatoutTripVendorsController</members>
+        <members>NatoutTripVendorsControllerTest</members>
+        <members>NatoutTripTriggerHandler</members>
+        <members>NatoutTripTriggerHandlerTest</members>
+        <members>NatoutUserInfo</members>
+        <members>NatoutUserInfoTest</members>
+        <name>ApexClass</name>
+    </types>
     <types>  
         <members>ldsUtils</members>
         <members>locationFinder</members>
@@ -11,31 +51,45 @@
         <members>natoutTripBudgetMeals</members>
         <members>natoutTripBudgetTransportation</members>
         <members>natoutTripBudgetVolTravel</members>
+        <members>natoutTripCollaborators</members>
+        <members>natoutTripComments</members>
         <members>natoutTripDetail</members>
         <members>natoutTripItinerary</members>
         <members>natoutTripList</members>
         <members>natoutTripStaff</members>
         <members>natoutTripVendors</members>
+        <members>snackbar</members>
+        <members>tooltip</members>
         <name>LightningComponentBundle</name>  
     </types>
     <types>
+        <members>NatoutTripCommentsTrigger</members>
         <members>NatoutTripTrigger</members>
         <name>ApexTrigger</name>
+    </types>       
+    <types>
+        <members>NatoutTripStyles</members>
+        <members>NatoutTripFooter</members>
+        <name>ApexComponent</name>
     </types>       
     <types>
         <members>LocationFinderLightning</members>
         <members>NatoutTripExport</members>
         <members>NatoutTripBudgetExport</members>
         <members>NatoutTripBudgetReport</members>
-        <members>NatoutTripVendorExport</members>
+        <members>NatoutTripBudgetReportError</members>
         <members>NatoutTripDetail</members>
         <members>NatoutTripList</members>
         <members>NatoutTrip</members>
         <name>ApexPage</name>
     </types>       
     <types>
+         <members>InfoBubbleIcon</members>
+	     <name>StaticResource</name>
+    </types>    
+    <types>
          <members>NatoutTripsApp</members>
 	     <name>AuraDefinitionBundle</name>
-    </types>
+    </types>    
     <version>48.0</version>
 </Package>

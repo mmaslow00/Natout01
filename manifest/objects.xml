@@ -6,6 +6,7 @@
         <members>National_Outings_Trip_Agency__c</members>
         <members>National_Outings_Trip_Budget_Item__c</members>
         <members>National_Outings_Trip_Collaborator__c</members>
+        <members>National_Outings_Trip_Comments__c</members>  
         <members>National_Outings_Trip_Itinerary__c</members>
         <members>National_Outings_Trip_Staff__c</members>
         <members>National_Outings_Trip_Vendor__c</members>
@@ -19,6 +20,10 @@
     <types>
         <members>National_Outings_Trip_Area</members>
         <name>GlobalValueSet</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>CustomMetadata</name>
     </types>
 <version>48.0</version>
 </Package>
