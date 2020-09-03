@@ -3,7 +3,7 @@ public with sharing class NatoutTripTriggerHandler {
         Id contactId = getUserContactId();
         if(contactId != null) {
             Contact userContact = [
-                SELECT Name, MailingStreet, MailingCity, MailingState, MailingPostalCode
+                SELECT Name, MailingStreet, MailingCity, MailingState, MailingPostalCode, MailingCountry
                 FROM Contact
                 WHERE Id = :contactId
             ];
@@ -11,7 +11,9 @@ public with sharing class NatoutTripTriggerHandler {
                 trip.Sat_Phone_Ship_To_Name__c = userContact.Name;
                 trip.Sat_Phone_Ship_To_Address__c = userContact.MailingStreet;
                 trip.Sat_Phone_Ship_To_City__c = userContact.MailingCity;
-                trip.Sat_Phone_Ship_To_State__c = userContact.MailingState;
+                if(String.isBlank(userContact.MailingCountry)) {
+                    trip.Sat_Phone_Ship_To_State__c = userContact.MailingState;
+                }
                 trip.Sat_Phone_Ship_To_Zip_Code__c = userContact.MailingPostalCode;
             }
         }
