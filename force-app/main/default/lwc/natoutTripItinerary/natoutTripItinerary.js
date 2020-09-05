@@ -203,13 +203,12 @@ export default class NatoutTripItinerary extends LightningElement {
     }
 
     getNextDayIndex(lastDay) {
-        let tripDateArray = this.getTripDates();
         let dayNumArray = [];
         for(let i=0; i < this.itineraryList.length; i++) {
             dayNumArray.push(this.itineraryList[i].Day_Number__c - 1);
         }
-        if(lastDay != null) {
-            dayNumArray.push(lastDay);
+        if(typeof lastDay == 'number') {
+            dayNumArray.push(lastDay - 1);
         }
         let idx = 0;
         while(dayNumArray.includes(idx)) {
@@ -218,7 +217,7 @@ export default class NatoutTripItinerary extends LightningElement {
         return idx;
     }
     createNextDay() {
-        let nextDayIndex = this.getNextDayIndex(this.itemToUpdate.Day_Number__c) + 1;
+        let nextDayIndex = this.getNextDayIndex(this.itemToUpdate.Day_Number__c);
         let nextDate = this.getTripDates()[nextDayIndex];
         this.itemToUpdate = {
             National_Outings_Trip__c: this.recordId,
