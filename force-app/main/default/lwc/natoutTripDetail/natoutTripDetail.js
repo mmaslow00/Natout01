@@ -710,7 +710,7 @@ export default class NatoutTripDetail extends LightningElement {
             let name = this.template.querySelector('[data-field=Sat_Phone_Ship_To_Name__c]').value;
             let address = this.template.querySelector('[data-field=Sat_Phone_Ship_To_Address__c]').value;
             let city = this.template.querySelector('[data-field=Sat_Phone_Ship_To_City__c]').value;
-            let state = this.template.querySelector('[data-field=Sat_Phone_Ship_To_State__c]').value;
+            let state = this.template.querySelector('[data-field=Sat_Phone_Ship_To_State_Prov__c]').value;
             let zip = this.template.querySelector('[data-field=Sat_Phone_Ship_To_Zip_Code__c]').value;
 
             if( ! (date && name && address && city && state && zip) ) {
