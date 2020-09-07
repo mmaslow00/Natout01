@@ -223,8 +223,8 @@ export default class NatoutTripBudgetMeals extends LightningElement {
         for(let i=0; i < this.budgetList.length; i++) {
             dayNumArray.push(this.budgetList[i].Day_Number__c - 1);
         }
-        if(lastDay != null) {
-            dayNumArray.push(lastDay);
+        if(typeof lastDay == 'number') {
+            dayNumArray.push(lastDay - 1);
         }
         let idx = 0;
         while(dayNumArray.includes(idx)) {
@@ -235,7 +235,7 @@ export default class NatoutTripBudgetMeals extends LightningElement {
     createNextDay() {
         let partAmt = this.itemToUpdate.Participant_Amount__c;
         let staffAmt = this.itemToUpdate.Staff_Amount__c;
-        let nextDayIndex = this.getNextDayIndex(this.itemToUpdate.Day_Number__c) + 1;
+        let nextDayIndex = this.getNextDayIndex(this.itemToUpdate.Day_Number__c);
         let nextDate = this.getTripDates()[nextDayIndex];
         this.itemToUpdate = {
             National_Outings_Trip__c: this.recordId,
