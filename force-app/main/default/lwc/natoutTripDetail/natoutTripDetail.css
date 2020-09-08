@@ -14,3 +14,10 @@
     margin-top: 5px;
     font-size: 12px;
 }
+.intl-questions-header {
+    padding: 2%;
+    font-weight: bold;
+}
+.intl-questions-italic {
+    font-style: italic;
+}

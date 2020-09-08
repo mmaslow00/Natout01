@@ -653,6 +653,41 @@
                                     data-field="IntlQuestion03__c"
                                 >
                                 </lightning-input-field>
+                                <lightning-input-field
+                                    field-name="IntlQuestion04__c"
+                                    data-field="IntlQuestion04__c"
+                                >
+                                </lightning-input-field>
+                                <lightning-input-field
+                                    field-name="IntlQuestion05__c"
+                                    data-field="IntlQuestion05__c"
+                                >
+                                </lightning-input-field>
+                                <lightning-input-field
+                                    field-name="IntlQuestion06__c"
+                                    data-field="IntlQuestion06__c"
+                                >
+                                </lightning-input-field>
+                                <lightning-input-field
+                                    field-name="IntlQuestion07__c"
+                                    data-field="IntlQuestion07__c"
+                                >
+                                </lightning-input-field>
+                                <lightning-input-field
+                                    field-name="IntlQuestion08__c"
+                                    data-field="IntlQuestion08__c"
+                                >
+                                </lightning-input-field>
+                                <lightning-input-field
+                                    field-name="IntlQuestion09__c"
+                                    data-field="IntlQuestion09__c"
+                                >
+                                </lightning-input-field>
+                                <lightning-input-field
+                                    field-name="IntlQuestion10__c"
+                                    data-field="IntlQuestion10__c"
+                                >
+                                </lightning-input-field>
                                 </div>
                                 <template if:true={tripIsInternational}>
                                     <lightning-accordion-section name="budget-questions" label="Budget Questions">
@@ -683,7 +718,7 @@
 
                                     <label class="slds-form-element__label" for="q03">
                                         <strong>
-                                            3.	If expenses are not paid in dollars, list the exchange rate you used to calculate budget costs. 
+                                            3.	If expenses are not paid in dollars, list the exchange rate you used to calculate budget costs.&nbsp; 
                                             <a href="https://docs.google.com/spreadsheets/d/1mmJH9S-Hqw5HnNCWvR1q1QefMQPh_rcMgLNORzCLSmE" target="_blank">
                                                 Use this link to find exchange rates for the current budget cycle.
                                             </a>
@@ -697,6 +732,119 @@
                                         variant="label-hidden"
                                     >
                                     </lightning-input-field>
+                                    
+                                    <div class="intl-questions-header">
+                                        For concessionaire and third-party supported trips, please answer all questions below.
+                                    </div>
+
+                                    <label class="slds-form-element__label" for="q04">
+                                        <strong>
+                                            4.	List the third-party per-participant and per-staff rates quoted (or estimated) over the entire range of possible signups, 
+                                            in the currency of payment, in the comments below.&nbsp;
+                                            <span class="intl-questions-italic">
+                                            Important note: In the concessionaire budget section above, make sure to enter only the cost at the 80% level 
+                                            (if 80% of the number of participants is not a whole number, you need to round it to the closest whole number).
+                                            </span>
+                                        </strong>
+                                    </label>
+                                    <lightning-input-field
+                                        field-name="IntlQuestion05__c"
+                                        onchange={handleFieldChange}
+                                        data-field="IntlQuestion05__c"
+                                        data-id="q05"
+                                        variant="label-hidden"
+                                    >
+                                    </lightning-input-field>
+
+                                    <label class="slds-form-element__label" for="q05">
+                                        <strong>
+                                            5.	If expenses are NOT paid in dollars then enter the fixed cost in the currency of payment below. 
+                                            Explain any fixed costs paid to the concessionaire. In the concessionaire budget section above, 
+                                            enter the concessionaire's fixed cost under option “trip,” category “concessionaire.” 
+                                            Note: If you have multiple fixed costs (e.g. different bus sizes), 
+                                            enter the fixed cost amount associated with 80% capacity. 
+                                            List the other fixed costs and associated number of people in your comments below.
+                                        </strong>
+                                    </label>
+                                    <lightning-input-field
+                                        field-name="IntlQuestion05__c"
+                                        onchange={handleFieldChange}
+                                        data-field="IntlQuestion05__c"
+                                        data-id="q05"
+                                        variant="label-hidden"
+                                    >
+                                    </lightning-input-field>
+
+                                    <label class="slds-form-element__label" for="q06">
+                                        <strong>
+                                            6.	List the services the third-party is providing.
+                                        </strong>
+                                    </label>
+                                    <lightning-input-field
+                                        field-name="IntlQuestion06__c"
+                                        onchange={handleFieldChange}
+                                        data-field="IntlQuestion06__c"
+                                        data-id="q06"
+                                        variant="label-hidden"
+                                    >
+                                    </lightning-input-field>
+
+                                    <label class="slds-form-element__label" for="q07">
+                                        <strong>
+                                            7.	Do you have a quote for third party services?
+                                        </strong>
+                                    </label>
+                                    <lightning-input-field
+                                        field-name="IntlQuestion07__c"
+                                        onchange={handleFieldChange}
+                                        data-field="IntlQuestion07__c"
+                                        data-id="q07"
+                                        variant="label-hidden"
+                                    >
+                                    </lightning-input-field>
+
+                                    <label class="slds-form-element__label" for="q08">
+                                        <strong>
+                                            8.	If the answer is no, how did you estimate the cost? When do you expect to have a final quote?
+                                        </strong>
+                                    </label>
+                                    <lightning-input-field
+                                        field-name="IntlQuestion08__c"
+                                        onchange={handleFieldChange}
+                                        data-field="IntlQuestion08__c"
+                                        data-id="q08"
+                                        variant="label-hidden"
+                                    >
+                                    </lightning-input-field>
+
+                                    <label class="slds-form-element__label" for="q09">
+                                        <strong>
+                                            9.	What is the minimum number of paying people required by the concessionaire?
+                                        </strong>
+                                    </label>
+                                    <lightning-input-field
+                                        field-name="IntlQuestion09__c"
+                                        onchange={handleFieldChange}
+                                        data-field="IntlQuestion09__c"
+                                        data-id="q09"
+                                        variant="label-hidden"
+                                    >
+                                    </lightning-input-field>
+
+                                    <label class="slds-form-element__label" for="q10">
+                                        <strong>
+                                            10.	How much deposit is required? When? Is it refundable?
+                                        </strong>
+                                    </label>
+                                    <lightning-input-field
+                                        field-name="IntlQuestion10__c"
+                                        onchange={handleFieldChange}
+                                        data-field="IntlQuestion10__c"
+                                        data-id="q10"
+                                        variant="label-hidden"
+                                    >
+                                    </lightning-input-field>
+
                                     </lightning-accordion-section>
                                 </template>
                                                             

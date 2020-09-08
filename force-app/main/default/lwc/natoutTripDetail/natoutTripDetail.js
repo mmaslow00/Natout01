@@ -461,6 +461,9 @@ export default class NatoutTripDetail extends LightningElement {
     }
     get budgetReportUrl() {
         let baseUrl = window.location.protocol + '//' + window.location.hostname + '/' + window.location.pathname.split('/')[1];
+        if( ! baseUrl.endsWith('apex')) {
+            baseUrl += '/apex';
+        }
         baseUrl += '/NatoutTripBudgetReport?trip=' + this.recordId;
         return baseUrl;
     }
@@ -682,8 +685,10 @@ export default class NatoutTripDetail extends LightningElement {
             if(agencyCount < 1) {
                 errors.push({rowNum: rowNum++, text: 'At least one permit must be entered'});
             }
-            if( ! (this.tripRecord.Entry_Trail_Head__c && this.tripRecord.Exit_Trail_Head__c) ) {
-                errors.push({rowNum: rowNum++, text: 'Entry and Exit Trail Heads are required'});
+            if(this.isBPTrip) {
+                if( ! (this.tripRecord.Entry_Trail_Head__c && this.tripRecord.Exit_Trail_Head__c) ) {
+                    errors.push({rowNum: rowNum++, text: 'Entry and Exit Trail Heads are required'});
+                }
             }
         }
         let budgetCount = 
