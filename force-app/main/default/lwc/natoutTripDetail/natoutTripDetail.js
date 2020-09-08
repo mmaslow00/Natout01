@@ -29,7 +29,7 @@ export default class NatoutTripDetail extends LightningElement {
     tripTypeOptions = null;
     chosenTripType = null;
     chosenStatus = null;
-    changeEventCaptured = false;
+    lastFieldInitialized = false;
     @track errorList = [];
 
     @wire(getObjectInfo, { objectApiName: TRIP_OBJECT })
@@ -80,15 +80,6 @@ export default class NatoutTripDetail extends LightningElement {
             document.title = this.tripRecord.Name;
             this.loadedForm = true;
         }
-        else if( ! this.changeEventCaptured) {
-            var inp=this.template.querySelectorAll('lightning-input-field, lightning-combobox, lightning-dual-listbox, lightning-radio-group');
-            inp.forEach(function(element){
-                element.addEventListener('change', evt => {
-                    window.natoutTripDetailChangeMade = true;
-                });
-            });
-            this.changeEventCaptured = true;
-        }
     }
     renderedCallback() {
         if(this.tripRecord.Trip_Copy__c) {
@@ -108,6 +99,17 @@ export default class NatoutTripDetail extends LightningElement {
         this.tripRecord[fieldName] = e.target.value;
         if (fieldName === "Trip_Copy__c") {
             this.calculateWordCount();
+        }
+        else if((fieldName === "Geographic_Area__c" && this.tripIsInternational) || (fieldName === "Meals_Included__c" && ! this.tripIsInternational)) {
+            if(this.lastFieldInitialized == false) {
+                this.lastFieldInitialized = true;
+                let inp=this.template.querySelectorAll('lightning-input-field, lightning-combobox, lightning-dual-listbox, lightning-radio-group');
+                inp.forEach(function(element){
+                    element.addEventListener('change', evt => {
+                        window.natoutTripDetailChangeMade = true;
+                    });
+                });
+            }
         }
     }
     handleCountriesChange(e) {
@@ -405,6 +407,17 @@ export default class NatoutTripDetail extends LightningElement {
             }
         }
         return this.subcommOptions;
+    }
+    get intlQuestion01Options() {
+        return [
+            {label: 'Concessionaire-led', value: 'Concessionarie-led' },
+            {label: 'Third-party supported', value: 'Third-party supported'},
+            {label: 'No vendors used', value: 'No vendors used'}
+
+        ];
+    }
+    get selectedIntlQuestion01Option() {
+        return this.tripRecord.IntlQuestion01__c;
     }
     get tripTypeOptionList() {
         if(this.picklistOptions != null) {

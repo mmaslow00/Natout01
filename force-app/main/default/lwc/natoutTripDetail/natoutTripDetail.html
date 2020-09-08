@@ -637,8 +637,70 @@
                                     </c-natout-trip-budget-concessionaire>
                                 </div>
                             </lightning-accordion-section>
+                                <div style="display:none">
+                                <lightning-input-field
+                                    field-name="IntlQuestion01__c"
+                                    data-field="IntlQuestion01__c"
+                                >
+                                </lightning-input-field>
+                                <lightning-input-field
+                                    field-name="IntlQuestion02__c"
+                                    data-field="IntlQuestion02__c"
+                                >
+                                </lightning-input-field>
+                                <lightning-input-field
+                                    field-name="IntlQuestion03__c"
+                                    data-field="IntlQuestion03__c"
+                                >
+                                </lightning-input-field>
+                                </div>
+                                <template if:true={tripIsInternational}>
+                                    <lightning-accordion-section name="budget-questions" label="Budget Questions">
+                                    <lightning-radio-group
+                                        label="1. What kind of trip are you planning?"
+                                        options={intlQuestion01Options}
+                                        value={selectedIntlQuestion01Option}
+                                        type="radio"
+                                        onchange={handleFieldChange}
+                                        data-field="IntlQuestion01__c"
+                                    >
+                                    </lightning-radio-group>
+                                    <p class="infop">
+                                        A concessionaire trip is one that is planned, designed, and run by an outside company and purchased by the Sierra Club. Quite often, but not always, the concessionaire will provide guides for the duration of the trip. Third-party supported trips are those using the services of third-party vendors for more limited purposes, such as making hotel and/or transportation arrangements.
+                                    </p>
 
-                            <lightning-accordion-section name="budget-other" label="Other">                                
+                                    <label class="slds-form-element__label" for="q02">
+                                        <strong>2.	In which currency will third-party expenses be paid?</strong>
+                                    </label>
+                                    <lightning-input-field
+                                        field-name="IntlQuestion02__c"
+                                        onchange={handleFieldChange}
+                                        data-field="IntlQuestion02__c"
+                                        data-id="q02"
+                                        variant="label-hidden"
+                                    >
+                                    </lightning-input-field>
+
+                                    <label class="slds-form-element__label" for="q03">
+                                        <strong>
+                                            3.	If expenses are not paid in dollars, list the exchange rate you used to calculate budget costs. 
+                                            <a href="https://docs.google.com/spreadsheets/d/1mmJH9S-Hqw5HnNCWvR1q1QefMQPh_rcMgLNORzCLSmE" target="_blank">
+                                                Use this link to find exchange rates for the current budget cycle.
+                                            </a>
+                                        </strong>
+                                    </label>
+                                    <lightning-input-field
+                                        field-name="IntlQuestion03__c"
+                                        onchange={handleFieldChange}
+                                        data-field="IntlQuestion03__c"
+                                        data-id="q03"
+                                        variant="label-hidden"
+                                    >
+                                    </lightning-input-field>
+                                    </lightning-accordion-section>
+                                </template>
+                                                            
+                                <lightning-accordion-section name="budget-other" label="Other">                                
                                 <div class="slds-p-top_small">
                                     <template if:false={tripIsInternational}>
                                         <lightning-input-field
