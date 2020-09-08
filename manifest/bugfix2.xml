@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>  
+        <members>National_Outings_Trip__c.IntlQuestion01__c</members>
+        <members>National_Outings_Trip__c.IntlQuestion02__c</members>
+        <members>National_Outings_Trip__c.IntlQuestion03__c</members>
+        <members>National_Outings_Trip__c.IntlQuestion04__c</members>
+        <members>National_Outings_Trip__c.IntlQuestion05__c</members>
+        <members>National_Outings_Trip__c.IntlQuestion06__c</members>
+        <members>National_Outings_Trip__c.IntlQuestion07__c</members>
+        <members>National_Outings_Trip__c.IntlQuestion08__c</members>
+        <members>National_Outings_Trip__c.IntlQuestion09__c</members>
+        <members>National_Outings_Trip__c.IntlQuestion10__c</members>
+        <name>CustomField</name>          
+    </types>
+    <types>  
+        <members>natoutTripDetail</members>
+        <name>LightningComponentBundle</name>  
+    </types>
+    <version>48.0</version>
+</Package>
