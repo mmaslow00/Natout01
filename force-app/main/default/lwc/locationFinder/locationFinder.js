@@ -4,12 +4,13 @@ export default class LocationFinder extends LightningElement {
     @api latLng = {};
 
     get mapPageUrl() {
-        let baseUrl = window.location.protocol + '//' + window.location.hostname + '/' + window.location.pathname.split('/')[1];
-        baseUrl += '/LocationFinderLightning';
+        let lastSlash = window.location.pathname.lastIndexOf('/');
+        let pathStart = window.location.pathname.substring(0,lastSlash + 1);
+        let retUrl = window.location.origin + pathStart + 'LocationFinderLightning';
         if(this.latLng.latitude && this.latLng.longitude) {
-            baseUrl += '?location=' + this.latLng.latitude + ',' + this.latLng.longitude;
+            retUrl += '?location=' + this.latLng.latitude + ',' + this.latLng.longitude;
         }
-        return baseUrl;
+        return retUrl;
     }
     connectedCallback() {
         window.addEventListener("message", function(event) {
