@@ -461,7 +461,7 @@ export default class NatoutTripDetail extends LightningElement {
     }
     get budgetReportUrl() {
         let baseUrl = window.location.protocol + '//' + window.location.hostname;
-        if(window.location.pathname.includes('apex')) {
+        if(window.location.pathname.includes('/apex')) {
             baseUrl += '/apex';
         }
         baseUrl += '/NatoutTripBudgetReport?trip=' + this.recordId;
