@@ -131,7 +131,7 @@ public without sharing class NatoutEmailHandler {
             FROM Leadership__c 
             WHERE
                 Club_Entity__r.Entity_Category__c = 'Outings' AND Club_Entity__r.Type__c = 'National Outing Subcomm' 
-                AND Position_Status__c = 'Active' AND Leader_Position__r.Name IN ('Chair','Sub-comm Co-Chair','Vice Chair')
+                AND Position_Status__c = 'Active' AND Leader_Position__r.Name IN ('Chair','Sub-comm Co-Chair','Vice Chair','Trip Submission Approver')
                 AND Club_Entity__r.Name in :subcomms
         ];
         Map<String, List<Recipient>> officerMap = new Map<String, List<Recipient>>();

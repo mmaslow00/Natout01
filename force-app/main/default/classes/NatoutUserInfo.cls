@@ -52,7 +52,7 @@ public without sharing class NatoutUserInfo {
             SELECT Id FROM Leadership__c WHERE
             Contact__c = :contactId
             AND Club_Entity__r.Entity_Category__c = 'Outings' AND Club_Entity__r.Type__c = 'National Outing Subcomm' 
-            AND Position_Status__c = 'Active' AND Leader_Position__r.Name IN ('Chair','Sub-comm Co-Chair','Vice Chair')
+            AND Position_Status__c = 'Active' AND Leader_Position__r.Name IN ('Chair','Sub-comm Co-Chair','Vice Chair','Trip Submission Approver')
             AND Club_Entity__r.Name = :subcommName
         ];
         if( ! ldrList.isEmpty()) {
