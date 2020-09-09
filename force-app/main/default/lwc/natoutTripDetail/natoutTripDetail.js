@@ -100,6 +100,8 @@ export default class NatoutTripDetail extends LightningElement {
         if (fieldName === "Trip_Copy__c") {
             this.calculateWordCount();
         }
+        window.natoutTripDetailChangeMade = true;
+/*
         else if((fieldName === "Geographic_Area__c" && this.tripIsInternational) || (fieldName === "Meals_Included__c" && ! this.tripIsInternational)) {
             if(this.lastFieldInitialized == false) {
                 this.lastFieldInitialized = true;
@@ -111,6 +113,7 @@ export default class NatoutTripDetail extends LightningElement {
                 });
             }
         }
+    */
     }
     handleCountriesChange(e) {
         this.chosenCountries = e.target.value;
