@@ -8,7 +8,6 @@ import PERMIT_REQUIREMENT_FIELD from '@salesforce/schema/National_Outings_Trip__
 import getPicklistOptions from '@salesforce/apex/NatoutTripOptions.getOptions';
 import getUserAccess from '@salesforce/apex/NatoutUserInfo.getUserAccess';
 import { refreshApex } from '@salesforce/apex';
-import userId from '@salesforce/user/Id';
 
 export default class NatoutTripDetail extends LightningElement {
     @api recordId;
@@ -100,7 +99,9 @@ export default class NatoutTripDetail extends LightningElement {
         if (fieldName === "Trip_Copy__c") {
             this.calculateWordCount();
         }
-        window.natoutTripDetailChangeMade = true;
+        if(this.userCanEdit) {
+            window.natoutTripDetailChangeMade = true;
+        }
 /*
         else if((fieldName === "Geographic_Area__c" && this.tripIsInternational) || (fieldName === "Meals_Included__c" && ! this.tripIsInternational)) {
             if(this.lastFieldInitialized == false) {
