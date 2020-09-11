@@ -12,10 +12,13 @@
       Here you will find a list of trips. The default view, My Trips, shows trips you have started or submitted. Select All Trips to browse or search trips submitted by all leaders, which you may view in read-only mode. If you have been designated as a trip collaborator,  e.g., a co-leader, homeschool mentor, or other leader who has been given permission to assist with/edit another leader’s trip submission, you will access it here. 
     </p>
     <p>
-      Click on any column to sort trips in ascending or descending order. To open an individual trip, select the blue link in the Name column.
-    </p>
-    <p>
-      To start a new trip, select Create New Trip below.
+        <ul>
+            <li>Click on any column to sort trips in ascending or descending order.</li>
+            <li>To open an individual trip, select the blue link in the Trip Nickname column.</li>
+            <li>To copy a previous trip (either yours or another leader’s), click the down arrow at the end of the row and select Copy. Once copied, you can make any necessary updates and submit. Trips from the old TSS cannot be copied.</li>
+            <li>To delete a trip, click the down arrow at the end of the row and select Delete. This can only be done for trips you've created that have not yet been approved by the subcommittee chair.</li>
+            <li>To start a new submission, select Create New Trip.</li>
+        </ul>
     </p>
     </div>
 

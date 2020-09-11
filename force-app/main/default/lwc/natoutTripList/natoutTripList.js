@@ -45,7 +45,7 @@ export default class NatoutTripList extends LightningElement {
         super();
         this.columns =
         [
-            { label: 'Name', type: 'url', fieldName: 'nameUrl', sortable: 'true', typeAttributes: {label: {fieldName: 'Name'}} },
+            { label: 'Trip Nickname', type: 'url', fieldName: 'nameUrl', sortable: 'true', typeAttributes: {label: {fieldName: 'Name'}} },
             { label: 'Departs', type: 'date-local', sortable: true,
                 typeAttributes: {
                     month: "2-digit",

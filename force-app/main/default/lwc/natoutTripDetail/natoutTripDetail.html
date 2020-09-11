@@ -37,7 +37,7 @@
 
                 <label class="slds-form-element__label" for="tripName">
                     <abbr title="required" class="slds-required">*</abbr>
-                    Submission Name
+                    Trip Nickname
                     <c-tooltip
                     text="This name will appear on the TSS dashboard where users browse trip submissions and allows leaders to name their trip without impacting the official trip title. Since trip titles are not year specific, this allows leaders to keep track of trips as they prefer to organize them, e.g., Mary's 2025 Colorado Rockies Service Trip."
                     >
@@ -307,7 +307,7 @@
                         >
                         </lightning-input-field>
                         <label class="slds-form-element__label" for="groupType">
-                            <b>Secondary Activities: Please select up to 2</b>
+                            <b>Secondary Activities (optional): Please select up to 2</b>
                             <c-tooltip text="Does this trip include additional activities not conveyed by the trip type, e.g. a base camp trip that also includes an overnight kayak excursion? If so, please select these activities. This will ensure that your trip appears in search results for these terms on our website.">
                             </c-tooltip>
                             <div style="margin-top:4px; margin-bottom:4px; clear:both">
@@ -345,7 +345,7 @@
                                 </p>
                             </div>
                             <lightning-dual-listbox
-                                label="States: Please select up to 3"
+                                label="States/Provinces: Please select up to 3"
                                 source-label="Available"
                                 selected-label="Chosen"
                                 options={stateListOptions}
@@ -1008,7 +1008,7 @@
                             If your vendor is not listed, please use the Comments section at the end of the submission form to request that it be added.
                         </p>
                         <p class="infop">
-                            Note: when adding your comment, you must check the staff notification box; otherwise staff will not receive this request. This update will need to be made before the trip can be submitted.
+                            Note: when adding your comment, you must check the staff notification box; otherwise staff will not receive this request.
                         </p>
                         <div class="slds-p-top_small">
                             <c-natout-trip-vendors
@@ -1035,8 +1035,8 @@
                         >
                         </lightning-input-field>
                         <template if:true={satPhoneNeeded}>
-                            <label for="dateNeeded">
-                                Date Needed
+                            <label class="slds-form-element__label" for="dateNeeded">
+                                When do you need the phone delivered? This should be at least one day before the trip start date so that you have the phone on your way to the starting point.
                             </label>
                             <lightning-input-field
                                 field-name="Sat_Phone_Needed_Date__c"
@@ -1083,7 +1083,7 @@
                             >
                             </lightning-input-field>
                             <label for="shipToState">
-                                State
+                                State/Province
                             </label>
                             <lightning-input-field
                                 field-name="Sat_Phone_Ship_To_State_Prov__c"
