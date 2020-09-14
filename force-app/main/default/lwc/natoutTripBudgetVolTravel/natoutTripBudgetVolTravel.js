@@ -16,11 +16,21 @@ const columns = [
     { label: 'Role', fieldName: 'Staff_Role__c', hideDefaultActions: true, wrapText: true }
 ];
 
-const itemCategories = [
+const domesticItemCategories = [
     { label: 'Airfare', value: 'Airfare'},
     { label: 'Mileage', value: 'Mileage'},
     { label: 'Other - airport parking, baggage fees, etc.', value: 'Other - airport parking, baggage fees, etc.'},
     { label: 'Subsistence', value: 'Subsistence'},
+    { label: 'Transportation - In country', value: 'Transportation - In country'},
+    { label: 'Transportation - US', value: 'Transportation - US'},
+    { label: 'Vehicle Rental - Volunteer', value: 'Vehicle Rental - Volunteer'},
+];
+
+const internationalItemCategories = [
+    { label: 'Airfare', value: 'Airfare'},
+    { label: 'Mileage', value: 'Mileage'},
+    { label: 'Other - airport parking, baggage fees, etc.', value: 'Other - airport parking, baggage fees, etc.'},
+    { label: 'Pre/post-trip lodging and meals', value: 'Pre/post-trip lodging and meals'},
     { label: 'Transportation - In country', value: 'Transportation - In country'},
     { label: 'Transportation - US', value: 'Transportation - US'},
     { label: 'Vehicle Rental - Volunteer', value: 'Vehicle Rental - Volunteer'},
@@ -33,10 +43,12 @@ const formatter = new Intl.NumberFormat('en-US', {
   });
 
 export default class NatoutTripBudgetVolTravel extends LightningElement {
-    itemCategories = itemCategories;
+    domesticItemCategories = domesticItemCategories;
+    internationalItemCategories = internationalItemCategories;
     @api recordId = '';
     @api staffRoleOptions = [];
     @api canEdit = false;
+    @api tripIsInternational = false;
     @track budgetList=[];
     @track itemToUpdate = {};
     @track isModalOpen = false;
@@ -227,6 +239,14 @@ export default class NatoutTripBudgetVolTravel extends LightningElement {
             }
         }
         return cols;
+    }
+    get itemCategories() {
+        if(this.tripIsInternational) {
+            return this.internationalItemCategories;
+        }
+        else {
+            return this.domesticItemCategories;
+        }
     }
     showSnackbar(type, header, text) {
         this.template.querySelector('c-snackbar').show(type, header, text);

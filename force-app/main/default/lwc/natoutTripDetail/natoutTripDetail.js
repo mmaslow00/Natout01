@@ -102,19 +102,6 @@ export default class NatoutTripDetail extends LightningElement {
         if(this.userCanEdit) {
             window.natoutTripDetailChangeMade = true;
         }
-/*
-        else if((fieldName === "Geographic_Area__c" && this.tripIsInternational) || (fieldName === "Meals_Included__c" && ! this.tripIsInternational)) {
-            if(this.lastFieldInitialized == false) {
-                this.lastFieldInitialized = true;
-                let inp=this.template.querySelectorAll('lightning-input-field, lightning-combobox, lightning-dual-listbox, lightning-radio-group');
-                inp.forEach(function(element){
-                    element.addEventListener('change', evt => {
-                        window.natoutTripDetailChangeMade = true;
-                    });
-                });
-            }
-        }
-    */
     }
     handleCountriesChange(e) {
         this.chosenCountries = e.target.value;

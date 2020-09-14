@@ -86,7 +86,7 @@
             <lightning-layout-item padding="around-small">
                 <lightning-button variant="brand" label="Refresh List" onclick={retrieveList}></lightning-button>
             </lightning-layout-item>
-            <template if:false={userIsNotAdmin}>
+            <template if:true={userIsAdmin}>
                 <lightning-layout-item padding="around-small">
                     <lightning-button-menu label="Export Selected" onselect={exportSelected}>
                         <lightning-menu-item label="Trip Details" value="trip">

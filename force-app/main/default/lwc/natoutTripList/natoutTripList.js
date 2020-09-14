@@ -316,6 +316,12 @@ export default class NatoutTripList extends LightningElement {
         // return the sorted data
         return parseData;
     }
+    get userIsAdmin() {
+        if(this.userAccess && this.userAccess.data) {
+            return this.userAccess.data.isAdmin;
+        }
+        return false;
+    }
     get userIsNotAdmin() {
         if(this.userAccess && this.userAccess.data) {
             return ! this.userAccess.data.isAdmin;
