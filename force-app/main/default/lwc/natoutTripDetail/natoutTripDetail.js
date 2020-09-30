@@ -219,8 +219,8 @@ export default class NatoutTripDetail extends LightningElement {
     }
     setupChosenStates() {
         let retArray = [];
-        if(this.tripRecord.States__c) {
-            let chosenArray = this.tripRecord.States__c.split(";");
+        if(this.tripRecord.States_Provinces__c) {
+            let chosenArray = this.tripRecord.States_Provinces__c.split(";");
             for(let i=0; i < chosenArray.length; i++) {
                 retArray.push(chosenArray[i]);
             }
@@ -235,7 +235,7 @@ export default class NatoutTripDetail extends LightningElement {
             }
             chosen += this.chosenStates[i];
         }
-        this.tripRecord.States__c = chosen;
+        this.tripRecord.States_Provinces__c = chosen;
     }
 
     get mealsBudgetSubcomm() {

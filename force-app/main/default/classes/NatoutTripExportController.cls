@@ -17,7 +17,7 @@ public with sharing class NatoutTripExportController {
                 Planned_Staff__c,
                 Trip_Copy__c,
                 First_Time_Run__c,
-                States__c,
+                States_Provinces__c,
                 Country__c,
                 Latitude__c,
                 Longitude__c,
@@ -74,8 +74,8 @@ public with sharing class NatoutTripExportController {
             row.firstTimeRun = trip.First_Time_Run__c;
             row.tripCopyChanges = trip.Prior_Trip_Copy_Changes__c;
 
-            if(trip.States__c != null) {
-                List<String> states = trip.States__c.split(';');
+            if(trip.States_Provinces__c != null) {
+                List<String> states = trip.States_Provinces__c.split(';');
                 if(states.size() > 0) {
                     row.state1 = states[0];
                 }

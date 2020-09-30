@@ -20,7 +20,7 @@ public with sharing class NatoutTripExportControllerTest {
             Planned_Staff__c = 2,
             Trip_Copy__c = 'Test trip',
             First_Time_Run__c = false,
-            States__c = 'CA;NV;OR',
+            States_Provinces__c = 'CA;NV;OR',
             Country__c = 'USA',
             Latitude__c = 90,
             Longitude__c = -120,

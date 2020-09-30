@@ -8,7 +8,7 @@ public with sharing class NatoutTripListControllerTest {
             End_Date__c = Date.today() + 2,
             Status__c = 'Started',
             Trip_Type__c = 'Backpack - California',
-            States__c = 'CA'
+            States_Provinces__c = 'CA'
         );
         insert trip;
         NatoutTripListSearchCriteria criteria = new NatoutTripListSearchCriteria();
@@ -22,7 +22,7 @@ public with sharing class NatoutTripListControllerTest {
         criteria.subcomm = trip.Subcommittee__c;
         criteria.status = trip.Status__c;
         criteria.type = trip.Trip_Type__c;
-        criteria.state = trip.States__c;
+        criteria.state = trip.States_Provinces__c;
         criteria.nameMatch = trip.Name;
 
         tripList = NatoutTripListController.getTripList(criteria);

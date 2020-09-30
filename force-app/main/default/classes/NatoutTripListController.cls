@@ -42,13 +42,14 @@ public with sharing class NatoutTripListController {
             }
             if(searchCriteria.state != 'any' && searchCriteria.state != 'All') {
                 tripState = searchCriteria.state;
-                whereClause = appendToWhere(whereClause, 'States__c includes (:tripState)');
+                whereClause = appendToWhere(whereClause, 'States_Provinces__c LIKE \'%' + tripState + '%\'');
             }
             if(String.isNotBlank(searchCriteria.nameMatch)) {
                 searchTerm = '%' + searchCriteria.nameMatch + '%';
                 whereClause = appendToWhere(whereClause, 'Name like :searchTerm');
             }
         }
+        System.debug('whereClause: ' + whereClause);
         if(whereClause.length() > 0) {
             sql = sql + 'WHERE ' + whereClause;
         }
