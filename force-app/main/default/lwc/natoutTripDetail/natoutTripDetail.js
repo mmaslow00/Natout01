@@ -152,8 +152,6 @@ export default class NatoutTripDetail extends LightningElement {
         }
     }
     saveForm() {
-        // eslint-disable-next-line no-console
-        //console.log('Trip for save => ', JSON.stringify(this.tripRecord));
         let saveErrors = false;
         const allValid = [...this.template.querySelectorAll('lightning-input-field, lightning-combobox')]
         .reduce((validSoFar, inputCmp) => {
@@ -582,20 +580,20 @@ export default class NatoutTripDetail extends LightningElement {
             errors.push({rowNum: rowNum++, text: 'Title is Required'});
         }
         if( ! this.tripRecord.Start_Date__c ) {
-            errors.push({rowNum: rowNum++, text: 'Start Date is Required'});
+            errors.push({rowNum: rowNum++, text: 'General Information: Start Date is Required'});
         }
         if( ! this.tripRecord.End_Date__c ) {
-            errors.push({rowNum: rowNum++, text: 'End Date is Required'});
+            errors.push({rowNum: rowNum++, text: 'General Information: End Date is Required'});
         }
         if( ! this.tripRecord.Participants__c ) {
-            errors.push({rowNum: rowNum++, text: 'Number of Participants is Required'});
+            errors.push({rowNum: rowNum++, text: 'General Information: Number of Participants is Required'});
         } else if(parseInt(this.tripRecord.Participants__c) < 1) {
-            errors.push({rowNum: rowNum++, text: 'Number of Participants is Required'});
+            errors.push({rowNum: rowNum++, text: 'General Information: Number of Participants is Required'});
         }
         if( ! this.tripRecord.Planned_Staff__c ) {
-            errors.push({rowNum: rowNum++, text: 'Number of Planned Staff is Required'});
+            errors.push({rowNum: rowNum++, text: 'General Information: Number of Planned Staff is Required'});
         } else if(parseInt(this.tripRecord.Planned_Staff__c) < 1) {
-            errors.push({rowNum: rowNum++, text: 'Number of Planned Staff is Required'});
+            errors.push({rowNum: rowNum++, text: 'General Information: Number of Planned Staff is Required'});
         } else {
             let staffComponent = this.template.querySelector('c-natout-trip-staff');
             let optionsList = [];
@@ -603,80 +601,75 @@ export default class NatoutTripDetail extends LightningElement {
                 optionsList = staffComponent.getTripRoles();
             }
             if(optionsList.length > this.tripRecord.Planned_Staff__c) {
-                errors.push({rowNum: rowNum++, text: 'More Staff Entered than Planned'});
+                errors.push({rowNum: rowNum++, text: 'General Information: More Staff Entered than Planned'});
             }
         }
 
         if(this.tripRecord.First_Time_Run__c) {
             if( ! this.tripRecord.Trip_Copy__c ) {
-                errors.push({rowNum: rowNum++, text: 'Trip Copy is Required for a First Time Trip'});
+                errors.push({rowNum: rowNum++, text: 'Trip Copy and Marketing: Trip Copy is Required for a First Time Trip'});
             }
         }
         else if( ! this.tripRecord.Prior_Trip__c) {
-            errors.push({rowNum: rowNum++, text: 'Prior Trip # is Required if this not a First Time Trip'});
+            errors.push({rowNum: rowNum++, text: 'Trip Copy and Marketing: Prior Trip # is Required if this not a First Time Trip'});
         }
         if( ! this.tripRecord.Conservation_Emphasis__c) {
-            errors.push({rowNum: rowNum++, text: 'Conservation Emphasis is Required'});
+            errors.push({rowNum: rowNum++, text: 'Trip Copy and Marketing: Conservation Emphasis is Required'});
         }
         if(this.tripIsInternational) {
             if(this.chosenCountries.length == 0) {
-                errors.push({rowNum: rowNum++, text: 'At least one country is Required'});
+                errors.push({rowNum: rowNum++, text: 'Location Details, Safety and Risk: At least one country is Required'});
             }
             else if(this.chosenCountries.length > 3) {
-                errors.push({rowNum: rowNum++, text: 'You cannot specify more than 3 Countries'});
+                errors.push({rowNum: rowNum++, text: 'Location Details, Safety and Risk: You cannot specify more than 3 Countries'});
             }
         }
         else {
             let areas = this.tripRecord.Area__c;
             if( ! areas) {
-                errors.push({rowNum: rowNum++, text: 'At least one Area is Required'});
+                errors.push({rowNum: rowNum++, text: 'Location Details, Safety and Risk: At least one Area is Required'});
             }    
             else if(areas.length == 0) {
-                errors.push({rowNum: rowNum++, text: 'At least one Area is Required'});
+                errors.push({rowNum: rowNum++, text: 'Location Details, Safety and Risk: At least one Area is Required'});
             }
             else {
                 areas = this.tripRecord.Area__c.split(';');
                 if(areas.length > 3) {
-                    errors.push({rowNum: rowNum++, text: 'You cannot specify more than 3 Areas'});
+                    errors.push({rowNum: rowNum++, text: 'Location Details, Safety and Risk: You cannot specify more than 3 Areas'});
                 }
             }
+            
             let actTypes = this.tripRecord.Activity_Type__c;
-            if( ! actTypes ) {
-                errors.push({rowNum: rowNum++, text: 'At least one Activity Type is Required'});
+            if(actTypes) {
+              actTypes = this.tripRecord.Activity_Type__c.split(';');
+              if(actTypes.length > 3) {
+                  errors.push({rowNum: rowNum++, text: 'Trip Copy and Marketing: You cannot specify more than 3 Activity Types'});
+              }
             }
-            else if(actTypes.length == 0) {
-                errors.push({rowNum: rowNum++, text: 'At least one Activity Type is Required'});
-            }
-            else {
-                actTypes = this.tripRecord.Activity_Type__c.split(';');
-                if(actTypes.length > 3) {
-                    errors.push({rowNum: rowNum++, text: 'You cannot specify more than 3 Activity Types'});
-                }
-            }
-
             if(this.chosenStates.length > 3) {
-                errors.push({rowNum: rowNum++, text: 'You cannot specify more than 3 States'});
+                errors.push({rowNum: rowNum++, text: 'Trip Copy and Marketing: You cannot specify more than 3 States'});
             }
 
             if( ! this.tripRecord.Country__c ) {
-                errors.push({rowNum: rowNum++, text: 'Country is Required'});
+                errors.push({rowNum: rowNum++, text: 'Location Details, Safety and Risk: Country is Required'});
             }
         }
+
         if( ! (this.tripRecord.Latitude__c && this.tripRecord.Longitude__c) ) {
-            errors.push({rowNum: rowNum++, text: 'Longitude and Latitude are Required'});
+            errors.push({rowNum: rowNum++, text: 'Location Details, Safety and Risk: Longitude and Latitude are Required'});
         }
         if( ! this.tripRecord.Risks_Hazards__c ) {
-            errors.push({rowNum: rowNum++, text: 'Risks/Hazards is Required'});
+            errors.push({rowNum: rowNum++, text: 'Location Details, Safety and Risk: Risks/Hazards is Required'});
         }
 
         if( this.tripRecord.Permit_Requirement_Options__c === 'Permit Associate Staff will obtain Commercial Permit (s)' ) {
             let agencyCount = this.template.querySelector('c-natout-trip-agencies').getRowCount();
             if(agencyCount < 1) {
-                errors.push({rowNum: rowNum++, text: 'At least one permit must be entered'});
+                errors.push({rowNum: rowNum++, text: 'Permits: At least one permit must be entered'});
             }
             if(this.isBPTrip) {
                 if( ! (this.tripRecord.Entry_Trail_Head__c && this.tripRecord.Exit_Trail_Head__c) ) {
-                    errors.push({rowNum: rowNum++, text: 'Entry and Exit Trail Heads are required'});
+                    errors.push({rowNum: rowNum++, text: 'Permits: Entry and Exit Trail Heads are required'});
                 }
             }
         }
@@ -703,7 +696,7 @@ export default class NatoutTripDetail extends LightningElement {
                 this.tripRecord.Supplies_Equipment__c > 0
                 )
             ) {
-                errors.push({rowNum: rowNum++, text: 'Missing Budget'});
+                errors.push({rowNum: rowNum++, text: 'Budget: Missing Budget'});
             }
             
         }
@@ -711,7 +704,7 @@ export default class NatoutTripDetail extends LightningElement {
             let date = this.template.querySelector('[data-field=Sat_Phone_Needed_Date__c]').value;
             if(date) {
                 if(date > this.tripRecord.Start_Date__c) {
-                    errors.push({rowNum: rowNum++, text: 'Sat Phone Needed Date is after Start Date'});
+                    errors.push({rowNum: rowNum++, text: 'Satellite Phone: Sat Phone Needed Date is after Start Date'});
                 }
             }
             let name = this.template.querySelector('[data-field=Sat_Phone_Ship_To_Name__c]').value;
@@ -721,13 +714,13 @@ export default class NatoutTripDetail extends LightningElement {
             let zip = this.template.querySelector('[data-field=Sat_Phone_Ship_To_Zip_Code__c]').value;
 
             if( ! (date && name && address && city && state && zip) ) {
-                errors.push({rowNum: rowNum++, text: 'All Sat Phone fields must be entered when Sat Phone is needed'});
+                errors.push({rowNum: rowNum++, text: 'Satellite Phone: All Sat Phone fields must be entered when Sat Phone is needed'});
             }
         }
         let itineraryDays = this.template.querySelector('c-natout-trip-itinerary').getRowCount();
         let tripDays = this.numberOfDaysBetween(this.tripRecord.Start_Date__c, this.tripRecord.End_Date__c) + 1;
         if(itineraryDays > tripDays) {
-            errors.push({rowNum: rowNum++, text: 'Itinerary Days is greater than days between start and end dates'});
+            errors.push({rowNum: rowNum++, text: 'Itinerary: Itinerary Days is greater than days between start and end dates'});
         }
 
         return errors;

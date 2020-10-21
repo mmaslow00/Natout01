@@ -13,8 +13,8 @@ public without sharing class NatoutEmailHandler {
             if((prevTrip.Status__c == 'Started' || prevTrip.Status__c == 'Returned')) {
                 if(trip.Status__c == 'Submitted') {
                     List<Recipient> recipientList = approverMap.get(trip.Id);
-                    String msgText = startedToSubmittedText(trip.Name);
-                    String subject = 'Trip submission for ' + trip.Name + ' ready for review';
+                    String msgText = startedToSubmittedText(trip.Id, trip.Title__c);
+                    String subject = 'Trip submission for ' + trip.Title__c + ' ready for review';
                     //String textToSend = getMsgPrefix(recipientList) + ' : ' + msgText;
                     for(Recipient rcp : recipientList) {
                         //tseList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, textToSend));
@@ -24,8 +24,8 @@ public without sharing class NatoutEmailHandler {
             }
             else if(prevTrip.Status__c == 'Submitted' && trip.Status__c == 'Approved by Chair') {
                 List<Recipient> recipientList = creatorMap.get(trip.Id);
-                String msgText = submittedToApprovedByChairText(trip.Name, trip.Subcommittee__c);
-                String subject = 'Trip submission for ' + trip.Name + ' approved by chair and/or collaborator';
+                String msgText = submittedToApprovedByChairText(trip.Id, trip.Title__c, trip.Subcommittee__c);
+                String subject = 'Trip submission for ' + trip.Title__c + ' approved by chair and/or collaborator';
                 //String textToSend = getMsgPrefix(recipientList) + ' : ' + msgText;
                 for(Recipient rcp : recipientList) {
                     //tseList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, textToSend));
@@ -34,8 +34,8 @@ public without sharing class NatoutEmailHandler {
             }
             else if(prevTrip.Status__c == 'Approved by Chair' && trip.Status__c == 'Approved by Staff') {
                 List<Recipient> recipientList = creatorMap.get(trip.Id);
-                String msgText = approvedByChairToApprovedByStaffText(trip.Name);
-                String subject = 'Trip submission for ' + trip.Name + ' approved by staff';
+                String msgText = approvedByChairToApprovedByStaffText(trip.Id, trip.Title__c);
+                String subject = 'Trip submission for ' + trip.Title__c + ' approved by staff';
                 //String textToSend = getMsgPrefix(recipientList) + ' : ' + msgText;
                 for(Recipient rcp : recipientList) {
                     //tseList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, textToSend));
@@ -44,8 +44,8 @@ public without sharing class NatoutEmailHandler {
             }
             else if(prevTrip.Status__c == 'Submitted' && trip.Status__c == 'Returned') {
                 List<Recipient> recipientList = creatorMap.get(trip.Id);
-                String msgText = submittedToReturnedText(trip.Name, trip.Subcommittee__c);
-                String subject = 'Trip submission for ' + trip.Name + ' returned';
+                String msgText = submittedToReturnedText(trip.Id, trip.Title__c, trip.Subcommittee__c);
+                String subject = 'Trip submission for ' + trip.Title__c + ' returned';
                 //String textToSend = getMsgPrefix(recipientList) + ' : ' + msgText;
                 for(Recipient rcp : recipientList) {
                     //tseList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, textToSend));
@@ -178,48 +178,52 @@ public without sharing class NatoutEmailHandler {
         }
         return approverMap;
     }
-    private static String startedToSubmittedText(String tripName) {
+    private static String startedToSubmittedText(String tripId, String tripTitle) {
         String msg = 
             'Trip submission for ' +
-            tripName + ' ' +
+            tripTitle + ' ' +
             'has been submitted and is now ready for your review. ' +
             'If you’re satisfied with it, select "Approved by Chair", and it will be sent to staff for processing. ' +
             'You may also make adjustments or add comments at the end of the form before approving. ' + 
             'If you’re not satisfied with it, add any questions or requested changes to the comments section ' +
-            'and select "Returned" to return it back to the trip leader for further edits.'
+            'and select "Returned" to return it back to the trip leader for further edits. ' +
+            'Trip ' + tripTitle + ' can be found at https://campfire.sierraclub.org/NatoutTripDetail?id=' + tripId
             ;
         return msg;
     }
-    private static String submittedToApprovedByChairText(String tripName, String subCommName) {
+    private static String submittedToApprovedByChairText(String tripId, String tripTitle, String subCommName) {
         String msg =
             'Trip submission for ' +
-            tripName + ' ' +
+            tripTitle + ' ' +
             'has been approved the ' +
             subCommName + ' ' +
             'Subcommittee Chair and/or collaborators. ' +
             'Your trip will now be sent to staff for processing. ' +
-            'You will be notified once the trip has been approved by staff or if there are questions or changes required.'
+            'You will be notified once the trip has been approved by staff or if there are questions or changes required. ' +
+            'Trip ' + tripTitle + ' can be found at https://campfire.sierraclub.org/NatoutTripDetail?id=' + tripId
             ;
         return msg;
     }
-    private static String approvedByChairToApprovedByStaffText(String tripName) {
+    private static String approvedByChairToApprovedByStaffText(String tripId, String tripTitle) {
         String msg =
             'Trip submission for ' +
-            tripName + ' ' +
+            tripTitle + ' ' +
             'has been approved by staff. ' +
             'If there are any changes to your trip now that it is in the system, ' +
-            'please notify tony.rango@sierraclub.org and copy your subcommittee chair so that all parties are in the loop.'
+            'please notify tony.rango@sierraclub.org and copy your subcommittee chair so that all parties are in the loop. ' +
+            'Trip ' + tripTitle + ' can be found at https://campfire.sierraclub.org/NatoutTripDetail?id=' + tripId
         ;
         return msg;
     }
-    private static String submittedToReturnedText(String tripName, String subCommName) {
+    private static String submittedToReturnedText(String tripId, String tripTitle, String subCommName) {
         String msg = 
-            'Trip Submission for ' + tripName + ' ' +
+            'Trip Submission for ' + tripTitle + ' ' +
             'has been reviewed by the ' + subCommName + ' ' +
             'Subcommittee Chair, collaborators, and/or staff ' +
             'being returned to you with questions or requested changes. ' +
             'Please review the comments at the end of the trip submission form for an explanation of why it was returned. ' +
-            'Once you’ve addressed these questions or changes, you may resubmit, with comments if necessary.' 
+            'Once you’ve addressed these questions or changes, you may resubmit, with comments if necessary. ' +
+            'Trip ' + tripTitle + ' can be found at https://campfire.sierraclub.org/NatoutTripDetail?id=' + tripId
         ;
         return msg;
     }
@@ -232,7 +236,7 @@ public without sharing class NatoutEmailHandler {
             commentsIds.add(comments.Id);
         }
         List<National_Outings_Trip__c> tripList = [
-            SELECT Id, Name, Subcommittee__c FROM National_Outings_Trip__c WHERE Id in :tripIds
+            SELECT Id, Name, Title__c, Subcommittee__c FROM National_Outings_Trip__c WHERE Id in :tripIds
         ];
         Map<Id, National_Outings_Trip__c> tripMap = new Map<Id, National_Outings_Trip__c>(tripList);
         Map<Id, List<Recipient>> creatorMap = getCreators(tripList);
@@ -252,23 +256,27 @@ public without sharing class NatoutEmailHandler {
         ];
         for(National_Outings_Trip_Comments__c comments : commentsWithCreatorList) {
             National_Outings_Trip__c trip = tripMap.get(comments.National_Outings_Trip__c);
-            String subject = 'New Comment for Trip ' + trip.Name + ' from ' + comments.CreatedBy.Name;
+            String subject = 'New Comment for Trip ' + trip.Title__c + ' from ' + comments.CreatedBy.Name;
+
+            String link = 'https://campfire.sierraclub.org/NatoutTripDetail?id=' + comments.National_Outings_Trip__c;
+            String commentsText = comments.Comments__c + ' Trip ' + trip.Title__c + ' can be found at ' + link;
+
             if(comments.Notify_Creators__c) {
                 List<Recipient> recipientList = creatorMap.get(comments.National_Outings_Trip__c);
                 for(Recipient rcp : recipientList) {
-                    //sendList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, comments.Comments__c));
-                    sendList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, comments.Comments__c));
+                    //sendList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, commentsText));
+                    sendList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, commentsText));
                 }
             }
             if(comments.Notify_Approvers__c) {
                 List<Recipient> recipientList = approverMap.get(comments.National_Outings_Trip__c);
                 for(Recipient rcp : recipientList) {
-                    //sendList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, comments.Comments__c));
-                    sendList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, comments.Comments__c));
+                    //sendList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, commentsText));
+                    sendList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, commentsText));
                 }
             }
             if(comments.Notify_Staff__c) {
-                sendList.add(createTriggeredSend(null, staffEmailAddr, subject, comments.Comments__c));
+                sendList.add(createTriggeredSend(null, staffEmailAddr, subject, commentsText));
             }
         }
         return sendList;

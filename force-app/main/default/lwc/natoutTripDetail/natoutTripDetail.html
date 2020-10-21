@@ -148,16 +148,27 @@
                             required
                         >
                         </lightning-input-field>
+
+                        <label class="slds-form-element__label" for="numparticipants">
+                            <abbr class="slds-required" title="required">*</abbr>Number of Participants
+                        </label>
                         <lightning-input-field
                             field-name="Participants__c"
                             onchange={handleFieldChange}
                             data-field="Participants__c"
+                            data-id="numparticipants"
+                            variant="label-hidden"
                         >
                         </lightning-input-field>
+                        <label class="slds-form-element__label" for="numstaff">
+                            <abbr class="slds-required" title="required">*</abbr>Number of Planned Staff
+                        </label>
                         <lightning-input-field
                             field-name="Planned_Staff__c"
                             onchange={handleFieldChange}
                             data-field="Planned_Staff__c"
+                            data-id="numstaff"
+                            variant="label-hidden"
                         >
                         </lightning-input-field>
                         <div class="slds-p-top_small">
@@ -249,7 +260,7 @@
                         </template>
                         <div style="clear: both">
                             <label class="slds-form-element__label" for="conservation">
-                                Conservation Emphasis
+                              <abbr class="slds-required" title="required">*</abbr>Conservation Emphasis
                                 <c-tooltip text="Describe the conservation emphasis for this trip and when this will be discussed on the trip.">                                
                                 </c-tooltip>
                             </label>
@@ -307,7 +318,7 @@
                         >
                         </lightning-input-field>
                         <label class="slds-form-element__label" for="groupType">
-                            <b>Secondary Activities (optional): Please select up to 2</b>
+                          <b>Secondary Activities (Optional): Please select up to 2</b>
                             <c-tooltip text="Does this trip include additional activities not conveyed by the trip type, e.g. a base camp trip that also includes an overnight kayak excursion? If so, please select these activities. This will ensure that your trip appears in search results for these terms on our website.">
                             </c-tooltip>
                             <div style="margin-top:4px; margin-bottom:4px; clear:both">
@@ -351,10 +362,15 @@
                             >
                             </lightning-dual-listbox>
 
+                            <label class="slds-form-element__label" for="country">
+                                <abbr class="slds-required" title="required">*</abbr>Country
+                            </label>
                             <lightning-input-field
                                 field-name="Country__c"
                                 onchange={handleFieldChange}
                                 data-field="Country__c"
+                                data-id="country"
+                                variant="label-hidden"
                             >
                             </lightning-input-field>
 
@@ -373,8 +389,8 @@
                                 <p class="infop">
                                     Note: when adding your comment, you must check the staff notification box; otherwise staff will not receive this request. This update will need to be made before the trip can be submitted.
                                 </p>
-                                <p style="font-weight: bold; margin-top: 5px;">
-                                    Areas: Please select up to 3
+                                <p style="margin-top: 5px;">
+                                  <abbr class="slds-required" title="required">*</abbr><b>Areas: Please select up to 3</b>
                                 </p>
                             </label>
                             <lightning-input-field
@@ -428,19 +444,31 @@
                                     text="Use the map location tool to select the park or region that is the focus of your trip, then select 'Save Location.' If the trip takes place in harder-to-define area, such as a portion of the Missouri River, search for a landmark featured in the trip, such as the town of Arrow Rock, Missouri.">
                                 </c-tooltip>
 
-                                <lightning-input-field
-                                    field-name="Latitude__c"
-                                    onchange={handleFieldChange}
-                                    data-field="Latitude__c"
-                                >
-                                </lightning-input-field>
+                                <div style="clear: both;">
+                                    <label class="slds-form-element__label" for="latitude" style="clear:both">
+                                        <abbr class="slds-required" title="required">*</abbr>Latitude
+                                    </label>
+                                    <lightning-input-field
+                                        field-name="Latitude__c"
+                                        onchange={handleFieldChange}
+                                        data-field="Latitude__c"
+                                        data-id="latitude"
+                                        variant="label-hidden"
+                                    >
+                                    </lightning-input-field>
 
-                                <lightning-input-field
-                                    field-name="Longitude__c"
-                                    onchange={handleFieldChange}
-                                    data-field="Longitude__c"
-                                >
-                                </lightning-input-field>
+                                    <label class="slds-form-element__label" for="latitude" style="clear:both">
+                                        <abbr class="slds-required" title="required">*</abbr>Longitude
+                                    </label>
+                                    <lightning-input-field
+                                        field-name="Longitude__c"
+                                        onchange={handleFieldChange}
+                                        data-field="Longitude__c"
+                                        data-id="longitude"
+                                        variant="label-hidden"
+                                    >
+                                    </lightning-input-field>
+                                </div>
                             </div>
                             <div class="slds-col slds-p-top_x-small">
                                 <template if:true={showMap}>
@@ -481,7 +509,7 @@
                         </div>
                         <div style="clear: both;">
                         <label class="slds-form-element__label" for="risksHazards">
-                            Risks/Hazards
+                          <abbr title="required" class="slds-required">*</abbr>Risks/Hazards
                             <c-tooltip text="1) List major risks and hazards associated with this trip. 2) What strategies will you use to mitigate them? 3) What options for communications in field are available? 4) Name any dangerous wildlife in the trip area you may encounter. 5) Are you familiar with the protocols for this dangerous wildlife?">                                
                             </c-tooltip>
                         </label>
@@ -618,7 +646,13 @@
                                 </div>
                             </lightning-accordion-section>
 
-                            <lightning-accordion-section name="budget-concessionaire" label={concessionaireTitle}>                                
+                            <lightning-accordion-section name="budget-concessionaire" label={concessionaireTitle}>
+                                <p class="infop">
+                                  In the concessionaire budget section below, make sure to enter only the per participant cost (and staff cost) at the 80% level (if 80% of the number of participants is not a whole number, you need to round it to the closest whole number).
+                                  <br/><br/>
+                                  Enter the concessionaire's fixed cost under option “trip,”. Note: If you have multiple fixed costs (e.g. different bus sizes), enter the fixed cost amount associated only with 80% capacity.
+                                </p>
+                                <br/>
                                 <lightning-input-field
                                     field-name="Concessionaire_Comments__c"
                                     onchange={handleFieldChange}
@@ -746,10 +780,10 @@
                                         </strong>
                                     </label>
                                     <lightning-input-field
-                                        field-name="IntlQuestion05__c"
+                                        field-name="IntlQuestion04__c"
                                         onchange={handleFieldChange}
-                                        data-field="IntlQuestion05__c"
-                                        data-id="q05"
+                                        data-field="IntlQuestion04__c"
+                                        data-id="q04"
                                         variant="label-hidden"
                                     >
                                     </lightning-input-field>
@@ -1172,11 +1206,11 @@
                         </template>                
                         <template if:false={statusChangeErrors}>
                             <p>
-                                The trip is ready to be submitted for approval.
+                              The trip is ready to be submitted for approval. Note that once the status is changed, you will not be able to make further changes unless the approver returns it to you.
                             </p>
+                            <br/>
                             <p>
-                                Note that after saving the trip for with this status, you will no longer be 
-                                able to make further changes unless the approver returns it to you.
+                              To submit your trip, close this window and hit the Save button at the top or bottom of the form. If you miss this final step, your trip will not be submitted.
                             </p>
                         </template>
                         </div>
