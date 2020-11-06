@@ -1,4 +1,4 @@
-public with sharing class NatoutTripCopy {
+public without sharing class NatoutTripCopy {
     @AuraEnabled
     public static String copy(String tripId) {
         String retVal = null;
@@ -9,6 +9,7 @@ public with sharing class NatoutTripCopy {
         National_Outings_Trip__c toTrip = fromTrip.clone(false, true, false, false);
         toTrip.Status__c = 'Started';
         toTrip.Name = 'Copy of ' + fromTrip.Name;
+        toTrip.OwnerID = UserInfo.getUserId();
         Database.SaveResult rslt = Database.insert(toTrip);
         if( ! rslt.isSuccess()) {
             return null;

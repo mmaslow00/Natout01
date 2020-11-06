@@ -226,6 +226,7 @@ public with sharing class NatoutTripBudgetReportController {
                         numParts = 0;
                     }
                     row.partAmount += (budgetItem.Amount__c * numParts);
+                    row.part80Amount += (budgetItem.Amount__c * math.round(numParts * .8));
                 }
                 when 'Trip' {
                     row.tripAmount += budgetItem.Amount__c;
@@ -266,6 +267,7 @@ public with sharing class NatoutTripBudgetReportController {
             Integer tripDays = trip.Start_Date__c.daysBetween(trip.End_Date__c) + 1;
             Decimal staffCost=0;
             Decimal partCost=0;
+            Decimal part80Cost=0;
             if(trip.Meals_Budget_Option__c == 'Subcommittee') {
                 staffCost =
                     (trip.Planned_Staff__c * (trip.Meals_First_Day__c + trip.Meals_Last_Day__c) * values.First_Last_Meals__c) +
@@ -273,16 +275,22 @@ public with sharing class NatoutTripBudgetReportController {
                 partCost =
                     (trip.Participants__c * (trip.Meals_First_Day__c + trip.Meals_Last_Day__c) * values.First_Last_Meals__c) +
                     (trip.Participants__c * (tripDays - 2) * values.Full_Day_Meals__c);
+                part80Cost =
+                    (math.round(trip.Participants__c * .8) * (trip.Meals_First_Day__c + trip.Meals_Last_Day__c) * values.First_Last_Meals__c) +
+                    (math.round(trip.Participants__c *.8) * (tripDays - 2) * values.Full_Day_Meals__c);
             }
             else if(trip.Meals_Budget_Option__c == 'Day') {
                 for(National_Outings_Trip_Budget_Item__c item : getBudgetList()) {
                     if(item.Budget_Category__c == 'Meals') {
                         staffCost += item.Staff_Amount__c * item.Number_Staff__c;
                         partCost += item.Participant_Amount__c * trip.Participants__c;
+                        part80Cost += (item.Participant_Amount__c * math.round(trip.Participants__c * .8));
                     }
                 }
             }
-            retVal.add('Participant Meals', partCost);
+            SimpleRow partMeals = new SimpleRow('Participant Meals', partCost);
+            partMeals.part80Amount = part80Cost;
+            retVal.itemList.add(partMeals);
             retVal.add('Staff Meals', staffCost);
             retVal.add('Fixed Amount', trip.Fixed_Amount__c);
             mealsSummary = retVal;
@@ -294,9 +302,9 @@ public with sharing class NatoutTripBudgetReportController {
             return null;
         }
         Decimal totalCost =
-            getVolTravel().getGrandTotalAmount() + getMeals().getTotalAmount() + 
-            getTransport().getGrandTotalAmount() + getOtherList().getTotalAmount() + 
-            getStandardValues().getTotalAmount() + getConcessionaires().getGrandTotalAmount();
+            getVolTravel().getGrandTotalAmount() + getMeals().getTotalPart80Amount() + 
+            getTransport().getPart80GrandTotal() + getOtherList().getTotalAmount() + 
+            getStandardValues().getTotalAmount() + getConcessionaires().getPart80GrandTotal();
 
         National_Outings_Trip_Type_Values__mdt values = getTripTypeValues();
         Decimal overhead = 0;
@@ -311,7 +319,7 @@ public with sharing class NatoutTripBudgetReportController {
             }
         }
         totalCost += overhead;
-        Decimal costPerPart = totalCost / getTrip().Participants__c;
+        Decimal costPerPart = totalCost / math.round(getTrip().Participants__c * .8);
         Decimal roundedCost = 5 * math.round(costPerPart / 5);
 
         return roundedCost;
@@ -354,12 +362,20 @@ public with sharing class NatoutTripBudgetReportController {
             }
             return total;
         }
+        Decimal getPart80GrandTotal() {
+            Decimal total = 0;
+            for(BudgetRow row : itemList) {
+                total += row.getRowPart80Amount();
+            }
+            return total;
+        }
     }
     public class BudgetRow {
         public String itemName {get; set;}
         public Decimal tripAmount=0;
         public Decimal partAmount=0;
         public Decimal staffAmount=0;
+        Decimal part80Amount=0;
         public Decimal getTripAmount() {
             return tripAmount > 0 ? tripAmount : null;
         }
@@ -375,6 +391,9 @@ public with sharing class NatoutTripBudgetReportController {
         }
         Decimal getRowAmount() {
             return tripAmount + partAmount + staffAmount;
+        }
+        Decimal getRowPart80Amount() {
+            return tripAmount + part80Amount + staffAmount;
         } 
     }
     public class VolTravel {
@@ -477,14 +496,23 @@ public with sharing class NatoutTripBudgetReportController {
             }
             return total;
         }
+        public Decimal getTotalPart80Amount() {
+            Decimal total = 0;
+            for(SimpleRow row : itemList) {
+                total += row.part80Amount;
+            }
+            return total;
+        }
     }
     public class SimpleRow {
         public SimpleRow(String itemName, Decimal amount) {
             this.itemName = itemName;
             this.amount = amount;
+            this.part80Amount = 0;
         }
         public String itemName {get; set;}
         Decimal amount;
+        Decimal part80Amount;
         public Decimal getAmount() {
             return amount > 0 ? amount : null;
         }

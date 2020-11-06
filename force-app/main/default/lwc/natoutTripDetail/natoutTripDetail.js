@@ -487,8 +487,8 @@ export default class NatoutTripDetail extends LightningElement {
             if(this.userCanApprove) {
                 if( ! opts.includes('Returned')) {
                     opts.push('Returned');
-                    opts.push('Approved by Chair');
                 }
+                opts.push('Approved by Chair');
             }
             if(this.userIsAdmin) {
                 opts.push('Approved by Staff');
