@@ -672,6 +672,10 @@ export default class NatoutTripDetail extends LightningElement {
                     errors.push({rowNum: rowNum++, text: 'Permits: Entry and Exit Trail Heads are required'});
                 }
             }
+            let itineraryDays = this.template.querySelector('c-natout-trip-itinerary').getRowCount();
+            if(itineraryDays == 0) {
+                errors.push({rowNum: rowNum++, text: 'Itinerary: An Itinerary is required'});
+            }
         }
         let budgetCount = 
             this.template.querySelector('c-natout-trip-budget-concessionaire').getRowCount() +

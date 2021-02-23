@@ -57,7 +57,7 @@ export default class NatoutTripList extends LightningElement {
             {label: 'Subcommittee', fieldName: 'Subcommittee__c', sortable: true, hideDefaultActions: true, wrapText: true},
             {label: 'Status', fieldName: 'Status__c', sortable: true, hideDefaultActions: true, wrapText: true},
             {label: 'Type', fieldName: 'Trip_Type__c', sortable: true, hideDefaultActions: true, wrapText: true},
-            { type: 'action', typeAttributes: { rowActions: this.getRowActions } },
+            { type: 'action', typeAttributes: { rowActions: this.getRowActions.bind(this)  } },
         ];
     }
 
@@ -228,6 +228,14 @@ export default class NatoutTripList extends LightningElement {
                 });
             }
         }
+        else if(this.userIsAdmin) {
+            if(row.Status__c != 'Approved by Staff' && row.Status__c != 'Uploaded to TRAIL') {
+                actions.push({
+                    'label': 'Delete',
+                    'name': 'delete'
+                });
+            }
+        }
         doneCallback(actions);
     }
     handleRowAction(event) {
@@ -327,6 +335,13 @@ export default class NatoutTripList extends LightningElement {
             return ! this.userAccess.data.isAdmin;
         }
         return false;
+    }
+    get listSize() {
+        let retVal = null;
+        if(this.tripList && this.tripList.data) {
+            retVal = this.tripList.data.length;
+        }
+        return retVal;
     }
     showSnackbar(type, header, text) {
         this.template.querySelector('c-snackbar').show(type, header, text);

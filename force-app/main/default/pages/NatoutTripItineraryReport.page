@@ -1,0 +1,53 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false"
+    controller="NatoutTripItineraryController"
+>
+<style>
+    * {
+        font-family: 'Arial','Helvetica',sans-serif;
+        line-height: 150%;
+    }
+
+    .alignRight {
+        text-align: right;
+    }
+    .printButton {
+        padding: 8px;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+    .label {
+        font-weight: bold;
+        margin-right: 4px;
+    }
+</style>
+    <div class="printButton alignRight">
+        <div>
+        <apex:form >
+            <apex:commandButton value="Print"
+                onclick="window.print()"
+            />
+        </apex:form>
+        </div>
+    </div>
+
+    <div class="label">
+        Itinerary for {!tripName}
+    </div>
+    <div>
+        <apex:repeat value="{!reportList}" var="it">
+            <p>
+                <span class="label">Day:</span>
+                {!it.dayNum} &nbsp; - &nbsp;
+                <apex:outputText value="{0,date,EEEE MMM d, yyyy}">
+                    <apex:param value="{!it.dayDate}"/>
+                </apex:outputText>
+                <br/>
+                <span class="label">Camp Site or Lodge Name:</span>{!it.location}<br/>
+                <span class="label">Agency:</span>{!it.agency}<br/>
+                <span class="label">Trails Used:</span>{!it.trails}
+            </p>
+        </apex:repeat>
+    </div>
+</apex:page>
