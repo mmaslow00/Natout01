@@ -616,6 +616,11 @@ export default class NatoutTripDetail extends LightningElement {
         if( ! this.tripRecord.Conservation_Emphasis__c) {
             errors.push({rowNum: rowNum++, text: 'Trip Copy and Marketing: Conservation Emphasis is Required'});
         }
+        if(this.isBPTrip) {
+            if( ! this.tripRecord.Backpack_Rating__c ) {
+                errors.push({rowNum: rowNum++, text: 'Trip Copy and Marketing: A Backpack Rating is Required for all Backpack Trips'});
+            }
+        }
         if(this.tripIsInternational) {
             if(this.chosenCountries.length == 0) {
                 errors.push({rowNum: rowNum++, text: 'Location Details, Safety and Risk: At least one country is Required'});

@@ -289,10 +289,15 @@
                         >
                         </lightning-input-field>
                         <template if:true={isBPTrip}>
+                            <label class="slds-form-element__label" for="bprating">
+                                <abbr class="slds-required" title="required">*</abbr>Backpack Rating
+                            </label>
                             <lightning-input-field
                                 field-name="Backpack_Rating__c"
                                 onchange={handleFieldChange}
                                 data-field="Backpack_Rating__c"
+                                data-id="bprating"
+                                variant="label-hidden"
                             >
                             </lightning-input-field>
                         </template>
