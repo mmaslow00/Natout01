@@ -288,6 +288,15 @@
                             data-field="Meals_Included__c"
                         >
                         </lightning-input-field>
+
+                        <div style="display:none">
+                            <lightning-input-field
+                                field-name="Backpack_Rating__c"
+                                data-field="Backpack_Rating__c"
+                            >
+                            </lightning-input-field>
+                        </div>
+
                         <template if:true={isBPTrip}>
                             <label class="slds-form-element__label" for="bprating">
                                 <abbr class="slds-required" title="required">*</abbr>Backpack Rating
