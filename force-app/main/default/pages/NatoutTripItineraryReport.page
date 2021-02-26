@@ -5,6 +5,7 @@
     * {
         font-family: 'Arial','Helvetica',sans-serif;
         line-height: 150%;
+        background-color: white;
     }
 
     .alignRight {
@@ -45,8 +46,12 @@
                 </apex:outputText>
                 <br/>
                 <span class="label">Camp Site or Lodge Name:</span>{!it.location}<br/>
-                <span class="label">Agency:</span>{!it.agency}<br/>
-                <span class="label">Trails Used:</span>{!it.trails}
+                <apex:outputPanel rendered="{!NOT(ISNULL(it.agency))}">
+                    <span class="label">Agency:</span>{!it.agency}<br/>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!NOT(ISNULL(it.trails))}">
+                    <span class="label">Trails Used:</span>{!it.trails}
+                </apex:outputPanel>
             </p>
         </apex:repeat>
     </div>

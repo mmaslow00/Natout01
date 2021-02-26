@@ -948,7 +948,7 @@
                                             The trip price is an estimate based upon the values you entered and a standard overhead allocation. Your final price will be determined once processed by the office. See standard overhead allocation amounts here.
                                         </p>
                                     </div>
-                                    <iframe src={budgetReportUrl} width="100%" height="800px">
+                                    <iframe src={budgetReportUrl} data-id="budgetReportIframe"  width="100%" height="800px">
                                     </iframe>
                                 </lightning-accordion-section>
                         </lightning-accordion>
@@ -1041,6 +1041,21 @@
                             >
                             </c-natout-trip-itinerary>
                         </div>
+                        <lightning-accordion
+                            allow-multiple-sections-open
+                            active-section-name={activeItinerarySections}
+                            onsectiontoggle={handleItinerarySectionToggle}
+                        >
+                            <lightning-accordion-section name="itinerary-report" label="Printable Report">
+                                <div>
+                                    <p class="infop">
+                                        Close and Reopen this section to refresh the report
+                                    </p>
+                                </div>
+                            <iframe src={itineraryReportUrl} data-id="itineraryReportIframe"  width="100%" height="800px">
+                                </iframe>
+                            </lightning-accordion-section>
+                        </lightning-accordion>
                     </lightning-accordion-section>
 
                     <lightning-accordion-section name="Vendors" label="Vendors">

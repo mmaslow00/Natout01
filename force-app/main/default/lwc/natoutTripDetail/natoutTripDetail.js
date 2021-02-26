@@ -15,6 +15,7 @@ export default class NatoutTripDetail extends LightningElement {
     @track wordCount = null;
     @track activeBudgetSections = [];
     @track activeTripSections = ["Approval Status"];
+    @track activeItinerarySections = [];
     @track searchingForLocation = false;
     @track showMap = false;
     @track showStatusDialog;
@@ -132,7 +133,7 @@ export default class NatoutTripDetail extends LightningElement {
 
         if(openSections.includes('budget-report')) {
             //refresh report page
-            let iframe = this.template.querySelector('iframe');
+            let iframe = this.template.querySelector('[data-id=budgetReportIframe]');
             iframe.src += '';
         }
         let sectionDiff = openSections.filter( x => !this.activeBudgetSections.includes(x) );
@@ -140,6 +141,21 @@ export default class NatoutTripDetail extends LightningElement {
         //only update if there is a difference (as handleToggleSection is reexecuted
         //until no diffs (seems odd, but it was)
         this.activeBudgetSections = sectionDiff;
+        }
+    }
+    handleItinerarySectionToggle(event) {
+        const openSections = event.detail.openSections;
+
+        if(openSections.includes('itinerary-report')) {
+            //refresh report page
+            let iframe = this.template.querySelector('[data-id=itineraryReportIframe]');
+            iframe.src += '';
+        }
+        let sectionDiff = openSections.filter( x => !this.activeItinerarySections.includes(x) );
+        if (sectionDiff.length > 0) {
+        //only update if there is a difference (as handleToggleSection is reexecuted
+        //until no diffs (seems odd, but it was)
+        this.activeItinerarySections = sectionDiff;
         }
     }
     handleTripSectionToggle(event) {
@@ -452,6 +468,12 @@ export default class NatoutTripDetail extends LightningElement {
         let lastSlash = window.location.pathname.lastIndexOf('/');
         let pathStart = window.location.pathname.substring(0,lastSlash + 1);
         let retUrl = window.location.origin + pathStart + 'NatoutTripBudgetReport?trip=' + this.recordId;
+        return retUrl;
+    }
+    get itineraryReportUrl() {
+        let lastSlash = window.location.pathname.lastIndexOf('/');
+        let pathStart = window.location.pathname.substring(0,lastSlash + 1);
+        let retUrl = window.location.origin + pathStart + 'NatoutTripItineraryReport?id=' + this.recordId;
         return retUrl;
     }
     get userCanEdit() {
