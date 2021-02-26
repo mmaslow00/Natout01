@@ -15,19 +15,18 @@ public with sharing class NatoutTripItineraryController {
     }
     public static List<PrintReport> getReportList() {
         List<National_Outings_Trip_Itinerary__c> itList = getItineraryList(getTripId());
-        Date dayDate = getTrip(getTripId()).Start_Date__c;
+        Date startDate = getTrip(getTripId()).Start_Date__c;
         List<PrintReport> reportList = new List<PrintReport>();
         for(National_Outings_Trip_Itinerary__c it : itList) {
             reportList.add(
                 new PrintReport(
                     it.Land_Agency__r.Name,
                     it.Day_Number__c,
-                    dayDate,
+                    startDate.addDays(Integer.valueOf(it.Day_Number__c) - 1),
                     it.Camp_Lodge_Location__c,
                     it.Trails_Used__c
                 )
             );
-            dayDate = dayDate.addDays(1);
         }
         return reportList;
     }
