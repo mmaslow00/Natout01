@@ -20,7 +20,12 @@
                 >
                 </lightning-formatted-date-time>
             </p>                
-            <p class="slds-box slds-theme_default">{com.Comments__c}</p>
+            <p class="slds-box slds-theme_default">
+                <lightning-formatted-rich-text 
+                    value={com.Comments__c}
+                >
+                </lightning-formatted-rich-text>
+            </p>
         </div>
     </template>    
     
@@ -44,14 +49,13 @@
                             onchange={handleCheckboxChange}>
                         </lightning-checkbox-group>
 
-                        <lightning-textarea
+                        <lightning-input-rich-text
                             label="Comment" 
                             placeholder="Enter a New Comment"
                             required
                             onchange={handleChange}
-                            max-length="4000"
-                        >
-                        </lightning-textarea>
+                            disabled-categories="FORMAT_FONT,ALIGN_TEXT,INSERT_CONTENT,REMOVE_FORMATTING"                        >
+                        </lightning-input-rich-text>
 
                     </div>
                     <footer class="slds-modal__footer">
