@@ -1,0 +1,78 @@
+<apex:page sidebar="false" showHeader="false"
+    controller="NatoutTripBudgetReportController"
+>
+<style>
+    * {
+    box-sizing: border-box;
+    }
+    .alignLeft {
+        text-align: left;
+    }
+    .alignRight {
+        text-align: right;
+    }
+ </style>
+
+<apex:dataTable value="{!intlRevenue}" var="item"
+columnClasses="alignLeft, alignRight, alignRight"
+footerClass="alignRight footer"
+styleClass="tableClass" 
+cellpadding="8"
+>
+<apex:facet name="header">Revenue</apex:facet>
+
+<apex:column >
+    {!item.label}
+</apex:column>
+
+<apex:column>
+    <apex:facet name="header">Cost at 80%</apex:facet>
+    <apex:outputText value="{0, number, currency}" rendered="{!item.label != 'Number of Participants'}">
+        <apex:param value="{!item.c80}" />
+    </apex:outputText>
+    <apex:outputText value="{0, number}" rendered="{!item.label == 'Number of Participants'}">
+        <apex:param value="{!item.c80}" />
+    </apex:outputText>
+</apex:column>
+
+<apex:column>
+    <apex:facet name="header">Cost at 100%</apex:facet>
+    <apex:outputText value="{0, number, currency}" rendered="{!item.label != 'Number of Participants'}">
+        <apex:param value="{!item.c100}" />
+    </apex:outputText>
+    <apex:outputText value="{0, number}" rendered="{!item.label == 'Number of Participants'}">
+        <apex:param value="{!item.c100}" />
+    </apex:outputText>
+</apex:column>
+
+</apex:dataTable>
+
+<apex:dataTable value="{!intlExpenses}" var="item"
+columnClasses="alignLeft, alignRight, alignRight"
+footerClass="alignRight footer"
+styleClass="tableClass" 
+cellpadding="8"
+>
+<apex:facet name="header">Expenses</apex:facet>
+
+<apex:column >
+    {!item.label}
+</apex:column>
+
+<apex:column>
+    <apex:facet name="header">Cost at 80%</apex:facet>
+    <apex:outputText value="{0, number, currency}">
+        <apex:param value="{!item.c80}" />
+    </apex:outputText>
+</apex:column>
+
+<apex:column>
+    <apex:facet name="header">Cost at 100%</apex:facet>
+    <apex:outputText value="{0, number, currency}">
+        <apex:param value="{!item.c100}" />
+    </apex:outputText>
+</apex:column>
+
+</apex:dataTable>
+
+</apex:page>

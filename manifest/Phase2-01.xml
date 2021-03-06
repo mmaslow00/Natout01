@@ -3,10 +3,13 @@
     <types>
         <members>NatoutTripItineraryController</members>
         <members>NatoutTripItineraryControllerTest</members>
+        <members>NatoutTripBudgetController</members>
+        <members>NatoutTripBudgetControllerTest</members>
         <name>ApexClass</name>
     </types>
     <types>
         <members>NatoutTripItineraryReport</members>
+        <members>NatoutTripBudgetReport</members>
         <name>ApexPage</name>
     </types>       
     <types>  

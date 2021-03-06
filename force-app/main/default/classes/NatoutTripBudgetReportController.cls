@@ -113,6 +113,9 @@ public with sharing class NatoutTripBudgetReportController {
         }
         return retList;
     }
+    public Boolean getIsInternationalTrip() {
+        return getTrip().Trip_Type__c == 'International';
+    }
     public VolTravel getVolTravel() {
         if(volTravelSummary == null) {
             Map<String, VolTravelRow> categoryMap = new Map<String, VolTravelRow>();
@@ -297,6 +300,7 @@ public with sharing class NatoutTripBudgetReportController {
         }
         return mealsSummary;
     }
+
     public Decimal getTripPrice() {
         if(getTrip().Participants__c == null) {
             return null;
@@ -305,7 +309,7 @@ public with sharing class NatoutTripBudgetReportController {
             getVolTravel().getGrandTotalAmount() + getMeals().getTotalPart80Amount() + 
             getTransport().getPart80GrandTotal() + getOtherList().getTotalAmount() + 
             getStandardValues().getTotalAmount() + getConcessionaires().getPart80GrandTotal();
-
+/*        
         National_Outings_Trip_Type_Values__mdt values = getTripTypeValues();
         Decimal overhead = 0;
         if(values != null) {
@@ -319,12 +323,174 @@ public with sharing class NatoutTripBudgetReportController {
             }
         }
         totalCost += overhead;
+*/
+        totalCost += getOverhead();
         Decimal costPerPart = totalCost / math.round(getTrip().Participants__c * .8);
         Decimal roundedCost = 5 * math.round(costPerPart / 5);
 
         return roundedCost;
     }
+    private Decimal getOverhead() {
+        National_Outings_Trip_Type_Values__mdt values = getTripTypeValues();
+        Decimal overhead = 0;
+        if(values != null) {
+            if(values.Overhead_Amount2__c > 0) {
+                if(getTrip().First_Time_Run__c) {
+                    overhead = values.Overhead_Amount2__c;
+                }
+            }
+            if(overhead == 0) {
+                overhead = values.Overhead_Amount1__c;
+            }
+        }
+        return overhead;
+    }
+    public List<IntlRow> getIntlRevenue() {
+        List<IntlRow> rpt = new List<IntlRow>();
+        rpt.add(
+            new IntlRow(
+                'Number of Participants',
+                math.round(getTrip().Participants__c * .8),
+                getTrip().Participants__c
+            )
+        );
+        rpt.add(
+            new IntlRow(
+                'Estimated Trip Price',
+                getTripPrice(),
+                getTripPrice100()
+            )
+        );
+        Decimal total80 =
+            getVolTravel().getGrandTotalAmount() + 
+            getMeals().getTotalPart80Amount() + 
+            getTransport().getPart80GrandTotal() +
+            getConcessionaires().getPart80GrandTotal() +
+            getOtherList().getTotal() +
+            getStandardValues().getTotalAmount()
+        ;
+        Decimal total100 =
+            getVolTravel().getGrandTotalAmount() + 
+            getMeals().getTotalAmount() + 
+            getTransport().getGrandTotalAmount() +
+            getConcessionaires().getPart80GrandTotal() +
+            getOtherList().getTotalAmount() +
+            getStandardValues().getTotalAmount()
+        ;
+        rpt.add(
+            new IntlRow(
+                'Revenue',
+                (getTripPrice() * math.round(getTrip().Participants__c * .8)) - total80,
+                (getTripPrice100() * getTrip().Participants__c) - total100
+            )
+        );
+        
+        return rpt;
+    }
+    public List<IntlRow> getIntlExpenses() {
+        List<IntlRow> rpt = new List<IntlRow>();
+        rpt.add(
+            new IntlRow(
+                'Volunteer Travel',
+                getVolTravel().getGrandTotalAmount(),
+                getVolTravel().getGrandTotalAmount()
+            )
+        );
+        rpt.add(
+            new IntlRow(
+                'Meals',
+                getMeals().getTotalPart80Amount(),
+                getMeals().getTotalAmount()
+            )
+        );
+        rpt.add(
+            new IntlRow(
+                'On Trip Transportation',
+                getTransport().getPart80GrandTotal(),
+                getTransport().getGrandTotal()            
+            )
+        );
+        rpt.add(
+            new IntlRow(
+                'Concessionaires/Leader Planned Arrangements',
+                getConcessionaires().getPart80GrandTotal(),
+                getConcessionaires().getGrandTotal()
+            )
+        );
+        rpt.add(
+            new IntlRow(
+                'Other',
+                getOtherList().getTotal(),
+                getOtherList().getTotal()
+            )
+        );
+        rpt.add(
+            new IntlRow(
+                'Subcommittee Standard Values',
+                getStandardValues().getTotalAmount(),
+                getStandardValues().getTotalAmount()
+            )
+        );
+        Decimal total80 =
+            getVolTravel().getGrandTotalAmount() + 
+            getMeals().getTotalPart80Amount() + 
+            getTransport().getPart80GrandTotal() +
+            getConcessionaires().getPart80GrandTotal() +
+            getOtherList().getTotal() +
+            getStandardValues().getTotalAmount()
+        ;
+        Decimal total100 =
+            getVolTravel().getGrandTotalAmount() + 
+            getMeals().getTotalAmount() + 
+            getTransport().getGrandTotalAmount() +
+            getConcessionaires().getPart80GrandTotal() +
+            getOtherList().getTotalAmount() +
+            getStandardValues().getTotalAmount()
+        ;
+        rpt.add(
+            new IntlRow(
+                'Total Field Expenses',
+                total80,
+                total100
+            )
+        );
+        rpt.add(
+            new IntlRow(
+                'Overhead Contribution',
+                getOverhead(),
+                getOverhead()
+            )
+        );
 
+        return rpt;
+    }
+    private Decimal getTripPrice100() {
+        Decimal totalCost =
+            getVolTravel().getGrandTotalAmount() + getMeals().getTotalAmount() + 
+            getTransport().getGrandTotalAmount() + getOtherList().getTotalAmount() + 
+            getStandardValues().getTotalAmount() + getConcessionaires().getGrandTotal();
+
+/*            
+        National_Outings_Trip_Type_Values__mdt values = getTripTypeValues();
+        Decimal overhead = 0;
+        if(values != null) {
+            if(values.Overhead_Amount2__c > 0) {
+                if(getTrip().First_Time_Run__c) {
+                    overhead = values.Overhead_Amount2__c;
+                }
+            }
+            if(overhead == 0) {
+                overhead = values.Overhead_Amount1__c;
+            }
+        }
+        totalCost += overhead;
+*/
+        totalCost += getOverhead();
+        Decimal costPerPart = totalCost / math.round(getTrip().Participants__c);
+        Decimal roundedCost = 5 * math.round(costPerPart / 5);
+
+        return roundedCost;
+    }
     public class BudgetCategory {
         public BudgetCategory() {
             this.itemList = new List<BudgetRow>();
@@ -516,5 +682,15 @@ public with sharing class NatoutTripBudgetReportController {
         public Decimal getAmount() {
             return amount > 0 ? amount : null;
         }
+    }
+    public class IntlRow {
+        public IntlRow(String label, Decimal c80, Decimal c100) {
+            this.label = label;
+            this.c80 = c80;
+            this.c100 = c100;
+        }
+        public String label {get; set;}
+        public Decimal c80 {get; set;}
+        public Decimal c100 {get; set;}
     }
 }

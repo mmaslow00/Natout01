@@ -222,7 +222,7 @@
         styleClass="tableClass" 
         cellpadding="8"
     >
-        <apex:facet name="header">Concessionaires</apex:facet>
+        <apex:facet name="header">Concessionaires/Leader Planned Arrangements</apex:facet>
 
         <apex:column >
             {!item.itemName}
@@ -332,6 +332,74 @@
             </apex:column>
         </apex:dataTable>
     </div>
+    </apex:outputPanel>
+
+    <apex:outputPanel rendered = "{!isInternationalTrip}">
+        <div class="bordered">
+            <apex:dataTable value="{!intlRevenue}" var="item"
+                columnClasses="alignLeft, alignRight, alignRight"
+                footerClass="alignRight footer"
+                styleClass="tableClass" 
+                cellpadding="8"
+            >
+            <apex:facet name="header">Revenue</apex:facet>
+            
+            <apex:column >
+                {!item.label}
+            </apex:column>
+            
+            <apex:column>
+                <apex:facet name="header">Cost at 80%</apex:facet>
+                <apex:outputText value="{0, number, currency}" rendered="{!item.label != 'Number of Participants'}">
+                    <apex:param value="{!item.c80}" />
+                </apex:outputText>
+                <apex:outputText value="{0, number}" rendered="{!item.label == 'Number of Participants'}">
+                    <apex:param value="{!item.c80}" />
+                </apex:outputText>
+            </apex:column>
+            
+            <apex:column>
+                <apex:facet name="header">Cost at 100%</apex:facet>
+                <apex:outputText value="{0, number, currency}" rendered="{!item.label != 'Number of Participants'}">
+                    <apex:param value="{!item.c100}" />
+                </apex:outputText>
+                <apex:outputText value="{0, number}" rendered="{!item.label == 'Number of Participants'}">
+                    <apex:param value="{!item.c100}" />
+                </apex:outputText>
+            </apex:column>            
+            </apex:dataTable>            
+        </div>
+
+        <div class="bordered">
+            <apex:dataTable value="{!intlExpenses}" var="item"
+                columnClasses="alignLeft, alignRight, alignRight"
+                footerClass="alignRight footer"
+                styleClass="tableClass" 
+                cellpadding="8"
+            >
+            <apex:facet name="header">Expenses</apex:facet>
+            
+            <apex:column >
+                {!item.label}
+            </apex:column>
+            
+            <apex:column>
+                <apex:facet name="header">Cost at 80%</apex:facet>
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!item.c80}" />
+                </apex:outputText>
+            </apex:column>
+            
+            <apex:column>
+                <apex:facet name="header">Cost at 100%</apex:facet>
+                <apex:outputText value="{0, number, currency}">
+                    <apex:param value="{!item.c100}" />
+                </apex:outputText>
+            </apex:column>
+            
+            </apex:dataTable>            
+        </div>
+
     </apex:outputPanel>
 
 </apex:page>
