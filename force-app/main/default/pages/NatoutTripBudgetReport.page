@@ -348,8 +348,7 @@
                 {!item.label}
             </apex:column>
             
-            <apex:column>
-                <apex:facet name="header">Cost at 80%</apex:facet>
+            <apex:column headerValue="80%" headerClass="alignRight">
                 <apex:outputText value="{0, number, currency}" rendered="{!item.label != 'Number of Participants'}">
                     <apex:param value="{!item.c80}" />
                 </apex:outputText>
@@ -358,8 +357,8 @@
                 </apex:outputText>
             </apex:column>
             
-            <apex:column>
-                <apex:facet name="header">Cost at 100%</apex:facet>
+            <apex:column headerClass="alignRight">
+                <apex:facet name="header">100%</apex:facet>
                 <apex:outputText value="{0, number, currency}" rendered="{!item.label != 'Number of Participants'}">
                     <apex:param value="{!item.c100}" />
                 </apex:outputText>

@@ -172,5 +172,13 @@ public with sharing class NatoutTripBudgetReportControllerTest {
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('trip', trip.Id);
         Pagereference errorPage = ctl.checkForNulls();
+        
+        trip.Participants__c = 10;
+        trip.Trip_Type__c = 'International';
+        update trip;
+        ctl = new NatoutTripBudgetReportController();
+        System.assertEquals(true, ctl.getIsInternationalTrip());
+        List<NatoutTripBudgetReportController.IntlRow> row = ctl.getIntlRevenue();
+        row = ctl.getIntlExpenses();
     }
 }
