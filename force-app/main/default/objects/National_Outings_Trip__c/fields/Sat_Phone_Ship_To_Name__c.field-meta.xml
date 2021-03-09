@@ -3,7 +3,7 @@
     <fullName>Sat_Phone_Ship_To_Name__c</fullName>
     <externalId>false</externalId>
     <label>Sat Phone Ship-To Name</label>
-    <length>20</length>
+    <length>255</length>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Text</type>

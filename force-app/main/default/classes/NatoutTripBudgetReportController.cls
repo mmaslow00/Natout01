@@ -309,21 +309,7 @@ public with sharing class NatoutTripBudgetReportController {
             getVolTravel().getGrandTotalAmount() + getMeals().getTotalPart80Amount() + 
             getTransport().getPart80GrandTotal() + getOtherList().getTotalAmount() + 
             getStandardValues().getTotalAmount() + getConcessionaires().getPart80GrandTotal();
-/*        
-        National_Outings_Trip_Type_Values__mdt values = getTripTypeValues();
-        Decimal overhead = 0;
-        if(values != null) {
-            if(values.Overhead_Amount2__c > 0) {
-                if(getTrip().First_Time_Run__c) {
-                    overhead = values.Overhead_Amount2__c;
-                }
-            }
-            if(overhead == 0) {
-                overhead = values.Overhead_Amount1__c;
-            }
-        }
-        totalCost += overhead;
-*/
+
         totalCost += getOverhead();
         Decimal costPerPart = totalCost / math.round(getTrip().Participants__c * .8);
         Decimal roundedCost = 5 * math.round(costPerPart / 5);
@@ -366,7 +352,7 @@ public with sharing class NatoutTripBudgetReportController {
             getMeals().getTotalPart80Amount() + 
             getTransport().getPart80GrandTotal() +
             getConcessionaires().getPart80GrandTotal() +
-            getOtherList().getTotal() +
+            getOtherList().getTotalAmount() +
             getStandardValues().getTotalAmount()
         ;
         Decimal total100 =

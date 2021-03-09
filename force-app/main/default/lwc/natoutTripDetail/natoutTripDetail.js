@@ -8,6 +8,7 @@ import PERMIT_REQUIREMENT_FIELD from '@salesforce/schema/National_Outings_Trip__
 import getPicklistOptions from '@salesforce/apex/NatoutTripOptions.getOptions';
 import getUserAccess from '@salesforce/apex/NatoutUserInfo.getUserAccess';
 import { refreshApex } from '@salesforce/apex';
+import submitPostTripReport from '@salesforce/apex/NatoutTripPostTripReport.submitReport';
 
 export default class NatoutTripDetail extends LightningElement {
     @api recordId;
@@ -30,6 +31,9 @@ export default class NatoutTripDetail extends LightningElement {
     chosenTripType = null;
     chosenStatus = null;
     lastFieldInitialized = false;
+    postTripReportDue = false;
+    revisingPostUse = false;
+    updatingPostUse = false;
     @track errorList = [];
 
     @wire(getObjectInfo, { objectApiName: TRIP_OBJECT })
@@ -67,7 +71,12 @@ export default class NatoutTripDetail extends LightningElement {
                     // eslint-disable-next-line no-unused-vars
                     .filter((field) => !!this.template.querySelector(`[data-field=${field}]`))
                     .reduce((total, field) => {
-                        total[field] = fields[field].value;
+                        if(field == 'Post_Trip_Report_Due__c') {
+                            this.postTripReportDue = fields[field].value;
+                        }
+                        else {
+                            total[field] = fields[field].value;
+                        }
                         return total;
                     }, {})
             };
@@ -101,7 +110,9 @@ export default class NatoutTripDetail extends LightningElement {
             this.calculateWordCount();
         }
         if(this.userCanEdit) {
-            window.natoutTripDetailChangeMade = true;
+            if( ! fieldName.startsWith('Post_Trip')) {
+                window.natoutTripDetailChangeMade = true;
+            }
         }
     }
     handleCountriesChange(e) {
@@ -210,7 +221,25 @@ export default class NatoutTripDetail extends LightningElement {
             });
         }   
     }
-
+    savePostUse() {
+        this.updatingPostUse = true;
+        submitPostTripReport({
+            tripId: this.recordId,
+            itinerary: this.tripRecord.Post_Trip_Report_Itinerary__c,
+            medical: this.tripRecord.Post_Trip_Report_Medical__c
+        })
+        .then(result => {
+            this.tripRecord.Post_Trip_Report_Date_Submitted__c = result;
+            this.error = undefined;
+            this.revisingPostUse = false;
+            this.updatingPostUse = false;
+        })
+        .catch(error => {
+            this.error = error;
+            this.updatingPostUse = true;
+            this.showSnackbar('failure', 'Update Failed', reduceErrors(error).join(', '));
+        });        
+    }
     setupChosenCountries() {
         let retArray = [];
         if(this.tripRecord.International_Countries__c) {
@@ -528,6 +557,32 @@ export default class NatoutTripDetail extends LightningElement {
     }
     get statusChangeErrors() {
         return this.errorList.length > 0;
+    }
+    get postTripReportSubmitted() {
+        if(this.revisingPostUse) {
+            return false;
+        }
+        let retVal = this.tripRecord.Post_Trip_Report_Date_Submitted__c != null;
+        return retVal;
+    }
+    get showPostUseFields() {
+        if(this.revisingPostUse) {
+            return true;
+        }
+        let retVal = this.postTripReportDue && this.tripRecord.Status__c == 'Uploaded to TRAIL';
+        return retVal;
+    }
+    get displayPostUseFields() {
+        if(this.revisingPostUse) {
+            return false;
+        }
+        return this.postTripReportSubmitted;
+    }
+    revisePostUse() {
+        this.revisingPostUse = true;
+    }
+    cancelPostUse() {
+        this.revisingPostUse = false;
     }
     get showApprovalWarnings() {
         let retVal = false;

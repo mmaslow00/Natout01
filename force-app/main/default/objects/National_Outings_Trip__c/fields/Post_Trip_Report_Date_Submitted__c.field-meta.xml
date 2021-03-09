@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Sat_Phone_Ship_To_Address__c</fullName>
+    <fullName>Post_Trip_Report_Date_Submitted__c</fullName>
     <externalId>false</externalId>
-    <label>Sat Phone Ship-To Address</label>
-    <length>225</length>
+    <label>Post Trip Report Date Submitted</label>
     <required>false</required>
     <trackTrending>false</trackTrending>
-    <type>Text</type>
-    <unique>false</unique>
+    <type>DateTime</type>
 </CustomField>

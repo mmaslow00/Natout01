@@ -21,3 +21,12 @@
 .intl-questions-italic {
     font-style: italic;
 }
+.bordered {
+    padding: 8px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    border-style: solid;
+    border-width: thin;    
+}

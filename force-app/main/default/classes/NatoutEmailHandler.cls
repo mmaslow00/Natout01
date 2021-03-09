@@ -282,7 +282,7 @@ public without sharing class NatoutEmailHandler {
         return sendList;
     }
 
-    private static TriggeredSendEmail__c createTriggeredSend(Id contactId, String emailAddr, String subject, String msg) {
+    public static TriggeredSendEmail__c createTriggeredSend(Id contactId, String emailAddr, String subject, String msg) {
         JSONGenerator gen = JSON.createGenerator(false);
         gen.writeStartObject();
         gen.writeFieldName('To');

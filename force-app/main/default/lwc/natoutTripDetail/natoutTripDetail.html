@@ -72,6 +72,113 @@
                     disabled={userIsReadOnly}
                     >
                 </lightning-input-field>
+
+                <div style="display: none;">
+                    <lightning-input-field
+                        field-name="Post_Trip_Report_Itinerary__c"
+                        data-field="Post_Trip_Report_Itinerary__c"
+                        data-id="post-trip-report-itinerary"
+                    >
+                    </lightning-input-field>
+                    <lightning-input-field
+                        field-name="Post_Trip_Report_Medical__c"
+                        data-field="Post_Trip_Report_Medical__c"
+                        data-id="post-trip-report-medical"
+                    >
+                    </lightning-input-field>
+                    <lightning-input-field
+                        field-name="Post_Trip_Report_Date_Submitted__c"
+                        data-field="Post_Trip_Report_Date_Submitted__c"
+                        data-id="post-trip-report-date"
+                    >
+                    </lightning-input-field>
+                    <lightning-input-field
+                        field-name="Post_Trip_Report_Due__c"
+                        data-field="Post_Trip_Report_Due__c"
+                    >
+                    </lightning-input-field>
+                </div>
+                
+                <template if:true={showPostUseFields}>
+                    <template if:false={postTripReportSubmitted}>
+                        <div class="bordered">
+                        <div style="margin-bottom: 10px;">
+                            <p class="infop">
+                                Please describe any significant changes to your itinerary (i.e. cancelled trip early due to weather, 
+                                major reroutes. Minor changes do not need to be reported). 
+                                If so, please tell us what changed below. If not, your trip itinerary will be kept on file 
+                                as originally submitted.
+                            </p>
+                        </div>
+                        <label class="slds-form-element__label" for="postTripReportItinerary">
+                            Itinerary Changes
+                        </label>
+                        <lightning-input-field
+                            field-name="Post_Trip_Report_Itinerary__c"
+                            onchange={handleFieldChange}
+                            data-field="Post_Trip_Report_Itinerary__c"
+                            value={tripRecord.Post_Trip_Report_Itinerary__c}
+                            variant="label-hidden"
+                        >
+                        </lightning-input-field>
+
+                        <div style="margin-bottom: 10px;">
+                            <p class="infop">
+                                Did your trip have any reportable injuries or medical incidents requiring medical aid 
+                                beyond basic First Aid and where a request for medical aid/rescue assistance was made?
+                            </p>
+                        </div>
+                        <label class="slds-form-element__label" for="postTripReportMedical">
+                            Injuries or Medical Incidents
+                        </label>
+                        <lightning-input-field
+                            field-name="Post_Trip_Report_Medical__c"
+                            onchange={handleFieldChange}
+                            data-field="Post_Trip_Report_Medical__c"
+                            value={tripRecord.Post_Trip_Report_Medical__c}
+                            variant="label-hidden"
+                        >
+                        </lightning-input-field>
+                        <div class="save-button">
+                            <lightning-button class="slds-m-top_small"
+                                variant="brand"
+                                label="Submit Post Use Report"
+                                onclick={savePostUse}>
+                            </lightning-button>
+                            <template if:true={revisingPostUse}>
+                                <lightning-button class="slds-m-top_small slds-p-left_large"
+                                    label="Dismiss"
+                                    onclick={cancelPostUse}>
+                                </lightning-button>
+                            </template>
+                        </div>
+
+                        <div if:true={updatingPostUse} class="slds-is-relative">
+                            <lightning-spinner
+                                alternative-text="Updating..."
+                            >
+                            </lightning-spinner>
+                        </div> 
+                                     
+                        </div>
+                    </template>
+                    <template if:true={displayPostUseFields}>
+                        Post Use Report Submitted:&nbsp;
+                        <lightning-formatted-date-time
+                            value={tripRecord.Post_Trip_Report_Date_Submitted__c}
+                            year="numeric"
+                            month="long"
+                            day="numeric"
+                        >
+                        </lightning-formatted-date-time>
+                        <lightning-button class="slds-m-top_small slds-p-left_medium"
+                            variant="base"
+                            label="View/Revise Post Use Report"
+                            onclick={revisePostUse}>
+                        </lightning-button>
+                    </template>
+                </template>
+
                 <lightning-accordion 
                     active-section-name={activeTripSections}
                     allow-multiple-sections-open

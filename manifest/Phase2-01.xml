@@ -3,8 +3,11 @@
     <types>
         <members>NatoutTripItineraryController</members>
         <members>NatoutTripItineraryControllerTest</members>
-        <members>NatoutTripBudgetController</members>
-        <members>NatoutTripBudgetControllerTest</members>
+        <members>NatoutTripBudgetReportController</members>
+        <members>NatoutTripBudgetReportControllerTest</members>
+        <members>NatoutTripPostTripReport</members>
+        <members>NatoutTripPostTripReportTest</members>
+        <members>NatoutEmailHandler</members>
         <name>ApexClass</name>
     </types>
     <types>
