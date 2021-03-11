@@ -382,34 +382,42 @@ public with sharing class NatoutTripBudgetReportController {
                 getVolTravel().getGrandTotalAmount()
             )
         );
-        rpt.add(
-            new IntlRow(
-                'Meals',
-                getMeals().getTotalPart80Amount(),
-                getMeals().getTotalAmount()
-            )
-        );
-        rpt.add(
-            new IntlRow(
-                'On Trip Transportation',
-                getTransport().getPart80GrandTotal(),
-                getTransport().getGrandTotal()            
-            )
-        );
-        rpt.add(
-            new IntlRow(
-                'Concessionaires/Leader Planned Arrangements',
-                getConcessionaires().getPart80GrandTotal(),
-                getConcessionaires().getGrandTotal()
-            )
-        );
-        rpt.add(
-            new IntlRow(
-                'Other',
-                getOtherList().getTotal(),
-                getOtherList().getTotal()
-            )
-        );
+        if(getMeals().getTotalAmount() > 0) {
+            rpt.add(
+                new IntlRow(
+                    'Meals',
+                    getMeals().getTotalPart80Amount(),
+                    getMeals().getTotalAmount()
+                )
+            );
+        }
+        if(getTransport().getGrandTotal() > 0) {
+            rpt.add(
+                new IntlRow(
+                    'On Trip Transportation',
+                    getTransport().getPart80GrandTotal(),
+                    getTransport().getGrandTotal()            
+                )
+            );
+        }   
+        if(getConcessionaires().getGrandTotalAmount() > 0) {
+            rpt.add(
+                new IntlRow(
+                    'Concessionaires/Leader Planned Arrangements',
+                    getConcessionaires().getPart80GrandTotal(),
+                    getConcessionaires().getGrandTotal()
+                )
+            );
+        }
+        if(getOtherList().getTotalAmount() > 0) {
+            rpt.add(
+                new IntlRow(
+                    'Other',
+                    getOtherList().getTotal(),
+                    getOtherList().getTotal()
+                )
+            );
+        }
         rpt.add(
             new IntlRow(
                 'Subcommittee Standard Values',
@@ -422,8 +430,8 @@ public with sharing class NatoutTripBudgetReportController {
             getMeals().getTotalPart80Amount() + 
             getTransport().getPart80GrandTotal() +
             getConcessionaires().getPart80GrandTotal() +
-            getOtherList().getTotal() +
-            getStandardValues().getTotalAmount()
+            getOtherList().getTotalAmount() +
+            getStandardValues().getTotalAmount() 
         ;
         Decimal total100 =
             getVolTravel().getGrandTotalAmount() + 
@@ -455,22 +463,6 @@ public with sharing class NatoutTripBudgetReportController {
             getVolTravel().getGrandTotalAmount() + getMeals().getTotalAmount() + 
             getTransport().getGrandTotalAmount() + getOtherList().getTotalAmount() + 
             getStandardValues().getTotalAmount() + getConcessionaires().getGrandTotal();
-
-/*            
-        National_Outings_Trip_Type_Values__mdt values = getTripTypeValues();
-        Decimal overhead = 0;
-        if(values != null) {
-            if(values.Overhead_Amount2__c > 0) {
-                if(getTrip().First_Time_Run__c) {
-                    overhead = values.Overhead_Amount2__c;
-                }
-            }
-            if(overhead == 0) {
-                overhead = values.Overhead_Amount1__c;
-            }
-        }
-        totalCost += overhead;
-*/
         totalCost += getOverhead();
         Decimal costPerPart = totalCost / math.round(getTrip().Participants__c);
         Decimal roundedCost = 5 * math.round(costPerPart / 5);
