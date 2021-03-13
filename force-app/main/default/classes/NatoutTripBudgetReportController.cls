@@ -333,18 +333,19 @@ public with sharing class NatoutTripBudgetReportController {
     }
     public List<IntlRow> getIntlRevenue() {
         List<IntlRow> rpt = new List<IntlRow>();
+        Decimal parts80 = math.round(getTrip().Participants__c * .8);
         rpt.add(
             new IntlRow(
                 'Number of Participants',
-                math.round(getTrip().Participants__c * .8),
+                parts80,
                 getTrip().Participants__c
             )
         );
         rpt.add(
             new IntlRow(
                 'Estimated Trip Price',
-                getTripPrice(),
-                getTripPrice100()
+                getTripPrice() ,
+                getTripPrice()
             )
         );
         Decimal total80 =
@@ -359,18 +360,18 @@ public with sharing class NatoutTripBudgetReportController {
             getVolTravel().getGrandTotalAmount() + 
             getMeals().getTotalAmount() + 
             getTransport().getGrandTotalAmount() +
-            getConcessionaires().getPart80GrandTotal() +
+            getConcessionaires().getGrandTotalAmount() +
             getOtherList().getTotalAmount() +
             getStandardValues().getTotalAmount()
         ;
         rpt.add(
             new IntlRow(
                 'Revenue',
-                (getTripPrice() * math.round(getTrip().Participants__c * .8)) - total80,
-                (getTripPrice100() * getTrip().Participants__c) - total100
+                (getTripPrice() * math.round(getTrip().Participants__c * .8)),
+                (getTripPrice() * getTrip().Participants__c)
             )
         );
-        
+               
         return rpt;
     }
     public List<IntlRow> getIntlExpenses() {
@@ -437,7 +438,7 @@ public with sharing class NatoutTripBudgetReportController {
             getVolTravel().getGrandTotalAmount() + 
             getMeals().getTotalAmount() + 
             getTransport().getGrandTotalAmount() +
-            getConcessionaires().getPart80GrandTotal() +
+            getConcessionaires().getGrandTotal() +
             getOtherList().getTotalAmount() +
             getStandardValues().getTotalAmount()
         ;
@@ -451,23 +452,11 @@ public with sharing class NatoutTripBudgetReportController {
         rpt.add(
             new IntlRow(
                 'Overhead Contribution',
-                getOverhead(),
-                getOverhead()
+                (getTripPrice() * math.round(getTrip().Participants__c * .8)) - total80,
+                (getTripPrice() * getTrip().Participants__c) - total100
             )
         );
-
         return rpt;
-    }
-    private Decimal getTripPrice100() {
-        Decimal totalCost =
-            getVolTravel().getGrandTotalAmount() + getMeals().getTotalAmount() + 
-            getTransport().getGrandTotalAmount() + getOtherList().getTotalAmount() + 
-            getStandardValues().getTotalAmount() + getConcessionaires().getGrandTotal();
-        totalCost += getOverhead();
-        Decimal costPerPart = totalCost / math.round(getTrip().Participants__c);
-        Decimal roundedCost = 5 * math.round(costPerPart / 5);
-
-        return roundedCost;
     }
     public class BudgetCategory {
         public BudgetCategory() {
