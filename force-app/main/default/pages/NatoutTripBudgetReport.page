@@ -38,6 +38,9 @@
     .leftMargin {
         padding-left: 5px;
     }
+    .overline {
+        text-decoration: overline;
+    }
 </style>
     <div class="printButton alignRight">
         <div>
@@ -342,9 +345,10 @@
                 styleClass="tableClass" 
                 cellpadding="8"
             >
-            <apex:facet name="header">Revenue</apex:facet>
-            
             <apex:column >
+                <apex:facet name="header">
+                    Revenue
+                </apex:facet>
                 {!item.label}
             </apex:column>
             
@@ -376,22 +380,29 @@
                 styleClass="tableClass" 
                 cellpadding="8"
             >
-            <apex:facet name="header">Expenses</apex:facet>
-            
-            <apex:column >
+            <apex:column>
+                <apex:facet name="header">
+                    Expenses
+                </apex:facet>
                 {!item.label}
             </apex:column>
             
             <apex:column headerClass="alignRight">
                 <apex:facet name="header">80%</apex:facet>
-                <apex:outputText value="{0, number, currency}">
+                <apex:outputText 
+                    value="{0, number, currency}"
+                    styleClass="{!IF(item.label == 'Total Field Expenses', 'overline', '')}"
+                >
                     <apex:param value="{!item.c80}" />
                 </apex:outputText>
             </apex:column>
-            
+
             <apex:column headerClass="alignRight">
                 <apex:facet name="header">100%</apex:facet>
-                <apex:outputText value="{0, number, currency}">
+                <apex:outputText 
+                    value="{0, number, currency}"
+                    styleClass="{!IF(item.label == 'Total Field Expenses', 'overline', '')}"
+                >
                     <apex:param value="{!item.c100}" />
                 </apex:outputText>
             </apex:column>

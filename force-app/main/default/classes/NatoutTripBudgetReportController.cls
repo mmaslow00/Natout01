@@ -438,7 +438,7 @@ public with sharing class NatoutTripBudgetReportController {
             getVolTravel().getGrandTotalAmount() + 
             getMeals().getTotalAmount() + 
             getTransport().getGrandTotalAmount() +
-            getConcessionaires().getGrandTotal() +
+            getConcessionaires().getGrandTotalAmount() +
             getOtherList().getTotalAmount() +
             getStandardValues().getTotalAmount()
         ;
@@ -447,6 +447,13 @@ public with sharing class NatoutTripBudgetReportController {
                 'Total Field Expenses',
                 total80,
                 total100
+            )
+        );
+        rpt.add(
+            new IntlRow(
+                null,
+                null,
+                null
             )
         );
         rpt.add(
