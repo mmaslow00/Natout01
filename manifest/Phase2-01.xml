@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
+        <members>ContentManagerService</members>
+        <members>FileUploadService</members>
+        <members>NatoutTripTriggerHandler</members>
         <members>NatoutTripItineraryController</members>
         <members>NatoutTripItineraryControllerTest</members>
         <members>NatoutTripBudgetReportController</members>
@@ -11,6 +14,10 @@
         <name>ApexClass</name>
     </types>
     <types>
+        <members>NatoutTripTrigger</members>
+        <name>ApexTrigger</name>
+    </types>       
+    <types>
         <members>NatoutTripItineraryReport</members>
         <members>NatoutTripBudgetReport</members>
         <name>ApexPage</name>
@@ -18,6 +25,8 @@
     <types>  
         <members>natoutTripDetail</members>
         <members>natoutTripList</members>
+        <members>contentManager</members>
+        <members>fileUpload</members>
         <name>LightningComponentBundle</name>  
     </types>
     <version>48.0</version>

@@ -49,6 +49,23 @@ public with sharing class NatoutTripTriggerHandler {
             }
         }
     }
+    public static void beforeDelete(List<National_Outings_Trip__c> tripList) {
+        Set<Id> tripIds = new Set<Id>();
+        for(National_Outings_Trip__c trip : tripList) {
+            tripIds.add(trip.Id);
+        }
+
+        List<ContentDocumentLink> contentDocumentList = [
+            SELECT ContentDocumentId, LinkedEntityId 
+            FROM   ContentDocumentLink 
+            WHERE  LinkedEntityId in :tripIds
+        ];
+        List<ContentDocument> docList = new List<ContentDocument>();    
+        for(ContentDocumentLink cdl : contentDocumentList){
+            docList.add(new ContentDocument(Id=cdl.ContentDocumentId));
+        }
+        delete docList;
+    }
     private static Id getUserContactId() {
         Id userId = UserInfo.getUserId();
         Id contactId=null;
