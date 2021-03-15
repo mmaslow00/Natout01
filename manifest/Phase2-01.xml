@@ -2,8 +2,11 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
         <members>ContentManagerService</members>
+        <members>ContentManagerServiceTest</members>
         <members>FileUploadService</members>
+        <members>FileUploadServiceTest</members>
         <members>NatoutTripTriggerHandler</members>
+        <members>NatoutTripTriggerHandlerTest</members>
         <members>NatoutTripItineraryController</members>
         <members>NatoutTripItineraryControllerTest</members>
         <members>NatoutTripBudgetReportController</members>

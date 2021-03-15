@@ -47,5 +47,27 @@ public with sharing class NatoutTripTriggerHandlerTest {
             AND Contact__c = :contactId
         ];
         System.assertEquals(1, staffList.size());
+
+        Id fileId = FileUploadService.saveTheChunkFile(trip.Id, 'TestFileName', 'TestContent', 'pdf', null);
+
+        List<ContentDocumentLink> contentDocumentList = [
+            SELECT ContentDocumentId, LinkedEntityId 
+            FROM   ContentDocumentLink 
+            WHERE  LinkedEntityId = :tripId
+        ];
+        System.assertEquals(1, contentDocumentList.size());
+
+        Id docId = contentDocumentList[0].ContentDocumentId;
+        List<ContentDocument> docList = [
+            SELECT Id FROM ContentDocument WHERE Id = :docId
+        ];
+        System.assertEquals(1, docList.size());
+
+        delete trip;
+
+        docList = [
+            SELECT Id FROM ContentDocument WHERE Id = :docId
+        ];
+        System.assertEquals(0, docList.size());
     }
 }

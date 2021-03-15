@@ -26,40 +26,4 @@ public with sharing class ContentManagerService {
     public static void deleteContentDocument(String recordId) {
         Database.delete(recordId);
     }
-
-    public static string ContentType(String fileType) {
-
-        switch on fileType.toLowerCase(){
-            when 'docx' {
-                return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-            }
-            when 'csv' {
-                return 'application/vnd.ms-excel';
-            }
-            when 'wav' {
-                return 'audio/wav';
-            }
-            when 'wmv' {
-                return 'video/x-ms-wmv';
-            }
-            when 'mp3' {
-                return 'audio/mpeg';
-            }
-            when 'mp4' {
-                return 'video/mp4';
-            }
-            when 'png' {
-                return 'image/png';
-                
-            }
-            when 'pdf' {
-                return 'application/pdf';
-                
-            }
-            when else {
-                return 'image/jpeg';
-            }
-        }
-
-    }
 }

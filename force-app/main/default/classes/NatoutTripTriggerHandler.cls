@@ -1,3 +1,7 @@
+/*
+    Tests for methods in this class are in NatoutTripTriggerHandlerTest
+    Except for test for afterUpdate method, which is in NatoutEmailHandlerTest
+*/
 public with sharing class NatoutTripTriggerHandler {
     public static void beforeInsert(List<National_Outings_Trip__c> tripList) {
         Id contactId = getUserContactId();
