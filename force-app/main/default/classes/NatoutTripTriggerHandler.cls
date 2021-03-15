@@ -60,11 +60,13 @@ public with sharing class NatoutTripTriggerHandler {
             FROM   ContentDocumentLink 
             WHERE  LinkedEntityId in :tripIds
         ];
-        List<ContentDocument> docList = new List<ContentDocument>();    
-        for(ContentDocumentLink cdl : contentDocumentList){
-            docList.add(new ContentDocument(Id=cdl.ContentDocumentId));
+        if( ! contentDocumentList.isEmpty() ) {
+            List<ContentDocument> docList = new List<ContentDocument>();    
+            for(ContentDocumentLink cdl : contentDocumentList){
+                docList.add(new ContentDocument(Id=cdl.ContentDocumentId));
+            }
+            delete docList;
         }
-        delete docList;
     }
     private static Id getUserContactId() {
         Id userId = UserInfo.getUserId();
