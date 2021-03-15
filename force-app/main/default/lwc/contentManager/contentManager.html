@@ -5,7 +5,7 @@
     <lightning-button if:true={showsync} variant="brand" title="Content Sync" icon-name="utility:sync"
         onclick={handleSync} slot="actions" >
     </lightning-button>
-    <div class="slds-var-p-around_small" >
+    <div>
         <div class="slds-grid slds-wrap">
             <div class="slds-col slds-size_1-of-4" if:true={showFilters}>
                 <lightning-input if:true={showFilters} type="search" variant="standard" name="Title" label="Title" onchange={handleSearch} >
