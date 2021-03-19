@@ -271,6 +271,7 @@ public with sharing class NatoutTripBudgetReportController {
             Decimal staffCost=0;
             Decimal partCost=0;
             Decimal part80Cost=0;
+            Decimal fixedAmount = 0;
             if(trip.Meals_Budget_Option__c == 'Subcommittee') {
                 staffCost =
                     (trip.Planned_Staff__c * (trip.Meals_First_Day__c + trip.Meals_Last_Day__c) * values.First_Last_Meals__c) +
@@ -281,6 +282,7 @@ public with sharing class NatoutTripBudgetReportController {
                 part80Cost =
                     (math.round(trip.Participants__c * .8) * (trip.Meals_First_Day__c + trip.Meals_Last_Day__c) * values.First_Last_Meals__c) +
                     (math.round(trip.Participants__c *.8) * (tripDays - 2) * values.Full_Day_Meals__c);
+                fixedAmount = trip.Fixed_Amount__c;
             }
             else if(trip.Meals_Budget_Option__c == 'Day') {
                 for(National_Outings_Trip_Budget_Item__c item : getBudgetList()) {
@@ -290,6 +292,7 @@ public with sharing class NatoutTripBudgetReportController {
                         part80Cost += (item.Participant_Amount__c * math.round(trip.Participants__c * .8));
                     }
                 }
+                fixedAmount = trip.Fixed_Amount__c;
             }
             SimpleRow partMeals = new SimpleRow('Participant Meals', partCost);
             partMeals.part80Amount = part80Cost;
@@ -297,6 +300,7 @@ public with sharing class NatoutTripBudgetReportController {
             retVal.add('Staff Meals', staffCost);
             retVal.add('Fixed Amount', trip.Fixed_Amount__c);
             mealsSummary = retVal;
+            mealsSummary.fixedAmount = fixedAmount;
         }
         return mealsSummary;
     }
@@ -630,18 +634,22 @@ public with sharing class NatoutTripBudgetReportController {
         public Decimal getTotalAmount() {
             Decimal total = 0;
             for(SimpleRow row : itemList) {
-                if(row.amount > 0) {
+                if(row.amount > 0 && row.itemName != 'Fixed Amount') {
                     total += row.amount;
                 }
             }
-            return total;
+            return total + getFixedAmount();
         }
         public Decimal getTotalPart80Amount() {
             Decimal total = 0;
             for(SimpleRow row : itemList) {
                 total += row.part80Amount;
             }
-            return total;
+            return total + getFixedAmount();
+        }
+        public Decimal fixedAmount;
+        public Decimal getFixedAmount() {
+            return fixedAmount == null ? 0 : fixedAmount;
         }
     }
     public class SimpleRow {

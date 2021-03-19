@@ -34,11 +34,6 @@ export default class ContentManager extends NavigationMixin(LightningElement) {
                     iconName: { fieldName: 'icon' }, iconPosition: 'left' 
                 }
             },
-            { label: 'Preview', type:  'button', typeAttributes: { 
-                    label: 'Preview',  name: 'Preview',  variant: 'brand-outline',
-                    iconName: 'utility:preview', iconPosition: 'right'
-                } 
-            },
             { label: 'Download', type:  'button', typeAttributes: { 
                     label: 'Download', name: 'Download', variant: 'brand', iconName: 'action:download', 
                     iconPosition: 'right' 

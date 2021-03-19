@@ -71,7 +71,7 @@ export default class NatoutTripDetail extends LightningElement {
                     // eslint-disable-next-line no-unused-vars
                     .filter((field) => !!this.template.querySelector(`[data-field=${field}]`))
                     .reduce((total, field) => {
-                        if(field == 'Post_Trip_Report_Due__c') {
+                        if(field === 'Post_Trip_Report_Due__c') {
                             this.postTripReportDue = fields[field].value;
                         }
                         else {

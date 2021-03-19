@@ -1168,7 +1168,7 @@
                             <iframe src={itineraryReportUrl} data-id="itineraryReportIframe"  width="100%" height="800px">
                                 </iframe>
                             </lightning-accordion-section>
-                            <lightning-accordion-section name="files" label="Files">
+                            <lightning-accordion-section name="files" label="Files and Links">
                                 <p class="infop">
                                     To upload a file, first specify the file, either by clicking "Upload Files", or by dragging a file from the file explorer to the "drop files" area. 
                                     Then, click "Upload". After a few seconds, the uploaded file should appear in the list.
@@ -1179,6 +1179,13 @@
                                         show-file-upload={userCanEdit}
                                     >
                                     </c-content-manager>
+                                </div>
+                                <div>
+                                    <c-natout-trip-links
+                                        record-id={recordId}
+                                        can-edit={userCanEdit}
+                                    >
+                                    </c-natout-trip-links>
                                 </div>
                             </lightning-accordion-section>
                         </lightning-accordion>

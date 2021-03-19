@@ -1,0 +1,68 @@
+<template>
+    <div class="c-container">
+        <article class="slds-card">
+            <div class="slds-card__header slds-grid slds-page-header">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">
+                            <span>Links</span>
+                        </h2>
+                    </div>
+                    <div if:true={canEdit} class="slds-no-flex">
+                        <button class="slds-button slds-button_neutral" onclick={createNewLink}>New</button>
+                    </div>
+                </header>
+            </div>
+            <lightning-datatable
+                key-field="Id"
+                data={linkList}
+                columns={columns}
+                onrowaction={handleRowAction}
+                hide-checkbox-column="true"
+            >
+            </lightning-datatable>
+        </article>
+    
+        <template if:true={modalIsOpen}>
+            <div>
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                                <lightning-icon icon-name="utility:close" size="medium">
+                                </lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Update Link</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <lightning-input type="url"
+                                    label='URL'
+                                    value={itemToUpdate.Url__c}
+                                    onchange={handleFieldChange}
+                                    data-field="Url__c"
+                                    required
+                                >
+                                </lightning-input>
+                                <lightning-input
+                                    label='Description'
+                                    value={itemToUpdate.Description__c}
+                                    onchange={handleFieldChange}
+                                    data-field="Description__c"
+                                    required
+                                >
+                                </lightning-input>    
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <lightning-button label="Cancel" variant="neutral" onclick={closeModal}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <lightning-button label="Save" variant="brand" onclick={saveAndClose} class="slds-p-left_large"></lightning-button>
+                                <lightning-button label="Save and New" variant="brand" onclick={saveAndNew} class="slds-p-left_large"></lightning-button>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </div>
+        </template>
+    </div>
+    <c-snackbar></c-snackbar>
+</template>

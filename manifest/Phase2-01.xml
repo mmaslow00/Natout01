@@ -13,6 +13,8 @@
         <members>NatoutTripBudgetReportControllerTest</members>
         <members>NatoutTripPostTripReport</members>
         <members>NatoutTripPostTripReportTest</members>
+        <members>NatoutTripLinksController</members>
+        <members>NatoutTripLinksControllerTest</members>
         <members>NatoutEmailHandler</members>
         <name>ApexClass</name>
     </types>
@@ -28,6 +30,7 @@
     <types>  
         <members>natoutTripDetail</members>
         <members>natoutTripList</members>
+        <members>natoutTripLinks</members>
         <members>contentManager</members>
         <members>fileUpload</members>
         <name>LightningComponentBundle</name>  
