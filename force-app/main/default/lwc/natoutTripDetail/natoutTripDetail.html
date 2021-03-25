@@ -1170,6 +1170,11 @@
                             </lightning-accordion-section>
                             <lightning-accordion-section name="files" label="Files and Links">
                                 <p class="infop">
+                                    Please add your trip map(s) here.  Please format your map as a PDF document if possible.  
+                                    While an uploaded PDF is preferred, you may also paste the link to your CalTopo map if desired.
+                                </p>
+                                <div class="files-and-links">
+                                <p class="infop">
                                     To upload a file, first specify the file, either by clicking "Upload Files", or by dragging a file from the file explorer to the "drop files" area. 
                                     Then, click "Upload". After a few seconds, the uploaded file should appear in the list.
                                 </p>
@@ -1180,7 +1185,8 @@
                                     >
                                     </c-content-manager>
                                 </div>
-                                <div>
+                                </div>
+                                <div class="files-and-links">
                                     <c-natout-trip-links
                                         record-id={recordId}
                                         can-edit={userCanEdit}

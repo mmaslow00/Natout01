@@ -336,8 +336,7 @@
         </apex:dataTable>
     </div>
     </apex:outputPanel>
-
-    <apex:outputPanel rendered = "{!isInternationalTrip}">
+    <div style="page-break-before:always;">
         <div class="bordered">
             <apex:dataTable value="{!intlRevenue}" var="item"
                 columnClasses="alignLeft, alignRight, alignRight"
@@ -372,7 +371,6 @@
             </apex:column>            
             </apex:dataTable>            
         </div>
-
         <div class="bordered">
             <apex:dataTable value="{!intlExpenses}" var="item"
                 columnClasses="alignLeft, alignRight, alignRight"
@@ -410,6 +408,6 @@
             </apex:dataTable>            
         </div>
 
-    </apex:outputPanel>
+    </div>
 
 </apex:page>
