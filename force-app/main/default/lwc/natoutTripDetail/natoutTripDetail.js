@@ -147,12 +147,14 @@ export default class NatoutTripDetail extends LightningElement {
             let iframe = this.template.querySelector('[data-id=budgetReportIframe]');
             iframe.src += '';
         }
+        /*
         let sectionDiff = openSections.filter( x => !this.activeBudgetSections.includes(x) );
         if (sectionDiff.length > 0) {
         //only update if there is a difference (as handleToggleSection is reexecuted
         //until no diffs (seems odd, but it was)
         this.activeBudgetSections = sectionDiff;
         }
+        */
     }
     handleItinerarySectionToggle(event) {
         const openSections = event.detail.openSections;
@@ -162,13 +164,16 @@ export default class NatoutTripDetail extends LightningElement {
             let iframe = this.template.querySelector('[data-id=itineraryReportIframe]');
             iframe.src += '';
         }
+        /*
         let sectionDiff = openSections.filter( x => !this.activeItinerarySections.includes(x) );
         if (sectionDiff.length > 0) {
         //only update if there is a difference (as handleToggleSection is reexecuted
         //until no diffs (seems odd, but it was)
         this.activeItinerarySections = sectionDiff;
         }
+        */
     }
+    /*
     handleTripSectionToggle(event) {
         const openSections = event.detail.openSections;
         let sectionDiff = openSections.filter( x => !this.activeTripSections.includes(x) );
@@ -178,6 +183,7 @@ export default class NatoutTripDetail extends LightningElement {
         this.activeTripSections = sectionDiff;
         }
     }
+    */
     saveForm() {
         let saveErrors = false;
         const allValid = [...this.template.querySelectorAll('lightning-input-field, lightning-combobox')]
