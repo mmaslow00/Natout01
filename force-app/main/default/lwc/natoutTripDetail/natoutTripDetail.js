@@ -20,6 +20,7 @@ export default class NatoutTripDetail extends LightningElement {
     @track searchingForLocation = false;
     @track showMap = false;
     @track showStatusDialog;
+    @track verifyingBudgetApproval = false;
     loadedForm = false;
     loadedStatus = null;
     countryOptions = null;
@@ -62,33 +63,30 @@ export default class NatoutTripDetail extends LightningElement {
           });        
     }
     handleLoad(event) {
-        if (!this.loadedForm) {
-            let fields = Object.values(event.detail.records)[0].fields;
-            const recordId = Object.keys(event.detail.records)[0];
-            this.tripRecord = {
-                Id: recordId,
-                ...Object.keys(fields)
-                    // eslint-disable-next-line no-unused-vars
-                    .filter((field) => !!this.template.querySelector(`[data-field=${field}]`))
-                    .reduce((total, field) => {
-                        if(field === 'Post_Trip_Report_Due__c') {
-                            this.postTripReportDue = fields[field].value;
-                        }
-                        else {
-                            total[field] = fields[field].value;
-                        }
-                        return total;
-                    }, {})
-            };
-            this.setupChosenCountries();
-            this.setupChosenStates();
-            this.chosenSubcomm = this.tripRecord.Subcommittee__c;
-            this.chosenTripType = this.tripRecord.Trip_Type__c;
-            this.chosenStatus = this.tripRecord.Status__c;
-            this.loadedStatus = this.tripRecord.Status__c;
-            document.title = this.tripRecord.Name;
-            this.loadedForm = true;
-        }
+        let fields = Object.values(event.detail.records)[0].fields;
+        const recordId = Object.keys(event.detail.records)[0];
+        this.tripRecord = {
+            Id: recordId,
+            ...Object.keys(fields)
+                // eslint-disable-next-line no-unused-vars
+                .filter((field) => !!this.template.querySelector(`[data-field=${field}]`))
+                .reduce((total, field) => {
+                    if(field === 'Post_Trip_Report_Due__c') {
+                        this.postTripReportDue = fields[field].value;
+                    }
+                    else {
+                        total[field] = fields[field].value;
+                    }
+                    return total;
+                }, {})
+        };
+        this.setupChosenCountries();
+        this.setupChosenStates();
+        this.chosenSubcomm = this.tripRecord.Subcommittee__c;
+        this.chosenTripType = this.tripRecord.Trip_Type__c;
+        this.chosenStatus = this.tripRecord.Status__c;
+        this.loadedStatus = this.tripRecord.Status__c;
+        document.title = this.tripRecord.Name;
     }
     renderedCallback() {
         if(this.tripRecord.Trip_Copy__c) {
@@ -523,6 +521,12 @@ export default class NatoutTripDetail extends LightningElement {
         }
         return false;
     }
+    get userCanApproveBudget() {
+        if(this.userAccess && this.userAccess.data) {
+            return this.userAccess.data.canApproveBudget;
+        }
+        return false;
+    }
     get userIsAdmin() {
         if(this.userAccess && this.userAccess.data) {
             return this.userAccess.data.isAdmin;
@@ -590,6 +594,12 @@ export default class NatoutTripDetail extends LightningElement {
     cancelPostUse() {
         this.revisingPostUse = false;
     }
+    cancelBudgetApproval() {
+        this.verifyingBudgetApproval = false;
+    }
+    requestBudgetApproval() {
+        this.verifyingBudgetApproval = true;
+    }
     get showApprovalWarnings() {
         let retVal = false;
         if(this.tripRecord.Status__c === 'Submitted') {
@@ -600,6 +610,26 @@ export default class NatoutTripDetail extends LightningElement {
             }
         }
         return retVal;
+    }
+    get showBudgetApprovalButton() {
+        if(this.tripIsInternational) {
+            //if(this.tripRecord.Status__c === 'Submitted') {
+                if(this.userCanApproveBudget) {
+                    if( ! this.tripRecord.Budget_Approved_Date__c) {
+                        return true;
+                    }
+                }
+            //}
+        }
+        return false;
+    }
+    get showDateBudgetApproved() {
+        if(this.tripIsInternational) {
+            if(this.tripRecord.Budget_Approved_Date__c) {
+                return true;
+            }
+        }
+        return false;
     }
     get approvalWarnings() {
         let warnings = [];
@@ -705,7 +735,7 @@ export default class NatoutTripDetail extends LightningElement {
             }
         }
         if(this.tripIsInternational) {
-            if(this.chosenCountries.length == 0) {
+            if(this.chosenCountries.length === 0) {
                 errors.push({rowNum: rowNum++, text: 'Location Details, Safety and Risk: At least one country is Required'});
             }
             else if(this.chosenCountries.length > 3) {
@@ -717,7 +747,7 @@ export default class NatoutTripDetail extends LightningElement {
             if( ! areas) {
                 errors.push({rowNum: rowNum++, text: 'Location Details, Safety and Risk: At least one Area is Required'});
             }    
-            else if(areas.length == 0) {
+            else if(areas.length === 0) {
                 errors.push({rowNum: rowNum++, text: 'Location Details, Safety and Risk: At least one Area is Required'});
             }
             else {
@@ -761,7 +791,7 @@ export default class NatoutTripDetail extends LightningElement {
                 }
             }
             let itineraryDays = this.template.querySelector('c-natout-trip-itinerary').getRowCount();
-            if(itineraryDays == 0) {
+            if(itineraryDays === 0) {
                 errors.push({rowNum: rowNum++, text: 'Itinerary: An Itinerary is required'});
             }
         }
@@ -770,14 +800,14 @@ export default class NatoutTripDetail extends LightningElement {
             this.template.querySelector('c-natout-trip-budget-vol-travel').getRowCount() +
             this.template.querySelector('c-natout-trip-budget-transportation').getRowCount();
 
-        if(budgetCount == 0) {
+        if(budgetCount === 0) {
             let mealsBudgetComponent = this.template.querySelector('c-natout-trip-budget-meals');
             if(mealsBudgetComponent) {
                 budgetCount += mealsBudgetComponent.getRowCount();
             }
         }
 
-        if(budgetCount == 0) {
+        if(budgetCount === 0) {
             if( ! 
                 (
                 this.tripRecord.Wilderness_Agency_Fees__c > 0 ||

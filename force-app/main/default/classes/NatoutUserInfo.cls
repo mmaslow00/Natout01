@@ -13,6 +13,7 @@ public without sharing class NatoutUserInfo {
     @AuraEnabled (cacheable=true)
     public static UserAccess getUserAccess(String tripId) {
         Id userId = System.UserInfo.getUserId();
+        Id contactId = getContactId();
         UserAccess uAccess = new UserAccess();
 
         /* National Outings Admins get full access */
@@ -25,6 +26,7 @@ public without sharing class NatoutUserInfo {
             uAccess.canEdit = true;
             uAccess.canApprove = true;
             uAccess.isAdmin = true;
+            uAccess.canApproveBudget = canApproveBudget(contactId);
             return uAccess;
         }
 
@@ -46,13 +48,12 @@ public without sharing class NatoutUserInfo {
         }
 
         /* Certain subcomittee positions get approval access */
-        Id contactId = getContactId();
         String subcommName = trip.Subcommittee__c;
         List<Leadership__c> ldrList = [
             SELECT Id FROM Leadership__c WHERE
             Contact__c = :contactId
             AND Club_Entity__r.Entity_Category__c = 'Outings' AND Club_Entity__r.Type__c = 'National Outing Subcomm' 
-            AND Position_Status__c = 'Active' AND Leader_Position__r.Name IN ('Chair','Sub-comm Co-Chair','Vice Chair','Trip Submission Approver')
+            AND Position_Status__c = 'Active' AND Leader_Position__r.Name IN ('Chair','Sub-comm Co-Chair','Vice Chair')
             AND Club_Entity__r.Name = :subcommName
         ];
         if( ! ldrList.isEmpty()) {
@@ -89,13 +90,31 @@ public without sharing class NatoutUserInfo {
                 }
             }
         }
+
+        uAccess.canApproveBudget = canApproveBudget(contactId);
+
         return uAccess;
+    }
+    public static Boolean canApproveBudget(String contactId) {
+        List<Leadership__c> approverList = [
+            SELECT
+                Contact__c, 
+                Contact__r.Email
+            FROM Leadership__c 
+            WHERE
+                Contact__c = :contactId
+                AND Club_Entity__r.Entity_Category__c = 'Outings' AND Club_Entity__r.Type__c = 'National Outing Subcomm' 
+                AND Club_Entity__r.Name = 'International'
+                AND Position_Status__c = 'Active' AND Leader_Position__r.Name = 'Trip Submission Advisor'
+        ];
+        return ! approverList.isEmpty();
     }
     public class UserAccess {
         public UserAccess() {
             this.canEdit = false;
             this.canApprove = false;
             this.isAdmin = false;
+            this.canApproveBudget = false;
         }
         @AuraEnabled
         public Boolean canEdit {get; set;}
@@ -103,5 +122,7 @@ public without sharing class NatoutUserInfo {
         public Boolean canApprove {get; set;}
         @AuraEnabled
         public Boolean isAdmin {get; set;}
+        @AuraEnabled
+        public Boolean canApproveBudget {get; set;}
     }
 }

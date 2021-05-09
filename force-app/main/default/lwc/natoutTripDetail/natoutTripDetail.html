@@ -650,12 +650,45 @@
                     </lightning-accordion-section>
 
                     <lightning-accordion-section name="Budget" label="Budget">
+                        <div style="display:none">
+                            <lightning-input-field
+                                field-name="Budget_Approved_Date__c"
+                                data-field="Budget_Approved_Date__c"
+                            >
+                            </lightning-input-field>
+                        </div>
                         <lightning-accordion
                             allow-multiple-sections-open
                             active-section-name={activeBudgetSections}
                             onsectiontoggle={handleBudgetSectionToggle}
                         >
                             <template if:true={tripIsInternational}>
+                                <div style="text-align: center;" class="slds-p-top_large slds-p-bottom_large">
+                                    <template if:true={showBudgetApprovalButton}>
+                                        <lightning-button 
+                                            variant="brand"
+                                            name="approveBudget"
+                                            label="Approve Budget"
+                                            onclick={requestBudgetApproval}
+                                        >
+                                        </lightning-button>             
+                                    </template>
+                                    <template if:true={showDateBudgetApproved}>
+                                        <div style="font-weight: bold;">
+                                            Budget Approved:&nbsp;&nbsp;
+                                            <lightning-formatted-date-time
+                                                value={tripRecord.Budget_Approved_Date__c}
+                                                year="numeric"
+                                                month="numeric"
+                                                day="numeric"
+                                                hour="numeric"
+                                                minute="2-digit"
+                                                time-zone-name="short"
+                                            >
+                                            </lightning-formatted-date-time>
+                                        </div>                            
+                                    </template>
+                                </div>       
                                 <p class="infop">
                                     Budgets for international trips have unique items which are described
                                     <a href="https://drive.google.com/file/d/1GpgkVlRtArbslpDPlOmWmcsmiQxGmy_J/view" target="_blank"> here</a>
@@ -1393,6 +1426,28 @@
                         </div>
                     <footer class="slds-modal__footer">
                         <lightning-button label="Dismiss" variant="neutral" onclick={closeErrorDisplay}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+
+    <template if:true={verifyingBudgetApproval}>
+        <div>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Approve Budget</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                        <p>
+                            Press Continue to approve the budget for this trip. (This action cannot be undone.)
+                        </p>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Cancel" variant="destructive" onclick={cancelBudgetApproval}></lightning-button>
+                        <lightning-button label="Continue" variant="brand" onclick={approveBudget} class="slds-p-left_large"></lightning-button>
                     </footer>
                 </div>
             </section>

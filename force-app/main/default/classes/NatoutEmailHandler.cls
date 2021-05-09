@@ -5,6 +5,7 @@ public without sharing class NatoutEmailHandler {
     public static List<TriggeredSendEmail__c> statusChanged(List<National_Outings_Trip__c> tripList, Map<Id, National_Outings_Trip__c> oldMap) {
         Map<Id, List<Recipient>> creatorMap = getCreators(tripList);
         Map<Id, List<Recipient>> approverMap = getApprovers(tripList);
+        List<Recipient> budgetApprovers = getBudgetApprovers();
 
         List<TriggeredSendEmail__c> tseList = new List<TriggeredSendEmail__c>();
 
@@ -12,12 +13,20 @@ public without sharing class NatoutEmailHandler {
             National_Outings_Trip__c prevTrip = oldMap.get(trip.Id);
             if((prevTrip.Status__c == 'Started' || prevTrip.Status__c == 'Returned')) {
                 if(trip.Status__c == 'Submitted') {
-                    List<Recipient> recipientList = approverMap.get(trip.Id);
-                    String msgText = startedToSubmittedText(trip.Id, trip.Title__c);
-                    String subject = 'Trip submission for ' + trip.Title__c + ' ready for review';
-                    //String textToSend = getMsgPrefix(recipientList) + ' : ' + msgText;
+                    List<Recipient> recipientList;
+                    String msgText;
+                    String subject;
+                    if(trip.Subcommittee__c == 'International' && trip.Budget_Approved_Date__c == null) {
+                        recipientList = budgetApprovers;
+                        msgText = submitForBudgetApproval(trip.Id, trip.Title__c);
+                        subject = 'Trip submission for ' + trip.Title__c + ' ready for budget review';
+                    }
+                    else {
+                        recipientList = approverMap.get(trip.Id);
+                        msgText = startedToSubmittedText(trip.Id, trip.Title__c);
+                        subject = 'Trip submission for ' + trip.Title__c + ' ready for review';
+                    }
                     for(Recipient rcp : recipientList) {
-                        //tseList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, textToSend));
                         tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
                     }
                 }
@@ -131,7 +140,7 @@ public without sharing class NatoutEmailHandler {
             FROM Leadership__c 
             WHERE
                 Club_Entity__r.Entity_Category__c = 'Outings' AND Club_Entity__r.Type__c = 'National Outing Subcomm' 
-                AND Position_Status__c = 'Active' AND Leader_Position__r.Name IN ('Chair','Sub-comm Co-Chair','Vice Chair','Trip Submission Approver')
+                AND Position_Status__c = 'Active' AND Leader_Position__r.Name IN ('Chair','Sub-comm Co-Chair','Vice Chair')
                 AND Club_Entity__r.Name in :subcomms
         ];
         Map<String, List<Recipient>> officerMap = new Map<String, List<Recipient>>();
@@ -178,12 +187,42 @@ public without sharing class NatoutEmailHandler {
         }
         return approverMap;
     }
+    private static List<Recipient> getBudgetApprovers() {
+        List<Leadership__c> approverList = [
+            SELECT
+                Contact__c, 
+                Contact__r.Email
+            FROM Leadership__c 
+            WHERE
+                Club_Entity__r.Entity_Category__c = 'Outings' AND Club_Entity__r.Type__c = 'National Outing Subcomm' 
+                AND Club_Entity__r.Name = 'International'
+                AND Position_Status__c = 'Active' AND Leader_Position__r.Name = 'Trip Submission Approver'
+        ];
+        List<Recipient> rcpList = new List<Recipient>();
+        for(Leadership__c ldr : approverList) {
+            rcpList.add(new Recipient(ldr.Contact__c, ldr.Contact__r.Email));
+        }
+        return rcpList;
+    }
     private static String startedToSubmittedText(String tripId, String tripTitle) {
         String msg = 
             'Trip submission for ' +
             tripTitle + ' ' +
             'has been submitted and is now ready for your review. ' +
             'If you’re satisfied with it, select "Approved by Chair", and it will be sent to staff for processing. ' +
+            'You may also make adjustments or add comments at the end of the form before approving. ' + 
+            'If you’re not satisfied with it, add any questions or requested changes to the comments section ' +
+            'and select "Returned" to return it back to the trip leader for further edits. ' +
+            'Trip ' + tripTitle + ' can be found at https://campfire.sierraclub.org/NatoutTripDetail?id=' + tripId
+            ;
+        return msg;
+    }
+    private static String submitForBudgetApproval(String tripId, String tripTitle) {
+        String msg = 
+            'Trip submission for ' +
+            tripTitle + ' ' +
+            'has been submitted and is now ready for your budget review. ' +
+            'If you’re satisfied with it, click "Budget Approved", and it will be sent to the chair for their approval. ' +
             'You may also make adjustments or add comments at the end of the form before approving. ' + 
             'If you’re not satisfied with it, add any questions or requested changes to the comments section ' +
             'and select "Returned" to return it back to the trip leader for further edits. ' +
