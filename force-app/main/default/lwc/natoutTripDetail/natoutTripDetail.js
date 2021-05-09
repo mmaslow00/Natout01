@@ -9,6 +9,7 @@ import getPicklistOptions from '@salesforce/apex/NatoutTripOptions.getOptions';
 import getUserAccess from '@salesforce/apex/NatoutUserInfo.getUserAccess';
 import { refreshApex } from '@salesforce/apex';
 import submitPostTripReport from '@salesforce/apex/NatoutTripPostTripReport.submitReport';
+import approveBudget from '@salesforce/apex/NatoutTripBudgetController.approveBudget';
 
 export default class NatoutTripDetail extends LightningElement {
     @api recordId;
@@ -599,6 +600,23 @@ export default class NatoutTripDetail extends LightningElement {
     }
     requestBudgetApproval() {
         this.verifyingBudgetApproval = true;
+    }
+    submitBudgetApproval() {
+        approveBudget({
+            tripId: this.recordId,
+        })
+        .then(result => {
+            this.tripRecord.Budget_Approved_Date__c = result.dateApproved;
+            this.tripRecord.Budget_Approved_By__c = result.appovedBy;
+            this.error = undefined;
+        })
+        .catch(error => {
+            this.error = error;
+            this.showSnackbar('failure', 'Update Failed', reduceErrors(error).join(', '));
+        })
+        .finally(() => {
+            this.verifyingBudgetApproval = false;
+        });
     }
     get showApprovalWarnings() {
         let retVal = false;
