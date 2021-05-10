@@ -64,6 +64,30 @@ public without sharing class NatoutEmailHandler {
         }
         return tseList;
     }
+
+    public static List<TriggeredSendEmail__c> budgetApproved(List<National_Outings_Trip__c> tripList) {
+        Map<Id, List<Recipient>> creatorMap = getCreators(tripList);
+        Map<Id, List<Recipient>> approverMap = getApprovers(tripList);
+
+        List<TriggeredSendEmail__c> tseList = new List<TriggeredSendEmail__c>();
+
+        for(National_Outings_Trip__c trip : tripList) {
+            List<Recipient> recipientList = creatorMap.get(trip.Id);
+            String msgText = budgetApprovedToCreatorsText(trip.Id, trip.Title__c);
+            String subject = 'Trip Budget Approved for ' + trip.Title__c;
+            for(Recipient rcp : recipientList) {
+                tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
+            }
+
+            recipientList = approverMap.get(trip.Id);
+            msgText = budgetApprovedToChairsText(trip.Id, trip.Title__c);
+            for(Recipient rcp : recipientList) {
+                tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
+            }
+        }
+        return tseList;
+    }
+
     /*
     private static String getMsgPrefix(List<Recipient> recipientList) {
         String emails = '';
@@ -203,6 +227,24 @@ public without sharing class NatoutEmailHandler {
             rcpList.add(new Recipient(ldr.Contact__c, ldr.Contact__r.Email));
         }
         return rcpList;
+    }
+    private static String budgetApprovedToCreatorsText(String tripId, String tripTitle) {
+        String msg = 
+            'Trip submission for ' +
+            tripTitle + ' ' +
+            'has been approved by the International Subcommittee budget reviewers. Your trip will now be sent to the chairs for review. ' +
+            'Trip ' + tripTitle + ' can be found at https://campfire.sierraclub.org/NatoutTripDetail?id=' + tripId
+            ;
+        return msg;
+    }
+    private static String budgetApprovedToChairsText(String tripId, String tripTitle) {
+        String msg = 
+            'Trip submission for ' +
+            tripTitle + ' ' +
+            'has been approved by the International Subcommittee budget reviewers. The trip is now ready for the chairs to review. ' +
+            'Trip ' + tripTitle + ' can be found at https://campfire.sierraclub.org/NatoutTripDetail?id=' + tripId
+            ;
+        return msg;
     }
     private static String startedToSubmittedText(String tripId, String tripTitle) {
         String msg = 

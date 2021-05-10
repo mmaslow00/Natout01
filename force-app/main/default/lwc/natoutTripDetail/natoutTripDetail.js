@@ -64,30 +64,32 @@ export default class NatoutTripDetail extends LightningElement {
           });        
     }
     handleLoad(event) {
-        let fields = Object.values(event.detail.records)[0].fields;
-        const recordId = Object.keys(event.detail.records)[0];
-        this.tripRecord = {
-            Id: recordId,
-            ...Object.keys(fields)
-                // eslint-disable-next-line no-unused-vars
-                .filter((field) => !!this.template.querySelector(`[data-field=${field}]`))
-                .reduce((total, field) => {
-                    if(field === 'Post_Trip_Report_Due__c') {
-                        this.postTripReportDue = fields[field].value;
-                    }
-                    else {
-                        total[field] = fields[field].value;
-                    }
-                    return total;
-                }, {})
-        };
-        this.setupChosenCountries();
-        this.setupChosenStates();
-        this.chosenSubcomm = this.tripRecord.Subcommittee__c;
-        this.chosenTripType = this.tripRecord.Trip_Type__c;
-        this.chosenStatus = this.tripRecord.Status__c;
-        this.loadedStatus = this.tripRecord.Status__c;
-        document.title = this.tripRecord.Name;
+        if( ! this.loadedForm) {
+            let fields = Object.values(event.detail.records)[0].fields;
+            const recordId = Object.keys(event.detail.records)[0];
+            this.tripRecord = {
+                Id: recordId,
+                ...Object.keys(fields)
+                    // eslint-disable-next-line no-unused-vars
+                    .filter((field) => !!this.template.querySelector(`[data-field=${field}]`))
+                    .reduce((total, field) => {
+                        if(field === 'Post_Trip_Report_Due__c') {
+                            this.postTripReportDue = fields[field].value;
+                        }
+                        else {
+                            total[field] = fields[field].value;
+                        }
+                        return total;
+                    }, {})
+            };
+            this.setupChosenCountries();
+            this.setupChosenStates();
+            this.chosenSubcomm = this.tripRecord.Subcommittee__c;
+            this.chosenTripType = this.tripRecord.Trip_Type__c;
+            this.chosenStatus = this.tripRecord.Status__c;
+            this.loadedStatus = this.tripRecord.Status__c;
+            document.title = this.tripRecord.Name;
+        }
     }
     renderedCallback() {
         if(this.tripRecord.Trip_Copy__c) {
@@ -103,6 +105,7 @@ export default class NatoutTripDetail extends LightningElement {
         }
     }
     handleFieldChange(e) {
+        this.loadedForm = true;
         let fieldName = e.currentTarget.dataset.field;
         this.tripRecord[fieldName] = e.target.value;
         if (fieldName === "Trip_Copy__c") {
@@ -115,18 +118,23 @@ export default class NatoutTripDetail extends LightningElement {
         }
     }
     handleCountriesChange(e) {
+        this.loadedForm = true;
         this.chosenCountries = e.target.value;
     }
     handleStatesChange(e) {
+        this.loadedForm = true;
         this.chosenStates = e.target.value;
     }
     handleSubcommChange(e) {
+        this.loadedForm = true;
         this.chosenSubcomm = e.target.value;
     }
     handleTripTypeChange(e) {
+        this.loadedForm = true;
         this.chosenTripType = e.target.value;
     }
     handleStatusChange(e) {
+        this.loadedForm = true;
         let previousStatus = this.chosenStatus;
         this.chosenStatus = e.target.value;
         if((previousStatus === 'Started' || previousStatus === 'Returned') && this.chosenStatus === 'Submitted') {

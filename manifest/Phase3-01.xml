@@ -3,6 +3,7 @@
     <types>
         <members>NatoutEmailHandler</members>
         <members>NatoutTripBudgetController</members>
+        <members>NatoutTripTriggerHandler</members>
         <members>NatoutUserInfo</members>
         <name>ApexClass</name>
     </types>

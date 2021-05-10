@@ -45,12 +45,23 @@ public with sharing class NatoutTripTriggerHandler {
                 changedTrips.add(trip);
             }
         }
+        List<TriggeredSendEmail__c> emailList = new List<TriggeredSendEmail__c>();
         if( ! changedTrips.isEmpty() ) {
-            List<TriggeredSendEmail__c> emailList =
-                NatoutEmailHandler.statusChanged(changedTrips, oldMap);
-            if( ! emailList.isEmpty() ) {
-                insert emailList;
+            emailList.addAll(NatoutEmailHandler.statusChanged(changedTrips, oldMap));
+        }
+
+        changedTrips.clear();
+        for(National_Outings_Trip__c trip : tripList) {
+            National_Outings_Trip__c prevTrip = oldMap.get(trip.Id);
+            if(prevTrip.Budget_Approved_Date__c != trip.Budget_Approved_Date__c) {
+                changedTrips.add(trip);
             }
+        }
+        if( ! changedTrips.isEmpty() ) {
+            emailList.addAll(NatoutEmailHandler.budgetApproved(changedTrips));
+        }
+        if( ! emailList.isEmpty() ) {
+            insert emailList;
         }
     }
     public static void beforeDelete(List<National_Outings_Trip__c> tripList) {

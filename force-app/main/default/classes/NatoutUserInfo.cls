@@ -90,8 +90,14 @@ public without sharing class NatoutUserInfo {
                 }
             }
         }
-
-        uAccess.canApproveBudget = canApproveBudget(contactId);
+        if(trip.Status__c == 'Started' || trip.Status__c == 'Returned') {
+            if(trip.Budget_Approved_Date__c == null) {
+                uAccess.canApproveBudget = canApproveBudget(contactId);
+                if(uAccess.canApproveBudget) {
+                    uAccess.canEdit = true;
+                }
+            }
+        }
 
         return uAccess;
     }
