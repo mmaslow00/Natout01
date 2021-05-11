@@ -52,16 +52,38 @@ public with sharing class NatoutTripTriggerHandler {
 
         changedTrips.clear();
         for(National_Outings_Trip__c trip : tripList) {
-            National_Outings_Trip__c prevTrip = oldMap.get(trip.Id);
-            if(prevTrip.Budget_Approved_Date__c != trip.Budget_Approved_Date__c) {
-                changedTrips.add(trip);
+            if(trip.Subcommittee__c == 'International') {
+                National_Outings_Trip__c prevTrip = oldMap.get(trip.Id);
+                if(prevTrip.Budget_Approved_Date__c == null && trip.Budget_Approved_Date__c != null) {
+                    changedTrips.add(trip);
+                }
             }
         }
         if( ! changedTrips.isEmpty() ) {
             emailList.addAll(NatoutEmailHandler.budgetApproved(changedTrips));
         }
         if( ! emailList.isEmpty() ) {
-            insert emailList;
+            //insert emailList;
+            for(TriggeredSendEmail__c tse : emailList) {
+                System.debug(tse.Email__c);
+            }
+        }
+    }
+    public static void beforeUpdate(List<National_Outings_Trip__c> tripList, Map<Id,National_Outings_Trip__c> oldMap) {
+        for(National_Outings_Trip__c trip : tripList) {
+            National_Outings_Trip__c prevTrip = oldMap.get(trip.Id);
+            if(trip.Status__c == 'Submitted' && prevTrip.Status__c != 'Submitted') {
+                trip.Date_Last_Submitted__c = System.now();
+            }
+            else {
+                trip.Date_Last_Submitted__c = prevTrip.Date_Last_Submitted__c;
+            }
+            if(trip.Status__c == 'Returned' && prevTrip.Status__c != 'Returned') {
+                trip.Date_Last_Returned__c = System.now();
+            }
+            else {
+                trip.Date_Last_Returned__c = prevTrip.Date_Last_Returned__c;
+            }
         }
     }
     public static void beforeDelete(List<National_Outings_Trip__c> tripList) {

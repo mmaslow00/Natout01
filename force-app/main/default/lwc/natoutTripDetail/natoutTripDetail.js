@@ -21,6 +21,7 @@ export default class NatoutTripDetail extends LightningElement {
     @track searchingForLocation = false;
     @track showMap = false;
     @track showStatusDialog;
+    @track changingStatus;
     @track verifyingBudgetApproval = false;
     loadedForm = false;
     loadedStatus = null;
@@ -105,7 +106,7 @@ export default class NatoutTripDetail extends LightningElement {
         }
     }
     handleFieldChange(e) {
-        this.loadedForm = true;
+        this.changeMade();
         let fieldName = e.currentTarget.dataset.field;
         this.tripRecord[fieldName] = e.target.value;
         if (fieldName === "Trip_Copy__c") {
@@ -118,23 +119,23 @@ export default class NatoutTripDetail extends LightningElement {
         }
     }
     handleCountriesChange(e) {
-        this.loadedForm = true;
+        this.changeMade();
         this.chosenCountries = e.target.value;
     }
     handleStatesChange(e) {
-        this.loadedForm = true;
+        this.changeMade();
         this.chosenStates = e.target.value;
     }
     handleSubcommChange(e) {
-        this.loadedForm = true;
+        this.changeMade();
         this.chosenSubcomm = e.target.value;
     }
     handleTripTypeChange(e) {
-        this.loadedForm = true;
+        this.changeMade();
         this.chosenTripType = e.target.value;
     }
     handleStatusChange(e) {
-        this.loadedForm = true;
+        this.changeMade();
         let previousStatus = this.chosenStatus;
         this.chosenStatus = e.target.value;
         if((previousStatus === 'Started' || previousStatus === 'Returned') && this.chosenStatus === 'Submitted') {
@@ -143,8 +144,28 @@ export default class NatoutTripDetail extends LightningElement {
                 this.template.querySelector('.approvalStatus').value = previousStatus;
                 this.chosenStatus = previousStatus;
             }
+            this.changingStatus = true;
             this.showStatusDialog = true;
         }
+    }
+    checkForErrors() {
+        this.errorList = this.statusStartedToSubmitted();
+        this.changingStatus = false;
+        this.showStatusDialog = true;
+    }
+    changeMade() {
+        this.loadedForm = true;
+        window.natoutTripDetailChangeMade = true;
+    }
+    get statusDialogTitle() {
+        let retVal = 'Check for Errors';
+        if(this.changingStatus) {
+            retVal = 'Submit for Approval';
+        }
+        return retVal;
+    }
+    get showErrorCheck() {
+        return this.tripRecord.Status__c === 'Started' || this.tripRecord.Status__c === 'Returned';
     }
     handleBudgetSectionToggle(event) {
         const openSections = event.detail.openSections;
@@ -639,13 +660,13 @@ export default class NatoutTripDetail extends LightningElement {
     }
     get showBudgetApprovalButton() {
         if(this.tripIsInternational) {
-            //if(this.tripRecord.Status__c === 'Submitted') {
+            if(this.tripRecord.Status__c === 'Submitted' || this.tripRecord.Status__c === 'Returned') {
                 if(this.userCanApproveBudget) {
                     if( ! this.tripRecord.Budget_Approved_Date__c) {
                         return true;
                     }
                 }
-            //}
+            }
         }
         return false;
     }
@@ -708,6 +729,22 @@ export default class NatoutTripDetail extends LightningElement {
     }
     closeErrorDisplay() {
         this.showStatusDialog = false;
+    }
+    get wasPreviouslySubmitted() {
+        if(this.tripRecord) {
+            if(this.tripRecord.Date_Last_Submitted__c) {
+                return true;
+            }
+        }
+        return false;
+    }
+    get wasPreviouslyReturned() {
+        if(this.tripRecord) {
+            if(this.tripRecord.Date_Last_Returned__c) {
+                return true;
+            }
+        }
+        return false;
     }
     statusStartedToSubmitted() {
         let errors = [];
@@ -783,13 +820,6 @@ export default class NatoutTripDetail extends LightningElement {
                 }
             }
             
-            let actTypes = this.tripRecord.Activity_Type__c;
-            if(actTypes) {
-              actTypes = this.tripRecord.Activity_Type__c.split(';');
-              if(actTypes.length > 3) {
-                  errors.push({rowNum: rowNum++, text: 'Trip Copy and Marketing: You cannot specify more than 3 Activity Types'});
-              }
-            }
             if(this.chosenStates.length > 3) {
                 errors.push({rowNum: rowNum++, text: 'Trip Copy and Marketing: You cannot specify more than 3 States'});
             }
@@ -797,6 +827,14 @@ export default class NatoutTripDetail extends LightningElement {
             if( ! this.tripRecord.Country__c ) {
                 errors.push({rowNum: rowNum++, text: 'Location Details, Safety and Risk: Country is Required'});
             }
+        }
+
+        let actTypes = this.tripRecord.Activity_Type__c;
+        if(actTypes) {
+          actTypes = this.tripRecord.Activity_Type__c.split(';');
+          if(actTypes.length > 3) {
+              errors.push({rowNum: rowNum++, text: 'Trip Copy and Marketing: You cannot specify more than 3 Activity Types'});
+          }
         }
 
         if( ! (this.tripRecord.Latitude__c && this.tripRecord.Longitude__c) ) {

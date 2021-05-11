@@ -5,7 +5,7 @@ public without sharing class NatoutEmailHandler {
     public static List<TriggeredSendEmail__c> statusChanged(List<National_Outings_Trip__c> tripList, Map<Id, National_Outings_Trip__c> oldMap) {
         Map<Id, List<Recipient>> creatorMap = getCreators(tripList);
         Map<Id, List<Recipient>> approverMap = getApprovers(tripList);
-        List<Recipient> budgetApprovers = getBudgetApprovers();
+        List<Recipient> budgetApproversList = getBudgetApprovers();
 
         List<TriggeredSendEmail__c> tseList = new List<TriggeredSendEmail__c>();
 
@@ -17,7 +17,7 @@ public without sharing class NatoutEmailHandler {
                     String msgText;
                     String subject;
                     if(trip.Subcommittee__c == 'International' && trip.Budget_Approved_Date__c == null) {
-                        recipientList = budgetApprovers;
+                        recipientList = budgetApproversList;
                         msgText = submitForBudgetApproval(trip.Id, trip.Title__c);
                         subject = 'Trip submission for ' + trip.Title__c + ' ready for budget review';
                     }
@@ -220,7 +220,7 @@ public without sharing class NatoutEmailHandler {
             WHERE
                 Club_Entity__r.Entity_Category__c = 'Outings' AND Club_Entity__r.Type__c = 'National Outing Subcomm' 
                 AND Club_Entity__r.Name = 'International'
-                AND Position_Status__c = 'Active' AND Leader_Position__r.Name = 'Trip Submission Approver'
+                AND Position_Status__c = 'Active' AND Leader_Position__r.Name = 'Trip Submission Advisor'
         ];
         List<Recipient> rcpList = new List<Recipient>();
         for(Leadership__c ldr : approverList) {

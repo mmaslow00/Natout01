@@ -97,6 +97,16 @@
                         data-field="Post_Trip_Report_Due__c"
                     >
                     </lightning-input-field>
+                    <lightning-input-field
+                        field-name="Date_Last_Submitted__c"
+                        data-field="Date_Last_Submitted__c"
+                    >
+                    </lightning-input-field>
+                    <lightning-input-field
+                        field-name="Date_Last_Returned__c"
+                        data-field="Date_Last_Returned__c"
+                    >
+                    </lightning-input-field>
                 </div>
                 
                 <template if:true={showPostUseFields}>
@@ -203,6 +213,39 @@
                         <div if:false={userCanEdit}>
                             <lightning-output-field field-name="Status__c">
                             </lightning-output-field>
+                        </div>
+
+                        <div if:true={showErrorCheck} class="slds-p-around_medium">
+                            <lightning-button 
+                                label="Check for Submission Errors" onclick={checkForErrors}
+                                variant="brand-outline"
+                            >
+                            </lightning-button>
+                        </div>
+
+                        <div if:true={wasPreviouslySubmitted}>
+                            Last Submitted:&nbsp;&nbsp;
+                            <lightning-formatted-date-time value={tripRecord.Date_Last_Submitted__c} 
+                                year="numeric"
+                                month="numeric"
+                                day="numeric"
+                                hour="numeric"
+                                minute="2-digit"
+                                time-zone-name="short"        
+                            >
+                            </lightning-formatted-date-time>                            
+                        </div>
+                        <div if:true={wasPreviouslyReturned}>
+                            Last Returned:&nbsp;&nbsp;
+                            <lightning-formatted-date-time value={tripRecord.Date_Last_Returned__c} 
+                                year="numeric"
+                                month="numeric"
+                                day="numeric"
+                                hour="numeric"
+                                minute="2-digit"
+                                time-zone-name="short"
+                            >
+                            </lightning-formatted-date-time>                            
                         </div>
                 
                     </lightning-accordion-section>
@@ -1401,7 +1444,7 @@
                             </lightning-icon>
                             <span class="slds-assistive-text">Close</span>
                         </button>
-                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Submit For Approval</h2>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{statusDialogTitle}</h2>
                     </header>
                     <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
                         <template if:true={statusChangeErrors}>
@@ -1415,13 +1458,20 @@
                             </ul>
                         </template>                
                         <template if:false={statusChangeErrors}>
-                            <p>
-                              The trip is ready to be submitted for approval. Note that once the status is changed, you will not be able to make further changes unless the approver returns it to you.
-                            </p>
-                            <br/>
-                            <p>
-                              To submit your trip, close this window and hit the Save button at the top or bottom of the form. If you miss this final step, your trip will not be submitted.
-                            </p>
+                            <template if:true={changingStatus}>
+                                <p>
+                                    The trip is ready to be submitted for approval. Note that once the status is changed, you will not be able to make further changes unless the approver returns it to you.
+                                </p>
+                                <br/>
+                                <p>
+                                    To submit your trip, close this window and hit the Save button at the top or bottom of the form. If you miss this final step, your trip will not be submitted.
+                                </p>
+                            </template>
+                            <template if:false={changingStatus}>
+                                <p>
+                                    The trip is ready to be submitted for approval.
+                                </p>
+                            </template>
                         </template>
                         </div>
                     <footer class="slds-modal__footer">

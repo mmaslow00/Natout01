@@ -1,4 +1,4 @@
-trigger NatoutTripTrigger on National_Outings_Trip__c (before insert, after insert, after update, before delete) {
+trigger NatoutTripTrigger on National_Outings_Trip__c (before insert, after insert, before update, after update, before delete) {
     if(Trigger.isInsert) {
         if(Trigger.isBefore) {
             NatoutTripTriggerHandler.beforeInsert(Trigger.new);
@@ -10,6 +10,9 @@ trigger NatoutTripTrigger on National_Outings_Trip__c (before insert, after inse
     else if(Trigger.isUpdate) {
         if(Trigger.isAfter) {
             NatoutTripTriggerHandler.afterUpdate(Trigger.new, Trigger.oldMap);
+        }
+        else if(trigger.isBefore) {
+            NatoutTripTriggerHandler.beforeUpdate(Trigger.new, Trigger.oldMap);
         }
     }
     else if(Trigger.isDelete) {

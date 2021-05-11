@@ -7,6 +7,10 @@
         <members>NatoutUserInfo</members>
         <name>ApexClass</name>
     </types>
+    <types>
+        <members>NatoutTripTrigger</members>
+        <name>ApexTrigger</name>
+    </types>       
     <types>  
         <members>natoutTripDetail</members>
         <name>LightningComponentBundle</name>  
