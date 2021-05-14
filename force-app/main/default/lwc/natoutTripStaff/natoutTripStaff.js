@@ -171,6 +171,13 @@ export default class NatoutTripStaff extends LightningElement {
                     this.error = undefined;
                     this.savingStaff = false;
                     this.showSnackbar('success','Staff Updated','Staff successfully updated');
+                    if(staffRecord.Role__c === 'Leader') {
+                        const leaderUpdatedEvent = new CustomEvent("leaderupdated",
+                            {detail: {}}
+                        );
+                        this.dispatchEvent(leaderUpdatedEvent);
+                    }
+    
                     return refreshApex(this.wiredStaff);
                 })
                 .catch(error => {

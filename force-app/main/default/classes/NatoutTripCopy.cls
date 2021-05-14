@@ -8,6 +8,10 @@ public without sharing class NatoutTripCopy {
         National_Outings_Trip__c fromTrip = Database.query(query);
         National_Outings_Trip__c toTrip = fromTrip.clone(false, true, false, false);
         toTrip.Status__c = 'Started';
+        toTrip.Date_Submitted__c = null;
+        toTrip.Date_Last_Submitted__c = null;
+        toTrip.Date_Returned__c = null;
+        toTrip.Date_Last_Returned__c = null;
         toTrip.Name = 'Copy of ' + fromTrip.Name;
         toTrip.OwnerID = UserInfo.getUserId();
         Database.SaveResult rslt = Database.insert(toTrip);

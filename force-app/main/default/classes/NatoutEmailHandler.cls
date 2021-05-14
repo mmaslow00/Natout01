@@ -309,7 +309,7 @@ public without sharing class NatoutEmailHandler {
         return msg;
     }
 
-    public static List<TriggeredSendEmail__c> notifyOfComments(List<National_Outings_Trip_Comments__c> commentsList) {
+    public static void notifyOfComments(List<National_Outings_Trip_Comments__c> commentsList) {
         Set<Id> tripIds = new Set<Id>();
         Set<Id> commentsIds = new Set<Id>();
         for(National_Outings_Trip_Comments__c comments : commentsList) {
@@ -324,6 +324,7 @@ public without sharing class NatoutEmailHandler {
         Map<Id, List<Recipient>> approverMap = getApprovers(tripList);
 
         List<TriggeredSendEmail__c> sendList = new List<TriggeredSendEmail__c>();
+        List<National_Outings_Trip_Comments_Recip__c> commentsRecipList = new List<National_Outings_Trip_Comments_Recip__c>();
         List<National_Outings_Trip_Comments__c> commentsWithCreatorList = [
             SELECT 
                 National_Outings_Trip__c, 
@@ -347,6 +348,12 @@ public without sharing class NatoutEmailHandler {
                 for(Recipient rcp : recipientList) {
                     //sendList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, commentsText));
                     sendList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, commentsText));
+                    commentsRecipList.add(
+                        new National_Outings_Trip_Comments_Recip__c(
+                            Contact__c = rcp.contactId,
+                            Email__c = rcp.emailAddr
+                        )
+                    );
                 }
             }
             if(comments.Notify_Approvers__c) {
@@ -354,13 +361,25 @@ public without sharing class NatoutEmailHandler {
                 for(Recipient rcp : recipientList) {
                     //sendList.add(createTriggeredSend(rcp.contactId, testEmailAddr, subject, commentsText));
                     sendList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, commentsText));
+                    commentsRecipList.add(
+                        new National_Outings_Trip_Comments_Recip__c(
+                            Contact__c = rcp.contactId,
+                            Email__c = rcp.emailAddr
+                        )
+                    );
                 }
             }
             if(comments.Notify_Staff__c) {
                 sendList.add(createTriggeredSend(null, staffEmailAddr, subject, commentsText));
+                commentsRecipList.add(
+                    new National_Outings_Trip_Comments_Recip__c(
+                        Email__c = staffEmailAddr
+                    )
+                );
             }
         }
-        return sendList;
+        insert sendList;
+        insert commentsRecipList;
     }
 
     public static TriggeredSendEmail__c createTriggeredSend(Id contactId, String emailAddr, String subject, String msg) {

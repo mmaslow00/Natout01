@@ -107,6 +107,17 @@
                         data-field="Date_Last_Returned__c"
                     >
                     </lightning-input-field>
+                    <lightning-input-field
+                        field-name="Prior_Trip__c"
+                        data-field="Prior_Trip__c"
+                        data-id="priorTripNo"
+                    >
+                    </lightning-input-field>
+                    <lightning-input-field
+                        field-name="Prior_Trip_Price__c"
+                        data-field="Prior_Trip_Price__c"
+                    >
+                    </lightning-input-field>
                 </div>
                 
                 <template if:true={showPostUseFields}>
@@ -329,6 +340,7 @@
                             <c-natout-trip-staff
                                 record-id={recordId}
                                 can-edit={userCanEdit}
+                                onleaderupdated={refreshSatPhoneAddress}
                             >
                             </c-natout-trip-staff>
                         </div>
@@ -367,14 +379,22 @@
                                 <c-tooltip text="Previous trip number, e.g., 20015A">                                
                                 </c-tooltip>
                             </label>
-                                <lightning-input-field
-                                field-name="Prior_Trip__c"
+                            <lightning-input
+                                class="priorTripNo"
                                 onchange={handleFieldChange}
-                                data-field="Prior_Trip__c"
-                                data-id="priorTripNo"
+                                value={tripRecord.Prior_Trip__c}
                                 variant="label-hidden"
+                                data-field="Prior_Trip__c"
                             >
-                            </lightning-input-field>
+                            </lightning-input>
+                            <div if:true={displayPriorPrice}>
+                                Prior Trip Price:&nbsp;&nbsp;
+                                <lightning-formatted-number
+                                    value={priorPrice}
+                                    format-style="currency"
+                                    currency-code="USD">
+                                </lightning-formatted-number>                                
+                            </div>
                         </template>
   
                         <label class="slds-form-element__label" for="tripCopy">

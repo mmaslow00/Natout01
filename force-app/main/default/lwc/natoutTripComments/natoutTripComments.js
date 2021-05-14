@@ -27,6 +27,24 @@ export default class NatoutTripComments extends LightningElement {
             this.commentsList = result.data.map(row => {
                 let submitter = row.CreatedBy.Name;
                 let newRow = {...row , submitter};
+                let recipients = [];
+                if(row.National_Outings_Trip_Comments_Recips__r) {
+                    let recip = row.National_Outings_Trip_Comments_Recips__r;
+                    for(let idx=0; idx < recip.length; idx++) {
+                        let recipient = recip[idx];
+                        let name = '';
+                        if(recipient.Contact__r) {
+                            name = recipient.Contact__r.Name;
+                        }
+                        else {
+                            name = 'Outings Staff';
+                        }
+                        recipients.push({Id: recipient.Id, name: name, email: recipient.Email__c});
+                    }
+                }
+                newRow = {...newRow , recipients};
+                let hasRecipients = recipients.length > 0;
+                newRow = {...newRow , hasRecipients};
                 return newRow;
             });
 

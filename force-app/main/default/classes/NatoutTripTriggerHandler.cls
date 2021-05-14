@@ -73,16 +73,20 @@ public with sharing class NatoutTripTriggerHandler {
         for(National_Outings_Trip__c trip : tripList) {
             National_Outings_Trip__c prevTrip = oldMap.get(trip.Id);
             if(trip.Status__c == 'Submitted' && prevTrip.Status__c != 'Submitted') {
-                trip.Date_Last_Submitted__c = System.now();
+                trip.Date_Last_Submitted__c = trip.Date_Submitted__c;
+                trip.Date_Submitted__c = System.now();
             }
             else {
                 trip.Date_Last_Submitted__c = prevTrip.Date_Last_Submitted__c;
+                trip.Date_Submitted__c = prevTrip.Date_Last_Submitted__c;
             }
             if(trip.Status__c == 'Returned' && prevTrip.Status__c != 'Returned') {
-                trip.Date_Last_Returned__c = System.now();
+                trip.Date_Last_Returned__c = trip.Date_Returned__c;
+                trip.Date_Returned__c = System.now();
             }
             else {
                 trip.Date_Last_Returned__c = prevTrip.Date_Last_Returned__c;
+                trip.Date_Returned__c = prevTrip.Date_Returned__c;
             }
         }
     }
@@ -105,6 +109,55 @@ public with sharing class NatoutTripTriggerHandler {
             delete docList;
         }
     }
+    public static void setSatPhoneAddress(List<National_Outings_Trip_Staff__c> staffList, Map<Id,National_Outings_Trip_Staff__c> oldMap) {
+        Set<Id> tripIds = new Set<Id>();
+        for(National_Outings_Trip_Staff__c staff : staffList) {
+            National_Outings_Trip_Staff__c oldStaff = oldMap.get(staff.Id);
+            if(
+                staff.Role__c == 'Leader' &&
+                staff.Contact__c != null &&
+                staff.Contact__c != oldStaff.Contact__c
+            ) {
+                tripIds.add(staff.National_Outings_Trip__c);
+            }
+        }
+        if( ! tripIds.isEmpty() ) {
+            List<National_Outings_Trip_Staff__c> staffAddressList = [
+                SELECT Id, 
+                    National_Outings_Trip__c,
+                    Contact__r.Name,
+                    Contact__r.MailingStreet,
+                    Contact__r.MailingCity,
+                    Contact__r.MailingState,
+                    Contact__r.MailingPostalCode
+                FROM National_Outings_Trip_Staff__c
+                WHERE 
+                    National_Outings_Trip__c in :tripIds
+                    AND Contact__c != null
+                    AND Role__c = 'Leader'
+            ];
+            Map<Id, National_Outings_Trip_Staff__c> staffMap = new Map<Id, National_Outings_Trip_Staff__c>();
+            for(National_Outings_Trip_Staff__c staff : staffAddressList) {
+                staffMap.put(staff.National_Outings_Trip__c, staff);
+            }
+
+            List<National_Outings_Trip__c> tripList = new List<National_Outings_Trip__c>();
+            for(Id tripId : tripIds) {
+                National_Outings_Trip_Staff__c staff = staffMap.get(tripId);
+                tripList.add(
+                    new National_Outings_Trip__c(
+                        Id=tripId,
+                        Sat_Phone_Ship_To_Name__c = staff.Contact__r.Name,
+                        Sat_Phone_Ship_To_Address__c = staff.Contact__r.MailingStreet,
+                        Sat_Phone_Ship_To_City__c = staff.Contact__r.MailingCity,
+                        Sat_Phone_Ship_To_State_Prov__c = staff.Contact__r.MailingState,
+                        Sat_Phone_Ship_To_Zip_Code__c = staff.Contact__r.MailingPostalCode
+                    )                        
+                );
+            }
+            update tripList;
+        }
+    }
     private static Id getUserContactId() {
         Id userId = UserInfo.getUserId();
         Id contactId=null;
@@ -120,5 +173,40 @@ public with sharing class NatoutTripTriggerHandler {
             contactId = [select ContactId from User where Id=:userId].ContactId;
         }
         return contactId;
+    }
+    @AuraEnabled
+    public static ShipTo getSatPhoneAddr(String tripId) {
+        National_Outings_Trip_Staff__c leader = [
+            SELECT  
+            Contact__r.Name,
+            Contact__r.MailingStreet,
+            Contact__r.MailingCity,
+            Contact__r.MailingState,
+            Contact__r.MailingPostalCode
+            FROM National_Outings_Trip_Staff__c
+            WHERE 
+                National_Outings_Trip__c = :tripId
+                AND Contact__c != null
+                AND Role__c = 'Leader'
+        ];
+        ShipTo to = new ShipTo();
+        to.name = leader.Contact__r.Name;
+        to.address = leader.Contact__r.MailingStreet;
+        to.city = leader.Contact__r.MailingCity;
+        to.state = leader.Contact__r.MailingState;
+        to.zip = leader.Contact__r.MailingPostalCode;
+        return to;
+    }
+    public Class ShipTo {
+        @AuraEnabled
+        public String name {get; set;}
+        @AuraEnabled
+        public String address {get; set;}
+        @AuraEnabled
+        public String city {get; set;}
+        @AuraEnabled
+        public String state {get; set;}
+        @AuraEnabled
+        public String zip {get; set;}
     }
 }

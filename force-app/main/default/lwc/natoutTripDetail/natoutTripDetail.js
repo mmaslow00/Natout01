@@ -10,7 +10,8 @@ import getUserAccess from '@salesforce/apex/NatoutUserInfo.getUserAccess';
 import { refreshApex } from '@salesforce/apex';
 import submitPostTripReport from '@salesforce/apex/NatoutTripPostTripReport.submitReport';
 import approveBudget from '@salesforce/apex/NatoutTripBudgetController.approveBudget';
-
+import priceLookup from '@salesforce/apex/NatoutTripCampaignLookup.getTripPrice';
+import getSatPhoneAddress from '@salesforce/apex/NatoutTripTriggerHandler.getSatPhoneAddr';
 export default class NatoutTripDetail extends LightningElement {
     @api recordId;
     @track tripRecord = {};
@@ -23,6 +24,7 @@ export default class NatoutTripDetail extends LightningElement {
     @track showStatusDialog;
     @track changingStatus;
     @track verifyingBudgetApproval = false;
+    @track priorPrice;
     loadedForm = false;
     loadedStatus = null;
     countryOptions = null;
@@ -90,6 +92,16 @@ export default class NatoutTripDetail extends LightningElement {
             this.chosenStatus = this.tripRecord.Status__c;
             this.loadedStatus = this.tripRecord.Status__c;
             document.title = this.tripRecord.Name;
+
+            if(this.tripRecord.Prior_Trip_Price__c) {
+                this.priorPrice = this.tripRecord.Prior_Trip_Price__c;
+            }
+            if(this.tripRecord.Prior_Trip__c) {
+                let elem = this.template.querySelector('.priorTripNo');
+                elem.addEventListener('blur', (ev) => {
+                    this.checkTripNo(ev.target).bind(this);
+                });
+            }
         }
     }
     renderedCallback() {
@@ -388,7 +400,7 @@ export default class NatoutTripDetail extends LightningElement {
     get mealsBudgetOptions() {
         let mealsOptions = [{label: "None", value: "None"}];
         if(this.tripRecord.Subcommittee__c) {
-            if(this.tripRecord.Subcommittee__c != 'International') {
+            if(this.tripRecord.Subcommittee__c !== 'International') {
                 mealsOptions.push({label: "Subcommittee Standard Values", value: "Subcommittee"});
             }
         }
@@ -466,7 +478,7 @@ export default class NatoutTripDetail extends LightningElement {
                     this.subcommOptions = [];
                     for(let i=0; i < this.picklistOptions.data.subcommList.length; i++) {
                         let label = this.picklistOptions.data.subcommList[i];
-                        if(label != 'International') {
+                        if(label !== 'International') {
                             let labelValue = {label: label, value: label};
                             this.subcommOptions.push(labelValue);
                         }
@@ -507,7 +519,7 @@ export default class NatoutTripDetail extends LightningElement {
         if(this.tripRecord.Trip_Copy__c) {
             this.wordCount = this.tripRecord.Trip_Copy__c
                 .split(' ')
-                .filter(function(n) { return n != ''; })
+                .filter(function(n) { return n !== ''; })
                 .length;
         }
         return this.wordCount;
@@ -609,7 +621,7 @@ export default class NatoutTripDetail extends LightningElement {
         if(this.revisingPostUse) {
             return true;
         }
-        let retVal = this.postTripReportDue && this.tripRecord.Status__c == 'Uploaded to TRAIL';
+        let retVal = this.postTripReportDue && this.tripRecord.Status__c === 'Uploaded to TRAIL';
         return retVal;
     }
     get displayPostUseFields() {
@@ -617,6 +629,9 @@ export default class NatoutTripDetail extends LightningElement {
             return false;
         }
         return this.postTripReportSubmitted;
+    }
+    get displayPriorPrice() {
+        return this.priorPrice != null;
     }
     revisePostUse() {
         this.revisingPostUse = true;
@@ -645,6 +660,54 @@ export default class NatoutTripDetail extends LightningElement {
         })
         .finally(() => {
             this.verifyingBudgetApproval = false;
+        });
+    }
+    checkTripNo(target) {
+        let tripId = target.value;
+        let price = null;
+        priceLookup({
+            tripId: tripId
+        })
+        .then(result => {
+            price = result;
+            this.error = undefined;
+            if(price == null) {
+                this.tripRecord.Prior_Trip_Price__c = null;
+                this.priorPrice = null;
+                target.setCustomValidity('Trip not found');
+                target.reportValidity();
+            }
+            else {
+                this.tripRecord.Prior_Trip_Price__c = price;
+                this.priorPrice = price;
+                target.setCustomValidity('');
+                target.reportValidity();
+            }
+        })
+        .catch(error => {
+            this.error = error;
+            this.showSnackbar('failure', 'Trip Lookup Failed', reduceErrors(error).join(', '));
+        });
+    }
+    refreshSatPhoneAddress() {
+        getSatPhoneAddress({
+            tripId: this.recordId
+        })
+        .then(result => {
+            this.template.querySelector('[data-field=Sat_Phone_Ship_To_Name__c]').value = result.name;
+            this.tripRecord.Sat_Phone_Ship_To_Name = result.name;
+            this.template.querySelector('[data-field=Sat_Phone_Ship_To_Address__c]').value = result.address;
+            this.tripRecord.Sat_Phone_Ship_To_Address__c = result.address;
+            this.template.querySelector('[data-field=Sat_Phone_Ship_To_City__c]').value = result.city;
+            this.tripRecord.Sat_Phone_Ship_To_City__c = result.city;
+            this.template.querySelector('[data-field=Sat_Phone_Ship_To_State_Prov__c]').value = result.state;
+            this.tripRecord.Sat_Phone_Ship_To_State_Prov__c = result.state;
+            this.template.querySelector('[data-field=Sat_Phone_Ship_To_Zip_Code__c]').value = result.zip;
+            this.tripRecord.Sat_Phone_Ship_To_Zip_Code__c = result.zip;
+        })
+        .catch(error => {
+            this.error = error;
+            this.showSnackbar('failure', 'Resetting Sat Phone Address Failed', reduceErrors(error).join(', '));
         });
     }
     get showApprovalWarnings() {
@@ -720,7 +783,7 @@ export default class NatoutTripDetail extends LightningElement {
         this.template.querySelector('[data-field=Longitude__c]').value = latLng.longitude;
         this.searchingForLocation = false;
     }
-    cancelLocation(e) {
+    cancelLocation() {
         this.searchingForLocation = false;
     }
     mapLocation(e) {
@@ -786,8 +849,15 @@ export default class NatoutTripDetail extends LightningElement {
                 errors.push({rowNum: rowNum++, text: 'Trip Copy and Marketing: Trip Copy is Required for a First Time Trip'});
             }
         }
-        else if( ! this.tripRecord.Prior_Trip__c) {
-            errors.push({rowNum: rowNum++, text: 'Trip Copy and Marketing: Prior Trip # is Required if this not a First Time Trip'});
+        else {
+            if( ! this.tripRecord.Prior_Trip__c) {
+                errors.push({rowNum: rowNum++, text: 'Trip Copy and Marketing: Prior Trip # is Required if this not a First Time Trip'});
+            }
+            else {
+                if(this.priorPrice == null) {
+                    errors.push({rowNum: rowNum++, text: 'Trip Copy and Marketing: Valid Prior Trip # is Required if this not a First Time Trip'});
+                }        
+            }
         }
         if( ! this.tripRecord.Conservation_Emphasis__c) {
             errors.push({rowNum: rowNum++, text: 'Trip Copy and Marketing: Conservation Emphasis is Required'});

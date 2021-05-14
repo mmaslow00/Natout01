@@ -26,6 +26,14 @@
                 >
                 </lightning-formatted-rich-text>
             </p>
+            <p if:true={com.hasRecipients}>
+                Sent to:<br/>
+                <template for:each={com.recipients} for:item="rcp">
+                    <div key={rcp.Id}>
+                        {rcp.name}&nbsp;&nbsp;{rcp.email}
+                    </div>
+                </template>
+            </p>
         </div>
     </template>    
     
