@@ -326,7 +326,8 @@ public without sharing class NatoutEmailHandler {
         List<TriggeredSendEmail__c> sendList = new List<TriggeredSendEmail__c>();
         List<National_Outings_Trip_Comments_Recip__c> commentsRecipList = new List<National_Outings_Trip_Comments_Recip__c>();
         List<National_Outings_Trip_Comments__c> commentsWithCreatorList = [
-            SELECT 
+            SELECT
+                Id, 
                 National_Outings_Trip__c, 
                 Comments__c,
                 Notify_Creators__c,
@@ -351,7 +352,8 @@ public without sharing class NatoutEmailHandler {
                     commentsRecipList.add(
                         new National_Outings_Trip_Comments_Recip__c(
                             Contact__c = rcp.contactId,
-                            Email__c = rcp.emailAddr
+                            Email__c = rcp.emailAddr,
+                            National_Outings_Trip_Comments__c = comments.Id
                         )
                     );
                 }
@@ -364,7 +366,8 @@ public without sharing class NatoutEmailHandler {
                     commentsRecipList.add(
                         new National_Outings_Trip_Comments_Recip__c(
                             Contact__c = rcp.contactId,
-                            Email__c = rcp.emailAddr
+                            Email__c = rcp.emailAddr,
+                            National_Outings_Trip_Comments__c = comments.Id
                         )
                     );
                 }
@@ -373,7 +376,8 @@ public without sharing class NatoutEmailHandler {
                 sendList.add(createTriggeredSend(null, staffEmailAddr, subject, commentsText));
                 commentsRecipList.add(
                     new National_Outings_Trip_Comments_Recip__c(
-                        Email__c = staffEmailAddr
+                        Email__c = staffEmailAddr,
+                        National_Outings_Trip_Comments__c = comments.Id
                     )
                 );
             }

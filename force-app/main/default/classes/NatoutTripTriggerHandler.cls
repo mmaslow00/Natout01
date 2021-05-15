@@ -63,30 +63,32 @@ public with sharing class NatoutTripTriggerHandler {
             emailList.addAll(NatoutEmailHandler.budgetApproved(changedTrips));
         }
         if( ! emailList.isEmpty() ) {
-            //insert emailList;
-            for(TriggeredSendEmail__c tse : emailList) {
-                System.debug(tse.Email__c);
-            }
+            insert emailList;
         }
     }
     public static void beforeUpdate(List<National_Outings_Trip__c> tripList, Map<Id,National_Outings_Trip__c> oldMap) {
         for(National_Outings_Trip__c trip : tripList) {
             National_Outings_Trip__c prevTrip = oldMap.get(trip.Id);
+
             if(trip.Status__c == 'Submitted' && prevTrip.Status__c != 'Submitted') {
-                trip.Date_Last_Submitted__c = trip.Date_Submitted__c;
                 trip.Date_Submitted__c = System.now();
+                if(prevTrip.Status__c != 'Started') {
+                    trip.Date_Last_Submitted__c = prevTrip.Date_Submitted__c;
+                }
             }
             else {
+                trip.Date_Submitted__c = prevTrip.Date_Submitted__c;
                 trip.Date_Last_Submitted__c = prevTrip.Date_Last_Submitted__c;
-                trip.Date_Submitted__c = prevTrip.Date_Last_Submitted__c;
             }
             if(trip.Status__c == 'Returned' && prevTrip.Status__c != 'Returned') {
-                trip.Date_Last_Returned__c = trip.Date_Returned__c;
                 trip.Date_Returned__c = System.now();
+                if(prevTrip.Date_Returned__c != null) {
+                    trip.Date_Last_Returned__c = prevTrip.Date_Returned__c;
+                }
             }
             else {
-                trip.Date_Last_Returned__c = prevTrip.Date_Last_Returned__c;
                 trip.Date_Returned__c = prevTrip.Date_Returned__c;
+                trip.Date_Last_Returned__c = prevTrip.Date_Last_Returned__c;
             }
         }
     }
@@ -173,40 +175,5 @@ public with sharing class NatoutTripTriggerHandler {
             contactId = [select ContactId from User where Id=:userId].ContactId;
         }
         return contactId;
-    }
-    @AuraEnabled
-    public static ShipTo getSatPhoneAddr(String tripId) {
-        National_Outings_Trip_Staff__c leader = [
-            SELECT  
-            Contact__r.Name,
-            Contact__r.MailingStreet,
-            Contact__r.MailingCity,
-            Contact__r.MailingState,
-            Contact__r.MailingPostalCode
-            FROM National_Outings_Trip_Staff__c
-            WHERE 
-                National_Outings_Trip__c = :tripId
-                AND Contact__c != null
-                AND Role__c = 'Leader'
-        ];
-        ShipTo to = new ShipTo();
-        to.name = leader.Contact__r.Name;
-        to.address = leader.Contact__r.MailingStreet;
-        to.city = leader.Contact__r.MailingCity;
-        to.state = leader.Contact__r.MailingState;
-        to.zip = leader.Contact__r.MailingPostalCode;
-        return to;
-    }
-    public Class ShipTo {
-        @AuraEnabled
-        public String name {get; set;}
-        @AuraEnabled
-        public String address {get; set;}
-        @AuraEnabled
-        public String city {get; set;}
-        @AuraEnabled
-        public String state {get; set;}
-        @AuraEnabled
-        public String zip {get; set;}
     }
 }

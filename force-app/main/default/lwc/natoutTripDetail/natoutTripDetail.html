@@ -98,8 +98,18 @@
                     >
                     </lightning-input-field>
                     <lightning-input-field
+                        field-name="Date_Submitted__c"
+                        data-field="Date_Submitted__c"
+                    >
+                    </lightning-input-field>
+                    <lightning-input-field
                         field-name="Date_Last_Submitted__c"
                         data-field="Date_Last_Submitted__c"
+                    >
+                    </lightning-input-field>
+                    <lightning-input-field
+                        field-name="Date_Returned__c"
+                        data-field="Date_Returned__c"
                     >
                     </lightning-input-field>
                     <lightning-input-field
@@ -235,6 +245,17 @@
                         </div>
 
                         <div if:true={wasPreviouslySubmitted}>
+                            Submitted:&nbsp;&nbsp;
+                            <lightning-formatted-date-time value={tripRecord.Date_Submitted__c} 
+                                year="numeric"
+                                month="numeric"
+                                day="numeric"
+                                hour="numeric"
+                                minute="2-digit"
+                                time-zone-name="short"        
+                            >
+                            </lightning-formatted-date-time>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                             Last Submitted:&nbsp;&nbsp;
                             <lightning-formatted-date-time value={tripRecord.Date_Last_Submitted__c} 
                                 year="numeric"
@@ -247,6 +268,17 @@
                             </lightning-formatted-date-time>                            
                         </div>
                         <div if:true={wasPreviouslyReturned}>
+                            Returned:&nbsp;&nbsp;
+                            <lightning-formatted-date-time value={tripRecord.Date_Returned__c} 
+                                year="numeric"
+                                month="numeric"
+                                day="numeric"
+                                hour="numeric"
+                                minute="2-digit"
+                                time-zone-name="short"
+                            >
+                            </lightning-formatted-date-time>                            
+                            &nbsp;&nbsp;&nbsp;&nbsp;
                             Last Returned:&nbsp;&nbsp;
                             <lightning-formatted-date-time value={tripRecord.Date_Last_Returned__c} 
                                 year="numeric"

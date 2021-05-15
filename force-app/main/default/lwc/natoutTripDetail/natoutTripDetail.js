@@ -10,8 +10,8 @@ import getUserAccess from '@salesforce/apex/NatoutUserInfo.getUserAccess';
 import { refreshApex } from '@salesforce/apex';
 import submitPostTripReport from '@salesforce/apex/NatoutTripPostTripReport.submitReport';
 import approveBudget from '@salesforce/apex/NatoutTripBudgetController.approveBudget';
-import priceLookup from '@salesforce/apex/NatoutTripCampaignLookup.getTripPrice';
-import getSatPhoneAddress from '@salesforce/apex/NatoutTripTriggerHandler.getSatPhoneAddr';
+import priceLookup from '@salesforce/apex/NatoutTripService.getTripPrice';
+import getSatPhoneAddress from '@salesforce/apex/NatoutTripService.getSatPhoneAddr';
 export default class NatoutTripDetail extends LightningElement {
     @api recordId;
     @track tripRecord = {};
