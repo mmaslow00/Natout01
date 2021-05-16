@@ -47,7 +47,10 @@ public with sharing class NatoutTripBudgetController {
         National_Outings_Trip__c trip = new National_Outings_Trip__c(
             Id = tripId,
             Budget_Approved_Date__c = now,
-            Budget_Approved_By__c = userId
+            Budget_Approved_By__c = userId,
+            Date_Last_Submitted__c = null,
+            Date_Returned__c = null,
+            Date_Last_Returned__c = null
         );
         update trip;
         return new BudgetApproval(now, userId);

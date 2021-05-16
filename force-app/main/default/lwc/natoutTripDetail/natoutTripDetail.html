@@ -256,7 +256,7 @@
                             >
                             </lightning-formatted-date-time>
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            Last Submitted:&nbsp;&nbsp;
+                            Previously Submitted:&nbsp;&nbsp;
                             <lightning-formatted-date-time value={tripRecord.Date_Last_Submitted__c} 
                                 year="numeric"
                                 month="numeric"
@@ -265,9 +265,9 @@
                                 minute="2-digit"
                                 time-zone-name="short"        
                             >
-                            </lightning-formatted-date-time>                            
+                            </lightning-formatted-date-time>                          
                         </div>
-                        <div if:true={wasPreviouslyReturned}>
+                        <div if:true={wasPreviouslyReturned}>  
                             Returned:&nbsp;&nbsp;
                             <lightning-formatted-date-time value={tripRecord.Date_Returned__c} 
                                 year="numeric"
@@ -279,7 +279,7 @@
                             >
                             </lightning-formatted-date-time>                            
                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            Last Returned:&nbsp;&nbsp;
+                            Previously Returned:&nbsp;&nbsp;
                             <lightning-formatted-date-time value={tripRecord.Date_Last_Returned__c} 
                                 year="numeric"
                                 month="numeric"
@@ -758,32 +758,34 @@
                             onsectiontoggle={handleBudgetSectionToggle}
                         >
                             <template if:true={tripIsInternational}>
-                                <div style="text-align: center;" class="slds-p-top_large slds-p-bottom_large">
-                                    <template if:true={showBudgetApprovalButton}>
-                                        <lightning-button 
-                                            variant="brand"
-                                            name="approveBudget"
-                                            label="Approve Budget"
-                                            onclick={requestBudgetApproval}
-                                        >
-                                        </lightning-button>             
-                                    </template>
-                                    <template if:true={showDateBudgetApproved}>
-                                        <div style="font-weight: bold;">
-                                            Budget Approved:&nbsp;&nbsp;
-                                            <lightning-formatted-date-time
-                                                value={tripRecord.Budget_Approved_Date__c}
-                                                year="numeric"
-                                                month="numeric"
-                                                day="numeric"
-                                                hour="numeric"
-                                                minute="2-digit"
-                                                time-zone-name="short"
+                                <template if:true={showBudgetApprovalSection}>
+                                    <div style="text-align: center;" class="slds-p-top_large slds-p-bottom_large">
+                                        <template if:true={showBudgetApprovalButton}>
+                                            <lightning-button 
+                                                variant="brand"
+                                                name="approveBudget"
+                                                label="Approve Budget"
+                                                onclick={requestBudgetApproval}
                                             >
-                                            </lightning-formatted-date-time>
-                                        </div>                            
-                                    </template>
-                                </div>       
+                                            </lightning-button>             
+                                        </template>
+                                        <template if:true={showDateBudgetApproved}>
+                                            <div style="font-weight: bold;">
+                                                Budget Approved:&nbsp;&nbsp;
+                                                <lightning-formatted-date-time
+                                                    value={tripRecord.Budget_Approved_Date__c}
+                                                    year="numeric"
+                                                    month="numeric"
+                                                    day="numeric"
+                                                    hour="numeric"
+                                                    minute="2-digit"
+                                                    time-zone-name="short"
+                                                >
+                                                </lightning-formatted-date-time>
+                                            </div>                            
+                                        </template>
+                                    </div>
+                                </template>       
                                 <p class="infop">
                                     Budgets for international trips have unique items which are described
                                     <a href="https://drive.google.com/file/d/1GpgkVlRtArbslpDPlOmWmcsmiQxGmy_J/view" target="_blank"> here</a>

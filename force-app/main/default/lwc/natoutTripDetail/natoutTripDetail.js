@@ -741,6 +741,9 @@ export default class NatoutTripDetail extends LightningElement {
         }
         return false;
     }
+    get showBudgetApprovalSection() {
+        return this.showBudgetApprovalButton || this.showDateBudgetApproved;
+    }
     get approvalWarnings() {
         let warnings = [];
         let rowNum = 0;
