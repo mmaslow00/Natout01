@@ -90,6 +90,11 @@ public with sharing class NatoutTripTriggerHandler {
                 trip.Date_Returned__c = prevTrip.Date_Returned__c;
                 trip.Date_Last_Returned__c = prevTrip.Date_Last_Returned__c;
             }
+            if(trip.Budget_Approved_Date__c != null && prevTrip.Budget_Approved_Date__c == null) {
+                trip.Date_Last_Submitted__c = null;
+                trip.Date_Returned__c = null;
+                trip.Date_Last_Returned__c = null;
+            }
         }
     }
     public static void beforeDelete(List<National_Outings_Trip__c> tripList) {
