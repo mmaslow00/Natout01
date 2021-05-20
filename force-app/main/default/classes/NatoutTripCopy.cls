@@ -14,6 +14,13 @@ public without sharing class NatoutTripCopy {
         toTrip.Date_Last_Returned__c = null;
         toTrip.Name = 'Copy of ' + fromTrip.Name;
         toTrip.OwnerID = UserInfo.getUserId();
+        if(
+            toTrip.First_Time_Run__c == false &&
+            toTrip.Prior_Trip__c != null &&
+            toTrip.Prior_Trip_Price__c == null
+        ) {
+            toTrip.Prior_Trip_Price__c = NatoutTripService.getTripPrice(toTrip.Prior_Trip__c);
+        } 
         Database.SaveResult rslt = Database.insert(toTrip);
         if( ! rslt.isSuccess()) {
             return null;
