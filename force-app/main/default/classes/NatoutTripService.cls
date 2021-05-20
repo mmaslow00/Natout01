@@ -35,6 +35,18 @@ public with sharing class NatoutTripService {
         to.zip = leader.Contact__r.MailingPostalCode;
         return to;
     }
+    @AuraEnabled
+    public static BudgetApproval approveBudget(String tripId) {
+        Datetime now = System.now();
+        Id userId = UserInfo.getUserId();
+        National_Outings_Trip__c trip = new National_Outings_Trip__c(
+            Id = tripId,
+            Budget_Approved_Date__c = now,
+            Budget_Approved_By__c = userId
+        );
+        update trip;
+        return new BudgetApproval(now, userId);
+    }
     public Class ShipTo {
         @AuraEnabled
         public String name {get; set;}
@@ -46,5 +58,15 @@ public with sharing class NatoutTripService {
         public String state {get; set;}
         @AuraEnabled
         public String zip {get; set;}
+    }
+    public Class BudgetApproval {
+        BudgetApproval(Datetime dateApproved, Id approvedBy) {
+            this.dateApproved = dateApproved;
+            this.approvedBy = approvedBy;
+        }
+        @AuraEnabled
+        public Datetime dateApproved {get; set;}
+        @AuraEnabled
+        public String approvedBy {get; set;}
     }
 }

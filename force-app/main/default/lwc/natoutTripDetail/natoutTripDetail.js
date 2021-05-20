@@ -9,7 +9,7 @@ import getPicklistOptions from '@salesforce/apex/NatoutTripOptions.getOptions';
 import getUserAccess from '@salesforce/apex/NatoutUserInfo.getUserAccess';
 import { refreshApex } from '@salesforce/apex';
 import submitPostTripReport from '@salesforce/apex/NatoutTripPostTripReport.submitReport';
-import approveBudget from '@salesforce/apex/NatoutTripBudgetController.approveBudget';
+import approveBudget from '@salesforce/apex/NatoutTripService.approveBudget';
 import priceLookup from '@salesforce/apex/NatoutTripService.getTripPrice';
 import getSatPhoneAddress from '@salesforce/apex/NatoutTripService.getSatPhoneAddr';
 export default class NatoutTripDetail extends LightningElement {

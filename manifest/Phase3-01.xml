@@ -3,7 +3,6 @@
     <types>
         <members>NatoutTripService</members>
         <members>NatoutEmailHandler</members>
-        <members>NatoutTripBudgetController</members>
         <members>NatoutTripCommentsController</members>
         <members>NatoutTripCopy</members>
         <members>NatoutTripTriggerHandler</members>

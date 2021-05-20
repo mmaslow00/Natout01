@@ -40,27 +40,4 @@ public with sharing class NatoutTripBudgetController {
         ];
         return budgetList;
     }
-    @AuraEnabled
-    public static BudgetApproval approveBudget(String tripId) {
-        Datetime now = System.now();
-        Id userId = UserInfo.getUserId();
-        National_Outings_Trip__c trip = new National_Outings_Trip__c(
-            Id = tripId,
-            Budget_Approved_Date__c = now,
-            Budget_Approved_By__c = userId
-        );
-        update trip;
-        return new BudgetApproval(now, userId);
-    }
-
-    public Class BudgetApproval {
-        BudgetApproval(Datetime dateApproved, Id approvedBy) {
-            this.dateApproved = dateApproved;
-            this.approvedBy = approvedBy;
-        }
-        @AuraEnabled
-        public Datetime dateApproved {get; set;}
-        @AuraEnabled
-        public String approvedBy {get; set;}
-    }
 }
