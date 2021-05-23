@@ -35,7 +35,7 @@ public without sharing class NatoutUserInfo {
         }
 
         National_Outings_Trip__c trip = [
-            SELECT Id, OwnerId, Status__c, Subcommittee__c
+            SELECT Id, OwnerId, Status__c, Subcommittee__c, Budget_Approved_Date__c
             FROM National_Outings_Trip__c
             WHERE Id = :tripId
         ];

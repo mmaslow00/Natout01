@@ -26,8 +26,10 @@ public without sharing class NatoutEmailHandler {
                         msgText = startedToSubmittedText(trip.Id, trip.Title__c);
                         subject = 'Trip submission for ' + trip.Title__c + ' ready for review';
                     }
-                    for(Recipient rcp : recipientList) {
-                        tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
+                    if(recipientList != null) {
+                        for(Recipient rcp : recipientList) {
+                            tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
+                        }
                     }
                 }
             }
@@ -81,8 +83,10 @@ public without sharing class NatoutEmailHandler {
 
             recipientList = approverMap.get(trip.Id);
             msgText = budgetApprovedToChairsText(trip.Id, trip.Title__c);
-            for(Recipient rcp : recipientList) {
-                tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
+            if(recipientList != null) {
+                for(Recipient rcp : recipientList) {
+                    tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
+                }
             }
         }
         return tseList;

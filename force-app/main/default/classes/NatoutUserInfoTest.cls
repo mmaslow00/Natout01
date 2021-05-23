@@ -75,6 +75,7 @@ public with sharing class NatoutUserInfoTest {
         Id contactId = contact1.Id;
         String subcommName = trip.Subcommittee__c;
 
+        Test.startTest();
         uAccess = NatoutUserInfo.getUserAccess(trip.Id);
         System.assertEquals(true, uAccess.canEdit);
         System.assertEquals(true, uAccess.canApprove);
@@ -123,6 +124,8 @@ public with sharing class NatoutUserInfoTest {
         System.assertEquals(false, uAccess.canApprove);
         System.assertEquals(false, uAccess.isAdmin);
 
+        Test.stopTest();
+        
         National_Outings_Admin__c admin = new National_Outings_Admin__c(
             User__c = UserInfo.getUserId()
         );

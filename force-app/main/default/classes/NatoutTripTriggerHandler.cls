@@ -116,7 +116,7 @@ public with sharing class NatoutTripTriggerHandler {
             delete docList;
         }
     }
-    public static void setSatPhoneAddress(List<National_Outings_Trip_Staff__c> staffList, Map<Id,National_Outings_Trip_Staff__c> oldMap) {
+    public static void setSatPhoneAddress(List<National_Outings_Trip_Staff__c> staffList, Map<Id,National_Outings_Trip_Staff__c> oldMap) {        
         Set<Id> tripIds = new Set<Id>();
         for(National_Outings_Trip_Staff__c staff : staffList) {
             National_Outings_Trip_Staff__c oldStaff = oldMap.get(staff.Id);

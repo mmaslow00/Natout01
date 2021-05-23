@@ -29,12 +29,18 @@ public with sharing class NatoutTripCopyTest {
         );
         insert staff;
 
-        NatoutTripCopy tripCopy = new NatoutTripCopy();
         String copyId = NatoutTripCopy.copy(trip.Id);
         List<National_Outings_Trip_Budget_Item__c> budgetList = [SELECT Id from National_Outings_Trip_Budget_Item__c where National_Outings_Trip__c = :copyId];
         System.assertEquals(1, budgetList.size());
         List<String> idList = new List<String>();
         idList.add(trip.Id);
         NatoutTripCopy.markUploaded(idList);
+
+        trip.Subcommittee__c = 'International';
+        trip.First_Time_Run__c = false;
+        trip.Prior_Trip__c = 'Test';
+        trip.Prior_Trip_Price__c = null;
+        update trip;
+        NatoutTripCopy.copy(trip.Id);
     }
 }

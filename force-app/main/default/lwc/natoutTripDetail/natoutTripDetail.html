@@ -417,6 +417,7 @@
                                 value={tripRecord.Prior_Trip__c}
                                 variant="label-hidden"
                                 data-field="Prior_Trip__c"
+                                onblur={checkTripNo}
                             >
                             </lightning-input>
                             <div if:true={displayPriorPrice}>

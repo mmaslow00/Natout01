@@ -96,12 +96,6 @@ export default class NatoutTripDetail extends LightningElement {
             if(this.tripRecord.Prior_Trip_Price__c) {
                 this.priorPrice = this.tripRecord.Prior_Trip_Price__c;
             }
-            if(this.tripRecord.Prior_Trip__c) {
-                let elem = this.template.querySelector('.priorTripNo');
-                elem.addEventListener('blur', (ev) => {
-                    this.checkTripNo(ev.target).bind(this);
-                });
-            }
         }
     }
     renderedCallback() {
@@ -662,7 +656,8 @@ export default class NatoutTripDetail extends LightningElement {
             this.verifyingBudgetApproval = false;
         });
     }
-    checkTripNo(target) {
+    checkTripNo(ev) {
+        let target = ev.target;
         let tripId = target.value;
         let price = null;
         priceLookup({
