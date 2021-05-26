@@ -224,7 +224,7 @@ public without sharing class NatoutEmailHandler {
             WHERE
                 Club_Entity__r.Entity_Category__c = 'Outings' AND Club_Entity__r.Type__c = 'National Outing Subcomm' 
                 AND Club_Entity__r.Name = 'International'
-                AND Position_Status__c = 'Active' AND Leader_Position__r.Name = 'Trip Submission Advisor'
+                AND Position_Status__c = 'Active' AND Leader_Position__r.Name = 'Trip Submission Approver'
         ];
         List<Recipient> rcpList = new List<Recipient>();
         for(Leadership__c ldr : approverList) {

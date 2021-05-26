@@ -690,7 +690,7 @@ export default class NatoutTripDetail extends LightningElement {
         })
         .then(result => {
             this.template.querySelector('[data-field=Sat_Phone_Ship_To_Name__c]').value = result.name;
-            this.tripRecord.Sat_Phone_Ship_To_Name = result.name;
+            this.tripRecord.Sat_Phone_Ship_To_Name__c = result.name;
             this.template.querySelector('[data-field=Sat_Phone_Ship_To_Address__c]').value = result.address;
             this.tripRecord.Sat_Phone_Ship_To_Address__c = result.address;
             this.template.querySelector('[data-field=Sat_Phone_Ship_To_City__c]').value = result.city;

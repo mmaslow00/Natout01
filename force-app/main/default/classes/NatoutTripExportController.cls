@@ -70,6 +70,11 @@ public with sharing class NatoutTripExportController {
                 row.plannedStaff = trip.Planned_Staff__c.intValue();
             }
             row.tripCopy = trip.Trip_Copy__c;
+            row.tripCopy = row.tripCopy.replaceAll('â', '');
+            row.tripCopy = row.tripCopy.replaceAll('€', '');
+            row.tripCopy = row.tripCopy.replaceAll('™', '');
+            row.tripCopy = row.tripCopy.replaceAll('œ', '');
+
             row.wordCount = wordCount(trip.Trip_Copy__c);
             row.firstTimeRun = trip.First_Time_Run__c;
             row.tripCopyChanges = trip.Prior_Trip_Copy_Changes__c;
