@@ -26,5 +26,9 @@
         <members>natoutTripStaff</members>
         <name>LightningComponentBundle</name>  
     </types>
+    <types>
+        <members>NatoutTripExport</members>
+        <name>ApexPage</name>
+    </types>       
     <version>52.0</version>
 </Package>

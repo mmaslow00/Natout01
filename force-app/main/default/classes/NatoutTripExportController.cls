@@ -17,6 +17,7 @@ public with sharing class NatoutTripExportController {
                 Planned_Staff__c,
                 Trip_Copy__c,
                 First_Time_Run__c,
+                Prior_Trip__c,
                 States_Provinces__c,
                 Country__c,
                 Latitude__c,
@@ -69,10 +70,13 @@ public with sharing class NatoutTripExportController {
             if(trip.Planned_Staff__c != null) {
                 row.plannedStaff = trip.Planned_Staff__c.intValue();
             }
+
             row.tripCopy = trip.Trip_Copy__c.replaceAll('[â€™œ]', '');
+            row.tripCopy = row.tripCopy.replaceAll('[\n\r]',' ');
 
             row.wordCount = wordCount(trip.Trip_Copy__c);
             row.firstTimeRun = trip.First_Time_Run__c;
+            row.priorTrip = trip.Prior_Trip__c;
             row.tripCopyChanges = trip.Prior_Trip_Copy_Changes__c;
 
             if(trip.States_Provinces__c != null) {
@@ -359,6 +363,7 @@ public with sharing class NatoutTripExportController {
         public String tripCopyChanges {get; set;}
 
         public Boolean firstTimeRun {get; set;}
+        public String priorTrip {get; set;}
         public String state1 {get; set;}
         public String state2 {get; set;}
         public String state3 {get; set;}
