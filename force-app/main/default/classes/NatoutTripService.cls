@@ -47,6 +47,18 @@ public with sharing class NatoutTripService {
         update trip;
         return new BudgetApproval(now, userId);
     }
+    @AuraEnabled
+    public static BudgetApproval returnBudget(String tripId) {
+        Id userId = UserInfo.getUserId();
+        National_Outings_Trip__c trip = new National_Outings_Trip__c(
+            Id = tripId,
+            Budget_Approved_Date__c = null,
+            Budget_Approved_By__c = userId,
+            Status__c = 'Returned'
+        );
+        update trip;
+        return new BudgetApproval(null, userId);
+    }
     public Class ShipTo {
         @AuraEnabled
         public String name {get; set;}

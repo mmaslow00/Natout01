@@ -26,7 +26,7 @@ public without sharing class NatoutUserInfo {
             uAccess.canEdit = true;
             uAccess.canApprove = true;
             uAccess.isAdmin = true;
-            uAccess.canApproveBudget = canApproveBudget(contactId);
+            uAccess.canApproveBudget = true;
             return uAccess;
         }
 

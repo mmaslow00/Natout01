@@ -77,4 +77,16 @@ public with sharing class NatoutTripServiceTest {
         Id tripId = trip.Id;
         NatoutTripService.BudgetApproval appr = NatoutTripService.approveBudget(tripId);
     }
+    static testMethod void testBudgetReturn() {
+        National_Outings_Trip__c trip = new National_Outings_Trip__c(
+            Name = 'Test Trip',
+            Subcommittee__c = 'Knapsack',
+            Start_Date__c = Date.today(),
+            End_Date__c = Date.today() + 2,
+            Status__c = 'Started'
+        );
+        insert trip;
+        Id tripId = trip.Id;
+        NatoutTripService.BudgetApproval appr = NatoutTripService.returnBudget(tripId);
+    }
 }

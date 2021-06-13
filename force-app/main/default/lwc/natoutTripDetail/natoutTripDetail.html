@@ -769,6 +769,14 @@
                                                 onclick={requestBudgetApproval}
                                             >
                                             </lightning-button>             
+                                            <lightning-button 
+                                                variant="brand"
+                                                name="returnBudget"
+                                                label="Return Budget"
+                                                onclick={requestBudgetReturn}
+                                                class="slds-p-left_large"
+                                            >
+                                            </lightning-button>             
                                         </template>
                                         <template if:true={showDateBudgetApproved}>
                                             <div style="font-weight: bold;">
@@ -784,6 +792,11 @@
                                                 >
                                                 </lightning-formatted-date-time>
                                             </div>                            
+                                        </template>
+                                        <template if:true={budgetReturned}>
+                                            <div style="font-weight: bold;">
+                                                Trip returned to leader for further edits
+                                            </div>
                                         </template>
                                     </div>
                                 </template>       
@@ -1553,6 +1566,28 @@
                     <footer class="slds-modal__footer">
                         <lightning-button label="Cancel" variant="destructive" onclick={cancelBudgetApproval}></lightning-button>
                         <lightning-button label="Continue" variant="brand" onclick={submitBudgetApproval} class="slds-p-left_large"></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+
+    <template if:true={verifyingBudgetReturn}>
+        <div>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-03" class="slds-text-heading_medium slds-hyphenate">Return Budget</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+                        <p>
+                            Press Continue to return the budget to the leader for revision. (This action cannot be undone.)
+                        </p>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Cancel" variant="destructive" onclick={cancelBudgetApproval}></lightning-button>
+                        <lightning-button label="Continue" variant="brand" onclick={submitBudgetReturn} class="slds-p-left_large"></lightning-button>
                     </footer>
                 </div>
             </section>

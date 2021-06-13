@@ -10,6 +10,7 @@ import getUserAccess from '@salesforce/apex/NatoutUserInfo.getUserAccess';
 import { refreshApex } from '@salesforce/apex';
 import submitPostTripReport from '@salesforce/apex/NatoutTripPostTripReport.submitReport';
 import approveBudget from '@salesforce/apex/NatoutTripService.approveBudget';
+import returnBudget from '@salesforce/apex/NatoutTripService.returnBudget';
 import priceLookup from '@salesforce/apex/NatoutTripService.getTripPrice';
 import getSatPhoneAddress from '@salesforce/apex/NatoutTripService.getSatPhoneAddr';
 export default class NatoutTripDetail extends LightningElement {
@@ -24,6 +25,8 @@ export default class NatoutTripDetail extends LightningElement {
     @track showStatusDialog;
     @track changingStatus;
     @track verifyingBudgetApproval = false;
+    @track verifyingBudgetReturn = false;
+    @track budgetReturned = false;
     @track priorPrice;
     loadedForm = false;
     loadedStatus = null;
@@ -635,9 +638,13 @@ export default class NatoutTripDetail extends LightningElement {
     }
     cancelBudgetApproval() {
         this.verifyingBudgetApproval = false;
+        this.verifyingBudgetReturn = false;
     }
     requestBudgetApproval() {
         this.verifyingBudgetApproval = true;
+    }
+    requestBudgetReturn() {
+        this.verifyingBudgetReturn = true;
     }
     submitBudgetApproval() {
         approveBudget({
@@ -645,7 +652,6 @@ export default class NatoutTripDetail extends LightningElement {
         })
         .then(result => {
             this.tripRecord.Budget_Approved_Date__c = result.dateApproved;
-            this.tripRecord.Budget_Approved_By__c = result.appovedBy;
             this.error = undefined;
         })
         .catch(error => {
@@ -654,6 +660,25 @@ export default class NatoutTripDetail extends LightningElement {
         })
         .finally(() => {
             this.verifyingBudgetApproval = false;
+        });
+    }
+    submitBudgetReturn() {
+        returnBudget({
+            tripId: this.recordId,
+        })
+        .then(result => {
+            this.tripRecord.Status__c = 'Returned';
+            let statusInput = this.template.querySelector('.approvalStatus');
+            statusInput.value = 'Returned';
+            this.budgetReturned = true;
+            this.error = undefined;
+        })
+        .catch(error => {
+            this.error = error;
+            this.showSnackbar('failure', 'Update Failed', reduceErrors(error).join(', '));
+        })
+        .finally(() => {
+            this.verifyingBudgetReturn = false;
         });
     }
     checkTripNo(ev) {
@@ -718,7 +743,7 @@ export default class NatoutTripDetail extends LightningElement {
     }
     get showBudgetApprovalButton() {
         if(this.tripIsInternational) {
-            if(this.tripRecord.Status__c === 'Submitted' || this.tripRecord.Status__c === 'Returned') {
+            if(this.tripRecord.Status__c === 'Submitted') {
                 if(this.userCanApproveBudget) {
                     if( ! this.tripRecord.Budget_Approved_Date__c) {
                         return true;
@@ -737,7 +762,7 @@ export default class NatoutTripDetail extends LightningElement {
         return false;
     }
     get showBudgetApprovalSection() {
-        return this.showBudgetApprovalButton || this.showDateBudgetApproved;
+        return this.showBudgetApprovalButton || this.showDateBudgetApproved || this.budgetReturned;
     }
     get approvalWarnings() {
         let warnings = [];
