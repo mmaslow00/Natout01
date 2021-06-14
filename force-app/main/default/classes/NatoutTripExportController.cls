@@ -71,7 +71,7 @@ public with sharing class NatoutTripExportController {
                 row.plannedStaff = trip.Planned_Staff__c.intValue();
             }
 
-            row.tripCopy = trip.Trip_Copy__c.replaceAll('[â€™œ]', '');
+            row.tripCopy = trip.Trip_Copy__c.replaceAll('[â€™œÃ©]', '');
             row.tripCopy = row.tripCopy.replaceAll('[\n\r]',' ');
 
             row.wordCount = wordCount(trip.Trip_Copy__c);
