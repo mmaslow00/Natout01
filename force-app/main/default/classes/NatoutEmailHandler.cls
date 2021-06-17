@@ -265,11 +265,11 @@ public without sharing class NatoutEmailHandler {
             tripTitle + '" ' +
             'has been reviewed and approved by International subcommittee budget reviewer ' + reviewerName + '. ' +
             'If you’re satisfied with it, select "Approved by Chair" from the Status section at the top of the form, ' +
-            'then hit the “Save” button, and it will be sent to staff for processing. ' +
+            'then hit the "Save" button, and it will be sent to staff for processing. ' +
             'You may also make adjustments or add comments at the end of the form before approving. ' +
             'If you’re not satisfied with it, add any questions or requested changes to the comments section at the bottom, ' +
             'and select "Returned" from the Status section at the top of the form, ' +
-            'then hit the “Save” button, to return it back to the trip leader for further edits.' +
+            'then hit the "Save" button, to return it to the trip leader for further edits.' +
             '<br/><br/>' +
             'Trip ' + tripTitle + ' can be found at https://campfire.sierraclub.org/NatoutTripDetail?id=' + tripId
             ;
@@ -285,7 +285,7 @@ public without sharing class NatoutEmailHandler {
             'You may also make adjustments or add comments at the end of the form before approving. ' +
             'If you’re not satisfied with it, add any questions or requested changes to the comments section at the bottom, ' +
             'and select "Returned" from the Status section at the top of the form, ' +
-            'then hit the "Save" button, to return it back to the trip leader for further edits.' +
+            'then hit the "Save" button, to return it to the trip leader for further edits.' +
             '<br/><br/>' +
             'Trip ' + tripTitle + ' can be found at https://campfire.sierraclub.org/NatoutTripDetail?id=' + tripId
             ;
