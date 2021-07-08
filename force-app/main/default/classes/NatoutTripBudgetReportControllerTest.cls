@@ -16,7 +16,7 @@ public with sharing class NatoutTripBudgetReportControllerTest {
             Participants__c = 12,
             Planned_Staff__c = 2,
             First_Time_Run__c = true,
-            Trip_Type__c = 'Backpack - California',
+            Trip_Type__c = 'Backpack',
             Meals_First_Day__c = 25,
             Meals_Last_Day__c = 25
         );

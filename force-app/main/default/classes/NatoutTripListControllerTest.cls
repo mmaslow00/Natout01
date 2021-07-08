@@ -7,7 +7,7 @@ public with sharing class NatoutTripListControllerTest {
             Start_Date__c = Date.today(),
             End_Date__c = Date.today() + 2,
             Status__c = 'Started',
-            Trip_Type__c = 'Backpack - California',
+            Trip_Type__c = 'Backpack',
             States_Provinces__c = 'CA'
         );
         insert trip;

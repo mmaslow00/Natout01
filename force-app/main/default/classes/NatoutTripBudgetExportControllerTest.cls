@@ -3,7 +3,7 @@ public with sharing class NatoutTripBudgetExportControllerTest {
     static testMethod void myUnitTest() {
         National_Outings_Trip__c trip = new National_Outings_Trip__c(
             Name = 'Test Trip',
-            Trip_Type__c = 'Backpack - California',
+            Trip_Type__c = 'Backpack',
             Subcommittee__c = 'Knapsack',
             Start_Date__c = Date.today(),
             End_Date__c = Date.today() + 4,
