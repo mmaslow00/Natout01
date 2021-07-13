@@ -119,6 +119,15 @@ public with sharing class NatoutUserInfoTest {
             System.assertEquals(false, uAccess.isAdmin);
         }
 
+        National_Outings_Trip__c submittedTrip = new National_Outings_Trip__c(
+            Id = trip.Id,
+            Status__c = 'Submitted'
+        );
+        update submittedTrip;
+        System.runAs(user2) {
+            uAccess = NatoutUserInfo.getUserAccess(submittedTrip.Id);
+        }
+
         uAccess = NatoutUserInfo.getUserAccess('');
         System.assertEquals(false, uAccess.canEdit);
         System.assertEquals(false, uAccess.canApprove);
