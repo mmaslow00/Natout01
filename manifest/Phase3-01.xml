@@ -18,7 +18,7 @@
     </types>
     <types>
         <members>NatoutTripTrigger</members>
-        <members>NatoutTripStaff</members>
+        <members>NatoutTripStaffTrigger</members>
         <members>NatoutTripCommentsTrigger</members>
         <name>ApexTrigger</name>
     </types>       
