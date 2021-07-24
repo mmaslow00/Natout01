@@ -12,7 +12,7 @@ public with sharing class ContentManagerService {
         }
             
         List<ContentVersion> contentVersionList = [
-            SELECT Id, VersionData, FileType, Title, FileExtension,
+            SELECT Id, FileType, Title, FileExtension,
                 ContentDocument.CreatedBy.Name, ContentDocument.ContentSize,
                 CreatedDate, ContentDocumentId, ContentDocument.FileType
             FROM   ContentVersion 

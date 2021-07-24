@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
+        <members>ContentManagerService</members>
         <members>NatoutTripService</members>
         <members>NatoutTripServiceTest</members>
         <members>NatoutEmailHandler</members>
+        <members>NatoutEmailHandlerTest</members>
         <members>NatoutTripCommentsController</members>
         <members>NatoutTripCopy</members>
         <members>NatoutTripCopyTest</members>
@@ -16,13 +18,14 @@
     </types>
     <types>
         <members>NatoutTripTrigger</members>
-        <members>NatoutTripStaffTrigger</members>
+        <members>NatoutTripStaff</members>
         <members>NatoutTripCommentsTrigger</members>
         <name>ApexTrigger</name>
     </types>       
     <types>  
         <members>natoutTripComments</members>
         <members>natoutTripDetail</members>
+        <members>natoutTripList</members>
         <members>natoutTripStaff</members>
         <name>LightningComponentBundle</name>  
     </types>

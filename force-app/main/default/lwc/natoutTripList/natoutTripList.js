@@ -220,16 +220,16 @@ export default class NatoutTripList extends LightningElement {
         let actions = [
             { label: 'Copy', name: 'copy'}
         ];
-        if (row.OwnerId === userId) {
-            if(row.Status__c === 'Started' || row.Status__c === 'Returned') {
+        if(this.userIsAdmin) {
+            if(row.Status__c !== 'Approved by Staff' && row.Status__c !== 'Uploaded to TRAIL') {
                 actions.push({
                     'label': 'Delete',
                     'name': 'delete'
                 });
             }
         }
-        else if(this.userIsAdmin) {
-            if(row.Status__c != 'Approved by Staff' && row.Status__c != 'Uploaded to TRAIL') {
+        else if (row.OwnerId === userId) {
+            if(row.Status__c === 'Started' || row.Status__c === 'Returned') {
                 actions.push({
                     'label': 'Delete',
                     'name': 'delete'

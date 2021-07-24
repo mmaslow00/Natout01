@@ -1,3 +1,4 @@
+<!-- sldsValidatorIgnore -->
 <template>
     <div class="slds-form c-container">
         <div if:true={userCanEdit} class="slds-text-align_center save-button">
@@ -1594,6 +1595,29 @@
             <div class="slds-backdrop slds-backdrop_open"></div>
         </div>
     </template>
+
+
+    <template if:true={rejectApproval}>
+        <div>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-04" aria-modal="true" aria-describedby="modal-content-id-4" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-04" class="slds-text-heading_medium slds-hyphenate">Error</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-4">
+                        <p>
+                            The trip can not be approved until the budget is approved.
+                        </p>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Dismiss" variant="neutral" onclick={resetApproval}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+    
 
     <c-snackbar></c-snackbar>
 </template>

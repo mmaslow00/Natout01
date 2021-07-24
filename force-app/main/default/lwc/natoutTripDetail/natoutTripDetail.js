@@ -28,6 +28,8 @@ export default class NatoutTripDetail extends LightningElement {
     @track verifyingBudgetReturn = false;
     @track budgetReturned = false;
     @track priorPrice;
+    @track rejectApproval = false;
+    @track previousStatus;
     loadedForm = false;
     loadedStatus = null;
     countryOptions = null;
@@ -156,6 +158,18 @@ export default class NatoutTripDetail extends LightningElement {
             this.changingStatus = true;
             this.showStatusDialog = true;
         }
+        else if(previousStatus === 'Submitted' && this.chosenStatus === 'Approved by Chair') {
+            if(this.tripRecord.Subcommittee__c === 'International') {
+                if( ! this.tripRecord.Budget_Approved_Date__c ) {
+                    this.previousStatus = previousStatus;
+                    this.rejectApproval = true;
+                }
+            }
+        }
+    }
+    resetApproval() {
+        this.rejectApproval = false;
+        this.chosenStatus = this.previousStatus;
     }
     checkForErrors() {
         this.errorList = this.statusStartedToSubmitted();
