@@ -8,6 +8,7 @@
         <name>ApexClass</name>
     </types>
     <types>  
+        <members>natoutTripComments</members>
         <members>natoutTripDetail</members>
         <members>natoutTripFiles</members>
         <name>LightningComponentBundle</name>  

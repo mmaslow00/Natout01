@@ -152,13 +152,14 @@ public with sharing class NatoutEmailHandlerTest {
             Comments__c = 'Testing comments',
             Notify_Approvers__c = true,
             Notify_Creators__c = true,
-            Notify_Staff__c = true
+            Notify_Staff__c = true,
+            Notify_Brochure_Editor__c = true
         );
         insert comments;
         emailList = [
             SELECT SubscriberKey__c FROM TriggeredSendEmail__c
         ];
-        System.assertEquals(15, emailList.size());
+        System.assertEquals(16, emailList.size());
 
         NatoutEmailHandler.submitBrochure(trip.Id);
     }

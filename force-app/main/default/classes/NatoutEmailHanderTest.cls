@@ -152,7 +152,8 @@ public with sharing class NatoutEmailHanderTest {
             Comments__c = 'Testing comments',
             Notify_Approvers__c = true,
             Notify_Creators__c = true,
-            Notify_Staff__c = true
+            Notify_Staff__c = true,
+            Notify_Brochure_Editor__c = true
         );
         insert comments;
         emailList = [

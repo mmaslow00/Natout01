@@ -1,2 +1,2 @@
 #!/bin/bash
-sfdx force:source:deploy --manifest manifest\\FixBP.xml --checkonly --testlevel RunSpecifiedTests --runtests NatoutTripBudgetExportControllerTest,NatoutTripBudgetReportControllerTest,NatoutTripExportControllerTest,NatoutTripLinksControllerTest,NatoutTripListControllerTest --loglevel fatal
+sfdx force:source:deploy --manifest manifest\\Phase3-02.xml --checkonly --testlevel RunSpecifiedTests --runtests NatoutTripFilesServiceTest,NatoutEmailHandlerTest,NatoutTripTriggerHandlerTest --loglevel fatal

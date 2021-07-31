@@ -15,7 +15,8 @@ export default class NatoutTripComments extends LightningElement {
         this.checkboxOptions = [
             {label: 'Trip Leader and any collaborators they appoint', value: 'Leaders'},
             {label: 'Subcommittee officers and any collaborators they appoint', value: 'Officers'},
-            {label: 'National Outings staff', value: 'Staff'}
+            {label: 'National Outings staff', value: 'Staff'},
+            {label: 'Brochure Editor', value: 'Brochure Editor'}
         ];
         this.checkboxValues = [];
     }
@@ -83,7 +84,8 @@ export default class NatoutTripComments extends LightningElement {
                     Comments__c: this.tripComment,
                     Notify_Approvers__c: (this.checkboxValues.indexOf('Officers') >= 0),
                     Notify_Creators__c: (this.checkboxValues.indexOf('Leaders') >= 0),
-                    Notify_Staff__c: (this.checkboxValues.indexOf('Staff') >= 0)
+                    Notify_Staff__c: (this.checkboxValues.indexOf('Staff') >= 0),
+                    Notify_Brochure_Editor__c: (this.checkboxValues.indexOf('Brochure Editor') >= 0)
                 }
             }).then(result => {
                 this.showSnackbar('success', 'Comment Saved');

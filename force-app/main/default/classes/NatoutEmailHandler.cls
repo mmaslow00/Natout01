@@ -400,6 +400,7 @@ public without sharing class NatoutEmailHandler {
                 Notify_Creators__c,
                 Notify_Approvers__c,
                 Notify_Staff__c,
+                Notify_Brochure_Editor__c,
                 CreatedBy.Name
             FROM National_Outings_Trip_Comments__c
             WHERE Id in :commentsIds
@@ -446,6 +447,15 @@ public without sharing class NatoutEmailHandler {
                     )
                 );
             }
+            if(comments.Notify_Brochure_Editor__c) {
+                sendList.add(createTriggeredSend(null, brochureEditorEmailAddr, subject, commentsText));
+                commentsRecipList.add(
+                    new National_Outings_Trip_Comments_Recip__c(
+                        Email__c = brochureEditorEmailAddr,
+                        National_Outings_Trip_Comments__c = comments.Id
+                    )
+                );
+            }
         }
         insert sendList;
         insert commentsRecipList;
@@ -461,14 +471,17 @@ public without sharing class NatoutEmailHandler {
             Contact ctct = [
                 SELECT Name, Email FROM Contact where Id=:contactId
             ];
+            String subject = 'Brochure Submitted for ' + trip.Title__c;
             String msgText = 
                 ctct.Name + 
+                ' (<a href="' + 'mailto:' + ctct.Email + '?subject=' + subject + '">' +
+                ctct.Email + '</a>)' +
                 ' has submitted the brochure for ' +
                 trip.Title__c +
                 '.<br/><br/>' +
-                'Trip ' + trip.Title__c + ' can be found at https://campfire.sierraclub.org/NatoutTripDetail?id=' + tripId
+                'Trip ' + trip.Title__c + ' can be found at <a href="https://campfire.sierraclub.org/NatoutTripDetail?id=' + tripId + '">' +
+                'https://campfire.sierraclub.org/NatoutTripDetail?id=' + tripId + '</a>'
             ;
-            String subject = 'Brochure Submitted for ' + trip.Title__c;
             List<TriggeredSendEmail__c> sendList = new List<TriggeredSendEmail__c>();
             sendList.add(createTriggeredSend(contactId, ctct.Email, subject, msgText));
             sendList.add(createTriggeredSend(null, brochureEditorEmailAddr, subject, msgText));
