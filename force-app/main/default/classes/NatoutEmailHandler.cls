@@ -491,8 +491,6 @@ public without sharing class NatoutEmailHandler {
     }
 
     public static TriggeredSendEmail__c createTriggeredSend(Id contactId, String emailAddr, String subject, String msg) {
-        emailAddr = 'mmaslow00@gmail.com';
-
         JSONGenerator gen = JSON.createGenerator(false);
         gen.writeStartObject();
         gen.writeFieldName('To');
