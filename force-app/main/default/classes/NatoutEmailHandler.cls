@@ -1,7 +1,7 @@
 /*
-Tests include:
+Test coverage:
     NatoutEmailHandlerTest
-    NatoutTriggerHandlerTest
+    NatoutTripTriggerHandlerTest
 */
 public without sharing class NatoutEmailHandler {
     public static final String staffEmailAddr = 'tony.rango@sierraclub.org';
