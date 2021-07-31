@@ -483,13 +483,16 @@ public without sharing class NatoutEmailHandler {
                 'https://campfire.sierraclub.org/NatoutTripDetail?id=' + tripId + '</a>'
             ;
             List<TriggeredSendEmail__c> sendList = new List<TriggeredSendEmail__c>();
-            sendList.add(createTriggeredSend(contactId, ctct.Email, subject, msgText));
             sendList.add(createTriggeredSend(null, brochureEditorEmailAddr, subject, msgText));
+            String intro = 'The following message has been sent to ' + brochureEditorEmailAddr + '.<br/><br/>';
+            sendList.add(createTriggeredSend(contactId, ctct.Email, subject, intro + msgText));
             insert sendList;
         }           
     }
 
     public static TriggeredSendEmail__c createTriggeredSend(Id contactId, String emailAddr, String subject, String msg) {
+        emailAddr = 'mmaslow00@gmail.com';
+
         JSONGenerator gen = JSON.createGenerator(false);
         gen.writeStartObject();
         gen.writeFieldName('To');
