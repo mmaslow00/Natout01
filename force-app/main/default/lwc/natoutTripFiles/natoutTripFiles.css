@@ -1,0 +1,15 @@
+/*
+.ninety-percent {
+    zoom: 90%;
+}
+tr:nth-child(odd) {
+    background-color: #d5d9e0;
+}
+*/
+.small-text {
+    font-size:smaller;
+}
+.infop {
+    margin-top: 5px;
+    font-size: 12px;
+}

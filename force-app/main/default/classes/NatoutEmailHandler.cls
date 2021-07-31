@@ -1,5 +1,11 @@
+/*
+Tests include:
+    NatoutEmailHandlerTest
+    NatoutTriggerHandlerTest
+*/
 public without sharing class NatoutEmailHandler {
     public static final String staffEmailAddr = 'tony.rango@sierraclub.org';
+    public static final String brochureEditorEmailAddr = 'outings.brochures@sierraclub.org';
 
     public static List<TriggeredSendEmail__c> statusChanged(List<National_Outings_Trip__c> tripList, Map<Id, National_Outings_Trip__c> oldMap) {
         Map<Id, List<Recipient>> creatorMap = getCreators(tripList);
@@ -443,6 +449,31 @@ public without sharing class NatoutEmailHandler {
         }
         insert sendList;
         insert commentsRecipList;
+    }
+    @AuraEnabled 
+    public static void submitBrochure(String tripId) {
+        National_Outings_Trip__c trip = [
+            SELECT Title__c FROM National_Outings_Trip__c
+            WHERE Id = :tripId
+        ];
+        if(trip != null) {
+            String contactId = NatoutUserInfo.getContactId();
+            Contact ctct = [
+                SELECT Name, Email FROM Contact where Id=:contactId
+            ];
+            String msgText = 
+                ctct.Name + 
+                ' has submitted the brochure for ' +
+                trip.Title__c +
+                '.<br/><br/>' +
+                'Trip ' + trip.Title__c + ' can be found at https://campfire.sierraclub.org/NatoutTripDetail?id=' + tripId
+            ;
+            String subject = 'Brochure Submitted for ' + trip.Title__c;
+            List<TriggeredSendEmail__c> sendList = new List<TriggeredSendEmail__c>();
+            sendList.add(createTriggeredSend(contactId, ctct.Email, subject, msgText));
+            sendList.add(createTriggeredSend(null, brochureEditorEmailAddr, subject, msgText));
+            insert sendList;
+        }           
     }
 
     public static TriggeredSendEmail__c createTriggeredSend(Id contactId, String emailAddr, String subject, String msg) {

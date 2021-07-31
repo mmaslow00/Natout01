@@ -159,5 +159,7 @@ public with sharing class NatoutEmailHandlerTest {
             SELECT SubscriberKey__c FROM TriggeredSendEmail__c
         ];
         System.assertEquals(15, emailList.size());
+
+        NatoutEmailHandler.submitBrochure(trip.Id);
     }
 }

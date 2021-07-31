@@ -559,6 +559,52 @@
                         </lightning-input-field>
                     </lightning-accordion-section>
 
+                    <lightning-accordion-section name="Brochure" label="Trip Brochure and Photos">
+                        <div>
+                            <p>
+                                Please submit the text and photos that will appear in your online brochure. 
+                            </p>
+                            <div class="brochure-section1">
+                            <ol style="list-style: decimal;">
+                                <li>
+                                    Download the
+                                        <a href="https://docs.google.com/document/d/1IsENDXE_j9GviPG4YEcVdRMQeg0ryYoXZXOxEzaGrvc" target="_blank">
+                                        &nbsp;brochure template
+                                        </a>
+                                </li>
+                                <li>Fill it out</li>
+                                <li>Upload your completed template and photos below.</li>
+                            </ol>
+                            </div>
+                            <div class="brochure-section2">
+                                Once the brochure editor receives your submission, they will review it and, if necessary, follow up to ask questions or review significant edits.
+                                Check out our brochure submission guides for writing tips, examples, and the brochure archive. Our goal is to recycle content, when possible, to reduce the burden on leaders and staff and ensure consistent and high-quality content that sells. 
+                            </div>
+                            <div class="brochure-section2 bold-text">
+                                Please note: the brochure deadline is later than the trip submission deadline. The brochure may be submitted with the trip or later, as long as it’s submitted by the 
+                                <a href="https://community.sierraclub.org/file/2824/download" target="_blank">&nbsp;brochure submission deadline</a>.
+                            </div>
+                        </div>
+
+                        <div class="brochure-section2">
+                            Please add your online brochure and photos here (including leader bio photos, if applicable). 
+                            Format your brochure as a Word doc and your photos as JPGs. 
+                        </div>
+
+                        <div class="files-and-links">
+                        <c-natout-trip-files
+                            record-id={recordId}
+                            file-category="Brochure"
+                        >
+                        </c-natout-trip-files>
+                        </div>
+
+                        <div class="submit-brochure">
+                            <lightning-button label="Submit Brochure" variant="brand" icon-name="action:email" onclick={submitBrochure}>
+                            </lightning-button>
+                        </div>
+                    </lightning-accordion-section>
+
                     <lightning-accordion-section name="Location" label="Location Details, Safety and Risk">
                         <template if:true={tripIsInternational}>
                             <lightning-input-field
@@ -1328,17 +1374,13 @@
                                     While an uploaded PDF is preferred, you may also paste the link to your CalTopo map if desired.
                                 </p>
                                 <div class="files-and-links">
-                                <p class="infop">
-                                    To upload a file, first specify the file, either by clicking "Upload Files", or by dragging a file from the file explorer to the "drop files" area. 
-                                    Then, click "Upload". After a few seconds, the uploaded file should appear in the list.
-                                </p>
-                                <div>
-                                    <c-content-manager
-                                        record-id={recordId}
-                                        show-file-upload={userCanEdit}
-                                    >
-                                    </c-content-manager>
-                                </div>
+                                    <div>
+                                        <c-natout-trip-files
+                                            record-id={recordId}
+                                            file-category="Itinerary"
+                                        >
+                                        </c-natout-trip-files>
+                                    </div>
                                 </div>
                                 <div class="files-and-links">
                                     <c-natout-trip-links
@@ -1618,6 +1660,30 @@
         </div>
     </template>
     
+    <template if:true={submittingBrochure}>
+        <div>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-05" aria-modal="true" aria-describedby="modal-content-id-5" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <template if:true={sendingBrochure}>
+                        <lightning-spinner alternative-text="Loading" size="small" variant="brand"></lightning-spinner>
+                    </template>                
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-05" class="slds-text-heading_medium slds-hyphenate">Submit Brochure</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-5">
+                        <p>
+                            If you are ready to submit your brochure information to the Brochure Editor, click "Continue."
+                        </p>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Cancel" variant="destructive" onclick={cancelBrochureSubmission}></lightning-button>
+                        <lightning-button label="Continue" variant="brand" onclick={completeBrochureSubmission} class="slds-p-left_large"></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
 
     <c-snackbar></c-snackbar>
 </template>

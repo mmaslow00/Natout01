@@ -36,3 +36,22 @@
     border-style: solid;
     border-width: thin;    
 }
+.brochure-section1 {
+    padding: 4px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+.brochure-section2 {
+    padding: 4px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+.bold-text {
+    font-weight: bold;
+}
+.submit-brochure {
+    text-align: center;
+    margin-top: 10px;
+}

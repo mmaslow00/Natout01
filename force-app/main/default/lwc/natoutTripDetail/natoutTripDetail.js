@@ -13,6 +13,7 @@ import approveBudget from '@salesforce/apex/NatoutTripService.approveBudget';
 import returnBudget from '@salesforce/apex/NatoutTripService.returnBudget';
 import priceLookup from '@salesforce/apex/NatoutTripService.getTripPrice';
 import getSatPhoneAddress from '@salesforce/apex/NatoutTripService.getSatPhoneAddr';
+import submitBrochure from '@salesforce/apex/NatoutEmailHandler.submitBrochure';
 export default class NatoutTripDetail extends LightningElement {
     @api recordId;
     @track tripRecord = {};
@@ -44,6 +45,8 @@ export default class NatoutTripDetail extends LightningElement {
     postTripReportDue = false;
     revisingPostUse = false;
     updatingPostUse = false;
+    submittingBrochure = false;
+    sendingBrochure = false;
     @track errorList = [];
 
     @wire(getObjectInfo, { objectApiName: TRIP_OBJECT })
@@ -845,6 +848,29 @@ export default class NatoutTripDetail extends LightningElement {
             }
         }
         return false;
+    }
+    submitBrochure() {
+        this.submittingBrochure = true;
+    }
+    cancelBrochureSubmission() {
+        this.submittingBrochure = false;
+    }
+    completeBrochureSubmission() {
+        this.sendingBrochure = true;
+        submitBrochure({
+            tripId: this.recordId,
+        })
+        .then(() => {
+            this.showSnackbar('success', 'Brochure Submitted', 'Message sent to Brochure Editor');
+        })
+        .catch(error => {
+            this.error = error;
+            this.showSnackbar('failure', 'Brochure Submission Failed', reduceErrors(error).join(', '));
+        })
+        .finally(() => {
+            this.sendingBrochure = false;
+            this.submittingBrochure = false;
+        });
     }
     statusStartedToSubmitted() {
         let errors = [];

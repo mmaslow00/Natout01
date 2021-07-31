@@ -1,0 +1,107 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="small" variant="brand"></lightning-spinner>
+    </template>
+    <div>
+        <p class="infop">
+            To upload a file, first specify the file, either by clicking "Upload Files", or by dragging a file from the file explorer to the "drop files" area. 
+            Then, click "Upload". After a few seconds, the uploaded file should appear in the list. If you have uploaded a photograph, you can
+            add or modify the photographer's name by clicking on the file name in the list.
+        </p>
+    </div>
+    <div>
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_2-of-4 slds-var-p-left_small">
+                <div>
+                    <lightning-input label="" name="file uploader" onchange={handleFilesChange} type="file"></lightning-input>
+                </div>
+                <div class="slds-m-around_small">
+                    <template if:true={fileName}>
+                        {fileName} &nbsp; &nbsp; {fileSize}
+                    </template>
+                </div>
+                <div class="slds-m-around_small">
+                    <lightning-button variant="success" label="Upload" title="Upload" onclick={saveFile}></lightning-button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <table>
+        <template for:each={dataList} for:item="file">
+            <tr key={file.Id} data-id={file.Id}>
+                <td>
+                </td>
+                <td>
+
+                    <lightning-icon icon-name={file.icon} size="small" style="margin-right: 5px;"></lightning-icon>
+                    <template if:true={file.isImage} key={file.Id}>
+                        <a
+                        key={file.Id}
+                        data-row={file.rowNum}
+                        onclick={editPhotographer}
+                        >
+                            {file.Title} 
+                        </a>
+                    </template>
+                    <template if:false={file.isImage} key={file.Id}>
+                        {file.Title} 
+                    </template>
+                    <template if:true={file.Photo_Credit__c} key={file.Id}>
+                        <br key={file.id}/>Photo by: {file.Photo_Credit__c}
+                        <br key={file.id}/>&nbsp;
+                    </template>
+                    <template if:false={file.Photo_Credit__c} key={file.Id}>
+                        <br key={file.id}/>&nbsp;
+                    </template>
+                </td>
+                <td>
+                    <lightning-button label="Download" key={file.id} variant="brand" icon-name="action:download" onclick={downloadToClient} data-row={file.rowNum}
+                        class="small-text"
+                    >
+                    </lightning-button>
+                </td>
+                <td>
+                    <lightning-button label="Delete" key={file.id} variant="destructive" icon-name="action:delete" onclick={deleteFile} data-row={file.rowNum}
+                        class="small-text"
+                    >
+                    </lightning-button>
+                </td>
+            </tr>
+        </template>
+    </table>
+
+
+    <template if:true={editingPhotoName}>
+        <div>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+                            {rowToUpdate.Title}
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <lightning-layout-item padding="around-small">
+                            <lightning-input 
+                                label="Photograher's Name"
+                                value={rowToUpdate.Photo_Credit__c}
+                                onchange={handleFieldChange}
+                                class="photoname"
+                            >
+                            </lightning-input>
+                        </lightning-layout-item>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Cancel" variant="destructive" onclick={cancelSave}></lightning-button>
+                        <lightning-button label="Save" variant="brand" onclick={updateFile} class="slds-p-left_large"></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+
+    <c-snackbar></c-snackbar>
+</template>
