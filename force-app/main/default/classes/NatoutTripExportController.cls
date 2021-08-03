@@ -71,9 +71,10 @@ public with sharing class NatoutTripExportController {
                 row.plannedStaff = trip.Planned_Staff__c.intValue();
             }
 
-            row.tripCopy = trip.Trip_Copy__c.replaceAll('[â€™œÃ©]', '');
-            row.tripCopy = row.tripCopy.replaceAll('[\n\r]',' ');
-
+            if(trip.Trip_Copy__c != null) {
+                row.tripCopy = trip.Trip_Copy__c.replaceAll('[â€™œÃ©]', '');
+                row.tripCopy = row.tripCopy.replaceAll('[\n\r]',' ');
+            }
             row.wordCount = wordCount(trip.Trip_Copy__c);
             row.firstTimeRun = trip.First_Time_Run__c;
             row.priorTrip = trip.Prior_Trip__c;
