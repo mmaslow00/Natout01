@@ -2,7 +2,7 @@
 /* eslint-disable no-alert */
 import { LightningElement, api, track } from 'lwc';
 import { updateRecord } from 'lightning/uiRecordApi';
-import getContentDetails from '@salesforce/apex/FileManagerService.getContentDetails';
+import getContentDetails from '@salesforce/apex/NatoutTripFilesService.getContentDetails';
 import deleteContentDocument from '@salesforce/apex/NatoutTripFilesService.deleteContentDocument';
 import saveTheChunkFile from '@salesforce/apex/NatoutTripFilesService.saveTheChunkFile';
 import { reduceErrors } from 'c/ldsUtils';
@@ -25,29 +25,6 @@ export default class NatoutTripFiles extends LightningElement {
 
     connectedCallback() {
         this.handleSync();
-    }
-
-    handleDeleteFiles(row) {
-        if( ! confirm('Are you sure you want to delete this file?')) {
-            return;
-        }
-        this.isLoading = true;
-
-        deleteContentDocument({
-            recordId : row.ContentDocumentId
-        })
-        .then(() => {
-            this.dataList  = this.dataList.filter(item => {
-                return item.ContentDocumentId !== row.ContentDocumentId ;
-            });
-        })
-        .catch(error => {
-            console.error('**** error **** \n ',error);
-            this.showSnackbar('failure','Error','Error Deleting File');
-        })
-        .finally(()=>{
-            this.isLoading = false;
-        });
     }
 
     deleteFile(event) {

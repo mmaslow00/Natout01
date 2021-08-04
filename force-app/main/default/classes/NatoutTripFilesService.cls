@@ -1,4 +1,4 @@
-public with sharing class NatoutTripFilesService {
+public without sharing class NatoutTripFilesService {
     @AuraEnabled
     public static String getContentDetails(String recordId, String fileCategory) {
         List<ContentDocumentLink> contentDocumentList = [SELECT ContentDocumentId, LinkedEntityId 
