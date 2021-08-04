@@ -5,6 +5,7 @@ import { updateRecord } from 'lightning/uiRecordApi';
 import getContentDetails from '@salesforce/apex/NatoutTripFilesService.getContentDetails';
 import deleteContentDocument from '@salesforce/apex/NatoutTripFilesService.deleteContentDocument';
 import saveTheChunkFile from '@salesforce/apex/NatoutTripFilesService.saveTheChunkFile';
+import userId from '@salesforce/user/Id';
 import { reduceErrors } from 'c/ldsUtils';
 
 const MAX_FILE_SIZE = 5000000;
@@ -13,6 +14,7 @@ const CHUNK_SIZE = 750000;
 export default class NatoutTripFiles extends LightningElement {
     @api recordId;
     @api fileCategory;
+    @api userIsAdmin;
     isLoading = false;
 
     fileName = '';
@@ -77,7 +79,6 @@ export default class NatoutTripFiles extends LightningElement {
             finalData.forEach(file => {
                 file.downloadUrl = baseUrl+'sfc/servlet.shepherd/document/download/'+file.ContentDocumentId;
                 file.fileUrl     = baseUrl+'sfc/servlet.shepherd/version/renditionDownload?rendition=THUMB720BY480&amp;versionId='+file.Id;
-                file.CREATED_BY  = file.ContentDocument.CreatedBy.Name;
                 file.Size        = this.formatBytes(file.ContentDocument.ContentSize, 2);
                 file.displayTitle = file.Title;
                 file.rowNum = rowNum++;
@@ -100,6 +101,15 @@ export default class NatoutTripFiles extends LightningElement {
                     }
                     file.isImage = false;
                 }
+
+                let canDelete = false;
+                if(file.ContentDocument.CreatedById === userId) {
+                    canDelete = true;
+                }
+                else if(this.userIsAdmin) {
+                    canDelete = true;
+                }
+                file.canDelete = canDelete;
             });
             this.dataList = finalData;
         })

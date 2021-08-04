@@ -62,16 +62,17 @@
                     >
                     </lightning-button>
                 </td>
-                <td>
-                    <lightning-button label="Delete" key={file.id} variant="destructive" icon-name="action:delete" onclick={deleteFile} data-row={file.rowNum}
-                        class="small-text"
-                    >
-                    </lightning-button>
-                </td>
+                <template if:true={file.canDelete}>
+                    <td>
+                        <lightning-button label="Delete" key={file.id} variant="destructive" icon-name="action:delete" onclick={deleteFile} data-row={file.rowNum}
+                            class="small-text"
+                        >
+                        </lightning-button>
+                    </td>
+                </template>
             </tr>
         </template>
     </table>
-
 
     <template if:true={editingPhotoName}>
         <div>

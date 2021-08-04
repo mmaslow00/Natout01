@@ -12,7 +12,7 @@ public without sharing class NatoutTripFilesService {
             
         List<ContentVersion> contentVersionList = [
             SELECT Id, FileType, Title, FileExtension,
-                ContentDocument.CreatedBy.Name, ContentDocument.ContentSize,
+                ContentDocument.CreatedById, ContentDocument.ContentSize,
                 CreatedDate, ContentDocumentId, ContentDocument.FileType,
                 Photo_Credit__c
             FROM   ContentVersion 
