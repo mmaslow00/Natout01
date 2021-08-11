@@ -7,7 +7,7 @@ public with sharing class NatoutTripTriggerHandler {
         Id contactId = getUserContactId();
         if(contactId != null) {
             Contact userContact = [
-                SELECT Name, MailingStreet, MailingCity, MailingState, MailingPostalCode
+                SELECT Name, MailingStreet, MailingCity, MailingState, MailingPostalCode, Phone, Email
                 FROM Contact
                 WHERE Id = :contactId
             ];
@@ -17,6 +17,8 @@ public with sharing class NatoutTripTriggerHandler {
                 trip.Sat_Phone_Ship_To_City__c = userContact.MailingCity;
                 trip.Sat_Phone_Ship_To_State_Prov__c = userContact.MailingState;
                 trip.Sat_Phone_Ship_To_Zip_Code__c = userContact.MailingPostalCode;
+                trip.Sat_Phone_Ship_To_Phone__c = userContact.Phone;
+                trip.Sat_Phone_Ship_To_Email__C = userContact.Email;
             }
         }
         return;
@@ -136,7 +138,9 @@ public with sharing class NatoutTripTriggerHandler {
                     Contact__r.MailingStreet,
                     Contact__r.MailingCity,
                     Contact__r.MailingState,
-                    Contact__r.MailingPostalCode
+                    Contact__r.MailingPostalCode,
+                    Contact__r.Phone,
+                    Contact__r.Email
                 FROM National_Outings_Trip_Staff__c
                 WHERE 
                     National_Outings_Trip__c in :tripIds
@@ -158,7 +162,9 @@ public with sharing class NatoutTripTriggerHandler {
                         Sat_Phone_Ship_To_Address__c = staff.Contact__r.MailingStreet,
                         Sat_Phone_Ship_To_City__c = staff.Contact__r.MailingCity,
                         Sat_Phone_Ship_To_State_Prov__c = staff.Contact__r.MailingState,
-                        Sat_Phone_Ship_To_Zip_Code__c = staff.Contact__r.MailingPostalCode
+                        Sat_Phone_Ship_To_Zip_Code__c = staff.Contact__r.MailingPostalCode,
+                        Sat_Phone_Ship_To_Email__c = staff.Contact__r.Email,
+                        Sat_Phone_Ship_To_Phone__c = staff.Contact__r.Phone
                     )                        
                 );
             }

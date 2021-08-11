@@ -648,6 +648,7 @@
                             </div>
                             -->
 
+                            <!--
                             <label class="slds-form-element__label" for="area">
                                 <p class="infop">
                                     Select an item from the Available table on the left and use the right arrow to add it to the Chosen table on the right. To remove an item from the Chosen table, select it and use the left arrow.
@@ -670,6 +671,7 @@
                                 variant="label-hidden"
                             >
                             </lightning-input-field>
+                            -->
                         </template>
 
                         <div style="display:none">
@@ -1499,6 +1501,28 @@
                                 onchange={handleFieldChange}
                                 data-field="Sat_Phone_Ship_To_Zip_Code__c"
                                 data-id="shipToZip"
+                                variant="label-hidden"
+                            >
+                            </lightning-input-field>
+                            <label for="shipToEmail">
+                                Email
+                            </label>
+                            <lightning-input-field
+                                field-name="Sat_Phone_Ship_To_Email__c"
+                                onchange={handleFieldChange}
+                                data-field="Sat_Phone_Ship_To_Email__c"
+                                data-id="shipToEmail"
+                                variant="label-hidden"
+                            >
+                            </lightning-input-field>
+                            <label for="shipToPhone">
+                                Phone
+                            </label>
+                            <lightning-input-field
+                                field-name="Sat_Phone_Ship_To_Phone__c"
+                                onchange={handleFieldChange}
+                                data-field="Sat_Phone_Ship_To_Phone__c"
+                                data-id="shipToPhone"
                                 variant="label-hidden"
                             >
                             </lightning-input-field>

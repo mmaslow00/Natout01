@@ -20,7 +20,9 @@ public with sharing class NatoutTripService {
             Contact__r.MailingStreet,
             Contact__r.MailingCity,
             Contact__r.MailingState,
-            Contact__r.MailingPostalCode
+            Contact__r.MailingPostalCode,
+            Contact__r.Phone,
+            Contact__r.Email
             FROM National_Outings_Trip_Staff__c
             WHERE 
                 National_Outings_Trip__c = :tripId
@@ -33,6 +35,8 @@ public with sharing class NatoutTripService {
         to.city = leader.Contact__r.MailingCity;
         to.state = leader.Contact__r.MailingState;
         to.zip = leader.Contact__r.MailingPostalCode;
+        to.phone = leader.Contact__r.Phone;
+        to.email = leader.Contact__r.email;
         return to;
     }
     @AuraEnabled
@@ -70,6 +74,10 @@ public with sharing class NatoutTripService {
         public String state {get; set;}
         @AuraEnabled
         public String zip {get; set;}
+        @AuraEnabled
+        public String phone {get; set;}
+        @AuraEnabled
+        public String email {get; set;}
     }
     public Class BudgetApproval {
         BudgetApproval(Datetime dateApproved, Id approvedBy) {

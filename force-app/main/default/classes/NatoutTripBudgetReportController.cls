@@ -296,6 +296,7 @@ public with sharing class NatoutTripBudgetReportController {
             }
             SimpleRow partMeals = new SimpleRow('Participant Meals', partCost);
             partMeals.part80Amount = part80Cost;
+            partMeals.staffAmount = staffCost;
             retVal.itemList.add(partMeals);
             retVal.add('Staff Meals', staffCost);
             retVal.add('Fixed Amount', trip.Fixed_Amount__c);
@@ -354,7 +355,7 @@ public with sharing class NatoutTripBudgetReportController {
         );
         Decimal total80 =
             getVolTravel().getGrandTotalAmount() + 
-            getMeals().getTotalPart80Amount() + 
+            getMeals().getTotalPart80Amount() + getMeals().getStaffAmount() +
             getTransport().getPart80GrandTotal() +
             getConcessionaires().getPart80GrandTotal() +
             getOtherList().getTotalAmount() +
@@ -391,7 +392,7 @@ public with sharing class NatoutTripBudgetReportController {
             rpt.add(
                 new IntlRow(
                     'Meals',
-                    getMeals().getTotalPart80Amount(),
+                    getMeals().getTotalPart80Amount() + getMeals().getStaffAmount(),
                     getMeals().getTotalAmount()
                 )
             );
@@ -432,7 +433,7 @@ public with sharing class NatoutTripBudgetReportController {
         );
         Decimal total80 =
             getVolTravel().getGrandTotalAmount() + 
-            getMeals().getTotalPart80Amount() + 
+            getMeals().getTotalPart80Amount() + getMeals().getStaffAmount() +
             getTransport().getPart80GrandTotal() +
             getConcessionaires().getPart80GrandTotal() +
             getOtherList().getTotalAmount() +
@@ -647,6 +648,15 @@ public with sharing class NatoutTripBudgetReportController {
             }
             return total + getFixedAmount();
         }
+        public Decimal getStaffAmount() {
+            Decimal total = 0;
+            for(SimpleRow row : itemList) {
+                if(row.amount > 0 && row.itemName == 'Staff Meals') {
+                    total += row.amount;
+                }
+            }
+            return total;
+        }
         public Decimal fixedAmount;
         public Decimal getFixedAmount() {
             return fixedAmount == null ? 0 : fixedAmount;
@@ -657,10 +667,12 @@ public with sharing class NatoutTripBudgetReportController {
             this.itemName = itemName;
             this.amount = amount;
             this.part80Amount = 0;
+            this.staffAmount = 0;
         }
         public String itemName {get; set;}
         Decimal amount;
         Decimal part80Amount;
+        Decimal staffAmount;
         public Decimal getAmount() {
             return amount > 0 ? amount : null;
         }

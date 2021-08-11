@@ -741,6 +741,10 @@ export default class NatoutTripDetail extends LightningElement {
             this.tripRecord.Sat_Phone_Ship_To_State_Prov__c = result.state;
             this.template.querySelector('[data-field=Sat_Phone_Ship_To_Zip_Code__c]').value = result.zip;
             this.tripRecord.Sat_Phone_Ship_To_Zip_Code__c = result.zip;
+            this.template.querySelector('[data-field=Sat_Phone_Ship_To_Phone__c]').value = result.phone;
+            this.tripRecord.Sat_Phone_Ship_To_Phone__c = result.phone;
+            this.template.querySelector('[data-field=Sat_Phone_Ship_To_Email__c]').value = result.email;
+            this.tripRecord.Sat_Phone_Ship_To_Email__c = result.zip;
         })
         .catch(error => {
             this.error = error;
@@ -939,6 +943,7 @@ export default class NatoutTripDetail extends LightningElement {
             }
         }
         else {
+            /*
             let areas = this.tripRecord.Area__c;
             if( ! areas) {
                 errors.push({rowNum: rowNum++, text: 'Location Details, Safety and Risk: At least one Area is Required'});
@@ -952,7 +957,7 @@ export default class NatoutTripDetail extends LightningElement {
                     errors.push({rowNum: rowNum++, text: 'Location Details, Safety and Risk: You cannot specify more than 3 Areas'});
                 }
             }
-            
+            */
             if(this.chosenStates.length > 3) {
                 errors.push({rowNum: rowNum++, text: 'Trip Copy and Marketing: You cannot specify more than 3 States'});
             }

@@ -5,6 +5,8 @@
         <members>NatoutTripFilesServiceTest</members>
         <members>NatoutEmailHandler</members>
         <members>NatoutEmailHandlerTest</members>
+        <members>NatoutTripService</members>
+        <members>NatoutTripTriggerHandler</members>
         <name>ApexClass</name>
     </types>
     <types>  
