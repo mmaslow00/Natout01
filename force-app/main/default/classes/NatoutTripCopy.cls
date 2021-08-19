@@ -16,6 +16,7 @@ public without sharing class NatoutTripCopy {
         toTrip.OwnerID = UserInfo.getUserId();
         toTrip.Budget_Approved_By__c = null;
         toTrip.Budget_Approved_Date__c = null;
+        toTrip.Brochure_Submitted_Date__c = null;
         if(
             toTrip.First_Time_Run__c == false &&
             toTrip.Prior_Trip__c != null &&

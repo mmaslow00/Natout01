@@ -560,6 +560,13 @@
                     </lightning-accordion-section>
 
                     <lightning-accordion-section name="Brochure" label="Trip Brochure and Photos">
+                        <div style="display:none">
+                            <lightning-input-field
+                                field-name="Brochure_Submitted_Date__c"
+                                data-field="Brochure_Submitted_Date__c"
+                            >
+                            </lightning-input-field>
+                        </div>
                         <div>
                             <p>
                                 Please submit the text and photos that will appear in your online brochure. 
@@ -573,12 +580,16 @@
                                         </a>
                                 </li>
                                 <li>Fill it out</li>
-                                <li>Upload your completed template and photos below.</li>
+                                <li>Upload your completed template and photos below</li>
                             </ol>
                             </div>
                             <div class="brochure-section2">
                                 Once the brochure editor receives your submission, they will review it and, if necessary, follow up to ask questions or review significant edits.
-                                Check out our brochure submission guides for writing tips, examples, and the brochure archive. Our goal is to recycle content, when possible, to reduce the burden on leaders and staff and ensure consistent and high-quality content that sells. 
+                                Check out our&nbsp; 
+                                <a href="https://community.sierraclub.org/page/brochure-submission" target="_blank">
+                                    brochure submission guides 
+                                </a> 
+                                &nbsp;for writing tips, examples, and the brochure archive. Our goal is to recycle content, when possible, to reduce the burden on leaders and staff and ensure consistent and high-quality content that sells. 
                             </div>
                             <div class="brochure-section2 bold-text">
                                 Please note: the brochure deadline is later than the trip submission deadline. The brochure may be submitted with the trip or later, as long as it’s submitted by the 
@@ -587,7 +598,7 @@
                         </div>
 
                         <div class="brochure-section2">
-                            Please add your online brochure and photos here (including leader bio photos, if applicable). 
+                            Please add your online brochure and photos below (including leader bio photos, if applicable). 
                             Format your brochure as a Word doc and your photos as JPGs. 
                         </div>
 
@@ -603,6 +614,21 @@
                         <div class="submit-brochure">
                             <lightning-button label="Submit Brochure" variant="brand" icon-name="action:email" onclick={submitBrochure}>
                             </lightning-button>
+                            <template if:true={brochureSubmitted}>
+                                <div>
+                                Brochure Submitted:&nbsp;&nbsp;
+                                <lightning-formatted-date-time
+                                    value={tripRecord.Brochure_Submitted_Date__c}
+                                    year="numeric"
+                                    month="numeric"
+                                    day="numeric"
+                                    hour="numeric"
+                                    minute="2-digit"
+                                    time-zone-name="short"
+                                >
+                                </lightning-formatted-date-time>
+                                </div>
+                            </template>
                         </div>
                     </lightning-accordion-section>
 
@@ -1373,7 +1399,7 @@
                             </lightning-accordion-section>
                             <lightning-accordion-section name="files" label="Files and Links">
                                 <p class="infop">
-                                    Please add your trip map(s) here.  Please format your map as a PDF document if possible.  
+                                    Please add your trip map(s) below.  Please format your map as a PDF document if possible.  
                                     While an uploaded PDF is preferred, you may also paste the link to your CalTopo map if desired.
                                 </p>
                                 <div class="files-and-links">

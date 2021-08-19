@@ -38,7 +38,12 @@ export default class NatoutTripComments extends LightningElement {
                             name = recipient.Contact__r.Name;
                         }
                         else {
-                            name = 'Outings Staff';
+                            if(recipient.Email__c.indexOf('brochure') >= 0) {
+                                name = "Brochure Editor";
+                            }
+                            else {
+                                name = 'Outings Staff';
+                            }
                         }
                         recipients.push({Id: recipient.Id, name: name, email: recipient.Email__c});
                     }

@@ -89,17 +89,15 @@ export default class NatoutTripFiles extends LightningElement {
                 let fileType = file.ContentDocument.FileType.toLowerCase();
                 if(imageExtensions.includes(fileType)){
                     file.icon = 'doctype:image';
-                    if(this.fileCategory === 'Brochure') {
-                        file.isImage = true;
-                    }
-                    else {
-                        this.isImage = false;
-                    }
+                    file.isImage = true;
                 }else{
+                    file.isImage = false;
+                    if(fileType === 'word_x') {
+                        fileType = 'word';
+                    }
                     if(supportedIconExtensions.includes(fileType)){
                         file.icon = 'doctype:' + fileType;
                     }
-                    file.isImage = false;
                 }
 
                 let canDelete = false;

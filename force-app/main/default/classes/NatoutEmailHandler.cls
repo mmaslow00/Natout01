@@ -461,11 +461,12 @@ public without sharing class NatoutEmailHandler {
         insert commentsRecipList;
     }
     @AuraEnabled 
-    public static void submitBrochure(String tripId) {
+    public static Datetime submitBrochure(String tripId) {
         National_Outings_Trip__c trip = [
             SELECT Title__c FROM National_Outings_Trip__c
             WHERE Id = :tripId
         ];
+        Datetime now = System.now();
         if(trip != null) {
             String contactId = NatoutUserInfo.getContactId();
             Contact ctct = [
@@ -487,7 +488,14 @@ public without sharing class NatoutEmailHandler {
             String intro = 'The following message has been sent to ' + brochureEditorEmailAddr + '.<br/><br/>';
             sendList.add(createTriggeredSend(contactId, ctct.Email, subject, intro + msgText));
             insert sendList;
-        }           
+
+            National_Outings_Trip__c trip2Update = new National_Outings_Trip__c(
+                Id = tripId,
+                Brochure_Submitted_Date__c = now
+            );
+            update trip2Update;
+        }
+        return now;
     }
 
     public static TriggeredSendEmail__c createTriggeredSend(Id contactId, String emailAddr, String subject, String msg) {

@@ -853,6 +853,14 @@ export default class NatoutTripDetail extends LightningElement {
         }
         return false;
     }
+    get brochureSubmitted() {
+        if(this.tripRecord) {
+            if(this.tripRecord.Brochure_Submitted_Date__c) {
+                return true;
+            }
+        }
+        return false;
+    }
     submitBrochure() {
         this.submittingBrochure = true;
     }
@@ -861,11 +869,12 @@ export default class NatoutTripDetail extends LightningElement {
     }
     completeBrochureSubmission() {
         this.sendingBrochure = true;
+        this.dateBrochureSubmitted = null;
         submitBrochure({
             tripId: this.recordId,
         })
-        .then(() => {
-            this.showSnackbar('success', 'Brochure Submitted', 'Message sent to Brochure Editor');
+        .then((result) => {
+            this.dateBrochureSubmitted = result;
         })
         .catch(error => {
             this.error = error;
@@ -874,6 +883,9 @@ export default class NatoutTripDetail extends LightningElement {
         .finally(() => {
             this.sendingBrochure = false;
             this.submittingBrochure = false;
+            if(this.dateBrochureSubmitted) {
+                this.tripRecord.Brochure_Submitted_Date__c = this.dateBrochureSubmitted;
+            }
         });
     }
     statusStartedToSubmitted() {
