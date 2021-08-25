@@ -51,7 +51,10 @@
 .bold-text {
     font-weight: bold;
 }
-.submit-brochure {
+.brochure-submission {
     margin-top: 10px;
+}
+.submit-button {
+    margin-top: 5px;
     text-align: center;
 }

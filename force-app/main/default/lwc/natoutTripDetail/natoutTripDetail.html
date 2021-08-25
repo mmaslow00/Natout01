@@ -611,24 +611,29 @@
                         </c-natout-trip-files>
                         </div>
 
-                        <div class="submit-brochure">
-                            <lightning-button label="Submit Brochure" variant="brand" icon-name="action:email" onclick={submitBrochure}>
-                            </lightning-button>
-                            <template if:true={brochureSubmitted}>
-                                <div>
-                                Brochure Submitted:&nbsp;&nbsp;
-                                <lightning-formatted-date-time
-                                    value={tripRecord.Brochure_Submitted_Date__c}
-                                    year="numeric"
-                                    month="numeric"
-                                    day="numeric"
-                                    hour="numeric"
-                                    minute="2-digit"
-                                    time-zone-name="short"
-                                >
-                                </lightning-formatted-date-time>
+                        <div class="brochure-submission">
+                            <lightning-input 
+                                type="checkbox"
+                                class="approve-brochure-checkbox"
+                                label="I confirm that any new or substantial changes have been reviewed by the subcommittee chair or brochure reviewer. (Required)"
+                            ></lightning-input>
+                            <div class="submit-button">
+                                <lightning-button label="Submit Brochure" variant="brand" icon-name="action:email" onclick={submitBrochure}>
+                                </lightning-button>
+                                <div if:true={brochureSubmitted}>
+                                    Brochure Submitted:&nbsp;&nbsp;
+                                    <lightning-formatted-date-time
+                                        value={tripRecord.Brochure_Submitted_Date__c}
+                                        year="numeric"
+                                        month="numeric"
+                                        day="numeric"
+                                        hour="numeric"
+                                        minute="2-digit"
+                                        time-zone-name="short"
+                                    >
+                                    </lightning-formatted-date-time>
                                 </div>
-                            </template>
+                            </div>
                         </div>
                     </lightning-accordion-section>
 
@@ -1723,13 +1728,22 @@
                         <h2 id="modal-heading-05" class="slds-text-heading_medium slds-hyphenate">Submit Brochure</h2>
                     </header>
                     <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-5">
+                        <div if:true={brochureCheckboxChecked}>
                         <p>
                             If you are ready to submit your brochure information to the Brochure Editor, click "Continue."
                         </p>
+                        </div>
+                        <div if:false={brochureCheckboxChecked}>
+                            <p>
+                                You must confirm that any new or substantial changes have been reviewed
+                            </p>
+                        </div>    
                     </div>
                     <footer class="slds-modal__footer">
                         <lightning-button label="Cancel" variant="destructive" icon-name="action:close" onclick={cancelBrochureSubmission}></lightning-button>
-                        <lightning-button label="Continue" variant="brand" icon-name="action:approval" onclick={completeBrochureSubmission} class="slds-p-left_large"></lightning-button>
+                        <template if:true={brochureCheckboxChecked}>
+                            <lightning-button label="Continue" variant="brand" icon-name="action:approval" onclick={completeBrochureSubmission} class="slds-p-left_large"></lightning-button>
+                        </template>
                     </footer>
                 </div>
             </section>

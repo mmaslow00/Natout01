@@ -31,6 +31,7 @@ export default class NatoutTripDetail extends LightningElement {
     @track priorPrice;
     @track rejectApproval = false;
     @track previousStatus;
+    @track brochureCheckboxChecked = false;
     loadedForm = false;
     loadedStatus = null;
     countryOptions = null;
@@ -862,6 +863,7 @@ export default class NatoutTripDetail extends LightningElement {
         return false;
     }
     submitBrochure() {
+        this.brochureCheckboxChecked = this.template.querySelector('.approve-brochure-checkbox').checked;
         this.submittingBrochure = true;
     }
     cancelBrochureSubmission() {
@@ -886,6 +888,8 @@ export default class NatoutTripDetail extends LightningElement {
             if(this.dateBrochureSubmitted) {
                 this.tripRecord.Brochure_Submitted_Date__c = this.dateBrochureSubmitted;
             }
+            this.brochureCheckboxChecked = false;
+            this.template.querySelector('.approve-brochure-checkbox').checked = false;
         });
     }
     statusStartedToSubmitted() {
