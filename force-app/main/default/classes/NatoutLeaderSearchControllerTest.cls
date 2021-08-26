@@ -45,7 +45,7 @@ public with sharing class NatoutLeaderSearchControllerTest {
 		insert ldrPos;
 		Leadership__c role = new Leadership__c(
 			Club_Entity__c = ent.Id,
-			Position_Active__c = true,
+			Position_Status__c = 'Active',
 			Contact__c = contact1.Id,
 			Leader_Position__c = ldrPos.Id
 		);

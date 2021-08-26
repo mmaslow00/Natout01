@@ -89,7 +89,7 @@ public with sharing class NatoutEmailHandlerTest {
         insert ldrPos;
         Leadership__c role = new Leadership__c(
             Club_Entity__c = ent.Id,
-            Position_Active__c = true,
+            Position_Status__c = 'Active',
             Contact__c = subcommOfficer.Id,
             Leader_Position__c = ldrPos.Id
         );

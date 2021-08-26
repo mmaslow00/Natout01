@@ -5,11 +5,7 @@ public with sharing class NatoutTripServiceTest {
     static Id contactHouseholdTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Household').getRecordTypeId();
     static testMethod void testTripPrice() {
     	Club_Entity__c clubEntity = new Club_Entity__c(
-    		Name = 'Test Entity',
-    		Address_Street__c = '1234 Main St',
-    		Address_City__c = 'Some City',
-    		Address_State__c = 'CA',
-    		Address_Postal_Code__c = '90000'
+    		Name = 'Test Entity'
     	);
     	insert clubEntity;
 		Campaign camp = new Campaign(
