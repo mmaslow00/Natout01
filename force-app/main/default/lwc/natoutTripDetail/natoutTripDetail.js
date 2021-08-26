@@ -863,6 +863,12 @@ export default class NatoutTripDetail extends LightningElement {
         return false;
     }
     submitBrochure() {
+        let comp = this.template.querySelector('.brochure-files');
+        let brochureFileCount = comp.getRowCount();
+        if(brochureFileCount === 0) {
+            this.showSnackbar('failure', 'No File Uploaded', 'Please upload your file');
+            return;
+        }
         this.brochureCheckboxChecked = this.template.querySelector('.approve-brochure-checkbox').checked;
         this.submittingBrochure = true;
     }

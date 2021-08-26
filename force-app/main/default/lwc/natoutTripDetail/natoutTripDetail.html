@@ -607,6 +607,7 @@
                             record-id={recordId}
                             file-category="Brochure"
                             user-is-admin={userIsAdmin}
+                            class="brochure-files"
                         >
                         </c-natout-trip-files>
                         </div>
@@ -1584,7 +1585,7 @@
                         </p>
                         <c-natout-trip-comments  
                             record-id={recordId}
-                            can-edit={userCanEdit}
+                            can-edit=true
                         >
                         </c-natout-trip-comments>
                     </lightning-accordion-section>
@@ -1735,7 +1736,7 @@
                         </div>
                         <div if:false={brochureCheckboxChecked}>
                             <p>
-                                You must confirm that any new or substantial changes have been reviewed
+                                You must click the box to confirm that any new or substantial changes have been reviewed.
                             </p>
                         </div>    
                     </div>

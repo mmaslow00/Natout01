@@ -252,4 +252,7 @@ export default class NatoutTripFiles extends LightningElement {
         let row = this.dataList[rowNum];
         window.open(row.downloadUrl, "_blank");
     }
+    @api getRowCount() {
+        return this.dataList.length;
+    }
 }
