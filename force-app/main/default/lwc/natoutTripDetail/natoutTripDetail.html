@@ -613,11 +613,13 @@
                         </div>
 
                         <div class="brochure-submission">
-                            <lightning-input 
-                                type="checkbox"
-                                class="approve-brochure-checkbox"
-                                label="I confirm that any new or substantial changes have been reviewed by the subcommittee chair or brochure reviewer. (Required)"
-                            ></lightning-input>
+                            <strong>
+                                <lightning-input 
+                                    type="checkbox"
+                                    class="approve-brochure-checkbox"
+                                    label="I confirm that any new or substantial changes have been reviewed by the subcommittee chair or brochure reviewer. (Required)"
+                                ></lightning-input>
+                            </strong>
                             <div class="submit-button">
                                 <lightning-button label="Submit Brochure" variant="brand" icon-name="action:email" onclick={submitBrochure}>
                                 </lightning-button>
