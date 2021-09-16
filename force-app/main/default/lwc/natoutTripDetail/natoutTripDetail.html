@@ -1468,99 +1468,97 @@
                             variant="label-hidden"
                         >
                         </lightning-input-field>
-                        <template if:true={satPhoneNeeded}>
-                            <label class="slds-form-element__label" for="dateNeeded">
-                                When do you need the phone delivered? This should be at least one day before the trip start date so that you have the phone on your way to the starting point.
-                            </label>
-                            <lightning-input-field
-                                field-name="Sat_Phone_Needed_Date__c"
-                                onchange={handleFieldChange}
-                                data-field="Sat_Phone_Needed_Date__c"
-                                data-id="dateNeeded"
-                                variant="label-hidden"
-                            >
-                            </lightning-input-field>
-                            <div class="slds-p-top_small slds-p-bottom_small">
-                                <strong>Ship To:</strong>
-                            </div>
-                            <label for="shipToName">
-                                Name
-                            </label>
-                            <lightning-input-field
-                                field-name="Sat_Phone_Ship_To_Name__c"
-                                onchange={handleFieldChange}
-                                data-field="Sat_Phone_Ship_To_Name__c"
-                                data-id="shipToName"
-                                variant="label-hidden"
-                            >
-                            </lightning-input-field>
-                            <label for="shipToAddress">
-                                Address
-                            </label>
-                            <lightning-input-field
-                                field-name="Sat_Phone_Ship_To_Address__c"
-                                onchange={handleFieldChange}
-                                data-field="Sat_Phone_Ship_To_Address__c"
-                                data-id="shipToAddress"
-                                variant="label-hidden"
-                            >
-                            </lightning-input-field>
-                            <label for="shipToCity">
-                                City
-                            </label>
-                            <lightning-input-field
-                                field-name="Sat_Phone_Ship_To_City__c"
-                                onchange={handleFieldChange}
-                                data-field="Sat_Phone_Ship_To_City__c"
-                                data-id="shipToCity"
-                                variant="label-hidden"
-                            >
-                            </lightning-input-field>
-                            <label for="shipToState">
-                                State/Province
-                            </label>
-                            <lightning-input-field
-                                field-name="Sat_Phone_Ship_To_State_Prov__c"
-                                onchange={handleFieldChange}
-                                data-field="Sat_Phone_Ship_To_State_Prov__c"
-                                data-id="shipToState"
-                                variant="label-hidden"
-                            >
-                            </lightning-input-field>
-                            <label for="shipToZip">
-                                Zip Code
-                            </label>
-                            <lightning-input-field
-                                field-name="Sat_Phone_Ship_To_Zip_Code__c"
-                                onchange={handleFieldChange}
-                                data-field="Sat_Phone_Ship_To_Zip_Code__c"
-                                data-id="shipToZip"
-                                variant="label-hidden"
-                            >
-                            </lightning-input-field>
-                            <label for="shipToEmail">
-                                Email
-                            </label>
-                            <lightning-input-field
-                                field-name="Sat_Phone_Ship_To_Email__c"
-                                onchange={handleFieldChange}
-                                data-field="Sat_Phone_Ship_To_Email__c"
-                                data-id="shipToEmail"
-                                variant="label-hidden"
-                            >
-                            </lightning-input-field>
-                            <label for="shipToPhone">
-                                Phone
-                            </label>
-                            <lightning-input-field
-                                field-name="Sat_Phone_Ship_To_Phone__c"
-                                onchange={handleFieldChange}
-                                data-field="Sat_Phone_Ship_To_Phone__c"
-                                data-id="shipToPhone"
-                                variant="label-hidden"
-                            >
-                            </lightning-input-field>
-                        </template>
+                        <label class="slds-form-element__label" for="dateNeeded">
+                            When do you need the phone delivered? This should be at least one day before the trip start date so that you have the phone on your way to the starting point.
+                        </label>
+                        <lightning-input-field
+                            field-name="Sat_Phone_Needed_Date__c"
+                            onchange={handleFieldChange}
+                            data-field="Sat_Phone_Needed_Date__c"
+                            data-id="dateNeeded"
+                            variant="label-hidden"
+                        >
+                        </lightning-input-field>
+                        <div class="slds-p-top_small slds-p-bottom_small">
+                            <strong>Ship To:</strong>
+                        </div>
+                        <label for="shipToName">
+                            Name
+                        </label>
+                        <lightning-input-field
+                            field-name="Sat_Phone_Ship_To_Name__c"
+                            onchange={handleFieldChange}
+                            data-field="Sat_Phone_Ship_To_Name__c"
+                            data-id="shipToName"
+                            variant="label-hidden"
+                        >
+                        </lightning-input-field>
+                        <label for="shipToAddress">
+                            Address
+                        </label>
+                        <lightning-input-field
+                            field-name="Sat_Phone_Ship_To_Address__c"
+                            onchange={handleFieldChange}
+                            data-field="Sat_Phone_Ship_To_Address__c"
+                            data-id="shipToAddress"
+                            variant="label-hidden"
+                        >
+                        </lightning-input-field>
+                        <label for="shipToCity">
+                            City
+                        </label>
+                        <lightning-input-field
+                            field-name="Sat_Phone_Ship_To_City__c"
+                            onchange={handleFieldChange}
+                            data-field="Sat_Phone_Ship_To_City__c"
+                            data-id="shipToCity"
+                            variant="label-hidden"
+                        >
+                        </lightning-input-field>
+                        <label for="shipToState">
+                            State/Province
+                        </label>
+                        <lightning-input-field
+                            field-name="Sat_Phone_Ship_To_State_Prov__c"
+                            onchange={handleFieldChange}
+                            data-field="Sat_Phone_Ship_To_State_Prov__c"
+                            data-id="shipToState"
+                            variant="label-hidden"
+                        >
+                        </lightning-input-field>
+                        <label for="shipToZip">
+                            Zip Code
+                        </label>
+                        <lightning-input-field
+                            field-name="Sat_Phone_Ship_To_Zip_Code__c"
+                            onchange={handleFieldChange}
+                            data-field="Sat_Phone_Ship_To_Zip_Code__c"
+                            data-id="shipToZip"
+                            variant="label-hidden"
+                        >
+                        </lightning-input-field>
+                        <label for="shipToEmail">
+                            Email
+                        </label>
+                        <lightning-input-field
+                            field-name="Sat_Phone_Ship_To_Email__c"
+                            onchange={handleFieldChange}
+                            data-field="Sat_Phone_Ship_To_Email__c"
+                            data-id="shipToEmail"
+                            variant="label-hidden"
+                        >
+                        </lightning-input-field>
+                        <label for="shipToPhone">
+                            Phone
+                        </label>
+                        <lightning-input-field
+                            field-name="Sat_Phone_Ship_To_Phone__c"
+                            onchange={handleFieldChange}
+                            data-field="Sat_Phone_Ship_To_Phone__c"
+                            data-id="shipToPhone"
+                            variant="label-hidden"
+                        >
+                        </lightning-input-field>
                     </lightning-accordion-section>
 
                     <lightning-accordion-section name="Collaborators" label="Collaborators">
