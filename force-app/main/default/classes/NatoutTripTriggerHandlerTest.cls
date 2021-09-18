@@ -78,7 +78,7 @@ public with sharing class NatoutTripTriggerHandlerTest {
         trip.Budget_Approved_Date__c = System.now();
         update trip;
 
-        Id fileId = FileUploadService.saveTheChunkFile(trip.Id, 'TestFileName', 'TestContent', 'pdf', null);
+        Id fileId = NatoutTripFilesService.saveTheChunkFile(trip.Id, 'TestFileName', 'TestContent', 'pdf', null, 'Itinerary');
 
         List<ContentDocumentLink> contentDocumentList = [
             SELECT ContentDocumentId, LinkedEntityId 

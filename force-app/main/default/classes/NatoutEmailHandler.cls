@@ -6,6 +6,10 @@ Test coverage:
 public without sharing class NatoutEmailHandler {
     public static final String staffEmailAddr = 'tony.rango@sierraclub.org';
     public static final String brochureEditorEmailAddr = 'outings.brochures@sierraclub.org';
+    public static final String financeAssociateEmailAddr = 'tony.rango@sierraclub.org';
+    public static final String landAgencyAssociateEmailAddr = 'andrew.henry@sierraclub.org';
+    public static final String marketingManagerEmailAddr = 'jason.halal@sierraclub.org';
+    public static final String safetyTeamEmailAddr = 'program.safety@sierraclub.org';
 
     public static List<TriggeredSendEmail__c> statusChanged(List<National_Outings_Trip__c> tripList, Map<Id, National_Outings_Trip__c> oldMap) {
         Map<Id, List<Recipient>> creatorMap = getCreators(tripList);
@@ -189,7 +193,7 @@ public without sharing class NatoutEmailHandler {
             FROM Leadership__c 
             WHERE
                 Club_Entity__r.Entity_Category__c = 'Outings' AND Club_Entity__r.Type__c = 'National Outing Subcomm' 
-                AND Position_Status__c = 'Active' AND Leader_Position__r.Name IN ('Chair','Sub-comm Co-Chair','Vice Chair')
+                AND Position_Status__c = 'Active' AND Leader_Position__r.Name IN ('Chair','Sub-comm Co-Chair','Vice Chair','Trip Submis. Collaborator')
                 AND Club_Entity__r.Name in :subcomms
         ];
         Map<String, List<Recipient>> officerMap = new Map<String, List<Recipient>>();
@@ -401,6 +405,10 @@ public without sharing class NatoutEmailHandler {
                 Notify_Approvers__c,
                 Notify_Staff__c,
                 Notify_Brochure_Editor__c,
+                Notify_Finance__c,
+                Notify_Land_Agency__c,
+                Notify_Marketing__c,
+                Notify_Safety__c,
                 CreatedBy.Name
             FROM National_Outings_Trip_Comments__c
             WHERE Id in :commentsIds
@@ -443,6 +451,7 @@ public without sharing class NatoutEmailHandler {
                 commentsRecipList.add(
                     new National_Outings_Trip_Comments_Recip__c(
                         Email__c = staffEmailAddr,
+                        Staff_Position__c = 'Program Director',
                         National_Outings_Trip_Comments__c = comments.Id
                     )
                 );
@@ -452,6 +461,47 @@ public without sharing class NatoutEmailHandler {
                 commentsRecipList.add(
                     new National_Outings_Trip_Comments_Recip__c(
                         Email__c = brochureEditorEmailAddr,
+                        Staff_Position__c = 'Brochure Editor',
+                        National_Outings_Trip_Comments__c = comments.Id
+                    )
+                );
+            }
+            if(comments.Notify_Finance__c) {
+                sendList.add(createTriggeredSend(null, financeAssociateEmailAddr, subject, commentsText));
+                commentsRecipList.add(
+                    new National_Outings_Trip_Comments_Recip__c(
+                        Email__c = financeAssociateEmailAddr,
+                        Staff_Position__c = 'Finance Associate',
+                        National_Outings_Trip_Comments__c = comments.Id
+                    )
+                );
+            }
+            if(comments.Notify_Land_Agency__c) {
+                sendList.add(createTriggeredSend(null, landAgencyAssociateEmailAddr, subject, commentsText));
+                commentsRecipList.add(
+                    new National_Outings_Trip_Comments_Recip__c(
+                        Email__c = landAgencyAssociateEmailAddr,
+                        Staff_Position__c = 'Land Agency Associate',
+                        National_Outings_Trip_Comments__c = comments.Id
+                    )
+                );
+            }
+            if(comments.Notify_Marketing__c) {
+                sendList.add(createTriggeredSend(null, marketingManagerEmailAddr, subject, commentsText));
+                commentsRecipList.add(
+                    new National_Outings_Trip_Comments_Recip__c(
+                        Email__c = marketingManagerEmailAddr,
+                        Staff_Position__c = 'Marketing Manager',
+                        National_Outings_Trip_Comments__c = comments.Id
+                    )
+                );
+            }
+            if(comments.Notify_Safety__c) {
+                sendList.add(createTriggeredSend(null, safetyTeamEmailAddr, subject, commentsText));
+                commentsRecipList.add(
+                    new National_Outings_Trip_Comments_Recip__c(
+                        Email__c = safetyTeamEmailAddr,
+                        Staff_Position__c = 'Program Safety Team',
                         National_Outings_Trip_Comments__c = comments.Id
                     )
                 );

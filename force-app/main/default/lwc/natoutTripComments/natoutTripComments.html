@@ -50,22 +50,34 @@
                         </button>
                         <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Comment</h2>
                     </header>
-                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
-                        <lightning-checkbox-group name="Checkbox Group"
-                            label="Send notifications to:"
-                            options={checkboxOptions}
-                            value={checkboxValues}
-                            onchange={handleCheckboxChange}>
-                        </lightning-checkbox-group>
-
+                    <div class="slds-modal__content slds-p-around_medium fullwidth" id="modal-content-id-1">
+                        <div class="clearfix">
+                            <div class="halfwidth">
+                            <lightning-checkbox-group
+                                label="Send notifications to Volunteers:"
+                                options={volunteerOptions}
+                                value={volunteerValues}
+                                onchange={handleVolunteerChange}
+                            >
+                            </lightning-checkbox-group>
+                            </div>
+                            <div class="halfwidth">
+                                <lightning-checkbox-group
+                                    label="Send notifications to Staff:"
+                                    options={staffOptions}
+                                    value={staffValues}
+                                    onchange={handleStaffChange}
+                                >
+                            </lightning-checkbox-group>
+                            </div>
+                        </div>
                         <lightning-input-rich-text
                             label="Comment" 
                             placeholder="Enter a New Comment"
                             required
-                            onchange={handleChange}
+                            onchange={handleCommentChange}
                             disabled-categories="FORMAT_FONT,ALIGN_TEXT,INSERT_CONTENT,REMOVE_FORMATTING"                        >
                         </lightning-input-rich-text>
-
                     </div>
                     <footer class="slds-modal__footer">
                         <lightning-button label="Cancel" variant="neutral" onclick={closeModal}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;

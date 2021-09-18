@@ -826,7 +826,37 @@
                             variant="label-hidden"
                         >
                         </lightning-input-field>
+
+                        <p>
+                        <strong>Safety Management Plan</strong>
+                        </p>
+                        <p class="safety-mgmt">
+                            Please submit your Safety Management Plan.
+                        </p>
+                        <p class="safety-mgmt">
+                            1. Download the&nbsp;
+                            <a href="https://community.sierraclub.org/section/outings/national-outings/forms#7" target="_blank">
+                                appropriate form (domestic or international)
+                            </a>
+                        </p>
+                        <p>
+                            2. Fill it out
+                        </p>
+                        <p>
+                            3. Upload your completed form below
+                        </p>
+                        <p class="safety-mgmt">
+                            If you have any questions about this form, please contact Program Safety using the Comments section below.
+                        </p>
+                        <div class="files-and-links">
+                            <c-natout-trip-files
+                                record-id={recordId}
+                                file-category="Safety Management"
+                                user-is-admin={userIsAdmin}
+                            >
+                            </c-natout-trip-files>
                         </div>
+                        </div> <!-- End Location, Safety and Risks -->
                     </lightning-accordion-section>
 
                     <lightning-accordion-section name="Budget" label="Budget">
