@@ -23,6 +23,10 @@ public with sharing class NatoutTripServiceTest {
         insert camp;
         Decimal price = NatoutTripService.getTripPrice('Test');
         System.assertEquals(1000, price);
+        camp.Trip_Price__c = null;
+        update camp;
+        price = NatoutTripService.getTripPrice('Test');
+        System.assertEquals(0, price);
     }
 
     static testMethod void testSatPhoneAddress() {

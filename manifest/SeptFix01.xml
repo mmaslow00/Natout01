@@ -4,6 +4,8 @@
         <members>NatoutEmailHandler</members>
         <members>NatoutEmailHandlerTest</members>
         <members>NatoutTripCommentsController</members>
+        <members>NatoutTripService</members>
+        <members>NatoutTripServiceTest</members>
         <members>NatoutTripTriggerHandlerTest</members>
         <members>NatoutUserInfo</members>
         <name>ApexClass</name>

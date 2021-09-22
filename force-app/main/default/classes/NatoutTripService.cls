@@ -9,6 +9,9 @@ public with sharing class NatoutTripService {
         ];
         if(campList.size() > 0) {
             retVal = campList[0].Trip_Price__c;
+            if(retVal == null) {
+                retVal = 0;
+            }
         }
         return retVal;
     }

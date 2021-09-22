@@ -17,12 +17,12 @@ export default class NatoutTripComments extends LightningElement {
             {label: 'Subcommittee officers and any collaborators they appoint', value: 'Officers'},
         ];
         this.staffOptions = [
-            {label: 'Program Director', value: 'Director'},
-            {label: 'Marketing Manager', value: 'Marketing'},
-            {label: 'Land Agency Associate', value: 'Land'},
+            {label: 'Brochure Editor', value: 'Brochure Editor'},
             {label: 'Finance Associate', value: 'Finance'},
+            {label: 'Land Agency Associate', value: 'Land'},
+            {label: 'Marketing Manager', value: 'Marketing'},
+            {label: 'Program Director', value: 'Director'},
             {label: 'Program Safety Team', value: 'Safety'},
-            {label: 'Brochure Editor', value: 'Brochure Editor'}
         ];
         this.staffValues = [];
         this.volunteerValues = [];
