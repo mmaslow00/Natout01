@@ -222,13 +222,21 @@
                 >
                     <lightning-accordion-section name="Approval Status" label="Approval Status">
                         <div if:true={userCanEdit}>
+                            <label class="slds-form-element__label" for="approvalStatus">
+                                Approval Status
+                                <c-tooltip 
+                                    text="When you are ready to submit your trip, change the Approval Status from Started to Submitted, then click the Save button at the top or bottom of the form. Chairs will also use this section to approve or return a trip to the submitter."
+                                >                                
+                                </c-tooltip>
+                            </label>
                             <lightning-combobox
-                                label="Approval Status"
                                 placeholder="Choose Status"
                                 value={chosenStatus}
                                 options={statusOptions}
                                 onchange={handleStatusChange}
                                 class="approvalStatus"
+                                data-id="approvalStatus"
+                                variant="label-hidden"
                             >
                             </lightning-combobox>
                         </div>

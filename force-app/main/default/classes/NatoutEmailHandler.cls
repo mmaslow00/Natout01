@@ -7,8 +7,8 @@ public without sharing class NatoutEmailHandler {
     public static final String staffEmailAddr = 'tony.rango@sierraclub.org';
     public static final String brochureEditorEmailAddr = 'outings.brochures@sierraclub.org';
     public static final String financeAssociateEmailAddr = 'tony.rango@sierraclub.org';
-    public static final String landAgencyAssociateEmailAddr = 'andrew.henry@sierraclub.org';
-    public static final String marketingManagerEmailAddr = 'jason.halal@sierraclub.org';
+    public static final String landAgencyAssociateEmailAddr = 'outings.digital@sierraclub.org';
+    public static final String marketingManagerEmailAddr = 'outings.publicity@sierraclub.org';
     public static final String safetyTeamEmailAddr = 'program.safety@sierraclub.org';
 
     public static List<TriggeredSendEmail__c> statusChanged(List<National_Outings_Trip__c> tripList, Map<Id, National_Outings_Trip__c> oldMap) {
