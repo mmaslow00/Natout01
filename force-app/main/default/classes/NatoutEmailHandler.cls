@@ -7,7 +7,7 @@ public without sharing class NatoutEmailHandler {
     public static final String staffEmailAddr = 'tony.rango@sierraclub.org';
     public static final String brochureEditorEmailAddr = 'outings.brochures@sierraclub.org';
     public static final String financeAssociateEmailAddr = 'tony.rango@sierraclub.org';
-    public static final String landAgencyAssociateEmailAddr = 'outings.digital@sierraclub.org';
+    public static final String landAgencyAssociateEmailAddr = 'outings.permits@sierraclub.org';
     public static final String marketingManagerEmailAddr = 'outings.publicity@sierraclub.org';
     public static final String safetyTeamEmailAddr = 'program.safety@sierraclub.org';
 
