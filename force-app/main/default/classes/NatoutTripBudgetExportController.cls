@@ -76,6 +76,9 @@ public with sharing class NatoutTripBudgetExportController {
                         row.itemName = 'Other - Concessionaire';
                     }
                 }
+                else if(item.Item_Category__c == 'Pre/post-trip lodging and meals') {
+                    row.itemName = 'Pre/post-trip lodging and meal';
+                }
                 row.amount = item.Amount__c;
                 row.numStaff = item.Number_Staff__c;
                 if(item.Budget_Category__c == 'Volunteer Travel') {

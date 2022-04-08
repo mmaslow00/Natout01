@@ -257,6 +257,88 @@ public without sharing class NatoutEmailHandler {
         }
         return rcpList;
     }
+    private static Map<Id, List<Recipient>> getSMPReviewers(List<National_Outings_Trip__c> tripList) {
+        Set<String> subcomms = new Set<String>();
+        for(National_Outings_Trip__c trip : tripList) {
+            subcomms.add(trip.Subcommittee__c);
+        }
+        List<Leadership__c> reviewerList = [
+            SELECT
+                Club_Entity__r.Name,
+                Contact__c, 
+                Contact__r.Email
+            FROM Leadership__c 
+            WHERE
+                Club_Entity__r.Entity_Category__c = 'Outings' AND Club_Entity__r.Type__c = 'National Outing Subcomm' 
+                AND Position_Status__c = 'Active' AND Leader_Position__r.Code__c = 'SMP'
+                AND Club_Entity__r.Name in :subcomms
+        ];
+
+        Map<String, List<Recipient>> smpMap = new Map<String, List<Recipient>>();
+        for(Leadership__c reviewer : reviewerList) {
+            List<Recipient> recipientList = smpMap.get(reviewer.Club_Entity__r.Name);
+            if(recipientList == null) {
+                recipientList = new List<Recipient>();
+            }
+            recipientList.add(new Recipient(reviewer.Contact__c, reviewer.Contact__r.Email));
+            smpMap.put(reviewer.Club_Entity__r.Name, recipientList);
+        }
+        Map<Id, List<Recipient>> reviewerMap = new Map<Id, List<Recipient>>();
+        for(National_Outings_Trip__c trip : tripList) {
+            List<Recipient> recipientList = smpMap.get(trip.Subcommittee__c);
+            if(recipientList != null) {
+                reviewerMap.put(trip.Id, recipientList);
+            }
+        }
+        return reviewerMap;
+    }
+    public static void notifySMPReviewers(String tripId) {
+        National_Outings_Trip__c trip = [
+            SELECT Id, Name, Title__c, Subcommittee__c FROM National_Outings_Trip__c WHERE Id = :tripId
+        ];
+        String subcomm = trip.Subcommittee__c;
+        String msg =
+            'A Safety Management Plan has been submitted for trip "' + trip.Title__c + '." ' +
+            '<br/><br/>' +
+            'Trip ' + trip.Title__c + ' can be found at https://campfire.sierraclub.org/NatoutTripDetail?id=' + trip.Id
+            ;
+        String subject = 'A Safety Management Plan has been submitted for trip ' + trip.Title__c;
+        List<TriggeredSendEmail__c> sendList = new List<TriggeredSendEmail__c>();
+
+        List<Leadership__c> reviewerList = [
+            SELECT
+                Contact__c, 
+                Contact__r.Email
+            FROM Leadership__c 
+            WHERE
+                Club_Entity__r.Entity_Category__c = 'Outings' AND Club_Entity__r.Type__c = 'National Outing Subcomm' 
+                AND Position_Status__c = 'Active' AND Leader_Position__r.Code__c = 'SMP'
+                AND Club_Entity__r.Name = :subcomm
+        ];
+        if(reviewerList.size() == 0) {
+            reviewerList = [
+                SELECT
+                    Contact__c, 
+                    Contact__r.Email
+                FROM Leadership__c 
+                WHERE
+                    Club_Entity__r.Entity_Category__c = 'Outings' AND Club_Entity__r.Type__c = 'National Outing Subcomm' 
+                    AND Position_Status__c = 'Active' AND Leader_Position__r.Name IN ('Chair','Sub-comm Co-Chair','Vice Chair','Trip Submis. Collaborator')
+                    AND Club_Entity__r.Name = :subcomm
+            ];
+        }
+        if(reviewerList.size() > 0) {
+            List<Recipient> rcpList = new List<Recipient>();
+            for(Leadership__c ldr : reviewerList) {
+                rcpList.add(new Recipient(ldr.Contact__c, ldr.Contact__r.Email));
+            }
+            for(Recipient rcp : rcpList) {
+                sendList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msg));
+            }
+        }
+        sendList.add(createTriggeredSend(null, safetyTeamEmailAddr, subject, msg));
+        insert sendList;
+    }
     private static String budgetApprovedToCreatorsText(String tripId, String tripTitle, String approverName) {
         String msg = 
             'Trip "' +
@@ -393,6 +475,7 @@ public without sharing class NatoutEmailHandler {
         Map<Id, National_Outings_Trip__c> tripMap = new Map<Id, National_Outings_Trip__c>(tripList);
         Map<Id, List<Recipient>> creatorMap = getCreators(tripList);
         Map<Id, List<Recipient>> approverMap = getApprovers(tripList);
+        Map<Id, List<Recipient>> reviewerMap = getSMPReviewers(tripList);
 
         List<TriggeredSendEmail__c> sendList = new List<TriggeredSendEmail__c>();
         List<National_Outings_Trip_Comments_Recip__c> commentsRecipList = new List<National_Outings_Trip_Comments_Recip__c>();
@@ -409,6 +492,7 @@ public without sharing class NatoutEmailHandler {
                 Notify_Land_Agency__c,
                 Notify_Marketing__c,
                 Notify_Safety__c,
+                Notify_SMP_Reviewer__c,
                 CreatedBy.Name
             FROM National_Outings_Trip_Comments__c
             WHERE Id in :commentsIds
@@ -505,6 +589,24 @@ public without sharing class NatoutEmailHandler {
                         National_Outings_Trip_Comments__c = comments.Id
                     )
                 );
+            }
+            if(comments.Notify_SMP_Reviewer__c) {
+                List<Recipient> recipientList = reviewerMap.get(comments.National_Outings_Trip__c);
+                if(recipientList == null && comments.Notify_Approvers__c == false) {
+                    recipientList = approverMap.get(comments.National_Outings_Trip__c);
+                }
+                if(recipientList != null) {
+                    for(Recipient rcp : recipientList) {
+                        sendList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, commentsText));
+                        commentsRecipList.add(
+                            new National_Outings_Trip_Comments_Recip__c(
+                                Contact__c = rcp.contactId,
+                                Email__c = rcp.emailAddr,
+                                National_Outings_Trip_Comments__c = comments.Id
+                            )
+                        );
+                    }
+                }
             }
         }
         insert sendList;

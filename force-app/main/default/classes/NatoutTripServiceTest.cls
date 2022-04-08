@@ -89,4 +89,21 @@ public with sharing class NatoutTripServiceTest {
         Id tripId = trip.Id;
         NatoutTripService.BudgetApproval appr = NatoutTripService.returnBudget(tripId);
     }
+
+    static testMethod void testStaffApprovals(){
+        National_Outings_Trip__c trip = new National_Outings_Trip__c(
+            Name = 'Test Trip',
+            Subcommittee__c = 'Knapsack',
+            Start_Date__c = Date.today(),
+            End_Date__c = Date.today() + 2,
+            Status__c = 'Started'
+        );
+        insert trip;
+        NatoutTripService.updateStaffApprovals(trip.Id, true, true, true, true);
+        NatoutTripService.StaffApprovals appr = NatoutTripService.getStaffApprovals(trip.Id);
+        System.assertNotEquals(null, appr.budgetDate);
+        System.assertNotEquals(null, appr.marketingDate);
+        System.assertNotEquals(null, appr.permitsDate);
+        System.assertNotEquals(null, appr.vendorsDate);
+    }
 }

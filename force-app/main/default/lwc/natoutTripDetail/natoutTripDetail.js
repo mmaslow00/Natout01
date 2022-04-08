@@ -862,6 +862,17 @@ export default class NatoutTripDetail extends LightningElement {
         }
         return false;
     }
+    get tripId() {
+        if(this.tripRecord) {
+            if(this.tripRecord.Trip_ID__c) {
+                return this.tripRecord.Trip_ID__c;
+            }
+        }
+        return "";
+    }
+    get hasTripId() {
+        return this.tripId.length > 0;
+    }
     submitBrochure() {
         let comp = this.template.querySelector('.brochure-files');
         let brochureFileCount = comp.getRowCount();

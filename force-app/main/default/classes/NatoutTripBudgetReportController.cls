@@ -311,7 +311,7 @@ public with sharing class NatoutTripBudgetReportController {
             return null;
         }
         Decimal totalCost =
-            getVolTravel().getGrandTotalAmount() + getMeals().getTotalPart80Amount() + 
+            getVolTravel().getGrandTotalAmount() + getMeals().getTotalPart80Amount() + getMeals().getStaffAmount() +
             getTransport().getPart80GrandTotal() + getOtherList().getTotalAmount() + 
             getStandardValues().getTotalAmount() + getConcessionaires().getPart80GrandTotal();
 

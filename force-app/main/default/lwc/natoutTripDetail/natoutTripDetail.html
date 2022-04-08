@@ -73,8 +73,15 @@
                     disabled={userIsReadOnly}
                     >
                 </lightning-input-field>
-
+                <div if:true={hasTripId} style="margin-left: 1rem;">
+                    Trip# {tripId}
+                </div>
                 <div style="display: none;">
+                    <lightning-input-field 
+                        field-name="Trip_ID__c"
+                        data-field="Trip_ID__c"
+                    >
+                    </lightning-input-field>
                     <lightning-input-field
                         field-name="Post_Trip_Report_Itinerary__c"
                         data-field="Post_Trip_Report_Itinerary__c"
@@ -588,7 +595,8 @@
                                         </a>
                                 </li>
                                 <li>Fill it out</li>
-                                <li>Upload your completed template and photos below</li>
+                                <li>Upload your completed template and photos below (green button)</li>
+                                <li>Submit it to brochure editor (check box + blue button)</li>
                             </ol>
                             </div>
                             <div class="brochure-section2">
@@ -852,6 +860,13 @@
                         </p>
                         <p>
                             3. Upload your completed form below
+                        </p>
+                        <p class="safety-mgmt"> 
+                            <strong>
+                            Please note: This can be done at the same time as your trip submission or later as long as it’s in at least 60 days before your trip starts. 
+                            If you're waiting for details such as satellite phone numbers or emergency contact information, submit your SMP, 
+                            then return later and replace it with a new version containing the additional information.
+                            </strong>
                         </p>
                         <p class="safety-mgmt">
                             If you have any questions about this form, please contact Program Safety using the Comments section below.
@@ -1332,7 +1347,14 @@
                                 <lightning-accordion-section name="budget-report" label="Budget Report">
                                     <div>
                                         <p class="infop">
-                                            The trip price is an estimate based upon the values you entered and a standard overhead allocation. Your final price will be determined once processed by the office. See standard overhead allocation amounts here.
+                                            The trip price is an estimate based upon the values you entered and a standard overhead allocation. 
+                                            Your final price will be determined once processed by the office. See standard overhead allocation amounts 
+                                            <a href="https://community.sierraclub.org/page/standard-overhead-allocation" target="_blank"> here</a>.
+                                        </p>
+                                        <p class="infop">
+                                            Note: International trips are assigned a standard allocation of $6,800 in the trip budget report, however, 
+                                            new international trips will be priced using a standard allocation of $5,000
+                                            <strong> which is not reflected in the report</strong>.
                                         </p>
                                     </div>
                                     <iframe src={budgetReportUrl} data-id="budgetReportIframe"  width="100%" height="800px">
@@ -1494,9 +1516,10 @@
 
                     <lightning-accordion-section name="SatPhone" label="Satellite Phone">
                         <label class="slds-form-element__label" for="satPhoneNeeded">
-                            Satellite Phone Needed?
-                            <c-tooltip text="Is a Satellite phone needed?">                                
-                            </c-tooltip>
+                            Do you need a satellite phone? If yes, please check the box below. 
+                            Note that the address fields in the "Ship to" section below will automatically display the trip leader's address 
+                            regardless of whether this box is checked. 
+                            If you would like it shipped to a different address, you may enter it below.
                         </label>
                         <lightning-input-field
                             field-name="Sat_Phone_Needed__c"
@@ -1626,6 +1649,13 @@
                             can-edit=true
                         >
                         </c-natout-trip-comments>
+                    </lightning-accordion-section>
+
+                    <lightning-accordion-section if:true={userIsAdmin} name="Review" label="Production Review">
+                        <c-natout-trip-approvals
+                            record-id={recordId}
+                        >
+                        </c-natout-trip-approvals>
                     </lightning-accordion-section>
             
                 </lightning-accordion>

@@ -32,6 +32,9 @@ public without sharing class NatoutTripFilesService {
         base64Data = EncodingUtil.urlDecode(base64Data, 'UTF-8');
         if ( String.isBlank(fileId) ) {
             fileId = saveFiles(parentId, fileName, category, base64Data );
+            if(category == 'Safety Management') {
+                NatoutEmailHandler.notifySMPReviewers(parentId);
+            }
         } else {
             appendToFile(fileId, base64Data);
         }

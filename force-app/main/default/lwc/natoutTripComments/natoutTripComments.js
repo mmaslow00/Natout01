@@ -15,6 +15,7 @@ export default class NatoutTripComments extends LightningElement {
         this.volunteerOptions = [
             {label: 'Trip Leader and any collaborators they appoint', value: 'Leaders'},
             {label: 'Subcommittee officers and any collaborators they appoint', value: 'Officers'},
+            {label: 'Safety Management Plan Reviewers', value: 'SMP Reviewers'}
         ];
         this.staffOptions = [
             {label: 'Brochure Editor', value: 'Brochure Editor'},
@@ -104,6 +105,7 @@ export default class NatoutTripComments extends LightningElement {
                     Comments__c: this.tripComment,
                     Notify_Approvers__c: (this.volunteerValues.indexOf('Officers') >= 0),
                     Notify_Creators__c: (this.volunteerValues.indexOf('Leaders') >= 0),
+                    Notify_SMP_Reviewer__c: (this.volunteerValues.indexOf('SMP Reviewers') >= 0),
                     Notify_Staff__c: (this.staffValues.indexOf('Director') >= 0),
                     Notify_Brochure_Editor__c: (this.staffValues.indexOf('Brochure Editor') >= 0),
                     Notify_Finance__c: (this.staffValues.indexOf('Finance') >= 0),

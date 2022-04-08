@@ -17,6 +17,14 @@ public without sharing class NatoutTripCopy {
         toTrip.Budget_Approved_By__c = null;
         toTrip.Budget_Approved_Date__c = null;
         toTrip.Brochure_Submitted_Date__c = null;
+        toTrip.Approve_Budget_Date__c = null;
+        toTrip.Approve_Budget_User__c = null;
+        toTrip.Approve_Marketing_Date__c = null;
+        toTrip.Approve_Marketing_User__c = null;
+        toTrip.Approve_Permits_Date__c = null;
+        toTrip.Approve_Permits_User__c = null;
+        toTrip.Approve_Vendors_Date__c = null;
+        toTrip.Approve_Vendors_User__c = null;
         if(
             toTrip.First_Time_Run__c == false &&
             toTrip.Prior_Trip__c != null &&

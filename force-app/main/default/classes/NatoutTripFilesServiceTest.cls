@@ -13,6 +13,9 @@ public with sharing class NatoutTripFilesServiceTest {
         NatoutTripFilesService.saveTheChunkFile(tripId, 'TestFileName', 'TestContent', 'pdf', fileId, 'Itinerary');
 
         String rslts = NatoutTripFilesService.getContentDetails(tripId, 'Itinerary');
+
+        NatoutTripFilesService.saveTheChunkFile(trip.Id, 'TestFileName', 'TestContent', 'pdf', null, 'Safety Management');
+
         NatoutTripFilesService.deleteContentDocument(tripId);
     }
 }

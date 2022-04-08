@@ -66,6 +66,51 @@ public with sharing class NatoutTripService {
         update trip;
         return new BudgetApproval(null, userId);
     }
+    @AuraEnabled 
+    public static StaffApprovals getStaffApprovals(String tripId) {
+        System.debug('retrieving trip');
+        National_Outings_Trip__c trip = [
+            SELECT 
+                Approve_Budget_Date__c,
+                Approve_Budget_User__r.Name,
+                Approve_Marketing_Date__c,
+                Approve_Marketing_User__r.Name,
+                Approve_Permits_Date__c,
+                Approve_Permits_User__r.Name,
+                Approve_Vendors_Date__c,
+                Approve_Vendors_User__r.Name
+            FROM National_Outings_Trip__c
+            WHERE Id = :tripId
+        ];
+        StaffApprovals approvals = new StaffApprovals(trip);
+        System.debug('approvals: ' + approvals);
+        return approvals;
+    }
+    @AuraEnabled 
+    public static StaffApprovals updateStaffApprovals(String tripId, Boolean budget, Boolean marketing, Boolean permits, Boolean vendors) {
+        if(budget || marketing || permits || vendors) {
+            National_Outings_Trip__c trip = new National_Outings_Trip__c(Id=tripId);
+            if(budget) {
+                trip.Approve_Budget_Date__c = System.now();
+                trip.Approve_Budget_User__c = System.UserInfo.getUserId();
+            }
+            if(marketing) {
+                trip.Approve_Marketing_Date__c = System.now();
+                trip.Approve_Marketing_User__c = System.UserInfo.getUserId();
+            }
+            if(permits) {
+                trip.Approve_Permits_Date__c = System.now();
+                trip.Approve_Permits_User__c = System.UserInfo.getUserId();
+            }
+            if(vendors) {
+                trip.Approve_Vendors_Date__c = System.now();
+                trip.Approve_Vendors_User__c = System.UserInfo.getUserId();
+            }
+            System.debug('Trip2Update: ' + trip);
+            update trip;
+        }
+        return getStaffApprovals(tripId);
+    }
     public Class ShipTo {
         @AuraEnabled
         public String name {get; set;}
@@ -91,5 +136,33 @@ public with sharing class NatoutTripService {
         public Datetime dateApproved {get; set;}
         @AuraEnabled
         public String approvedBy {get; set;}
+    }
+    public Class StaffApprovals {
+        StaffApprovals(National_Outings_Trip__c trip) {
+            this.budgetUser = trip.Approve_Budget_User__r.Name;
+            this.budgetDate = trip.Approve_Budget_Date__c;
+            this.marketingUser = trip.Approve_Marketing_User__r.Name;
+            this.marketingDate = trip.Approve_Marketing_Date__c;
+            this.permitsUser = trip.Approve_Permits_User__r.Name;
+            this.permitsDate = trip.Approve_Permits_Date__c;
+            this.vendorsUser = trip.Approve_Vendors_User__r.Name;
+            this.vendorsDate = trip.Approve_Vendors_Date__c;
+        }
+        @AuraEnabled
+        public Datetime budgetDate {get; set;}
+        @AuraEnabled
+        public String budgetUser {get; set;}
+        @AuraEnabled
+        public Datetime marketingDate {get; set;}
+        @AuraEnabled
+        public String marketingUser {get; set;}
+        @AuraEnabled
+        public Datetime permitsDate {get; set;}
+        @AuraEnabled
+        public String permitsUser {get; set;}
+        @AuraEnabled
+        public Datetime vendorsDate {get; set;}
+        @AuraEnabled
+        public String vendorsUser {get; set;}
     }
 }

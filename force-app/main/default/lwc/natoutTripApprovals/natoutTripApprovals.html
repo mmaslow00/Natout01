@@ -1,0 +1,95 @@
+<template>
+    <div class="bordered-div" if:true={budgetApproved}>
+        Budget approved by {budgetUser} &nbsp;
+        <lightning-formatted-date-time
+            value={budgetDate}
+            year="numeric"
+            month="numeric"
+            day="numeric"
+            hour="numeric"
+            minute="2-digit"
+            time-zone-name="short"
+        >
+        </lightning-formatted-date-time>                            
+    </div>
+    <div class="bordered-div" if:false={budgetApproved}>
+        <lightning-input 
+            type="checkbox"
+            data-id="budget"
+            label="Budget Approved?"
+        >
+        </lightning-input>
+    </div>
+    <div class="bordered-div" if:true={permitsApproved}>
+        Permits approved by {permitsUser} &nbsp;
+        <lightning-formatted-date-time
+            value={permitsDate}
+            year="numeric"
+            month="numeric"
+            day="numeric"
+            hour="numeric"
+            minute="2-digit"
+            time-zone-name="short"
+        >
+        </lightning-formatted-date-time>                            
+    </div>
+    <div class="bordered-div" if:false={permitsApproved}>
+        <lightning-input 
+            type="checkbox"
+            data-id="permits"
+            label="Permits Approved?"
+        >
+        </lightning-input>
+    </div>
+    <div class="bordered-div" if:true={marketingApproved}>
+        Trip Copy and Marketing approved by {marketingUser} &nbsp;
+        <lightning-formatted-date-time
+            value={marketingDate}
+            year="numeric"
+            month="numeric"
+            day="numeric"
+            hour="numeric"
+            minute="2-digit"
+            time-zone-name="short"
+        >
+        </lightning-formatted-date-time>                            
+    </div>
+    <div class="bordered-div" if:false={marketingApproved}>
+        <lightning-input 
+            type="checkbox"
+            data-id="marketing"
+            label="Trip Copy and Marketing Approved?"
+        >
+        </lightning-input>
+    </div>
+    <div class="bordered-div" if:true={vendorsApproved}>
+        Vendors approved by {vendorsUser} &nbsp;
+        <lightning-formatted-date-time
+            value={vendorsDate}
+            year="numeric"
+            month="numeric"
+            day="numeric"
+            hour="numeric"
+            minute="2-digit"
+            time-zone-name="short"
+        >
+        </lightning-formatted-date-time>                            
+    </div>
+    <div class="bordered-div" if:false={vendorsApproved}>
+        <lightning-input 
+            type="checkbox"
+            data-id="vendors"
+            label="Vendors Approved?"
+        >
+        </lightning-input>
+    </div>
+    <div if:false={allApproved}>
+        <lightning-button 
+            label="Update Approvals"
+            variant="brand"
+            onclick={updateApprovals}
+        >
+        </lightning-button>
+    </div>
+    <c-snackbar></c-snackbar>
+</template>
