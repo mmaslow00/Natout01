@@ -6,6 +6,7 @@ public with sharing class NatoutTripListController {
         String status;
         String tripType;
         String tripState;
+        String tripCountry;
         String searchTerm;
         if(String.isNotEmpty(searchCriteria.dtBegin)) {
             beginDate = Date.valueOf(searchCriteria.dtBegin);
@@ -28,6 +29,9 @@ public with sharing class NatoutTripListController {
         if(searchCriteria.userTrips) {
             whereClause = appendToWhere(whereClause, 'OwnerId = \'' + UserInfo.getUserId() + '\'');
         } else {
+            if(searchCriteria.rackTrips) {
+                whereClause = appendToWhere(whereClause, 'Rack_Trip__c = true');
+            }
             if(searchCriteria.subcomm != 'any') {
                 subcomm = searchCriteria.subcomm;
                 whereClause = appendToWhere(whereClause, 'Subcommittee__c = :subcomm');
@@ -43,6 +47,10 @@ public with sharing class NatoutTripListController {
             if(searchCriteria.state != 'any' && searchCriteria.state != 'All') {
                 tripState = searchCriteria.state;
                 whereClause = appendToWhere(whereClause, 'States_Provinces__c LIKE \'%' + tripState + '%\'');
+            }
+            if(searchCriteria.country != 'any') {
+                tripCountry = searchCriteria.country;
+                whereClause = appendToWhere(whereClause, 'International_Countries__c LIKE \'%' + tripCountry + '%\'');
             }
             if(String.isNotBlank(searchCriteria.nameMatch)) {
                 searchTerm = '%' + searchCriteria.nameMatch + '%';

@@ -76,10 +76,35 @@
                 <div if:true={hasTripId} style="margin-left: 1rem;">
                     Trip# {tripId}
                 </div>
+                <div if:true={userCanApprove}
+                    class="slds-form_horizontal slds-form slds-grid"
+                >
+                    <label class="slds-col slds-size_4-of-12 slds-form-element__label" for="rackTrip">
+                        Is this a Ready-made Trip?
+                        <c-tooltip
+                            text="By clicking this box, you're creating a standard trip template that leaders can copy, personalize, and submit instead of creating a new trip from scratch. Only subcommittee chairs and their collaborators have permission to create ready-made trips."
+                        >
+                        </c-tooltip>
+                   </label>
+                    <lightning-input-field
+                        class="slds-col slds-size_1-of-12"
+                        field-name="Rack_Trip__c"
+                        onchange={handleFieldChange}
+                        data-field="Rack_Trip__c"
+                        data-id="rackTrip"
+                        variant="label-hidden"
+                        >
+                    </lightning-input-field>
+                </div>
                 <div style="display: none;">
                     <lightning-input-field 
                         field-name="Trip_ID__c"
                         data-field="Trip_ID__c"
+                    >
+                    </lightning-input-field>
+                    <lightning-input-field 
+                        field-name="Rack_Trip__c"
+                        data-field="Rack_Trip__c"
                     >
                     </lightning-input-field>
                     <lightning-input-field
@@ -574,88 +599,6 @@
                         </lightning-input-field>
                     </lightning-accordion-section>
 
-                    <lightning-accordion-section name="Brochure" label="Trip Brochure and Photos">
-                        <div style="display:none">
-                            <lightning-input-field
-                                field-name="Brochure_Submitted_Date__c"
-                                data-field="Brochure_Submitted_Date__c"
-                            >
-                            </lightning-input-field>
-                        </div>
-                        <div>
-                            <p>
-                                Please submit the text and photos that will appear in your online brochure. 
-                            </p>
-                            <div class="brochure-section1">
-                            <ol style="list-style: decimal;">
-                                <li>
-                                    Download the
-                                        <a href="https://docs.google.com/document/d/1IsENDXE_j9GviPG4YEcVdRMQeg0ryYoXZXOxEzaGrvc" target="_blank">
-                                        &nbsp;brochure template
-                                        </a>
-                                </li>
-                                <li>Fill it out</li>
-                                <li>Upload your completed template and photos below (green button)</li>
-                                <li>Submit it to brochure editor (check box + blue button)</li>
-                            </ol>
-                            </div>
-                            <div class="brochure-section2">
-                                Once the brochure editor receives your submission, they will review it and, if necessary, follow up to ask questions or review significant edits.
-                                Check out our&nbsp; 
-                                <a href="https://community.sierraclub.org/page/brochure-submission" target="_blank">
-                                    brochure submission guides 
-                                </a> 
-                                &nbsp;for writing tips, examples, and the brochure archive. Our goal is to recycle content, when possible, to reduce the burden on leaders and staff and ensure consistent and high-quality content that sells. 
-                            </div>
-                            <div class="brochure-section2 bold-text">
-                                Please note: the brochure deadline is later than the trip submission deadline. The brochure may be submitted with the trip or later, as long as it’s submitted by the 
-                                <a href="https://community.sierraclub.org/file/2824/download" target="_blank">&nbsp;brochure submission deadline</a>.
-                            </div>
-                        </div>
-
-                        <div class="brochure-section2">
-                            Please add your online brochure and photos below (including leader bio photos, if applicable). 
-                            Format your brochure as a Word doc and your photos as JPGs. 
-                        </div>
-
-                        <div class="files-and-links">
-                        <c-natout-trip-files
-                            record-id={recordId}
-                            file-category="Brochure"
-                            user-is-admin={userIsAdmin}
-                            class="brochure-files"
-                        >
-                        </c-natout-trip-files>
-                        </div>
-
-                        <div class="brochure-submission">
-                            <strong>
-                                <lightning-input 
-                                    type="checkbox"
-                                    class="approve-brochure-checkbox"
-                                    label="I confirm that any new or substantial changes have been reviewed by the subcommittee chair or brochure reviewer. (Required)"
-                                ></lightning-input>
-                            </strong>
-                            <div class="submit-button">
-                                <lightning-button label="Submit Brochure" variant="brand" icon-name="action:email" onclick={submitBrochure}>
-                                </lightning-button>
-                                <div if:true={brochureSubmitted}>
-                                    Brochure Submitted:&nbsp;&nbsp;
-                                    <lightning-formatted-date-time
-                                        value={tripRecord.Brochure_Submitted_Date__c}
-                                        year="numeric"
-                                        month="numeric"
-                                        day="numeric"
-                                        hour="numeric"
-                                        minute="2-digit"
-                                        time-zone-name="short"
-                                    >
-                                    </lightning-formatted-date-time>
-                                </div>
-                            </div>
-                        </div>
-                    </lightning-accordion-section>
-
                     <lightning-accordion-section name="Location" label="Location Details, Safety and Risk">
                         <template if:true={tripIsInternational}>
                             <lightning-input-field
@@ -863,13 +806,14 @@
                         </p>
                         <p class="safety-mgmt"> 
                             <strong>
-                            Please note: This can be done at the same time as your trip submission or later as long as it’s in at least 60 days before your trip starts. 
+                            Please note: This can be done at the same time as your trip submission or later as long as it's in at least 60 days before your trip starts. 
                             If you're waiting for details such as satellite phone numbers or emergency contact information, submit your SMP, 
                             then return later and replace it with a new version containing the additional information.
                             </strong>
                         </p>
                         <p class="safety-mgmt">
-                            If you have any questions about this form, please contact Program Safety using the Comments section below.
+                            Once your SMP has been submitted, it will be reviewed by your subcommittee's SMP Reviewer. 
+                            If you have questions about this, you may contact them using the Comments section below.
                         </p>
                         <div class="files-and-links">
                             <c-natout-trip-files
@@ -1620,6 +1564,88 @@
                             variant="label-hidden"
                         >
                         </lightning-input-field>
+                    </lightning-accordion-section>
+
+                    <lightning-accordion-section name="Brochure" label="Trip Brochure and Photos">
+                        <div style="display:none">
+                            <lightning-input-field
+                                field-name="Brochure_Submitted_Date__c"
+                                data-field="Brochure_Submitted_Date__c"
+                            >
+                            </lightning-input-field>
+                        </div>
+                        <div>
+                            <p>
+                                Please submit the text and photos that will appear in your online brochure. 
+                            </p>
+                            <div class="brochure-section1">
+                            <ol style="list-style: decimal;">
+                                <li>
+                                    Download the
+                                        <a href="https://docs.google.com/document/d/1IsENDXE_j9GviPG4YEcVdRMQeg0ryYoXZXOxEzaGrvc" target="_blank">
+                                        &nbsp;brochure template
+                                        </a>
+                                </li>
+                                <li>Fill it out</li>
+                                <li>Upload your completed template and photos below (green button)</li>
+                                <li>Submit it to brochure editor (check box + blue button)</li>
+                            </ol>
+                            </div>
+                            <div class="brochure-section2">
+                                Once the brochure editor receives your submission, they will review it and, if necessary, follow up to ask questions or review significant edits.
+                                Check out our&nbsp; 
+                                <a href="https://community.sierraclub.org/page/brochure-submission" target="_blank">
+                                    brochure submission guides 
+                                </a> 
+                                &nbsp;for writing tips, examples, and the brochure archive. Our goal is to recycle content, when possible, to reduce the burden on leaders and staff and ensure consistent and high-quality content that sells. 
+                            </div>
+                            <div class="brochure-section2 bold-text">
+                                Please note: the brochure deadline is later than the trip submission deadline. The brochure may be submitted with the trip or later, as long as it’s submitted by the 
+                                <a href="https://community.sierraclub.org/file/2824/download" target="_blank">&nbsp;brochure submission deadline</a>.
+                            </div>
+                        </div>
+
+                        <div class="brochure-section2">
+                            Please add your online brochure and photos below (including leader bio photos, if applicable). 
+                            Format your brochure as a Word doc and your photos as JPGs. 
+                        </div>
+
+                        <div class="files-and-links">
+                        <c-natout-trip-files
+                            record-id={recordId}
+                            file-category="Brochure"
+                            user-is-admin={userIsAdmin}
+                            class="brochure-files"
+                        >
+                        </c-natout-trip-files>
+                        </div>
+
+                        <div class="brochure-submission">
+                            <strong>
+                                <lightning-input 
+                                    type="checkbox"
+                                    class="approve-brochure-checkbox"
+                                    label="I confirm that any new or substantial changes have been reviewed by the subcommittee chair or brochure reviewer. (Required)"
+                                ></lightning-input>
+                            </strong>
+                            <div class="submit-button">
+                                <lightning-button label="Submit Brochure" variant="brand" icon-name="action:email" onclick={submitBrochure}>
+                                </lightning-button>
+                                <div if:true={brochureSubmitted}>
+                                    Brochure Submitted:&nbsp;&nbsp;
+                                    <lightning-formatted-date-time
+                                        value={tripRecord.Brochure_Submitted_Date__c}
+                                        year="numeric"
+                                        month="numeric"
+                                        day="numeric"
+                                        hour="numeric"
+                                        minute="2-digit"
+                                        time-zone-name="short"
+                                    >
+                                    </lightning-formatted-date-time>
+                                </div>
+                            </div>
+                        </div>
                     </lightning-accordion-section>
 
                     <lightning-accordion-section name="Collaborators" label="Collaborators">

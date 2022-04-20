@@ -8,7 +8,9 @@ public with sharing class NatoutTripListControllerTest {
             End_Date__c = Date.today() + 2,
             Status__c = 'Started',
             Trip_Type__c = 'Backpack',
-            States_Provinces__c = 'CA'
+            States_Provinces__c = 'CA',
+            Rack_Trip__c = true,
+            International_Countries__c = 'China'
         );
         insert trip;
         NatoutTripListSearchCriteria criteria = new NatoutTripListSearchCriteria();
@@ -24,6 +26,8 @@ public with sharing class NatoutTripListControllerTest {
         criteria.type = trip.Trip_Type__c;
         criteria.state = trip.States_Provinces__c;
         criteria.nameMatch = trip.Name;
+        criteria.rackTrips = true;
+        criteria.country = 'China';
 
         tripList = NatoutTripListController.getTripList(criteria);
         System.assertEquals(1, tripList.size());

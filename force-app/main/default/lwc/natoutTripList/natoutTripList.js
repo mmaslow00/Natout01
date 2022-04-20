@@ -24,10 +24,11 @@ export default class NatoutTripList extends LightningElement {
     @track dtBegin = null;
     @track dtEnd = null;
     @track copying = false;
-    @track selectTypeAny = false;
+    @track selectType = 'myTrips';
     selectedStatus = 'any';
     selectedTripType = 'any';
     selectedState = 'any';
+    selectedCountry = 'any';
     selectedNameSearch = '';
     @track sortedBy;
     @track sortDirection = 'asc';
@@ -70,6 +71,7 @@ export default class NatoutTripList extends LightningElement {
     get selectTypeOptions () {
         let radioOptions = [];
         radioOptions.push({ label: 'My Trips', value: 'myTrips'});
+        radioOptions.push({label: 'Ready-made Trips', value: 'rackTrips'});
         radioOptions.push({label: 'All Trips', value: 'all'});
         return radioOptions;
     }
@@ -115,15 +117,32 @@ export default class NatoutTripList extends LightningElement {
         }
         return null;
     }
+    get countryOptions() {
+        if(this.picklistOptions != null) {
+            if(this.picklistOptions.data) {
+                let options = [{label: 'Any', value: 'any'}];
+                for(let i=0; i < this.picklistOptions.data.countryList.length; i++) {
+                    let label = this.picklistOptions.data.countryList[i];
+                    let labelValue = {label: label, value: label};
+                    options.push(labelValue);
+                }
+                return options;
+            }
+        }
+        return null;
+    }
+
     retrieveList() {
         let parameterObject = {
-            userTrips: ! this.selectTypeAny,
+            userTrips: this.selectType === 'myTrips',
+            rackTrips: this.selectType === 'rackTrips',
             dtBegin: this.dtBegin,
             dtEnd: this.dtEnd,
             subcomm: this.selectedSubcomm,
             status: this.selectedStatus,
             type: this.selectedTripType,
             state: this.selectedState,
+            country: this.selectedCountry,
             nameMatch: this.selectedNameSearch
         };
 
@@ -191,7 +210,7 @@ export default class NatoutTripList extends LightningElement {
     }      
     
     handleSelectTypeChange(event) {
-        this.selectTypeAny= event.detail.value === 'myTrips' ? false : true; 
+        this.selectType = event.detail.value;
     }
     handleTripTypeChange(e) {
         this.selectedTripType = e.target.value;
@@ -211,11 +230,17 @@ export default class NatoutTripList extends LightningElement {
     handleStateChange(e) {
         this.selectedState = e.target.value;
     }
+    handleCountryChange(e) {
+        this.selectedCountry = e.target.value;
+    }
     handleNameSearchChange(e) {
         this.selectedNameSearch = e.target.value;
     }
     get statusOptions() {
         return statusOptions;
+    }
+    get showAddlCriteria() {
+        return this.selectType !== 'myTrips';
     }
     getRowActions(row, doneCallback) {
         let actions = [

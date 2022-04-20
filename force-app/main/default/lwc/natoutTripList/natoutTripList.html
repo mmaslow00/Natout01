@@ -30,7 +30,7 @@
                 </lightning-input>
             </lightning-layout-item>
         </lightning-layout>
-        <template if:true={selectTypeAny}>
+        <template if:true={showAddlCriteria}>
             <lightning-layout horizontal-align="center">
                 <lightning-layout-item padding="around-small">
                     <lightning-combobox
@@ -67,6 +67,15 @@
                         value={selectedState}
                         options={statesOptions}
                         onchange={handleStateChange}
+                    >
+                    </lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <lightning-combobox
+                        label="Country (international trips only)"
+                        value={selectedCountry}
+                        options={countryOptions}
+                        onchange={handleCountryChange}
                     >
                     </lightning-combobox>
                 </lightning-layout-item>
