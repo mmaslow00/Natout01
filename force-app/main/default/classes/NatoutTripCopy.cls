@@ -26,6 +26,7 @@ public without sharing class NatoutTripCopy {
         toTrip.Approve_Vendors_Date__c = null;
         toTrip.Approve_Vendors_User__c = null;
         toTrip.Rack_Trip__c = false;
+        toTrip.Trip_ID__c = null;
         if(
             toTrip.First_Time_Run__c == false &&
             toTrip.Prior_Trip__c != null &&

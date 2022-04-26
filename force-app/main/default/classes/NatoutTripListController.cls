@@ -8,6 +8,7 @@ public with sharing class NatoutTripListController {
         String tripState;
         String tripCountry;
         String searchTerm;
+        String tripNo;
         if(String.isNotEmpty(searchCriteria.dtBegin)) {
             beginDate = Date.valueOf(searchCriteria.dtBegin);
         }
@@ -56,8 +57,11 @@ public with sharing class NatoutTripListController {
                 searchTerm = '%' + searchCriteria.nameMatch + '%';
                 whereClause = appendToWhere(whereClause, 'Name like :searchTerm');
             }
+            if(String.isNotBlank(searchCriteria.tripNo)) {
+                tripNo = searchCriteria.tripNo;
+                whereClause = appendToWhere(whereClause, 'Trip_ID__c LIKE \'' + tripNo + '%\'');
+            }
         }
-        System.debug('whereClause: ' + whereClause);
         if(whereClause.length() > 0) {
             sql = sql + 'WHERE ' + whereClause;
         }

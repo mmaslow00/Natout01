@@ -106,4 +106,18 @@ public with sharing class NatoutTripServiceTest {
         System.assertNotEquals(null, appr.permitsDate);
         System.assertNotEquals(null, appr.vendorsDate);
     }
+    static testMethod void testStatusHistory() {
+        National_Outings_Trip__c trip = new National_Outings_Trip__c(
+            Name = 'Test Trip',
+            Subcommittee__c = 'Knapsack',
+            Start_Date__c = Date.today(),
+            End_Date__c = Date.today() + 2,
+            Status__c = 'Started'
+        );
+        insert trip;
+        trip.Status__c = 'Approved by Chair';
+        update trip;
+        List<National_Outings_Trip_Status_History__c> hist = NatoutTripService.getStatusHistory(trip.Id);
+        System.assertEquals(1, hist.size());
+    }
 }

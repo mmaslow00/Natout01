@@ -30,6 +30,7 @@ export default class NatoutTripList extends LightningElement {
     selectedState = 'any';
     selectedCountry = 'any';
     selectedNameSearch = '';
+    selectedTripNo = '';
     @track sortedBy;
     @track sortDirection = 'asc';
 
@@ -143,7 +144,8 @@ export default class NatoutTripList extends LightningElement {
             type: this.selectedTripType,
             state: this.selectedState,
             country: this.selectedCountry,
-            nameMatch: this.selectedNameSearch
+            nameMatch: this.selectedNameSearch,
+            tripNo: this.selectedTripNo
         };
 
         getTripList({ searchCriteria: parameterObject })
@@ -235,6 +237,9 @@ export default class NatoutTripList extends LightningElement {
     }
     handleNameSearchChange(e) {
         this.selectedNameSearch = e.target.value;
+    }
+    handleTripNoChange(e) {
+        this.selectedTripNo = e.target.value;
     }
     get statusOptions() {
         return statusOptions;

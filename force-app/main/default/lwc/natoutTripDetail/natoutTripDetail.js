@@ -14,6 +14,7 @@ import returnBudget from '@salesforce/apex/NatoutTripService.returnBudget';
 import priceLookup from '@salesforce/apex/NatoutTripService.getTripPrice';
 import getSatPhoneAddress from '@salesforce/apex/NatoutTripService.getSatPhoneAddr';
 import submitBrochure from '@salesforce/apex/NatoutEmailHandler.submitBrochure';
+import getStatusHistory from '@salesforce/apex/NatoutTripService.getStatusHistory';
 export default class NatoutTripDetail extends LightningElement {
     @api recordId;
     @track tripRecord = {};
@@ -61,6 +62,9 @@ export default class NatoutTripDetail extends LightningElement {
 
     @wire(getUserAccess, {tripId: '$recordId'})
     userAccess;
+
+    @wire(getStatusHistory, {tripId: '$recordId'})
+    statusHistory;
 
     constructor() {
         super();
@@ -272,6 +276,7 @@ export default class NatoutTripDetail extends LightningElement {
                 this.error = undefined;
                 this.showSnackbar('success', 'Trip Updated', 'Trip was successfully updated');
                 window.natoutTripDetailChangeMade = false;
+                refreshApex(this.statusHistory);
                 if(this.loadedStatus === 'Started' && this.tripRecord.Status__c === 'Submitted') {
                     return refreshApex(this.userAccess);
                 }

@@ -10,7 +10,8 @@ public with sharing class NatoutTripListControllerTest {
             Trip_Type__c = 'Backpack',
             States_Provinces__c = 'CA',
             Rack_Trip__c = true,
-            International_Countries__c = 'China'
+            International_Countries__c = 'China',
+            Trip_ID__c = '20112A'
         );
         insert trip;
         NatoutTripListSearchCriteria criteria = new NatoutTripListSearchCriteria();
@@ -28,6 +29,7 @@ public with sharing class NatoutTripListControllerTest {
         criteria.nameMatch = trip.Name;
         criteria.rackTrips = true;
         criteria.country = 'China';
+        criteria.tripNo = '20112A';
 
         tripList = NatoutTripListController.getTripList(criteria);
         System.assertEquals(1, tripList.size());

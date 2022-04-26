@@ -19,4 +19,6 @@ public with sharing class NatoutTripListSearchCriteria {
     public String country {get; set;}
     @AuraEnabled
     public String nameMatch {get; set;}
+    @AuraEnabled
+    public String tripNo {get; set;}
 }

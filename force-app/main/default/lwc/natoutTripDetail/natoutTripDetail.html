@@ -285,6 +285,7 @@
                             </lightning-button>
                         </div>
 
+                        <!--
                         <div if:true={wasPreviouslySubmitted}>
                             Submitted:&nbsp;&nbsp;
                             <lightning-formatted-date-time value={tripRecord.Date_Submitted__c} 
@@ -330,6 +331,33 @@
                                 time-zone-name="short"
                             >
                             </lightning-formatted-date-time>                            
+                        </div>
+                        -->
+
+                        <div>
+                            <table>
+                                <template for:each={statusHistory.data} for:item="hist">
+                                    <tr key={hist.Id}>
+                                        <td>
+                                            {hist.Status__c}
+                                        </td>
+                                        <td>
+                                            <lightning-formatted-date-time value={hist.CreatedDate} 
+                                                year="numeric"
+                                                month="numeric"
+                                                day="numeric"
+                                                hour="numeric"
+                                                minute="2-digit"
+                                                time-zone-name="short"
+                                            >
+                                            </lightning-formatted-date-time>                            
+                                        </td>
+                                        <td>
+                                            by {hist.User__r.Name}
+                                        </td>
+                                    </tr>
+                                </template>
+                            </table>
                         </div>
                 
                     </lightning-accordion-section>

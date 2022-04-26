@@ -106,10 +106,19 @@ public with sharing class NatoutTripService {
                 trip.Approve_Vendors_Date__c = System.now();
                 trip.Approve_Vendors_User__c = System.UserInfo.getUserId();
             }
-            System.debug('Trip2Update: ' + trip);
             update trip;
         }
         return getStaffApprovals(tripId);
+    }
+    @AuraEnabled(cacheable=true)
+    public static List<National_Outings_Trip_Status_History__c> getStatusHistory(String tripId) {
+        List<National_Outings_Trip_Status_History__c> histList = [
+            SELECT Id, CreatedDate, Status__c, User__r.Name 
+            FROM National_Outings_Trip_Status_History__c
+            WHERE National_Outings_Trip__c = :tripId
+            ORDER BY CreatedDate DESC
+        ];
+        return histList;
     }
     public Class ShipTo {
         @AuraEnabled

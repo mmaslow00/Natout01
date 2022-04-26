@@ -81,11 +81,19 @@
                 </lightning-layout-item>
             </lightning-layout>
             <lightning-layout horizontal-align="center">
-                <lightning-layout-item>
+                <lightning-layout-item padding="around-small">
                     <lightning-input
                         label="Name Contains"
                         value={selectedNameSearch}
                         onchange={handleNameSearchChange}
+                    >
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <lightning-input
+                        label="Trip #"
+                        value={selectedTripNo}
+                        onchange={handleTripNoChange}
                     >
                     </lightning-input>
                 </lightning-layout-item>

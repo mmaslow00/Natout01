@@ -50,6 +50,7 @@ public with sharing class NatoutTripTriggerHandler {
         List<TriggeredSendEmail__c> emailList = new List<TriggeredSendEmail__c>();
         if( ! changedTrips.isEmpty() ) {
             emailList.addAll(NatoutEmailHandler.statusChanged(changedTrips, oldMap));
+            saveStatusHistory(tripList);
         }
 
         changedTrips.clear();
@@ -117,6 +118,18 @@ public with sharing class NatoutTripTriggerHandler {
             }
             delete docList;
         }
+    }
+    private static void saveStatusHistory(List<National_Outings_Trip__c> tripList) {
+        List<National_Outings_Trip_Status_History__c> histList = new List<National_Outings_Trip_Status_History__c>();
+        for(National_Outings_Trip__c trip : tripList) {
+            histList.add(new National_Outings_Trip_Status_History__c(
+                National_Outings_Trip__c = trip.Id,
+                Status__c = trip.Status__c,
+                User__c = System.UserInfo.getUserId()
+                )
+            );
+        }
+        insert histList;
     }
     public static void setSatPhoneAddress(List<National_Outings_Trip_Staff__c> staffList, Map<Id,National_Outings_Trip_Staff__c> oldMap) {        
         Set<Id> tripIds = new Set<Id>();

@@ -28,23 +28,23 @@ public without sharing class NatoutEmailHandler {
                     String subject;
                     if(trip.Subcommittee__c == 'International' && trip.Budget_Approved_Date__c == null) {
                         recipientList = budgetApproversList;
-                        msgText = submitForBudgetApproval(trip.Id, trip.Title__c);
-                        subject = 'Trip submission for ' + trip.Title__c + ' ready for budget review';
+                        msgText = submitForBudgetApproval(trip.Id, trip.Subject_Title__c);
+                        subject = 'Trip submission for ' + trip.Subject_Title__c + ' ready for budget review';
                         for(Recipient rcp : recipientList) {
                             tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
                         }
 
                         recipientList = creatorMap.get(trip.Id);
-                        msgText = notifyLdrBudgetApprovalSubmitted(trip.Id, trip.Title__c);
-                        subject = 'Trip submission for ' + trip.Title__c + ' sent to budget reviewers';
+                        msgText = notifyLdrBudgetApprovalSubmitted(trip.Id, trip.Subject_Title__c);
+                        subject = 'Trip submission for ' + trip.Subject_Title__c + ' sent to budget reviewers';
                         for(Recipient rcp : recipientList) {
                             tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
                         }
                     }
                     else {
                         recipientList = approverMap.get(trip.Id);
-                        msgText = startedToSubmittedText(trip.Id, trip.Title__c);
-                        subject = 'Trip submission for ' + trip.Title__c + ' ready for review';
+                        msgText = startedToSubmittedText(trip.Id, trip.Subject_Title__c);
+                        subject = 'Trip submission for ' + trip.Subject_Title__c + ' ready for review';
                         for(Recipient rcp : recipientList) {
                             tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
                         }
@@ -53,16 +53,16 @@ public without sharing class NatoutEmailHandler {
             }
             else if(prevTrip.Status__c == 'Submitted' && trip.Status__c == 'Approved by Chair') {
                 List<Recipient> recipientList = creatorMap.get(trip.Id);
-                String msgText = submittedToApprovedByChairText(trip.Id, trip.Title__c, trip.Subcommittee__c);
-                String subject = 'Trip submission for ' + trip.Title__c + ' approved by chair and/or collaborator';
+                String msgText = submittedToApprovedByChairText(trip.Id, trip.Subject_Title__c, trip.Subcommittee__c);
+                String subject = 'Trip submission for ' + trip.Subject_Title__c + ' approved by chair and/or collaborator';
                 for(Recipient rcp : recipientList) {
                     tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
                 }
             }
             else if(prevTrip.Status__c == 'Approved by Chair' && trip.Status__c == 'Approved by Staff') {
                 List<Recipient> recipientList = creatorMap.get(trip.Id);
-                String msgText = approvedByChairToApprovedByStaffText(trip.Id, trip.Title__c);
-                String subject = 'Trip submission for ' + trip.Title__c + ' approved by staff';
+                String msgText = approvedByChairToApprovedByStaffText(trip.Id, trip.Subject_Title__c);
+                String subject = 'Trip submission for ' + trip.Subject_Title__c + ' approved by staff';
                 for(Recipient rcp : recipientList) {
                     tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
                 }
@@ -70,13 +70,13 @@ public without sharing class NatoutEmailHandler {
             else if(prevTrip.Status__c == 'Submitted' && trip.Status__c == 'Returned') {
                 List<Recipient> recipientList = creatorMap.get(trip.Id);
                 String msgText;
-                String subject = 'Trip submission for ' + trip.Title__c + ' returned';
+                String subject = 'Trip submission for ' + trip.Subject_Title__c + ' returned';
                 if(trip.Subcommittee__c == 'International' && trip.Budget_Approved_Date__c == null) {
                     String budgetApproverName = budgetApproverNameMap.get(trip.Id);
-                    msgText = budgetReturnedText(trip.Id, trip.Title__c, budgetApproverName);
+                    msgText = budgetReturnedText(trip.Id, trip.Subject_Title__c, budgetApproverName);
                 }
                 else {
-                    msgText = submittedToReturnedText(trip.Id, trip.Title__c, trip.Subcommittee__c);
+                    msgText = submittedToReturnedText(trip.Id, trip.Subject_Title__c, trip.Subcommittee__c);
                 }
                 for(Recipient rcp : recipientList) {
                     tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
@@ -97,14 +97,14 @@ public without sharing class NatoutEmailHandler {
             String budgetApproverName = budgetApproverNameMap.get(trip.Id);
 
             List<Recipient> recipientList = creatorMap.get(trip.Id);
-            String msgText = budgetApprovedToCreatorsText(trip.Id, trip.Title__c, budgetApproverName);
-            String subject = 'Trip Budget Approved for ' + trip.Title__c;
+            String msgText = budgetApprovedToCreatorsText(trip.Id, trip.Subject_Title__c, budgetApproverName);
+            String subject = 'Trip Budget Approved for ' + trip.Subject_Title__c;
             for(Recipient rcp : recipientList) {
                 tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
             }
 
             recipientList = approverMap.get(trip.Id);
-            msgText = budgetApprovedToChairsText(trip.Id, trip.Title__c, budgetApproverName);
+            msgText = budgetApprovedToChairsText(trip.Id, trip.Subject_Title__c, budgetApproverName);
             if(recipientList != null) {
                 for(Recipient rcp : recipientList) {
                     tseList.add(createTriggeredSend(rcp.contactId, rcp.emailAddr, subject, msgText));
@@ -294,15 +294,15 @@ public without sharing class NatoutEmailHandler {
     }
     public static void notifySMPReviewers(String tripId) {
         National_Outings_Trip__c trip = [
-            SELECT Id, Name, Title__c, Subcommittee__c FROM National_Outings_Trip__c WHERE Id = :tripId
+            SELECT Id, Name, Subject_Title__c, Subcommittee__c FROM National_Outings_Trip__c WHERE Id = :tripId
         ];
         String subcomm = trip.Subcommittee__c;
         String msg =
-            'A Safety Management Plan has been submitted for trip "' + trip.Title__c + '." ' +
+            'A Safety Management Plan has been submitted for trip "' + trip.Subject_Title__c + '." ' +
             '<br/><br/>' +
-            'Trip ' + trip.Title__c + ' can be found at https://campfire.sierraclub.org/NatoutTripDetail?id=' + trip.Id
+            'Trip ' + trip.Subject_Title__c + ' can be found at https://campfire.sierraclub.org/NatoutTripDetail?id=' + trip.Id
             ;
-        String subject = 'A Safety Management Plan has been submitted for trip ' + trip.Title__c;
+        String subject = 'A Safety Management Plan has been submitted for trip ' + trip.Subject_Title__c;
         List<TriggeredSendEmail__c> sendList = new List<TriggeredSendEmail__c>();
 
         List<Leadership__c> reviewerList = [
@@ -470,7 +470,7 @@ public without sharing class NatoutEmailHandler {
             commentsIds.add(comments.Id);
         }
         List<National_Outings_Trip__c> tripList = [
-            SELECT Id, Name, Title__c, Subcommittee__c FROM National_Outings_Trip__c WHERE Id in :tripIds
+            SELECT Id, Name, Subject_Title__c, Subcommittee__c FROM National_Outings_Trip__c WHERE Id in :tripIds
         ];
         Map<Id, National_Outings_Trip__c> tripMap = new Map<Id, National_Outings_Trip__c>(tripList);
         Map<Id, List<Recipient>> creatorMap = getCreators(tripList);
@@ -499,10 +499,10 @@ public without sharing class NatoutEmailHandler {
         ];
         for(National_Outings_Trip_Comments__c comments : commentsWithCreatorList) {
             National_Outings_Trip__c trip = tripMap.get(comments.National_Outings_Trip__c);
-            String subject = 'New Comment for Trip ' + trip.Title__c + ' from ' + comments.CreatedBy.Name;
+            String subject = 'New Comment for Trip ' + trip.Subject_Title__c + ' from ' + comments.CreatedBy.Name;
 
             String link = 'https://campfire.sierraclub.org/NatoutTripDetail?id=' + comments.National_Outings_Trip__c;
-            String commentsText = comments.Comments__c + '<br/><br/>Trip ' + trip.Title__c + ' can be found at ' + link;
+            String commentsText = comments.Comments__c + '<br/><br/>Trip ' + trip.Subject_Title__c + ' can be found at ' + link;
 
             if(comments.Notify_Creators__c) {
                 List<Recipient> recipientList = creatorMap.get(comments.National_Outings_Trip__c);
@@ -615,7 +615,7 @@ public without sharing class NatoutEmailHandler {
     @AuraEnabled 
     public static Datetime submitBrochure(String tripId) {
         National_Outings_Trip__c trip = [
-            SELECT Title__c FROM National_Outings_Trip__c
+            SELECT Subject_Title__c FROM National_Outings_Trip__c
             WHERE Id = :tripId
         ];
         Datetime now = System.now();
@@ -624,15 +624,15 @@ public without sharing class NatoutEmailHandler {
             Contact ctct = [
                 SELECT Name, Email FROM Contact where Id=:contactId
             ];
-            String subject = 'Brochure Submitted for ' + trip.Title__c;
+            String subject = 'Brochure Submitted for ' + trip.Subject_Title__c;
             String msgText = 
                 ctct.Name + 
                 ' (<a href="' + 'mailto:' + ctct.Email + '?subject=' + subject + '">' +
                 ctct.Email + '</a>)' +
                 ' has submitted the brochure for ' +
-                trip.Title__c +
+                trip.Subject_Title__c +
                 '.<br/><br/>' +
-                'Trip ' + trip.Title__c + ' can be found at <a href="https://campfire.sierraclub.org/NatoutTripDetail?id=' + tripId + '">' +
+                'Trip ' + trip.Subject_Title__c + ' can be found at <a href="https://campfire.sierraclub.org/NatoutTripDetail?id=' + tripId + '">' +
                 'https://campfire.sierraclub.org/NatoutTripDetail?id=' + tripId + '</a>'
             ;
             List<TriggeredSendEmail__c> sendList = new List<TriggeredSendEmail__c>();
