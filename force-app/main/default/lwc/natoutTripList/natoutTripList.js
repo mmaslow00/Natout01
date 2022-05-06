@@ -14,7 +14,8 @@ const statusOptions = [
     {label: 'Started', value: 'Started'},
     {label: 'Submitted', value: 'Submitted'},
     {label: 'Returned', value: 'Returned'},
-    {label: 'Approved by Chair', value: 'Approved by Chair'}
+    {label: 'Approved by Chair', value: 'Approved by Chair'},
+    {label: 'Uploaded to TRAIL', value: 'Uploaded to TRAIL'}
 ];
 
 export default class NatoutTripList extends LightningElement {
