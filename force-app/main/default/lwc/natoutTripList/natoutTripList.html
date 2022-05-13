@@ -122,18 +122,18 @@
             Number of Trips Listed: {listSize}
         </div>
         </div>
-    <lightning-datatable
-        key-field="id"
-        data={tripList.data}
-        columns={columns}
-        onrowaction={handleRowAction}
-        onsort={handleSort}
-        sorted-by={sortedBy}
-        sorted-direction={sortDirection}
-        hide-checkbox-column={userIsNotAdmin}
-        wrap-text-max-lines="2"
-    >
-    </lightning-datatable>
+        <lightning-datatable
+            key-field="id"
+            data={tripList.data}
+            columns={columns}
+            onrowaction={handleRowAction}
+            onsort={handleSort}
+            sorted-by={sortedBy}
+            sorted-direction={sortDirection}
+            hide-checkbox-column={userIsNotAdmin}
+            wrap-text-max-lines="2"
+        >
+        </lightning-datatable>
 
     <div if:true={copying}>
         <lightning-spinner alternative-text="Copying" size="large"></lightning-spinner>

@@ -67,7 +67,9 @@ public with sharing class NatoutTripListController {
         }
         sql = sql + ' ORDER BY Start_Date__c desc';
 
+        System.debug('sql: ' + sql);
         List<National_Outings_Trip__c> tripList = Database.query(sql);
+        System.debug('tripList.size: ' + tripList.size());
         return tripList;
     }
     private static String appendToWhere(String original, String toAppend) {

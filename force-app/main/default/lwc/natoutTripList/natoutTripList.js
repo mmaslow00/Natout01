@@ -160,7 +160,12 @@ export default class NatoutTripList extends LightningElement {
                     let newRow = {...row , nameUrl};
                     if(row.National_Outings_Trip_Staffs__r) {
                         let leader = row.National_Outings_Trip_Staffs__r[0].Contact__r;
-                        leaderName = leader.LastName + ', ' + leader.FirstName;
+                        if(typeof leader === 'undefined') {
+                            leaderName = "";
+                        } 
+                        else {
+                            leaderName = leader.LastName + ', ' + leader.FirstName;
+                        }
                     }
                     newRow = {...newRow, leaderName};
                     return newRow;
@@ -374,6 +379,9 @@ export default class NatoutTripList extends LightningElement {
             retVal = this.tripList.data.length;
         }
         return retVal;
+    }
+    get tripsFound() {
+        return this.listSize != null;
     }
     showSnackbar(type, header, text) {
         this.template.querySelector('c-snackbar').show(type, header, text);
